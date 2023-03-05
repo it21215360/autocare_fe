@@ -24,7 +24,7 @@ export const navigation = [
     items: [
       {
         text: 'Employee Attendance',
-        path: '/emp_attendance'
+        path: 'payroll_hr/emp-attendance'
       },
       {
         text: 'Employee Payroll',
