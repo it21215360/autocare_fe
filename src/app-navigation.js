@@ -30,15 +30,9 @@ export const navigation = [
     items: [
       { text: 'Employee Attendance', path: '/emp_attendance' },
       { text: 'Employee Payroll', path: '/emp_payroll' },
-      { text: 'Employee Request Form', path: 'payroll/leave-request-form' }
-      {
-        text: 'Employee Attendance',
-        path: 'payroll_hr/emp-attendance'
-      },
-      {
-        text: 'Employee Payroll',
-        path: '/emp_payroll'
-      },
+      { text: 'Employee Request Form', path: 'payroll/leave-request-form' },
+      { text: 'Employee Attendance', path: 'payroll_hr/emp-attendance' },
+      { text: 'Employee Payroll', path: '/emp_payroll' },
     ]
   },
 

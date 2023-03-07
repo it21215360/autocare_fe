@@ -1,4 +1,4 @@
-import { HomePage, TasksPage, ProfilePage, ProductCategory, LeaveRequestForm } from './pages';
+import { HomePage, TasksPage, ProfilePage, ProductCategory, LeaveRequestForm, Attendance } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -17,8 +17,8 @@ const routes = [
 
 
     //it21215360@my.sliit.lk - Maheesha
-    { path: 'payroll/leave-request-form', element: LeaveRequestForm }
-
+    { path: 'payroll/leave-request-form', element: LeaveRequestForm },
+    { path: 'payroll_hr/emp-attendance', element: Attendance }
 
 
 
@@ -89,26 +89,8 @@ const routes = [
 
     
 
-    {
-        path: '/tasks',
-        element: TasksPage
-    },
-    {
-        path: '/profile',
-        element: ProfilePage
-    },
-    {
-        path: '/home',
-        element: HomePage
-    },
-    {
-        path: 'master/product-category',
-        element: ProductCategory
-    },
-    {
-        path: 'payroll_hr/emp-attendance',
-        element: Attendance
-    }
+   
+
 ];
 
 export default routes.map(route => {
