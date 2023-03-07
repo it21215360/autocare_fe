@@ -17,7 +17,7 @@ const routes = [
 
 
     //it21215360@my.sliit.lk - Maheesha
-    { path: 'payroll/leave-request-form', element: LeaveRequestForm },
+    { path: 'payroll_hr/leave-request-form', element: LeaveRequestForm },
     { path: 'payroll_hr/emp-attendance', element: Attendance }
 
 

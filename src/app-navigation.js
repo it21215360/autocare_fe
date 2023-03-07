@@ -29,10 +29,9 @@ export const navigation = [
     text: 'Payroll and HR', icon: 'folder',
     items: [
       { text: 'Employee Attendance', path: '/emp_attendance' },
-      { text: 'Employee Payroll', path: '/emp_payroll' },
-      { text: 'Employee Request Form', path: 'payroll/leave-request-form' },
+      { text: 'Leave Request Form', path: 'payroll_hr/leave-request-form' },
       { text: 'Employee Attendance', path: 'payroll_hr/emp-attendance' },
-      { text: 'Employee Payroll', path: '/emp_payroll' },
+      { text: 'Employee Payroll', path: 'payroll_hr/emp_payroll' },
     ]
   },
 

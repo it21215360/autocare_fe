@@ -14,7 +14,7 @@ export { default as Attendance } from './payroll_hr/attendance';
 
 
 //it21215360@my.sliit.lk - Maheesha
-export { default as LeaveRequestForm } from './payroll/LeaveRequestForm';
+export { default as LeaveRequestForm } from './payroll_hr/LeaveRequestForm';
 
 
 
