@@ -89,6 +89,26 @@ const routes = [
 
     
 
+    {
+        path: '/tasks',
+        element: TasksPage
+    },
+    {
+        path: '/profile',
+        element: ProfilePage
+    },
+    {
+        path: '/home',
+        element: HomePage
+    },
+    {
+        path: 'master/product-category',
+        element: ProductCategory
+    },
+    {
+        path: 'payroll_hr/emp-attendance',
+        element: Attendance
+    }
 ];
 
 export default routes.map(route => {
