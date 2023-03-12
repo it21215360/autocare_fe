@@ -2,7 +2,7 @@ export { default as HomePage } from './home/home';
 export { default as ProfilePage } from './profile/profile';
 export { default as TasksPage } from './tasks/tasks';
 export { default as ProductCategory } from './masters/productCategory';
-export { default as Attendance } from './payroll_hr/attendance';
+
 
 //shamith
 
@@ -14,10 +14,11 @@ export { default as Attendance } from './payroll_hr/attendance';
 
 
 //it21215360@my.sliit.lk - Maheesha
+export { default as Attendance } from './payroll_hr/attendance';
 export { default as LeaveRequestForm } from './payroll_hr/LeaveRequestForm';
-
-
-
+export { default as Salary } from './payroll_hr/payroll';
+export { default as LeaveApproval } from './payroll_hr/leaveApproval';
+export { default as AttendanceViewer } from './payroll_hr/dailyAttendanceViewer';
 
 
 

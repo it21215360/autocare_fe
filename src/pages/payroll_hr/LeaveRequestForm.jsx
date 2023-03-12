@@ -9,42 +9,76 @@ import { SelectBox } from "devextreme-react";
 import { Button } from 'devextreme-react/button';
 import { DateBox } from 'devextreme-react/calendar';
 
-const LeaveRequestForm = () => {
+import { Link } from 'react-router-dom';
+import LeaveApproval from "./leaveApproval";
 
-    let jBudgetDefinition = {
+
+//const LeaveRequestForm = () => {
+function LeaveRequestForm()  { 
+
+   let jBudgetDefinition = {
 
     }
+    
 
-    const [budgetdefinition, setBudgetdefinition] = useState({ fullName: 'Shamith Rosa', employeeId: 200202, empDepartment: 'IT Department', leaveFrom: '2022/10/21', dayCount: 2, leaveTo: '2022/10/23' })
+    const [budgetdefinition, setBudgetdefinition] = useState({ FirstName: 'Maheesha', employeeId: 200202, LastName: 'Rosa' ,empDepartment: 'IT Department', leaveFrom: '2022/10/21', leaveTo: '2022/10/23', dayCount: 'count'})
 
     const leaveCategory = [{ AutoID: 1, Name: 'Casual Leave' }, { AutoID: 2, Name: 'Annual Leave' }, { AutoID: 3, Name: 'Comp Leave' }, { AutoID: 4, Name: 'Comp Leave' }]
+    const empDepartment = [{ DepID: 1, Name: 'HR Department' }, { DepID: 2, Name: 'Finance Department' }, { DepID: 3, Name: ' LabourWorker Department' }]
 
     return (
+        
         <>
             <div className={'content-block'}>
+                
                 <h2>Emplyee Leave Request Form</h2>
+                <hr />
+
                 <Form formData={budgetdefinition}>
-                    <GroupItem colCount={3}>
-                        <Item dataField="fullName" editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
-                        }}>
-                            <Label text="Full Name"></Label>
-                            <RequiredRule message="Field required" />
-                        </Item>
+                    <GroupItem colCount={2}>
+
+                        
+                            <Item dataField="FirstName" editorType="dxTextBox"  editorOptions={{
+                                readOnly: true,
+                                }}>
+                                
+                                <Label text="First Name"></Label>
+                                <RequiredRule message="Field required" />
+                            </Item>
+                        
+
+
                         <Item dataField="employeeId" editorType="dxTextBox" editorOptions={{
                             readOnly: true,
                         }}>
                             <Label text="Employee Id"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
-                        <Item dataField="empDepartment" editorType="dxTextBox" editorOptions={{
+                        <Item dataField="LastName" editorType="dxTextBox" editorOptions={{
                             readOnly: true,
+                        }}>
+                            <Label text="Last Name"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+                        <Item dataField="empDepartment" editorType="dxSelectBox" editorOptions={{
+                           items: [{ DepID: 1, Name: 'HR Department' }, { DepID: 2, Name: 'Finance Department' }, { DepID: 3, Name: ' LabourWorker Department' }],
+                           searchEnabled: true,
+                           displayExpr: "Name",
+                           valueExpr: "DepID",
                         }}>
                             <Label text="Employee Department"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
+                        
                     </GroupItem>
+
                     <GroupItem colCount={3}>
+                    <Item dataField="leaveFrom" editorType="dxDateBox">
+                            <Label text="Leave From"></Label>
+                            
+                            <RequiredRule message="Field required" />
+                        </Item>
+
                         <Item
                             dataField="leaveCategory"
                             editorType="dxSelectBox"
@@ -58,10 +92,7 @@ const LeaveRequestForm = () => {
                             <Label text="Leave Type"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
-                        <Item dataField="leaveFrom">
-                            <Label text="Leave From"></Label>
-                            <RequiredRule message="Field required" />
-                        </Item>
+                       
                         <Item
                             dataField="leaveType"
                             editorType="dxSelectBox"
@@ -75,12 +106,15 @@ const LeaveRequestForm = () => {
                             <Label text="Leave Type"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
-                        <Item dataField="leaveTo">
+
+                        <Item dataField="leaveTo" editorType="dxDateBox">
                             <Label text="Leave To"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
                         <Item dataField="dayCount" editorOptions={{ readOnly: true }}>
                             <RequiredRule message="Field required" />
+                            
+                            
                         </Item>
 
                         {/* <Item dataField="DefinitionCode" editorType="dxTextBox" editorOptions={{
@@ -103,6 +137,7 @@ const LeaveRequestForm = () => {
                     <Button stylingMode="contained" type="success">Save</Button>
                     <Button stylingMode="contained" type="default">Clear</Button>
                 </Navbar>
+                
             </div>
             {/* <LoadPanel
                 message="Processing.... Please, wait..."
