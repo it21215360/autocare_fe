@@ -4,27 +4,21 @@ import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
 import LeaveRequestForm from "./LeaveRequestForm";
 
 const LeaveApproval = (props) => {
-    //const {data} = this.props.location;
-
-   
-    return(
+    return (
         <>
-       
+            <div className={'content-block'}>
+                <h2>Employee Leave Approval</h2>
+                <Form>
+                    <GroupItem colCount={1}>
+                        <Item>
+                            <Label text="First Name"></Label>
+                            <p value={props.name} />
+                        </Item>
 
-         <div className={'content-block'}>
-        <h2>Employee Leave Approval</h2>
-        <Form>
-            <GroupItem colCount={1}>
-                <Item>
-                    <Label text="First Name"></Label>
-                    <p value={props.name}/>
-                </Item>
-                
-            </GroupItem>
-            </Form>    
-        </div>  
+                    </GroupItem>
+                </Form>
+            </div>
         </>
-       
     )
 }
 
