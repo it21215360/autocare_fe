@@ -1,0 +1,15 @@
+.box{
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
+    display: inline;
+    padding: 10px;
+    font-size: 30px;
+    color: #fff;
+    font-family: sans-serif;
+    width: 440px;
+    position: absolute;
+    top: 120px;
+    left: 20px;
+}
+
+
