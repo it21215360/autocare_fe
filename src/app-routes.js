@@ -20,6 +20,10 @@ import {
   StockOrderRequestForm,
   StockReturnForm,
   Purchase,
+  Scheduling,
+  Package,
+  Update,
+  Cancel
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
