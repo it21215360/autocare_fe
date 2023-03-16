@@ -1,4 +1,4 @@
-import { HomePage, TasksPage, ProfilePage, ProductCategory, LeaveRequestForm, Attendance,Scheduling, Package, Update,Cancel} from './pages';
+import { HomePage, TasksPage, ProfilePage, ProductCategory, LeaveRequestForm, Attendance, Salary, LeaveApproval,AttendanceViewer ,CourierLogin,CourierRegistration,VehicleReg,DeliveryRequestForm,ShippingManage, CourierProfile} from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -19,6 +19,9 @@ const routes = [
     //it21215360@my.sliit.lk - Maheesha
     { path: 'payroll_hr/leave-request-form', element: LeaveRequestForm },
     { path: 'payroll_hr/emp-attendance', element: Attendance },
+    { path: 'payroll_hr/emp-payroll', element: Salary },
+    { path: 'payroll_hr/leaveApproval', element: LeaveApproval },
+    { path: 'payroll_hr/dailyAttendanceViewer', element: AttendanceViewer },
 
 
 
@@ -60,7 +63,12 @@ const routes = [
 
 
     //it21307362@my.sliit.lk - Fernando ST
-
+    { path: 'courier/CourierLogin', element: CourierLogin},
+    { path: 'courier/CourierRegistration', element: CourierRegistration},
+    { path: 'courier/VehicleReg', element: VehicleReg},
+    { path: 'courier/DeliveryRequestForm', element: DeliveryRequestForm},
+    { path: 'courier/ShippingManage', element: ShippingManage},
+    { path: 'courier/CourierProfile', element: CourierProfile},
 
 
 

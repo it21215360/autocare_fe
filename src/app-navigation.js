@@ -28,10 +28,12 @@ export const navigation = [
   {
     text: 'Payroll and HR', icon: 'folder',
     items: [
-      { text: 'Employee Attendance', path: '/emp_attendance' },
+      
       { text: 'Leave Request Form', path: 'payroll_hr/leave-request-form' },
       { text: 'Employee Attendance', path: 'payroll_hr/emp-attendance' },
-      { text: 'Employee Payroll', path: 'payroll_hr/emp_payroll' },
+      { text: 'Employee Salary', path: 'payroll_hr/emp-payroll' },
+      { text: 'Employee Leave Approval', path: 'payroll_hr/leaveApproval' },
+      { text: 'Employee Attendance Viewer', path: 'payroll_hr/dailyAttendanceViewer'},
     ]
   },
 
@@ -83,7 +85,17 @@ export const navigation = [
 
 
   //it21307362@my.sliit.lk - Fernando ST
-
+  {
+    text: 'Delivery', icon: 'folder',
+    items: [
+      { text: 'Courier Login', path: './courier/CourierLogin' },
+      { text: 'Courier Registration', path: './courier/CourierRegistration' },
+      { text: 'Vehicle Register', path: 'courier/VehicleReg' },
+      { text: 'Delivery Request Form', path: 'courier/DeliveryRequestForm' },
+      { text: 'Shipping Manage', path: 'courier/ShippingManage' },
+      { text: 'Courier Profile', path: 'courier/CourierProfile' },
+    ]
+  },
 
 
 
