@@ -74,7 +74,17 @@ export const navigation = [
 
 
   //it21307362@my.sliit.lk - Fernando ST
-
+  {
+    text: 'Delivery', icon: 'folder',
+    items: [
+      { text: 'Courier Login', path: './courier/CourierLogin' },
+      { text: 'Courier Registration', path: './courier/CourierRegistration' },
+      { text: 'Vehicle Register', path: 'courier/VehicleReg' },
+      { text: 'Delivery Request Form', path: 'courier/DeliveryRequestForm' },
+      { text: 'Shipping Manage', path: 'courier/ShippingManage' },
+      { text: 'Courier Profile', path: 'courier/CourierProfile' },
+    ]
+  },
 
 
 
