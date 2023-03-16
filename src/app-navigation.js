@@ -44,7 +44,17 @@ export const navigation = [
 
 
   //it21324406@my.sliit.lk - Shanoli
-
+  {
+    text: 'Stock_Management', icon: 'folder',
+    items: [
+      { text: 'Storage', path: 'Stock_Management/storage' },
+      { text: 'Suppliers', path: 'Stock_Management/suppliers' },
+      { text: 'Order', path: 'Stock_Management/order' },
+      { text: 'StockOrderRequestForm', path: 'Stock_Management/stock-order-request-form' },
+      { text: 'StockReturnForm', path: 'Stock_Management/stock-return-form'},
+      { text: 'Purchase', path: 'Stock_Management/purchase' },
+    ]
+  },
 
 
 

@@ -29,8 +29,11 @@ export { default as AttendanceViewer } from './payroll_hr/dailyAttendanceViewer'
 
 
 //it21324406@my.sliit.lk - Shanoli
-
-
+export { default as Storage} from './Stock_Management/Storage';
+export { default as Suppliers} from './Stock_Management/Suppliers';
+export { default as Order} from './Stock_Management/Order';
+export { default as StockOrderRequestForm} from './Stock_Management/StockOrderRequestForm';
+export { default as StockReturnForm} from './Stock_Management/StockReturnForm';
 
 
 
