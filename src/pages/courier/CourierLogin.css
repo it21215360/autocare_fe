@@ -1,15 +1,15 @@
-*{
+* {
     margin: 0;
     box-sizing: border-box;
     font-family: "Customfont";
 
 }
 
-.login-page{
-    background : url('/public/image/img.jpeg');
-    background-repeat: no-repeat;
+.login-page {
+    /*background: url('/public/image/img.jpeg');*/
+    /*background-repeat: no-repeat;*/
     background-size: cover;
-     
+
 }
 
 .page {
@@ -22,12 +22,13 @@
 }
 
 .cover {
-    background-color:rgba(200, 196, 196, 0.448);
+    background-color: rgba(200, 196, 196, 0.448);
     width: 70%;
     height: 70%;
     position: relative;
-    
-    
+    margin: auto;
+    margin-top: 5rem;
+
     border-radius: 1em;
     box-shadow: 0 0.188em 1.550em rgb(156, 156, 156);
     display: flex;
@@ -54,7 +55,7 @@
     cursor: pointer;
 }
 
-input {
+/* input {
     border: none;
     background-color: rgb(229, 226, 226);
     width: 80%;
@@ -62,7 +63,7 @@ input {
     text-align: center;
     padding: 2em;
     font-size: 0.75em;
-}
+} */
 
 input:focus {
     outline-color: rgb(32, 177, 255);
@@ -80,7 +81,9 @@ input:focus {
     cursor: pointer;
 }
 
-.login-btn:hover { transform: scale(1.25);}
+.login-btn:hover {
+    transform: scale(1.25);
+}
 
 .text {
     position: relative;
@@ -114,8 +117,9 @@ input:focus {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-   /** background-image: url('../icons/google.png');**/
+    /** background-image: url('../icons/google.png');**/
 }
+
 @media only screen and (min-device-width: 64em) {
     .page {
         font-size: 1.25em;

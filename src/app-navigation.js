@@ -1,14 +1,16 @@
 export const navigation = [
   { text: 'Home', path: '/home', icon: 'home' },
   {
-    text: 'Examples', icon: 'folder',
+    text: 'Customer', icon: 'card',
     items: [
-      { text: 'Profile', path: '/profile' },
-      { text: 'Tasks', path: '/tasks' }
+      { text: 'My Profile', path: '/profile' },
+      { text: 'Service History', path: '/tasks' },
+      { text: 'Order History', path: 'customer/order-history' },
+      { text: 'Delivery Tracker', path: 'customer/delivery-tracker' }
     ]
   },
   {
-    text: 'Masters', icon: 'folder',
+    text: 'Masters', icon: 'key',
     items: [
       { text: 'Vehicle', path: '/vehicle' },
       { text: 'Product Category', path: 'master/product-category' }
@@ -26,7 +28,7 @@ export const navigation = [
 
   //it21215360@my.sliit.lk - Maheesha
   {
-    text: 'Payroll and HR', icon: 'folder',
+    text: 'Payroll and HR', icon: 'group',
     items: [
       
       { text: 'Leave Request Form', path: 'payroll_hr/leave-request-form' },
@@ -45,14 +47,14 @@ export const navigation = [
 
   //it21324406@my.sliit.lk - Shanoli
   {
-    text: 'Stock_Management', icon: 'folder',
+    text: 'Stock Management', icon: 'product',
     items: [
-      { text: 'Storage', path: 'Stock_Management/storage' },
-      { text: 'Suppliers', path: 'Stock_Management/suppliers' },
-      { text: 'Order', path: 'Stock_Management/order' },
-      { text: 'StockOrderRequestForm', path: 'Stock_Management/stock-order-request-form' },
-      { text: 'StockReturnForm', path: 'Stock_Management/stock-return-form'},
-      { text: 'Purchase', path: 'Stock_Management/purchase' },
+      { text: 'Stock', path: 'stock_management/storage' },
+      { text: 'Suppliers', path: 'stock_management/suppliers' },
+      { text: 'PO History', path: 'stock_management/order' },
+      { text: 'Purchase Order Form', path: 'stock_management/stock-order-request-form' },
+      { text: 'Stock Return form', path: 'stock_management/stock-return-form'},
+      { text: 'Good Receive Form', path: 'stock_management/purchase' },
     ]
   },
 
@@ -66,10 +68,10 @@ export const navigation = [
   //it21197000@my.sliit.lk - Chethani
 
   {
-    text: 'Scheduling', icon: 'folder',
+    text: 'Scheduling', icon: 'event',
     items: [
       { text: 'Scheduling Appointment', path: 'scheduling/Scheduling_appointment'},
-      { text: 'Udate Appointment', path: 'scheduling/Update_appointment' },
+      { text: 'Update Appointment', path: 'scheduling/Update_appointment' },
       { text: 'Confirm Appointment', path: 'scheduling/Confirm_appointment' },
       { text: 'Cancel Appointment', path: 'scheduling/Cancel_appointment' },
    //   { text: ' memo viewer', path: 'scheduling/emp_payroll' },
@@ -96,7 +98,7 @@ export const navigation = [
 
   //it21307362@my.sliit.lk - Fernando ST
   {
-    text: 'Delivery', icon: 'folder',
+    text: 'Delivery', icon: 'globe',
     items: [
       { text: 'Courier Login', path: './courier/CourierLogin' },
       { text: 'Courier Registration', path: './courier/CourierRegistration' },

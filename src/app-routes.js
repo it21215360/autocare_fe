@@ -17,11 +17,10 @@ import {
   Storage,
   Order,
   Suppliers,
-  StockOrderRequestForm,
+  PurchaseOrderForm,
   StockReturnForm,
-  Purchase,
   Scheduling,
-  Package,
+  PackageDetails,
   Update,
   Cancel
 } from "./pages";
@@ -43,36 +42,30 @@ const routes = [
   { path: "payroll_hr/dailyAttendanceViewer", element: AttendanceViewer },
 
   //it21324406@my.sliit.lk - Shanoli
-  { path: "Stock_Management/storage", element: Storage },
-  { path: "Stock_Management/suppliers", element: Suppliers },
-  { path: "Stock_Management/order", element: Order },
+  { path: "stock_management/storage", element: Storage },
+  { path: "stock_management/suppliers", element: Suppliers },
+  { path: "stock_management/order", element: Order },
   {
-    path: "Stock_Management/stock-order-request-form",
-    element: StockOrderRequestForm,
+    path: "stock_management/stock-order-request-form",
+    element: PurchaseOrderForm,
   },
-  { path: "Stock_Management/stock-return-form", element: StockReturnForm },
+  { path: "stock_management/stock-return-form", element: StockReturnForm },
 
   //it21197000@my.sliit.lk - Chethani
-  //element==Function name
   { path: "/scheduling/Scheduling_appointment", element: Scheduling },
-  { path: "/scheduling/Package", element: Package },
+  { path: "/scheduling/Package", element: PackageDetails },
   { path: "/scheduling/Update_appointment", element: Update },
   { path: "/scheduling/Cancel_appointment", element: Cancel },
 
   //it21198090@my.sliit.lk - Shania
-    //it21197000@my.sliit.lk - Chethani
-    //element==Function name
-    { path: '/scheduling/Scheduling_appointment', element: Scheduling },
-    { path: '/scheduling/Package', element: Package },
-    { path: '/scheduling/Update_appointment', element: Update },
-    { path: '/scheduling/Cancel_appointment', element: Cancel },
 
 
 
 
 
 
-    //it21198090@my.sliit.lk - Shania
+
+  //it21198090@my.sliit.lk - Shania
 
 
 
@@ -92,7 +85,6 @@ const routes = [
 
   //it21238994@my.sliit.lk - Amanda
 
-    //it21326936@my.sliit.lk - Amandi
 
 
 
@@ -101,9 +93,15 @@ const routes = [
 
 
 
-    
+  //it21326936@my.sliit.lk - Amandi
 
-   
+
+
+
+
+
+
+
 
 ];
 

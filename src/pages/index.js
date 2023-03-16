@@ -29,11 +29,11 @@ export { default as AttendanceViewer } from './payroll_hr/dailyAttendanceViewer'
 
 
 //it21324406@my.sliit.lk - Shanoli
-export { default as Storage} from './Stock_Management/Storage';
-export { default as Suppliers} from './Stock_Management/Suppliers';
-export { default as Order} from './Stock_Management/Order';
-export { default as StockOrderRequestForm} from './Stock_Management/StockOrderRequestForm';
-export { default as StockReturnForm} from './Stock_Management/StockReturnForm';
+export { default as Storage} from './stock_management/Storage';
+export { default as Suppliers} from './stock_management/Suppliers';
+export { default as Order} from './stock_management/Order';
+export { default as PurchaseOrderForm} from './stock_management/purchaseOrderForm';
+export { default as StockReturnForm} from './stock_management/StockReturnForm';
 
 
 
@@ -44,7 +44,7 @@ export { default as StockReturnForm} from './Stock_Management/StockReturnForm';
 //it21197000@my.sliit.lk - Chethani
 //default as <function/class name>
 export { default as Scheduling } from './scheduling/Scheduling_appointment';
-export { default as Package } from './scheduling/Package';
+export { default as PackageDetails } from './scheduling/PackageDetails';
 export { default as Update } from './scheduling/Update_appointment';
 export { default as Cancel } from './scheduling/Cancel_appointment';
 

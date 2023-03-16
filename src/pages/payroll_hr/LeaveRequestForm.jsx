@@ -17,14 +17,14 @@ function LeaveRequestForm() {
 
     const [budgetdefinition, setBudgetdefinition] = useState({ FirstName: 'Maheesha', employeeId: 200202, LastName: 'Rosa', empDepartment: 'IT Department', leaveFrom: '2022/10/21', leaveTo: '2022/10/23', dayCount: 'count' })
 
-    const leaveCategory = [{ AutoID: 1, Name: 'Casual Leave' }, { AutoID: 2, Name: 'Annual Leave' }, { AutoID: 3, Name: 'Comp Leave' }, { AutoID: 4, Name: 'Comp Leave' }]
-    const empDepartment = [{ DepID: 1, Name: 'HR Department' }, { DepID: 2, Name: 'Finance Department' }, { DepID: 3, Name: ' LabourWorker Department' }]
+    const leaveCategory = [{ AutoID: 1, Name: 'Casual Leave' }, { AutoID: 2, Name: 'Annual Leave' }, { AutoID: 3, Name: 'Comp Leave' }]
+    const empDepartment = [{ DepID: 1, Name: 'HR Department' }, { DepID: 2, Name: 'Finance Department' }, { DepID: 3, Name: 'IT Department' }]
 
     return (
 
         <>
             <div className={'content-block'}>
-                <h2>Emplyee Leave Request Form</h2>
+                <h2>Employee Leave Request Form</h2>
                 <hr />
 
                 <Form formData={budgetdefinition}>
@@ -54,7 +54,7 @@ function LeaveRequestForm() {
                             <RequiredRule message="Field required" />
                         </Item>
                         <Item dataField="empDepartment" editorType="dxSelectBox" editorOptions={{
-                            items: [{ DepID: 1, Name: 'HR Department' }, { DepID: 2, Name: 'Finance Department' }, { DepID: 3, Name: ' LabourWorker Department' }],
+                            items: empDepartment,
                             searchEnabled: true,
                             displayExpr: "Name",
                             valueExpr: "DepID",
@@ -76,13 +76,13 @@ function LeaveRequestForm() {
                             dataField="leaveCategory"
                             editorType="dxSelectBox"
                             editorOptions={{
-                                items: [{ AutoID: 1, Name: 'Casual Leave' }, { AutoID: 2, Name: 'Annual Leave' }, { AutoID: 3, Name: 'Comp Leave' }, { AutoID: 4, Name: 'Comp Leave' }],
+                                items: leaveCategory,
                                 searchEnabled: true,
                                 displayExpr: "Name",
                                 valueExpr: "AutoID",
                             }}
                         >
-                            <Label text="Leave Type"></Label>
+                            <Label text="Leave Category"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
 
