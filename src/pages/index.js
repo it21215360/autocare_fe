@@ -35,13 +35,11 @@ export { default as LeaveRequestForm } from './payroll_hr/LeaveRequestForm';
 
 
 //it21197000@my.sliit.lk - Chethani
-
-
-
-
-
-
-
+//default as <function/class name>
+export { default as Scheduling } from './scheduling/Scheduling_appointment';
+export { default as Package } from './scheduling/Package';
+export { default as Update } from './scheduling/Update_appointment';
+export { default as Cancel } from './scheduling/Cancel_appointment';
 
 
 //it21198090@my.sliit.lk - Shania

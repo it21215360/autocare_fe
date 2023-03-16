@@ -1,4 +1,4 @@
-import { HomePage, TasksPage, ProfilePage, ProductCategory, LeaveRequestForm, Attendance } from './pages';
+import { HomePage, TasksPage, ProfilePage, ProductCategory, LeaveRequestForm, Attendance,Scheduling, Package, Update,Cancel} from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -18,7 +18,7 @@ const routes = [
 
     //it21215360@my.sliit.lk - Maheesha
     { path: 'payroll_hr/leave-request-form', element: LeaveRequestForm },
-    { path: 'payroll_hr/emp-attendance', element: Attendance }
+    { path: 'payroll_hr/emp-attendance', element: Attendance },
 
 
 
@@ -38,11 +38,13 @@ const routes = [
 
 
     //it21197000@my.sliit.lk - Chethani
-
-
-
-
-
+    //element==Function name
+    { path: '/scheduling/Scheduling_appointment', element: Scheduling },
+    { path: '/scheduling/Package', element:Package},
+    {path: '/scheduling/Update_appointment', element:Update},
+    {path: '/scheduling/Cancel_appointment', element:Cancel},
+    
+    
 
 
 

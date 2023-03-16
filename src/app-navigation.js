@@ -41,8 +41,6 @@ export const navigation = [
 
 
 
-
-
   //it21324406@my.sliit.lk - Shanoli
 
 
@@ -55,7 +53,18 @@ export const navigation = [
 
   //it21197000@my.sliit.lk - Chethani
 
-
+  {
+    text: 'Scheduling', icon: 'folder',
+    items: [
+      { text: 'Scheduling Appointment', path: 'scheduling/Scheduling_appointment'},
+      { text: 'Udate Appointment', path: 'scheduling/Update_appointment' },
+      { text: 'Confirm Appointment', path: 'scheduling/Confirm_appointment' },
+      { text: 'Cancel Appointment', path: 'scheduling/Cancel_appointment' },
+   //   { text: ' memo viewer', path: 'scheduling/emp_payroll' },
+      { text: 'Booked memo viewer', path: 'scheduling/Memo' },
+      { text: 'Package Details', path: 'scheduling/Package' },
+    ]
+  },
 
 
 
