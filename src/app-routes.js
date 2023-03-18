@@ -1,5 +1,30 @@
-import { HomePage, TasksPage, ProfilePage, ProductCategory, Attendance, RaiseTicket } from './pages';
-import { withNavigationWatcher } from './contexts/navigation';
+import {
+  HomePage,
+  TasksPage,
+  ProfilePage,
+  ProductCategory,
+  LeaveRequestForm,
+  Attendance,
+  Salary,
+  LeaveApproval,
+  AttendanceViewer,
+  CourierLogin,
+  CourierRegistration,
+  VehicleReg,
+  DeliveryRequestForm,
+  ShippingManage,
+  CourierProfile,
+  Storage,
+  Order,
+  Suppliers,
+  PurchaseOrderForm,
+  StockReturnForm,
+  Scheduling,
+  PackageDetails,
+  Update,
+  Cancel
+} from "./pages";
+import { withNavigationWatcher } from "./contexts/navigation";
 
 const routes = [
     {
@@ -21,16 +46,12 @@ const routes = [
     {
         path: 'payroll_hr/emp-attendance',
         element: Attendance
-    },
-    {
-        path: 'customer_care/raiseTicket',
-        element: RaiseTicket
     }
 ];
 
-export default routes.map(route => {
-    return {
-        ...route,
-        element: withNavigationWatcher(route.element, route.path)
-    };
+export default routes.map((route) => {
+  return {
+    ...route,
+    element: withNavigationWatcher(route.element, route.path),
+  };
 });
