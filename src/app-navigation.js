@@ -67,10 +67,15 @@ export const navigation = [
   //it21197000@my.sliit.lk - Chethani
 
   {
-    text: 'Scheduling', icon: 'data',
+    text: 'Scheduling', icon: 'event',
     items: [
-      { text: 'View Product Master Data', path: 'masters/ViewMasterProd'},
-      { text: 'Product Category Data', path: 'masters/ProductCat' },
+      { text: 'Scheduling Appointment', path: 'scheduling/Scheduling_appointment'},
+      { text: 'Update Appointment', path: 'scheduling/Update_appointment' },
+      { text: 'Confirm Appointment', path: 'scheduling/Confirm_appointment' },
+      { text: 'Cancel Appointment', path: 'scheduling/Cancel_appointment' },
+   //   { text: ' memo viewer', path: 'scheduling/emp_payroll' },
+      { text: 'Booked memo viewer', path: 'scheduling/Memo' },
+      { text: 'Package Details', path: 'scheduling/Package' },
     ]
   },
 
@@ -82,8 +87,12 @@ export const navigation = [
 
   //it21198090@my.sliit.lk - Shania
   {
-    text: 'Master Data', icon: 
-  }
+    text: 'Master Data', icon: 'data',
+    items: [
+      { text: 'View Product Master Data', path: 'masters/ViewMasterProd'},
+      { text: 'Product Category Data', path: 'masters/ProductCat' },
+    ]
+  },
 
 
 
