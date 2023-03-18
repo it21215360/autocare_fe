@@ -1,4 +1,4 @@
-import { HomePage, TasksPage, ProfilePage, ProductCategory, Attendance } from './pages';
+import { HomePage, TasksPage, ProfilePage, ProductCategory, Attendance, RaiseTicket } from './pages';
 import { withNavigationWatcher } from './contexts/navigation';
 
 const routes = [
@@ -21,6 +21,10 @@ const routes = [
     {
         path: 'payroll_hr/emp-attendance',
         element: Attendance
+    },
+    {
+        path: 'customer_care/raiseTicket',
+        element: RaiseTicket
     }
 ];
 

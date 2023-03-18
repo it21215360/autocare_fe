@@ -31,5 +31,13 @@ export const navigation = [
         path: '/emp_payroll'
       },
     ]
-  }
+  },
+  {
+    text: 'Customer Care',
+    icon: 'folder',
+    items: [
+      { text: 'Raise a Ticket', path: '/raiseTicket' },
+      { text: 'FAQ', path: '/faq' }
+    ]
+  },
 ];
