@@ -119,10 +119,10 @@ export const navigation = [
   //it21238994@my.sliit.lk - Amanda
   {
     text: 'Customer Care',
-    icon: 'folder',
+    icon: 'tips',
     items: [
-      { text: 'Raise a Ticket', path: '/raiseTicket' },
-      { text: 'FAQ', path: '/faq' }
+      { text: 'Raise a Ticket', path: 'customer_care/raiseTicket' },
+      { text: 'FAQ', path: 'customer_care/faq' }
     ]
   },
 
@@ -133,4 +133,11 @@ export const navigation = [
 
 
   //it21326936@my.sliit.lk - Amandi
+
+
+
+
+
+
+
 ];
