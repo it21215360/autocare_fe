@@ -94,13 +94,11 @@ const routes = [
 
 
   //it21326936@my.sliit.lk - Amandi
-
-
-
-
-
-
-
+  { path: 'Ordering/Order_details', element: OrderForm },
+  { path: 'Ordering/Cart', element: AddtoCart },
+  { path: 'Ordering/Card_details', element: CardForm },
+  { path: 'Ordering/Product', element: ProductPage },
+  { path: 'Ordering/Return_product', element: ReturnProduct }
 
 
 ];

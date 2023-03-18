@@ -128,4 +128,15 @@ export const navigation = [
 
 
   //it21326936@my.sliit.lk - Amandi
+  {
+    text: 'Order', icon: 'folder',
+    items: [
+      { text: 'Customer Payment', path: 'Ordering/Order_details' },
+      { text: 'Cart', path: 'Ordering/Cart' },
+      { text: 'Card Details', path: 'Ordering/Card_details' },
+      { text: 'Products', path: 'Ordering/Product' },
+      { text: 'Return Product', path: 'Ordering/Return_product' },
+  
+    ]
+  },
 ];
