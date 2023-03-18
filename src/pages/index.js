@@ -50,7 +50,8 @@ export { default as Cancel } from './scheduling/Cancel_appointment';
 
 
 //it21198090@my.sliit.lk - Shania
-
+export { default as ProductCategoryview } from './masters/ViewMasterProd';
+export { default as App } from './masters/ProductCat';
 
 
 

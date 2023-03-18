@@ -22,7 +22,9 @@ import {
   Scheduling,
   PackageDetails,
   Update,
-  Cancel
+  Cancel,
+  ProductCategoryview,
+  App
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
@@ -58,7 +60,8 @@ const routes = [
   { path: "/scheduling/Cancel_appointment", element: Cancel },
 
   //it21198090@my.sliit.lk - Shania
-
+  { path: "/masters/ViewMasterProd", element: ProductCategoryview },
+  { path: "/masters/ProductCat", element: App },
 
 
 
