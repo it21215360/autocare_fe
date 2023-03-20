@@ -4,9 +4,6 @@ export { default as TasksPage } from './tasks/tasks';
 export { default as ProductCategory } from './masters/productCategory';
 
 
-/**export { default as Delivery } from './courier/CourierLogin';**/
-
-
 //shamith
 
 
@@ -42,11 +39,14 @@ export { default as StockReturnForm} from './Stock_Management/StockReturnForm';
 
 
 //it21197000@my.sliit.lk - Chethani
-//default as <function/class name>
 export { default as Scheduling } from './scheduling/Scheduling_appointment';
 export { default as PackageDetails } from './scheduling/PackageDetails';
 export { default as Update } from './scheduling/Update_appointment';
 export { default as Cancel } from './scheduling/Cancel_appointment';
+
+
+
+
 
 
 //it21198090@my.sliit.lk - Shania
@@ -70,4 +70,26 @@ export { default as CourierProfile } from './courier/CourierProfile';
 
 
 
+
+
+
+
+
+
+
 //it21326936@my.sliit.lk - Amandi
+export { default as OrderForm } from './ordering/Order_details';
+export { default as CardForm } from './ordering/Card_details';
+//export { default as AddtoCart } from './ordering/';
+export { default as ProductPage} from './ordering/Product';
+export { default as  ReturnProduct} from './ordering/Return_products';
+
+
+
+
+
+
+
+
+//Amanda
+export {default as RaiseTicket} from './customer_care/raiseTicket';

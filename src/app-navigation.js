@@ -45,7 +45,6 @@ export const navigation = [
 
 
 
-
   //it21324406@my.sliit.lk - Shanoli
   {
     text: 'Stock Management', icon: 'product',
@@ -119,8 +118,14 @@ export const navigation = [
 
 
   //it21238994@my.sliit.lk - Amanda
-
-
+  {
+    text: 'Customer Care',
+    icon: 'tips',
+    items: [
+      { text: 'Raise a Ticket', path: 'customer_care/raiseTicket' },
+      { text: 'FAQ', path: 'customer_care/faq' }
+    ]
+  },
 
 
 
@@ -129,4 +134,22 @@ export const navigation = [
 
 
   //it21326936@my.sliit.lk - Amandi
+  {
+    text: 'Order', icon: 'folder',
+    items: [
+      { text: 'Customer Payment', path: 'Ordering/Order_details' },
+      { text: 'Cart', path: 'Ordering/Cart' },
+      { text: 'Card Details', path: 'Ordering/Card_details' },
+      { text: 'Products', path: 'Ordering/Product' },
+      { text: 'Return Product', path: 'Ordering/Return_product' },
+  
+    ]
+  },
+
+
+
+
+
+
+
 ];
