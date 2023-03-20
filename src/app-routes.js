@@ -23,7 +23,12 @@ import {
   PackageDetails,
   Update,
   Cancel,
-  RaiseTicket
+  RaiseTicket,
+  OrderForm,
+  AddtoCart,
+  CardForm,
+  ProductPage,
+  ReturnProduct
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
