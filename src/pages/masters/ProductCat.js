@@ -50,7 +50,7 @@ function App() {
 
   
   return (
-    <div className="App">
+    <div className={'content-block'}>
         <p>
           Hello World Shania  <br />
         </p>
