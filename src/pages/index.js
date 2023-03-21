@@ -19,18 +19,18 @@ export { default as LeaveRequestForm } from './payroll_hr/LeaveRequestForm';
 export { default as Salary } from './payroll_hr/payroll';
 export { default as LeaveApproval } from './payroll_hr/leaveApproval';
 export { default as AttendanceViewer } from './payroll_hr/dailyAttendanceViewer';
-
+export { default as EmpLogin } from './payroll_hr/employeeLogin';
 
 
 
 
 
 //it21324406@my.sliit.lk - Shanoli
-export { default as Storage} from './stock_management/Storage';
-export { default as Suppliers} from './stock_management/Suppliers';
-export { default as Order} from './stock_management/Order';
-export { default as PurchaseOrderForm} from './stock_management/purchaseOrderForm';
-export { default as StockReturnForm} from './stock_management/StockReturnForm';
+export { default as Storage} from './Stock_Management/Storage';
+export { default as Suppliers} from './Stock_Management/Suppliers';
+export { default as Order} from './Stock_Management/Order';
+export { default as PurchaseOrderForm} from './Stock_Management/purchaseOrderForm';
+export { default as StockReturnForm} from './Stock_Management/StockReturnForm';
 
 
 
@@ -78,8 +78,14 @@ export { default as CourierProfile } from './courier/CourierProfile';
 
 
 
-//it21326936@my.sliit.lk - Amandi
 
+
+//it21326936@my.sliit.lk - Amandi
+export { default as OrderForm } from './ordering/Order_details';
+export { default as CardForm } from './ordering/Card_details';
+//export { default as AddtoCart } from './ordering/';
+export { default as ProductPage} from './ordering/Product';
+export { default as  ReturnProduct} from './ordering/Return_products';
 
 
 

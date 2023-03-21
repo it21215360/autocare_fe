@@ -36,6 +36,7 @@ export const navigation = [
       { text: 'Employee Salary', path: 'payroll_hr/emp-payroll' },
       { text: 'Employee Leave Approval', path: 'payroll_hr/leaveApproval' },
       { text: 'Employee Attendance Viewer', path: 'payroll_hr/dailyAttendanceViewer'},
+      { text: 'Employee Login', path: 'payroll_hr/employeeLogin'},
     ]
   },
 

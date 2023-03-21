@@ -23,9 +23,15 @@ import {
   PackageDetails,
   Update,
   Cancel,
+  EmpLogin,
   ProductCategoryview,
   App,
-  RaiseTicket
+  RaiseTicket,
+  OrderForm,
+  AddtoCart,
+  CardForm,
+  ProductPage,
+  ReturnProduct
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
@@ -51,6 +57,7 @@ const routes = [
   { path: "payroll_hr/emp-payroll", element: Salary },
   { path: "payroll_hr/leaveApproval", element: LeaveApproval },
   { path: "payroll_hr/dailyAttendanceViewer", element: AttendanceViewer },
+  { path: "payroll_hr/employeeLogin", element: EmpLogin },
 
 
 
@@ -127,7 +134,7 @@ const routes = [
 
   //it21326936@my.sliit.lk - Amandi
   { path: 'Ordering/Order_details', element: OrderForm },
-  { path: 'Ordering/Cart', element: AddtoCart },
+  //{ path: 'Ordering/Cart', element: AddtoCart },
   { path: 'Ordering/Card_details', element: CardForm },
   { path: 'Ordering/Product', element: ProductPage },
   { path: 'Ordering/Return_product', element: ReturnProduct }
