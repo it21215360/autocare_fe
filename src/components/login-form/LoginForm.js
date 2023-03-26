@@ -11,8 +11,7 @@ import Form, {
 import LoadIndicator from "devextreme-react/load-indicator";
 import notify from "devextreme/ui/notify";
 import { useAuth } from "../../contexts/auth";
-import axios from "axios";
-import { API_BASE_URL, LANDING_PAGE_URL } from "../../appconfig/config";
+import { LANDING_PAGE_URL } from "../../appconfig/config";
 
 import "./LoginForm.scss";
 
@@ -22,36 +21,20 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({});
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    debugger;
-    const fetchURL = `${API_BASE_URL}/api/user/authenticate`;
-    axios
-      .get(fetchURL, {
-        params: {
-          userName: formData.username,
-          password: formData.password,
-        },
-      })
-      .then(
-        (response) => {
-          if (response.data.length == 0) {
-            setLoading(false);
-            notify("Access denied", "error", 2000);
-          } else {
-            setLoading(false);
-            notify("Access granted", "success", 3000);
-            navigate(LANDING_PAGE_URL);
-            //onSuccessfulLogin();
-          }
-        },
-        (error) => {
+  const onSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      setLoading(true);
+      const result = await signIn(formData.username, formData.password);
+      debugger;
+      if (result)
+        if (!result.isOk) {
           setLoading(false);
-          notify(error, "error", 2000);
+          notify(result.message, "error", 2000);
         }
-      );
-  };
+    },
+    [signIn]
+  );
 
   // const onSuccessfulLogin = useCallback(() => {
   //   navigate("/home");
