@@ -1,21 +1,51 @@
-import defaultUser from '../utils/default-user';
+import defaultUser from "../utils/default-user";
+import axios from "axios";
+import { API_BASE_URL } from "../appconfig/config";
 
-export async function signIn(email, password) {
+export async function signIn(username, password) {
+  return {
+    isOk: true,
+    data: defaultUser,
+  };
+  /*let returnObject = {};
+
   try {
+    debugger;
     // Send request
-    console.log(email, password);
 
-    return {
-      isOk: true,
-      data: defaultUser
-    };
-  }
-  catch {
-    return {
-      isOk: false,
-      message: "Authentication failed"
-    };
-  }
+    console.log(username, password);
+    const fetchURL = `${API_BASE_URL}/api/user/authenticate`;
+    axios
+      .get(fetchURL, {
+        params: {
+          userName: username,
+          password: password,
+        },
+      })
+      .then(
+        (response) => {
+          if (response.data.length == 0) {
+            returnObject = { isOk: false, message: "Authentication failed" };
+          } else {
+            returnObject = {
+              isOk: true,
+              message: "Access granted",
+              data: response.data,
+            };
+          }
+        },
+        (error) => {
+          returnObject = {
+            isOk: false,
+            message: `Authentication failed. ${error}`,
+          };
+        }
+      );
+
+    return returnObject;
+  } catch {
+    return returnObject;
+  }*/
 }
 
 export async function getUser() {
@@ -24,12 +54,11 @@ export async function getUser() {
 
     return {
       isOk: true,
-      data: defaultUser
+      data: defaultUser,
     };
-  }
-  catch {
+  } catch {
     return {
-      isOk: false
+      isOk: false,
     };
   }
 }
@@ -40,13 +69,12 @@ export async function createAccount(email, password) {
     console.log(email, password);
 
     return {
-      isOk: true
+      isOk: true,
     };
-  }
-  catch {
+  } catch {
     return {
       isOk: false,
-      message: "Failed to create account"
+      message: "Failed to create account",
     };
   }
 }
@@ -57,14 +85,13 @@ export async function changePassword(email, recoveryCode) {
     console.log(email, recoveryCode);
 
     return {
-      isOk: true
+      isOk: true,
     };
-  }
-  catch {
+  } catch {
     return {
       isOk: false,
-      message: "Failed to change password"
-    }
+      message: "Failed to change password",
+    };
   }
 }
 
@@ -74,13 +101,12 @@ export async function resetPassword(email) {
     console.log(email);
 
     return {
-      isOk: true
+      isOk: true,
     };
-  }
-  catch {
+  } catch {
     return {
       isOk: false,
-      message: "Failed to reset password"
+      message: "Failed to reset password",
     };
   }
 }

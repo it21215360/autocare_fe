@@ -25,37 +25,33 @@ export default function LoginForm() {
   const onSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    debugger;
-    const fetchURL = `${API_BASE_URL}/api/user/authenticate`;
-    axios
-      .get(fetchURL, {
-        params: {
-          userName: formData.username,
-          password: formData.password,
-        },
-      })
-      .then(
-        (response) => {
-          if (response.data.length == 0) {
-            setLoading(false);
-            notify("Access denied", "error", 2000);
-          } else {
-            setLoading(false);
-            notify("Access granted", "success", 3000);
-            navigate(LANDING_PAGE_URL);
-            //onSuccessfulLogin();
-          }
-        },
-        (error) => {
-          setLoading(false);
-          notify(error, "error", 2000);
-        }
-      );
+    
+    signIn(formData.username, formData.password);
+    // axios
+    //   .get(fetchURL, {
+    //     params: {
+    //       userName: formData.username,
+    //       password: formData.password,
+    //     },
+    //   })
+    //   .then(
+    //     (response) => {
+    //       if (response.data.length == 0) {
+    //         setLoading(false);
+    //         notify("Access denied", "error", 2000);
+    //       } else {
+    //         setLoading(false);
+    //         notify("Access granted", "success", 3000);
+    //         navigate(LANDING_PAGE_URL);
+    //         //onSuccessfulLogin();
+    //       }
+    //     },
+    //     (error) => {
+    //       setLoading(false);
+    //       notify(error, "error", 2000);
+    //     }
+    //   );
   };
-
-  // const onSuccessfulLogin = useCallback(() => {
-  //   navigate("/home");
-  // }, [navigate]);
 
   const onCreateAccountClick = useCallback(() => {
     navigate("/create-account");
