@@ -13,39 +13,17 @@ export async function signIn(username, password) {
     debugger;
     // Send request
 
-    console.log(username, password);
-    const fetchURL = `${API_BASE_URL}/api/user/authenticate`;
-    axios
-      .get(fetchURL, {
-        params: {
-          userName: username,
-          password: password,
-        },
-      })
-      .then(
-        (response) => {
-          if (response.data.length == 0) {
-            returnObject = { isOk: false, message: "Authentication failed" };
-          } else {
-            returnObject = {
-              isOk: true,
-              message: "Access granted",
-              data: response.data,
-            };
-          }
-        },
-        (error) => {
-          returnObject = {
-            isOk: false,
-            message: `Authentication failed. ${error}`,
-          };
-        }
-      );
-
-    return returnObject;
-  } catch {
-    return returnObject;
-  }*/
+    return {
+      isOk: true,
+      data: defaultUser
+    };
+  }
+  catch {
+    return {
+      isOk: false,
+      message: "Authentication failed"
+    };
+  }
 }
 
 export async function getUser() {
@@ -54,7 +32,7 @@ export async function getUser() {
 
     return {
       isOk: true,
-      data: defaultUser,
+      data: defaultUser
     };
   } catch {
     return {
@@ -63,10 +41,10 @@ export async function getUser() {
   }
 }
 
-export async function createAccount(email, password) {
+export async function createAccount(username, password) {
   try {
     // Send request
-    console.log(email, password);
+    console.log(username, password);
 
     return {
       isOk: true,
@@ -79,12 +57,13 @@ export async function createAccount(email, password) {
   }
 }
 
-export async function changePassword(email, recoveryCode) {
+export async function changePassword(username, recoveryCode) {
   try {
     // Send request
-    console.log(email, recoveryCode);
+    console.log(username, recoveryCode);
 
     return {
+      isOk: true,
       isOk: true,
     };
   } catch {
@@ -92,20 +71,25 @@ export async function changePassword(email, recoveryCode) {
       isOk: false,
       message: "Failed to change password",
     };
+      message: "Failed to change password",
+    };
   }
 }
 
-export async function resetPassword(email) {
+export async function resetPassword(username) {
   try {
     // Send request
-    console.log(email);
+    console.log(username);
 
     return {
       isOk: true,
+      isOk: true,
     };
+  } catch {
   } catch {
     return {
       isOk: false,
+      message: "Failed to reset password",
       message: "Failed to reset password",
     };
   }
