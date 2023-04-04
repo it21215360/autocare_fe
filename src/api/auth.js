@@ -23,7 +23,7 @@ export async function signIn(username, password) {
       isOk: false,
       message: "Authentication failed"
     };
-  }
+  }*/
 }
 
 export async function getUser() {
@@ -32,7 +32,7 @@ export async function getUser() {
 
     return {
       isOk: true,
-      data: defaultUser
+      data: defaultUser,
     };
   } catch {
     return {
@@ -71,8 +71,6 @@ export async function changePassword(username, recoveryCode) {
       isOk: false,
       message: "Failed to change password",
     };
-      message: "Failed to change password",
-    };
   }
 }
 
@@ -86,10 +84,8 @@ export async function resetPassword(username) {
       isOk: true,
     };
   } catch {
-  } catch {
     return {
       isOk: false,
-      message: "Failed to reset password",
       message: "Failed to reset password",
     };
   }
