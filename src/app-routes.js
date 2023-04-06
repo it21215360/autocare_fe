@@ -31,7 +31,8 @@ import {
   AddtoCart,
   CardForm,
   ProductPage,
-  ReturnProduct
+  ReturnProduct,
+  EmployeeMaster
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
@@ -58,6 +59,7 @@ const routes = [
   { path: "payroll_hr/leaveApproval", element: LeaveApproval },
   { path: "payroll_hr/dailyAttendanceViewer", element: AttendanceViewer },
   { path: "payroll_hr/employeeLogin", element: EmpLogin },
+  { path: "payroll_hr/employee-master", element: EmployeeMaster },
 
 
 
