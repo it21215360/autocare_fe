@@ -14,11 +14,13 @@ import {
   DeliveryRequestForm,
   ShippingManage,
   CourierProfile,
+  InventoryLogin,
   Storage,
   Order,
   Suppliers,
   PurchaseOrderForm,
   StockReturnForm,
+  GoodReceiveForm,
   Scheduling,
   PackageDetails,
   Update,
@@ -67,12 +69,13 @@ const routes = [
 
 
   //it21324406@my.sliit.lk - Shanoli
+  { path: "stock_management/login", element: InventoryLogin },
   { path: "stock_management/storage", element: Storage },
   { path: "stock_management/suppliers", element: Suppliers },
   { path: "stock_management/order", element: Order },
   { path: "stock_management/stock-order-request-form", element: PurchaseOrderForm, },
   { path: "stock_management/stock-return-form", element: StockReturnForm },
-
+  { path: "stock_management/purchase", element: GoodReceiveForm },
 
 
 

@@ -9,13 +9,13 @@ import { SelectBox } from "devextreme-react";
 import { Button } from 'devextreme-react/button';
 import { DateBox } from 'devextreme-react/calendar';
 
-const  StockReturnForm = () => {
+const  GoodReceiveForm = () => {
 
     let jBudgetDefinition = {
 
     }
 
-    const [budgetdefinition, setBudgetdefinition] = useState({returnID: 'R111', productName:'TATA Batteries', quantity: 100, reasonToReturn:'Damaged Items',returnDate:'12/03/2023'})
+    const [budgetdefinition, setBudgetdefinition] = useState({goodReceiveID: 'GR01', receivedDate:'01/04/2023', supplier:'Carmart(Pvt) Limited', purchaseOrderNumber:'1001',itemDescription:'Brake Oil in Engine Oil and Lubricants product catogory',receivedQuantity: 250 ,unitPrice: 3500.00,totalCost:875000.00 ,condition:"New" ,comments:"Unpacked and checked the quality of the brake oil"})
 
     //const productCategory = [{ AutoID: 1, Name: 'Automobile Tyres' }, { AutoID: 2, Name: 'Automobile Clean & Care' }, { AutoID: 3, Name: 'Automobile Spare Parts' }, { AutoID: 4, Name: 'Engine Oil & Lubricant'}, {AutoID:5, Name:'Automobile Lighting'}, {AutoID:6, Name:'Automobile Electronics'}]
 
@@ -23,36 +23,71 @@ const  StockReturnForm = () => {
     return (
         <>
             <div className={'content-block'}>
-                <h2><b>Stock Return Form</b></h2>
+                <h2><b>Good Receive Form</b></h2>
                 <Form formData={budgetdefinition}>
                     <GroupItem colCount={2}>
-                        <Item dataField="returnID" editorType="dxTextBox" editorOptions={{
+                        <Item dataField="goodReceiveID" editorType="dxTextBox" editorOptions={{
                             readOnly: true,
                         }}>
-                            <Label text="Return ID"></Label>
+                            <Label text="Good Receive ID"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
-                        <Item dataField=" productName " editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
-                        }}>
-                            <Label text="Product Name"></Label>
+                        <Item dataField="receivedDate" editorType="dxDateBox">
+                            <Label text="Good Received Date"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
-                        <Item dataField="quantity" editorType="dxTextBox" editorOptions={{
+                        <Item dataField="supplier" editorType="dxTextBox" editorOptions={{
                             readOnly: true,
                         }}>
-                            <Label text="Quantity"></Label>
+                            <Label text="Supplier"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
-                        <Item dataField="reasonToReturn" editorType="dxTextBox" editorOptions={{
+                        <Item dataField="purchaseOrderNumber" editorType="dxTextBox" editorOptions={{
                             readOnly: true,
                         }}>
-                            <Label text="Returning Reason"></Label>
+                            <Label text="Purchase Order Number"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
                         
-                        <Item dataField="returnDate" editorType="dxDateBox">
-                            <Label text="Return Date"></Label>
+                        <Item dataField="itemDescription" editorType="dxTextBox" editorOptions={{
+                            readOnly: true,
+                        }}>
+                            <Label text="Item Description"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+
+                        <Item dataField="receivedQuantity" editorType="dxTextBox" editorOptions={{
+                            readOnly: true,
+                        }}>
+                            <Label text="Received Quantity"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+
+                        <Item dataField="unitPrice" editorType="dxTextBox" editorOptions={{
+                            readOnly: true,
+                        }}>
+                            <Label text="Unit Price"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+
+                        <Item dataField="totalCost" editorType="dxTextBox" editorOptions={{
+                            readOnly: true,
+                        }}>
+                            <Label text="Total Cost"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+
+                        <Item dataField="condition" editorType="dxTextBox" editorOptions={{
+                            readOnly: true,
+                        }}>
+                            <Label text="Product Condition (New/Used/Damaged)"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+
+                        <Item dataField="comments" editorType="dxTextBox" editorOptions={{
+                            readOnly: true,
+                        }}>
+                            <Label text="Comments/Notes"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
                     </GroupItem>
@@ -75,7 +110,7 @@ const  StockReturnForm = () => {
 
 
                 <Navbar bg="light" variant="light">
-                    <Button stylingMode="contained" type="success">Submit</Button>
+                    <Button stylingMode="contained" type="success">Save</Button>
                     <Button stylingMode="contained" type="default">Clear</Button>
                 </Navbar>
             </div>
@@ -101,4 +136,4 @@ const  StockReturnForm = () => {
     )
 }
 
-export default StockReturnForm
+export default GoodReceiveForm

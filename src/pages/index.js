@@ -26,11 +26,15 @@ export { default as EmployeeMaster } from './payroll_hr/employeeMaster'
 
 
 //it21324406@my.sliit.lk - Shanoli
-export { default as Storage } from './stock_management/Storage';
-export { default as Suppliers } from './stock_management/Suppliers';
-export { default as Order } from './stock_management/Order';
-export { default as PurchaseOrderForm } from './stock_management/purchaseOrderForm';
-export { default as StockReturnForm } from './stock_management/StockReturnForm';
+
+
+export { default as Storage} from './stock_management/Storage';
+export { default as Suppliers} from './stock_management/Suppliers';
+export { default as Order} from './stock_management/Order';
+export { default as PurchaseOrderForm} from './stock_management/purchaseOrderForm';
+export { default as StockReturnForm} from './stock_management/StockReturnForm';
+export { default as GoodReceiveForm} from './stock_management/GoodReceiveForm';
+
 
 
 
