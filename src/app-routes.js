@@ -14,7 +14,7 @@ import {
   DeliveryRequestForm,
   ShippingManage,
   CourierProfile,
-  InventoryLogin,
+  //InventoryLogin,
   Storage,
   Order,
   Suppliers,
@@ -69,7 +69,7 @@ const routes = [
 
 
   //it21324406@my.sliit.lk - Shanoli
-  { path: "stock_management/login", element: InventoryLogin },
+  //{ path: "stock_management/login", element: InventoryLogin },
   { path: "stock_management/storage", element: Storage },
   { path: "stock_management/suppliers", element: Suppliers },
   { path: "stock_management/order", element: Order },
