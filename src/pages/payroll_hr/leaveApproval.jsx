@@ -39,7 +39,7 @@ class LeaveApproval extends React.Component {
     return (
       <React.Fragment>
         <DataGrid
-          id="gridContainer"
+          id="gridContainer"  
           dataSource={employees}
           keyExpr="ID"
           allowColumnReordering={true}

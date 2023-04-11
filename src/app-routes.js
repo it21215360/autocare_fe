@@ -26,12 +26,15 @@ import {
   Update,
   Cancel,
   EmpLogin,
+  ProductCategoryview,
+  App,
   RaiseTicket,
   OrderForm,
   AddtoCart,
   CardForm,
   ProductPage,
-  ReturnProduct
+  ReturnProduct,
+  EmployeeMaster
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
@@ -58,6 +61,7 @@ const routes = [
   { path: "payroll_hr/leaveApproval", element: LeaveApproval },
   { path: "payroll_hr/dailyAttendanceViewer", element: AttendanceViewer },
   { path: "payroll_hr/employeeLogin", element: EmpLogin },
+  { path: "payroll_hr/employee-master", element: EmployeeMaster },
 
 
 
@@ -88,8 +92,15 @@ const routes = [
 
 
 
-  //it21198090@my.sliit.lk - Shania
 
+
+
+
+
+
+  //it21198090@my.sliit.lk - Shania
+  { path: "/masters/ViewMasterProd", element: ProductCategoryview },
+  { path: "/masters/ProductCat", element: App },
 
 
 

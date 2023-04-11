@@ -30,13 +30,14 @@ export const navigation = [
   {
     text: 'Payroll and HR', icon: 'group',
     items: [
-      
+
       { text: 'Leave Request Form', path: 'payroll_hr/leave-request-form' },
       { text: 'Employee Attendance', path: 'payroll_hr/emp-attendance' },
       { text: 'Employee Salary', path: 'payroll_hr/emp-payroll' },
       { text: 'Employee Leave Approval', path: 'payroll_hr/leaveApproval' },
-      { text: 'Employee Attendance Viewer', path: 'payroll_hr/dailyAttendanceViewer'},
-      { text: 'Employee Login', path: 'payroll_hr/employeeLogin'},
+      { text: 'Employee Attendance Viewer', path: 'payroll_hr/dailyAttendanceViewer' },
+      { text: 'Employee Login', path: 'payroll_hr/employeeLogin' },
+      { text: 'Employee Master', path: 'payroll_hr/employee-master' }
     ]
   },
 
@@ -54,7 +55,7 @@ export const navigation = [
       { text: 'Suppliers', path: 'stock_management/suppliers' },
       { text: 'PO History', path: 'stock_management/order' },
       { text: 'Purchase Order Form', path: 'stock_management/stock-order-request-form' },
-      { text: 'Stock Return form', path: 'stock_management/stock-return-form'},
+      { text: 'Stock Return form', path: 'stock_management/stock-return-form' },
       { text: 'Good Receive Form', path: 'stock_management/purchase' },
     ]
   },
@@ -71,11 +72,11 @@ export const navigation = [
   {
     text: 'Scheduling', icon: 'event',
     items: [
-      { text: 'Scheduling Appointment', path: 'scheduling/Scheduling_appointment'},
+      { text: 'Scheduling Appointment', path: 'scheduling/Scheduling_appointment' },
       { text: 'Update Appointment', path: 'scheduling/Update_appointment' },
       { text: 'Confirm Appointment', path: 'scheduling/Confirm_appointment' },
       { text: 'Cancel Appointment', path: 'scheduling/Cancel_appointment' },
-   //   { text: ' memo viewer', path: 'scheduling/emp_payroll' },
+      //   { text: ' memo viewer', path: 'scheduling/emp_payroll' },
       { text: 'Booked memo viewer', path: 'scheduling/Memo' },
       { text: 'Package Details', path: 'scheduling/Package' },
     ]
@@ -88,7 +89,15 @@ export const navigation = [
 
 
   //it21198090@my.sliit.lk - Shania
-
+  {
+    text: 'Master Data', icon: 'data',
+    items: [
+      { text: 'View Product Master Data', path: 'masters/ViewMasterProd' },
+      { text: 'Product Category Data', path: 'masters/ProductCat' },
+      { text: 'Data Form Fill', path: 'mastera/ProductAdd-form' },
+      { text: 'Data Form Fill2', path: 'Appform2' },
+    ]
+  },
 
 
 
@@ -143,7 +152,7 @@ export const navigation = [
       { text: 'Card Details', path: 'Ordering/Card_details' },
       { text: 'Products', path: 'Ordering/Product' },
       { text: 'Return Product', path: 'Ordering/Return_product' },
-  
+
     ]
   },
 
