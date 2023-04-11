@@ -237,7 +237,7 @@ const EmployeeMaster = () => {
             <Form formData={empLeaveInfo}>
               <GroupItem colCount={4}>
                 <Item
-                  dataField="AnnualLeave"
+                  dataField="AnnualLeaveCount"
                   editorType="dxTextBox"
                   editorOptions={{
                     readOnly: false,
@@ -247,7 +247,7 @@ const EmployeeMaster = () => {
                   <RequiredRule message="Field required" />
                 </Item>
                 <Item
-                  dataField="CasualLeave"
+                  dataField="CasualLeaveCount"
                   editorType="dxTextBox"
                   editorOptions={{
                     readOnly: false,
