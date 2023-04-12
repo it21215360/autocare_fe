@@ -26,7 +26,7 @@ const LeaveRequestForm = () => {
       console.log(empLeaveInfo);
   
       axios
-        .post(`${API_BASE_URL}/api/employee/leave-details`, {
+        .post(`${API_BASE_URL}/api/payroll_hr/leave-request-form`, {
           LeaveInfo: JSON.stringify(empLeaveInfo)
         })
         .then((response) => {
