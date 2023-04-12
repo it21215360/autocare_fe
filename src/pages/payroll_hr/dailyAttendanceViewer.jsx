@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from 'devextreme-react/button';
 import DataGrid, {
   Column, Editing, Paging, Lookup,
 } from 'devextreme-react/data-grid';
-import axio from "axios";
 
+import { employees } from './data2.js';
 
-import { employees, states } from './data.js';
-
-  
-
-class LeaveApproval extends React.Component {
+class AttendanceViewer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { events: [] };
@@ -42,8 +38,8 @@ class LeaveApproval extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h5>Leave Approval</h5>
         
+        <h5>ATTENDANCE LOGS</h5>
         <DataGrid
           id="gridContainer"  
           dataSource={employees}
@@ -62,26 +58,15 @@ class LeaveApproval extends React.Component {
           onSaved={this.onSaved}
           onEditCanceling={this.onEditCanceling}
           onEditCanceled={this.onEditCanceled}>
-
-          <Paging enabled={true} />
           
-          
-          <Column dataField="FirstName" />
-          <Column dataField="LastName" />
-          <Column dataField="EmpId" width={130} />
-          <Column dataField="Department"/>
-          <Column dataField="LeaveCategory" caption = "Leave Category" />  
-          <Column dataField="LeaveType" caption = "Leave Type" />  
-          <Column dataField="LeaveFrom" caption = "Leave From" />
-          <Column dataField="LeaveTo" caption = "Leave To" />
-          <Column dataField="DayCount" caption = "Day Count" />
-          <Column dataField="Status"/>
-          <Column dataField="Action"/>
-          
+          <Column dataField="Date" />
+          <Column dataField="TimeIn" caption="Time-In"/>
+          <Column dataField="TimeOut" caption="Time-Out"/>
+          <Column dataField="TotalHours" caption="Total Hours"/>
         </DataGrid>
       </React.Fragment>
     );
   }
 }
 
-export default LeaveApproval;
+export default AttendanceViewer;

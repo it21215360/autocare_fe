@@ -13,10 +13,35 @@ import { DateBox } from 'devextreme-react/calendar';
 import { Link } from 'react-router-dom';
 import LeaveApproval from "./leaveApproval";
 
-function LeaveRequestForm() {
+import axios from 'axios';
+import { API_BASE_URL  } from '../../appconfig/config.js';
 
-    const [budgetdefinition, setBudgetdefinition] = useState({ FirstName: 'Maheesha', employeeId: 200202, LastName: 'Rosa', empDepartment: 'IT Department', leaveFrom: '2022/10/21', leaveTo: '2022/10/23', dayCount: 'count' })
 
+const LeaveRequestForm = () => {
+    const [empLeaveInfo, setEmpLeaveInfo] = useState({});
+  
+  
+  const onSaveBtnClick = (e) => {
+    try{
+      console.log(empLeaveInfo);
+  
+      axios
+        .post(`${API_BASE_URL}/api/payroll_hr/leave-request-form`, {
+          LeaveInfo: JSON.stringify(empLeaveInfo)
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {});
+      }catch (error) {
+        console.error(error);
+      }
+  };
+
+//function LeaveRequestForm() {
+
+    /*const [budgetdefinition, setBudgetdefinition] = useState({ FirstName: 'Maheesha', employeeId: 200202, LastName: 'Rosa', empDepartment: 'IT Department', leaveFrom: '2022/10/21', leaveTo: '2022/10/23', dayCount: 'count' })
+*/
     const leaveCategory = [{ AutoID: 1, Name: 'Casual Leave' }, { AutoID: 2, Name: 'Annual Leave' }, { AutoID: 3, Name: 'Comp Leave' }]
     const empDepartment = [{ DepID: 1, Name: 'HR Department' }, { DepID: 2, Name: 'Finance Department' }, { DepID: 3, Name: 'IT Department' }]
 
@@ -27,13 +52,15 @@ function LeaveRequestForm() {
                 <h2>Employee Leave Request Form</h2>
                 <hr />
 
-                <Form formData={budgetdefinition}>
+                <Form formData={empLeaveInfo}>
                     <GroupItem colCount={2}>
 
 
-                        <Item dataField="FirstName" editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
-                        }}>
+                        <Item dataField="FirstName" 
+                            editorType="dxTextBox" 
+                            editorOptions={{
+                                readOnly: false,
+                            }}>
 
                             <Label text="First Name"></Label>
                             <RequiredRule message="Field required" />
@@ -41,19 +68,30 @@ function LeaveRequestForm() {
 
 
 
-                        <Item dataField="employeeId" editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
+                        <Item 
+                            dataField="EmployeeID" 
+                            editorType="dxTextBox"
+                             editorOptions={{
+                            readOnly: false,
                         }}>
                             <Label text="Employee Id"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
-                        <Item dataField="LastName" editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
+
+                        <Item 
+                            dataField="LastName" 
+                            editorType="dxTextBox" 
+                            editorOptions={{
+                            readOnly: false,
                         }}>
                             <Label text="Last Name"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
-                        <Item dataField="empDepartment" editorType="dxSelectBox" editorOptions={{
+
+                        <Item 
+                            dataField="empDepartment" 
+                            editorType="dxSelectBox" 
+                            editorOptions={{
                             items: empDepartment,
                             searchEnabled: true,
                             displayExpr: "Name",
@@ -66,7 +104,9 @@ function LeaveRequestForm() {
                     </GroupItem>
 
                     <GroupItem colCount={3}>
-                        <Item dataField="leaveFrom" editorType="dxDateBox">
+                        <Item 
+                            dataField="leaveFrom" 
+                            editorType="dxDateBox">
                             <Label text="Leave From"></Label>
 
                             <RequiredRule message="Field required" />
@@ -100,11 +140,16 @@ function LeaveRequestForm() {
                             <RequiredRule message="Field required" />
                         </Item>
 
-                        <Item dataField="leaveTo" editorType="dxDateBox">
+                        <Item 
+                            dataField="leaveTo" 
+                            editorType="dxDateBox">
                             <Label text="Leave To"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
-                        <Item dataField="dayCount" editorOptions={{ readOnly: true }}>
+
+                        <Item 
+                            dataField="dayCount" 
+                            editorOptions={{ readOnly: false }}>
                             <RequiredRule message="Field required" />
 
 
@@ -113,12 +158,23 @@ function LeaveRequestForm() {
                 </Form>
 
                 <Navbar bg="light" variant="light">
-                    <Button stylingMode="contained" type="success">Save</Button>
-                    <Button stylingMode="contained" type="default">Clear</Button>
+                    <Button 
+                        stylingMode="contained" 
+                        type="success" 
+                        onClick={onSaveBtnClick}
+                        >
+                            Save
+                        </Button>
+                    <Button 
+                        stylingMode="contained" 
+                        type="default"
+                        >
+                            Clear
+                        </Button>
                 </Navbar>
             </div>
         </>
-    )
+    );
 }
 
-export default LeaveRequestForm
+export default LeaveRequestForm;
