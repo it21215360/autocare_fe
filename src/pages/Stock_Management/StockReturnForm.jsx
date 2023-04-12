@@ -8,23 +8,42 @@ import { useState } from "react";
 import { SelectBox } from "devextreme-react";
 import { Button } from 'devextreme-react/button';
 import { DateBox } from 'devextreme-react/calendar';
+import axios from "axios";
+import { API_BASE_URL } from "../../appconfig/config";
 
 const  StockReturnForm = () => {
 
-    let jBudgetDefinition = {
+   /* let jstockReturnInfo = {
 
-    }
+    }*/
 
-    const [budgetdefinition, setBudgetdefinition] = useState({returnID: 'R111',product:'TATA Batteries', quantity: 100, reasonToReturn:'Damaged Items',returnDate:'12/03/2023'})
+    const [stockReturnInfo, setStockReturnInfo] = useState({});
 
-    //const productCategory = [{ AutoID: 1, Name: 'Automobile Tyres' }, { AutoID: 2, Name: 'Automobile Clean & Care' }, { AutoID: 3, Name: 'Automobile Spare Parts' }, { AutoID: 4, Name: 'Engine Oil & Lubricant'}, {AutoID:5, Name:'Automobile Lighting'}, {AutoID:6, Name:'Automobile Electronics'}]
+    const onSaveBtnClick = (e) => {
+        try {
+          console.log(stockReturnInfo);
+         
+    
+          axios
+            .post(`${API_BASE_URL}/api/returnStock/add-returnStock`, {
+              ReturnDetails : JSON.stringify(stockReturnInfo),
+              
+            })
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {});
+        } catch (error) {
+          console.error(error);
+        }
+      };
 
 
     return (
         <>
             <div className={'content-block'}>
                 <h2><b>Stock Return Form</b></h2>
-                <Form formData={budgetdefinition}>
+                <Form formData={stockReturnInfo}>
                     <GroupItem colCount={2}>
                         <Item dataField="returnID" editorType="dxTextBox" editorOptions={{
                             readOnly: true,
@@ -96,7 +115,7 @@ const  StockReturnForm = () => {
 
 
                         <Item dataField=" product " editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
+                            readOnly: false,
                         }}>
 
 
@@ -105,13 +124,13 @@ const  StockReturnForm = () => {
                         </Item>
                         
                         <Item dataField="quantity" editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
+                            readOnly: false,
                         }}>
                             <Label text="Quantity"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
                         <Item dataField="reasonToReturn" editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
+                            readOnly: false,
                         }}>
                             <Label text="Returning Reason"></Label>
                             <RequiredRule message="Field required" />
@@ -141,7 +160,7 @@ const  StockReturnForm = () => {
 
 
                 <Navbar bg="light" variant="light">
-                    <Button stylingMode="contained" type="success">Submit</Button>
+                    <Button stylingMode="contained" type="success"  onClick={onSaveBtnClick}>Submit</Button>
                     <Button stylingMode="contained" type="default">Clear</Button>
                 </Navbar>
             </div>
@@ -164,7 +183,7 @@ const  StockReturnForm = () => {
                 ></List> */}
 
         </>
-    )
-}
+    );
+};
 
 export default StockReturnForm
