@@ -21,7 +21,7 @@ function App() {
   if (user) {
     return <Content />;
   }
-
+  
   return <UnauthenticatedContent />;
 }
 
