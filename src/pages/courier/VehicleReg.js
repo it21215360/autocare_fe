@@ -13,7 +13,7 @@ function CourierRegistration () {
       <div className="gender__details">
       <input type="radio" name="vehicle" id="dot-1"/>
       <input type="radio" name="vehicle" id="dot-2"/>
-      <input type="radio" name="vehicle" id="dot-3"/>
+     
       <span className="gender__title">Vehicle Type</span>
       <div className="category">
         <label>

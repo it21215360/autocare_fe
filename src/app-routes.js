@@ -13,8 +13,8 @@ import {
   VehicleReg,
   DeliveryRequestForm,
   ShippingManage,
+  ExportTableToExcel,
   CourierProfile,
-
   Storage,
   Order,
   Suppliers,
@@ -30,11 +30,10 @@ import {
   App,
   RaiseTicket,
   OrderForm,
-  AddtoCart,
+
   CardForm,
   ProductPage,
-  ReturnProduct,
-  EmployeeMaster
+  ReturnProduct
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
@@ -124,6 +123,12 @@ const routes = [
   { path: "courier/DeliveryRequestForm", element: DeliveryRequestForm },
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
+  { path: "courier/DeliveryChargeCalculator", element:DeliveryChargeCalculator},
+  { path: "courier/CityDistance", element:CityDistance},
+  { path: "courier/ExportTableToExcel", element:ExportTableToExcel},
+  
+
+
 
 
 

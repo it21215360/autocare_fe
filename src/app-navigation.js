@@ -116,9 +116,13 @@ export const navigation = [
       { text: 'Delivery Request Form', path: 'courier/DeliveryRequestForm' },
       { text: 'Shipping Manage', path: 'courier/ShippingManage' },
       { text: 'Courier Profile', path: 'courier/CourierProfile' },
+      { text: 'Delivery Charge', path: 'courier/DeliveryChargeCalculator' },
+      { text: 'City Distance', path: 'courier/CityDistance' },
+      { text: 'Export to Excel', path: 'courier/ExportToExcel' },
+      
     ]
   },
-
+  
 
 
 

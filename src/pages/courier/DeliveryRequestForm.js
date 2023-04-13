@@ -1,58 +1,93 @@
+import React, { useState } from 'react';
+import './DeliveryRequestForm.css';
 
 
-import React  from "react";
-import "./DeliveryRequestForm.css";
+const DeliveryRequestForm = () => {
+  const [orderid, setOrderID] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [province, setProvince] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Order ID:', name);
+    console.log('Name:', name);
+    console.log('Phone:', phone);
+    console.log('Address:', address);
+    console.log('City:', city);
+    console.log('Province:', province);
+  };
+
+  return (
+    <form action="" method="POST"  onSubmit={handleSubmit}>
+      <h2>Request for a delivery</h2>
+      <div className="form-group">
+        <label htmlFor="name">Order ID:</label>
+        <input
+          type="text"
+          id="orderid"
+          value={orderid}
+          onChange={(e) => setName(e.target.value)}
+          
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="phone">Phone:</label>
+        <input
+          type="text"
+          id="phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="address">Address:</label>
+        <input
+          type="text"
+          id="address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="city">City:</label>
+        <input
+          type="text"
+          id="city"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="state">Province:</label>
+        <input
+          type="text"
+          id="province"
+          value={province}
+          onChange={(e) => setProvince(e.target.value)}
+          required
+        />
+      </div>
+     
+      <a href ="/DeliveryRequestForm/submit"><button type="submit">Submit</button></a>
+    </form>
+  );
+};
 
 
-function DeliveryRequestForm () {
-
-    return(
-<div className="ship">
-  <h1>Shipping</h1>
-  <p>Please enter your shipping details.</p>
-  <hr/>
-
-  <div className="form">
-    
-  <div className="fields fields--2">
-  
-    
-    <label className="field">
-      <span className="field__label" for="firstname">First name</span>
-      <input className="field__input" type="text" id="firstname"  />
-    </label>
-    <label className="field">
-      <span className="field__label" for="lastname">Last name</span>
-      <input className="field__input" type="text" id="lastname"  />
-    </label>
-  </div>
-
-  <label className="field">
-    <span className="field__label" for="address">Phone</span>
-    <input className="field__input" type="text" id="phone" />
-  </label>
-
-  <label className="field">
-    <span className="field__label" for="address">Address</span>
-    <input className="field__input" type="text" id="address" />
-  </label>
-  
-  <div className="fields fields--3">
-    <label className="field">
-      <span className="field__label" for="zipcode">Zip code</span>
-      <input className="field__input" type="text" id="zipcode" />
-    </label>
-    <label className="field">
-      <span className="field__label" for="city">City</span>
-      <input className="field__input" type="text" id="city" />
-    </label>
-    
-  </div>
-  </div>
- 
-  <button className="button">Continue</button>
-</div>
-
-    )
-    }
-    export default DeliveryRequestForm
+export default DeliveryRequestForm;
