@@ -126,14 +126,14 @@
    
   }
   form .buttonsub {
-    height: 30px;
+    height: 80px;
     margin: 45px 0;
   }
   
   form .buttonsub input {
     height: 50%;
     width: 50%;
-    outline: none;
+   
     color: #fff;
     border: none;
    margin-right:60px;
