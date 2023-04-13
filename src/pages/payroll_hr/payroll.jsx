@@ -1,109 +1,93 @@
 import React from "react";
-//import '../node_modules/bootstrap4/dist/css/bootstrap.min.css';
 import { useState } from "react";
+import "./payroll.scss";
+import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
+import { Navbar, ListGroup } from "react-bootstrap";
+import { Button } from 'devextreme-react/button';
 
 function Salary() {
+  const [toggleState, setToggleState] = useState(1);
 
+  const toggleTab = (index) => {
+    setToggleState(index);
+  };
 
-    const [salary, setSalary] = useState();
-    //var [tax,setTax] = useState();
-    var [nsal, setNsal] = useState();
-    var [allowance, setAllowance] = useState();
-    var [deductions, setDeductions] = useState();
+  return (
+    <div className="container1">
+      <div className="bloc-tabs">
+        <button
+          className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
+          onClick={() => toggleTab(1)}
+        >
+          Payroll Logs
+        </button>
+        <button
+          className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
+          onClick={() => toggleTab(2)}
+        >
+          New Pay
+        </button>
+        
+      </div>
 
-    const [COL, setCol] = useState();
-    const [Insentive, setInsentive] = useState();
-    var [EPF, SetEPF] = useState(salary * 8 / 100);
-    var [Tax, setTax] = useState();
-    var [MedInsuarance, setMedInsuarance] = useState(300);
-    var [welfare, setWelfare] = useState(200);
+      <div className="content-tabs">
+        <div
+          className={toggleState === 1 ? "content1  active-content" : "content1"}
+        >
+          <h4>Content 1</h4>
+          <hr />
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
+            praesentium incidunt quia aspernatur quasi quidem facilis quo nihil
+            vel voluptatum?
+          </p>
+        </div>
 
-    function Calculation() {
+        <div
+          className={toggleState === 2 ? "content1  active-content" : "content1"}
+        >
+          
+            <div className="w-screen h-screen grid grid-rows-2 md:grid-cols-2 ">
+              <div className="w-full h-full subContent md:h-screen">
+                <h7>NEW PAY</h7>
+                <Form>
+                  <GroupItem colCount={1}>
+                    <Item dataField="Employee: " editorType="dxTextBox" />
+                    <Item dataField="Position: " editorType="dxTextBox" />
+                    <Item dataField="Pay Date: " editorType="dxDateBox">
+                            <Label text="Pay Date"></Label>
+                    </Item>
+                    <Item dataField="Starting Date: " editorType="dxDateBox">
+                            <Label text="Starting Date"></Label>
+                    </Item>
+                    <Item dataField="Ending Date: " editorType="dxDateBox">
+                            <Label text="Ending Date"></Label>
+                    </Item>
+                  </GroupItem>
+                </Form>
 
-        COL = 5000;
-        Insentive = 15000;
-        Tax = salary * 8 / 100;
-        EPF = salary * 8 / 100;
-        MedInsuarance = 300;
-        welfare = 200;
+                <Navbar bg="light" variant="light">
+                  <Button stylingMode="contained" type="success">Enter</Button>
+                </Navbar>
+              </div>
 
+              <div className="w-full h-full subContent bg-black">
+                <h7>EARNINGS</h7>
+                <Form>
+                  <GroupItem colCount={1}>
+                    <Item dataField="Employee: " editorType="dxTextBox" />
+                  </GroupItem>
+                </Form>
+                <Navbar bg="light" variant="light">
+                    <Button stylingMode="contained" type="success">Submit</Button>      
+                </Navbar> 
+              </div>
 
-        setTax(Tax);
-        setCol(COL);
-        setInsentive(Insentive);
-        SetEPF(EPF);
-        setMedInsuarance(MedInsuarance);
-        setWelfare(welfare);
-
-        //allowance = salary + COL + Insentive;
-        allowance = salary + COL + Insentive;
-        deductions = EPF + Tax + MedInsuarance + welfare;
-
-
-        setAllowance(allowance);
-        setDeductions(deductions);
-
-        nsal = allowance - deductions;
-        setNsal(nsal);
-
-        // alert(salary);
-        /* if(salary > 50000)
-           {
-               tax = salary * 10/100;
-   
-           }
-           else if(salary > 30000)
-           {
-               tax = salary * 5/100;
-           }
-           else
-           {
-               tax = 0;
-           }
-   
-           setTax(tax);
-   
-           nsal = salary - tax;
-           setNsal(nsal);
-   */
-
-
-    }
-
-    return (
-        <React.Fragment>
-            <div className={'content-block'}>
-                <h2>Salary Calculation Page</h2>
-                <div class="form-group">
-                    <label>Employee Name</label>
-                    <input type="text" class="form-control" placeholder="Enter name" />
-                </div>
-                <div class="form-group">
-                    <label>Salary</label>
-                    <input type="text" class="form-control" placeholder="Enter Salary"
-
-                        //calculating salary
-                        onChange={(event) => {
-                            setSalary(event.target.value);
-                        }}
-                    />
-                </div>
-
-                <div class="form-group">
-                    <label>Tax</label>
-                    <input type="text" class="form-control" placeholder="Tax" value={allowance} />
-                </div>
-
-                <div class="form-group">
-                    <label>Net Salary</label>
-                    <input type="text" class="form-control" placeholder="Net Salary" value={nsal} />
-
-                </div>
-                <button type="submit" onClick={Calculation} class="btn btn-primary mt-4">Submit</button>
             </div>
-        </React.Fragment>
-
-    );
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Salary
+export default Salary;

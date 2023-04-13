@@ -15,25 +15,25 @@ import {
   ShippingManage,
   ExportTableToExcel,
   CourierProfile,
-  DeliveryChargeCalculator,
-  CityDistance,
   Storage,
   Order,
   Suppliers,
   PurchaseOrderForm,
   StockReturnForm,
+  GoodReceiveForm,
   Scheduling,
   PackageDetails,
   Update,
   Cancel,
   EmpLogin,
+  ProductCategoryview,
+  App,
   RaiseTicket,
   OrderForm,
 
   CardForm,
   ProductPage,
-  ReturnProduct,
- 
+  ReturnProduct
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
@@ -60,6 +60,7 @@ const routes = [
   { path: "payroll_hr/leaveApproval", element: LeaveApproval },
   { path: "payroll_hr/dailyAttendanceViewer", element: AttendanceViewer },
   { path: "payroll_hr/employeeLogin", element: EmpLogin },
+  { path: "payroll_hr/employee-master", element: EmployeeMaster },
 
 
 
@@ -67,12 +68,13 @@ const routes = [
 
 
   //it21324406@my.sliit.lk - Shanoli
+ 
   { path: "stock_management/storage", element: Storage },
   { path: "stock_management/suppliers", element: Suppliers },
   { path: "stock_management/order", element: Order },
   { path: "stock_management/stock-order-request-form", element: PurchaseOrderForm, },
   { path: "stock_management/stock-return-form", element: StockReturnForm },
-
+  { path: "stock_management/purchase", element: GoodReceiveForm },
 
 
 
@@ -89,8 +91,15 @@ const routes = [
 
 
 
-  //it21198090@my.sliit.lk - Shania
 
+
+
+
+
+
+  //it21198090@my.sliit.lk - Shania
+  { path: "/masters/ViewMasterProd", element: ProductCategoryview },
+  { path: "/masters/ProductCat", element: App },
 
 
 

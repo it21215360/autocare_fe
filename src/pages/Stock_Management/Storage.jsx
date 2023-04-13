@@ -12,7 +12,7 @@ export default function Storage() {
     return (
         <React.Fragment>
             <div className={'content-block'}>
-                <h5><b>Stock Storage</b></h5>
+                <h5><b>Stock</b></h5>
                 <DataGrid id='sample'
                     dataSource={myDataSource}
                     rowAlternationEnabled={true}

@@ -36,15 +36,11 @@ const PurchaseOrderForm = () => {
                                     <RequiredRule message="Field required" />
                                 </Item>
                                 <EmptyItem></EmptyItem>
-                                <Item dataField="orderDate" editorType="dxTextBox" editorOptions={{
-                                    readOnly: true,
-                                }}>
+                                <Item dataField="orderDate" editorType="dxDateBox">
                                     <Label text="Order Date"></Label>
                                     <RequiredRule message="Field required" />
                                 </Item>
-                                <Item dataField="estdDliveryDate" editorType="dxTextBox" editorOptions={{
-                                    readOnly: true,
-                                }}>
+                                <Item dataField="estdDliveryDate" editorType="dxDateBox">
                                     <Label text="Est. Delivery Date"></Label>
                                     <RequiredRule message="Field required" />
                                 </Item>
@@ -121,8 +117,8 @@ const PurchaseOrderForm = () => {
                     <Card.Body>
                         <Card.Title><h6>Purchase Order Details</h6></Card.Title>
                         <Card.Text></Card.Text>
-                        <DataGrid></DataGrid>
-                    </Card.Body>
+                      <DataGrid></DataGrid>
+                </Card.Body>
                 </Card>
                 <hr></hr>
                 <Navbar bg="light" variant="light" className="crud_panel_buttons">
