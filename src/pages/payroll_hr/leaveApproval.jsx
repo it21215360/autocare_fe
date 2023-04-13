@@ -68,8 +68,8 @@ class LeaveApproval extends React.Component {
           
           <Column dataField="FirstName" />
           <Column dataField="LastName" />
-          <Column dataField="EmpId" width={130} />
-          <Column dataField="Department"/>
+          <Column dataField="EmployeeID" width={130} />
+          <Column dataField="EmpDepartment"/>
           <Column dataField="LeaveCategory" caption = "Leave Category" />  
           <Column dataField="LeaveType" caption = "Leave Type" />  
           <Column dataField="LeaveFrom" caption = "Leave From" />

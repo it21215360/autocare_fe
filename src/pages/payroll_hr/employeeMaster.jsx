@@ -40,6 +40,7 @@ const EmployeeMaster = () => {
     }
   };
 
+  
   return (
     <>
       <div className={"content-block"}>
