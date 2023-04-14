@@ -9,7 +9,6 @@ import { Navbar, ListGroup } from "react-bootstrap";
 
 import './attendance.scss';
 
-import { TimePicker } from 'react-ios-time-picker';
 
 import axios from 'axios';
 import { API_BASE_URL} from "../../appconfig/config";
@@ -22,13 +21,7 @@ const Attendance = () => {
 
     const [value, setValue] = useState();
 
-    const TimeIn = (timeValue) => {
-       setValue(timeValue);
-    }
 
-    const TimeOut= (timeValue) => {
-        setValue(timeValue);
-     }
 
      const [employeeAttendance, setEmployeeAttendance] = useState({});
      
@@ -68,17 +61,6 @@ const Attendance = () => {
                             <RequiredRule message="Field required" />
                         </Item>
                     </GroupItem>
-                    <GroupItem colCount={2}>
-                        <Item >
-                        <Label text="Time In"></Label>
-                        <TimePicker onChange={TimeIn} value={value} />
-                        </Item>
-                        <Item >
-                        <Label text="Time Out"></Label>
-                        <TimePicker onChange={TimeOut} value={value} />
-                        </Item>
-                        </GroupItem>       
-                    
 
                 </Form>
                 <Box direction="row" width="100%" height={100}>
