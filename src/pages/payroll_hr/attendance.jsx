@@ -44,7 +44,7 @@ const Attendance = () => {
 
     return (
         <React.Fragment>
-            <div className={'content-block'}>
+            {/* <div className={'content-block'}>
                 <h2>Mark your Attendance Here</h2>
 
                 <Form formData={employeeAttendance}>
@@ -77,7 +77,7 @@ const Attendance = () => {
                         </div>
                     </ItemBox>
                 </Box>
-            </div>
+            </div> */}
         </React.Fragment>
     )
 }
