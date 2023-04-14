@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'devextreme-react/button';
 import "./CourierLogin.css";
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
@@ -6,14 +7,14 @@ import { API_BASE_URL } from "../../appconfig/config";
 
 const CourierLogin= () => {
 
-  const [CourierData, setCourierData] = useState('');
+  const [CourierDetails, setCourierDetails] = useState({});
 
   const onSaveBtnClick = (e) => {
     try {
-      console.log(CourierData);
+      console.log(CourierDetails);
       axios
         .post(`${API_BASE_URL}/api/courier/add-courier`, {
-          CourierData: JSON.stringify(CourierData),
+          CourierData: JSON.stringify(CourierDetails),
         })
         .then((response) => {
           console.log(response);
@@ -28,18 +29,15 @@ const CourierLogin= () => {
   return (
   
   <div className="logf">
-<form formData={CourierData} className="login"  >
+<form formData={CourierDetails} className="login"  >
   <h2>Welcome, User!</h2>
   <p>Please log in</p>
   <input type="user" placeholder="Username"/>
-  <input type="city" placeholder="City" id="city"/>
-  <input type="submit" onClick = {onSaveBtnClick} value="Log In" />
-  <div class="links">
+  <input type="city" placeholder="City"/>
+  
+  <Button type="success"  onClick={onSaveBtnClick}>Login</Button>
 
-    <a href="#">Forgot password</a>
-    <a href="#">Register</a>
-
-  </div>
+  
 </form>
 </div>
   )

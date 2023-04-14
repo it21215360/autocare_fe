@@ -81,24 +81,20 @@ const Attendance = () => {
                     
 
                 </Form>
-                <Navbar bg="light" variant="light">
-                    <Button 
-                        stylingMode="contained" 
-                        type="success" 
-                        onClick={onSaveBtnClick}
-                        >
-                            Save
-                        </Button>
-                    <Button 
-                        stylingMode="contained" 
-                        type="default"
-                        >
-                            Clear
-                        </Button>
-                </Navbar>
-                
-               
-
+                <Box direction="row" width="100%" height={100}>
+                    <ItemBox ratio={0} baseSize="50%">
+                        <div id='timeIn' className="rect demo-dark">
+                            <Button onClick={addInTime}>Add Time In</Button>
+                            <h5>{inTime}</h5>
+                        </div>
+                    </ItemBox>
+                    <ItemBox ratio={0} baseSize="50%">
+                        <div id='timeOut' className="rect demo-light">
+                            <Button onClick={addOutTime}>Add Time Out</Button>
+                            <h5>{outTime}</h5>
+                        </div>
+                    </ItemBox>
+                </Box>
             </div>
         </React.Fragment>
     )

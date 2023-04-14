@@ -13,7 +13,6 @@ import {
   VehicleReg,
   DeliveryRequestForm,
   ShippingManage,
-  ExportTableToExcel,
   CourierProfile,
   Storage,
   Order,
@@ -26,16 +25,12 @@ import {
   Update,
   Cancel,
   EmpLogin,
-  ProductCategoryview,
-  App,
+  EmployeeMaster,
   RaiseTicket,
   OrderForm,
   CardForm,
   ProductPage,
   ReturnProduct,
-  EmployeeMaster,
-  DeliveryChargeCalculator,
-  CityDistance,
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
@@ -72,7 +67,9 @@ const routes = [
   { path: "/scheduling/Cancel_appointment", element: Cancel },
 
   //it21198090@my.sliit.lk - Shania
-  { path: "master/product-category", element: ProductCategory },
+  { path: "ProductCategory", element: ProductCategory },
+  // { path: "/masters/ViewMasterProd", element: ProductCategoryview },
+  // { path: "/masters/ProductCat", element: App },
 
   //it21198090@my.sliit.lk - Shania
 
@@ -83,18 +80,13 @@ const routes = [
   { path: "courier/DeliveryRequestForm", element: DeliveryRequestForm },
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
-  {
-    path: "courier/DeliveryChargeCalculator",
-    element: DeliveryChargeCalculator,
-  },
-  { path: "courier/CityDistance", element: CityDistance },
-  { path: "courier/ExportTableToExcel", element: ExportTableToExcel },
 
   //it21238994@my.sliit.lk - Amanda
   { path: "customer_care/raiseTicket", element: RaiseTicket },
 
   //it21326936@my.sliit.lk - Amandi
   { path: "Ordering/Order_details", element: OrderForm },
+  //{ path: 'Ordering/Cart', element: AddtoCart },
   { path: "Ordering/Card_details", element: CardForm },
   { path: "Ordering/Product", element: ProductPage },
   { path: "Ordering/Return_product", element: ReturnProduct },
