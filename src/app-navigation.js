@@ -51,6 +51,7 @@ export const navigation = [
     text: 'Stock Management', icon: 'product',
     items: [
       
+      { text: 'Inventory Login', path: 'stock_management/inventory-login' },
       { text: 'Stock', path: 'stock_management/storage' },
       { text: 'Suppliers', path: 'stock_management/suppliers' },
       { text: 'PO History', path: 'stock_management/order' },
