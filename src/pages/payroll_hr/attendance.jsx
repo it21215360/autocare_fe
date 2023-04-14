@@ -55,7 +55,7 @@ function Attendance() {
 
 
                 </Form>
-                <Box direction="row" width="100%" height={75}>
+                <Box direction="row" width="100%" height={100}>
                     <ItemBox ratio={0} baseSize="50%">
                         <div id='timeIn' className="rect demo-dark">
                             <Button onClick={addInTime}>Add Time In</Button>

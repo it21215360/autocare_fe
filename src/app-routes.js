@@ -13,7 +13,6 @@ import {
   VehicleReg,
   DeliveryRequestForm,
   ShippingManage,
-  
   CourierProfile,
   Storage,
   Order,
@@ -26,13 +25,12 @@ import {
   Update,
   Cancel,
   EmpLogin,
-  ProductCategoryview,
-  //App,
+  EmployeeMaster,
   RaiseTicket,
   OrderForm,
   CardForm,
   ProductPage,
-  ReturnProduct
+  ReturnProduct,
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
@@ -48,12 +46,7 @@ const routes = [
   { path: "payroll_hr/leaveApproval", element: LeaveApproval },
   { path: "payroll_hr/dailyAttendanceViewer", element: AttendanceViewer },
   { path: "payroll_hr/employeeLogin", element: EmpLogin },
- //{ path: "payroll_hr/employee-master", element: EmployeeMaster },
-
-
-
-
-
+  { path: "payroll_hr/employee-master", element: EmployeeMaster },
 
   //it21324406@my.sliit.lk - Shanoli
 
@@ -65,10 +58,7 @@ const routes = [
     element: PurchaseOrderForm,
   },
   { path: "stock_management/stock-return-form", element: StockReturnForm },
-{ path: "stock_management/purchase", element: GoodReceiveForm },
-
-
-
+  { path: "stock_management/purchase", element: GoodReceiveForm },
 
   //it21197000@my.sliit.lk - Chethani
   { path: "/scheduling/Scheduling_appointment", element: Scheduling },
@@ -77,13 +67,9 @@ const routes = [
   { path: "/scheduling/Cancel_appointment", element: Cancel },
 
   //it21198090@my.sliit.lk - Shania
- // { path: "/masters/ViewMasterProd", element: ProductCategoryview },
- // { path: "/masters/ProductCat", element: App },
-
-
-
-
-
+  { path: "ProductCategory", element: ProductCategory },
+  // { path: "/masters/ViewMasterProd", element: ProductCategoryview },
+  // { path: "/masters/ProductCat", element: App },
 
   //it21198090@my.sliit.lk - Shania
 
@@ -94,23 +80,16 @@ const routes = [
   { path: "courier/DeliveryRequestForm", element: DeliveryRequestForm },
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
-  
-
-
-
-
 
   //it21238994@my.sliit.lk - Amanda
   { path: "customer_care/raiseTicket", element: RaiseTicket },
 
   //it21326936@my.sliit.lk - Amandi
-  { path: 'Ordering/Order_details', element: OrderForm },
+  { path: "Ordering/Order_details", element: OrderForm },
   //{ path: 'Ordering/Cart', element: AddtoCart },
-  { path: 'Ordering/Card_details', element: CardForm },
-  { path: 'Ordering/Product', element: ProductPage },
-  { path: 'Ordering/Return_product', element: ReturnProduct }
-
-
+  { path: "Ordering/Card_details", element: CardForm },
+  { path: "Ordering/Product", element: ProductPage },
+  { path: "Ordering/Return_product", element: ReturnProduct },
 ];
 
 export default routes.map((route) => {
