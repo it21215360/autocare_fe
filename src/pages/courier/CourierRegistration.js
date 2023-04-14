@@ -5,6 +5,7 @@ function CourierRegistration () {
 
 
     return (
+      
       <div className="signup">
       <div className="sign">
       <div className="title">Registration</div>
@@ -38,7 +39,7 @@ function CourierRegistration () {
         </div>
        
         <div className="buttonsub">
-          <input type="submit" value="Next" data-inline="true"/>
+        <input type="submit" value="Next" />
         </div>
 
       

@@ -25,8 +25,8 @@ const LeaveRequestForm = () => {
     try{
       console.log(empLeaveInfo);
   
-      axios
-        .post(`${API_BASE_URL}/api/payroll_hr/leave-request-form`, {
+      axios  
+        .post(`${API_BASE_URL}/api/employee/leave-request-form`, {
           LeaveInfo: JSON.stringify(empLeaveInfo)
         })
         .then((response) => {
@@ -89,7 +89,7 @@ const LeaveRequestForm = () => {
                         </Item>
 
                         <Item 
-                            dataField="empDepartment" 
+                            dataField="EmpDepartment" 
                             editorType="dxSelectBox" 
                             editorOptions={{
                             items: empDepartment,
@@ -105,7 +105,7 @@ const LeaveRequestForm = () => {
 
                     <GroupItem colCount={3}>
                         <Item 
-                            dataField="leaveFrom" 
+                            dataField="LeaveFrom" 
                             editorType="dxDateBox">
                             <Label text="Leave From"></Label>
 
@@ -113,7 +113,7 @@ const LeaveRequestForm = () => {
                         </Item>
 
                         <Item
-                            dataField="leaveCategory"
+                            dataField="LeaveCategory"
                             editorType="dxSelectBox"
                             editorOptions={{
                                 items: leaveCategory,
@@ -127,7 +127,7 @@ const LeaveRequestForm = () => {
                         </Item>
 
                         <Item
-                            dataField="leaveType"
+                            dataField="LeaveType"
                             editorType="dxSelectBox"
                             editorOptions={{
                                 items: [{ AutoID: 1, Name: 'Full Day' }, { AutoID: 2, Name: 'Half Day' }],
@@ -141,14 +141,14 @@ const LeaveRequestForm = () => {
                         </Item>
 
                         <Item 
-                            dataField="leaveTo" 
+                            dataField="LeaveTo" 
                             editorType="dxDateBox">
                             <Label text="Leave To"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
 
                         <Item 
-                            dataField="dayCount" 
+                            dataField="DayCount" 
                             editorOptions={{ readOnly: false }}>
                             <RequiredRule message="Field required" />
 
