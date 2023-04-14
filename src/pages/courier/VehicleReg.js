@@ -1,12 +1,35 @@
-import React from "react";
+import React, { Component } from "react";
+import { Button } from "devextreme-react/button";
+import { useState } from "react";
+import axios from "axios";
+import { API_BASE_URL } from "../../appconfig/config";
 import "./VehicleReg.css";
 
-function CourierRegistration() {
+const VehicleReg = () => {
+  const [VehicleInfo, setVehicleInfo] = useState({});
+
+  const onSaveBtnClick = (e) => {
+    try {
+      console.log(VehicleInfo);
+
+      axios
+        .post(`${API_BASE_URL}/api/courier/add-vehicle`, {
+          VehicleDetails: JSON.stringify(VehicleInfo),
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {});
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="vehiReg">
       <div className="Reg">
         <div className="title">Register your vehicle today</div>
-        <form>
+        <form formData={VehicleInfo}>
           <div className="gender__details">
             <input type="radio" name="vehicle" id="dot-1" />
             <input type="radio" name="vehicle" id="dot-2" />
@@ -38,13 +61,13 @@ function CourierRegistration() {
             </div>
           </div>
 
-          <div className="buttonsub">
-            <input type="submit" value="Submit" data-inline="true" />
-          </div>
+          <Button type="success" onClick={onSaveBtnClick}>
+            Submit
+          </Button>
         </form>
       </div>
     </div>
   );
-}
+};
 
-export default CourierRegistration;
+export default VehicleReg;
