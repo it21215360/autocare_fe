@@ -1,27 +1,25 @@
-import React, { useState } from 'react';
-import './DeliveryRequestForm.css';
-
+import React, { useState } from "react";
 
 const DeliveryRequestForm = () => {
-  const [orderid, setOrderID] = useState('');
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [province, setProvince] = useState('');
+  const [orderid, setOrderID] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [province, setProvince] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Order ID:', name);
-    console.log('Name:', name);
-    console.log('Phone:', phone);
-    console.log('Address:', address);
-    console.log('City:', city);
-    console.log('Province:', province);
+    console.log("Order ID:", name);
+    console.log("Name:", name);
+    console.log("Phone:", phone);
+    console.log("Address:", address);
+    console.log("City:", city);
+    console.log("Province:", province);
   };
 
   return (
-    <form action="" method="POST"  onSubmit={handleSubmit}>
+    <form action="" method="POST" onSubmit={handleSubmit}>
       <h2>Request for a delivery</h2>
       <div className="form-group">
         <label htmlFor="name">Order ID:</label>
@@ -30,7 +28,6 @@ const DeliveryRequestForm = () => {
           id="orderid"
           value={orderid}
           onChange={(e) => setName(e.target.value)}
-          
         />
       </div>
       <div className="form-group">
@@ -83,11 +80,12 @@ const DeliveryRequestForm = () => {
           required
         />
       </div>
-     
-      <a href ="/DeliveryRequestForm/submit"><button type="submit">Submit</button></a>
+
+      <a href="/DeliveryRequestForm/submit">
+        <button type="submit">Submit</button>
+      </a>
     </form>
   );
 };
-
 
 export default DeliveryRequestForm;
