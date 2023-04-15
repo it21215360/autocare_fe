@@ -77,6 +77,7 @@ export const navigation = [
    //   { text: ' memo viewer', path: 'scheduling/emp_payroll' },
       { text: 'Booked memo viewer', path: 'scheduling/Memo' },
       { text: 'Package Details', path: 'scheduling/Package' },
+      
     ]
   },
 

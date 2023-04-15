@@ -47,6 +47,8 @@ export { default as Scheduling } from './scheduling/Scheduling_appointment';
 export { default as PackageDetails } from './scheduling/PackageDetails';
 export { default as Update } from './scheduling/Update_appointment';
 export { default as Cancel } from './scheduling/Cancel_appointment';
+export { default as oil } from './scheduling/Cancel_appointment';
+export { default as Confirm } from './scheduling/Confirm_appointment';
 
 
 //it21198090@my.sliit.lk - Shania
