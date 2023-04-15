@@ -71,12 +71,12 @@ function InventoryLogin() {
                 <Card.Text className="pwd">
                  Forgot Password?
             </Card.Text>   
-                 <br/><br/><br/>
+                 <br/>
                 <Navbar bg="light" variant="light" className="log">
                     <Button className="log" stylingMode="contained" type="success"  onClick={onSaveBtnClick}>Login</Button>
                    
                 </Navbar>
-               
+               <br/>
             </div>
            
         </>
