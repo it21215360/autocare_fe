@@ -36,13 +36,13 @@ function InventoryLogin() {
         <>
         
            <div className={'back-box'}>
-            <h2>AutoCare</h2>
+            <h2 className="head1">AutoCare</h2>
             
             <Card style={{ width: '100%' }}>
             <Card.Body>
-            <Card.Title><h6>Stock Management Login</h6></Card.Title>
+            <Card.Title className="head2">Stock Management Login</Card.Title>
             
-            <Card.Text className="card">
+            <Card.Text className="log1">
                  Please Log in to Continue!
             </Card.Text>
             <br/>
@@ -52,15 +52,15 @@ function InventoryLogin() {
                     <Item dataField="UserName" editorType="dxTextBox" editorOptions={{
                             readOnly: false,
                             }}>
-                            <Label text="User Name" ></Label>
-                            <RequiredRule message="Field required" />
+                            <Label  text="User Name" ></Label>
+                            <RequiredRule message="Enter Your username" />
                     </Item>
             
                     <Item dataField="Password" editorType="dxTextBox" editorOptions={{
                             readOnly: false,
                             }}>
                             <Label text="Password"></Label>
-                            <RequiredRule message="Field required" />
+                            <RequiredRule message="Enter your password" />
                     </Item>
                    
                 </GroupItem>  

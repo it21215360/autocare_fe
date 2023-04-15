@@ -1,6 +1,6 @@
 
 .back-box{
-    background-color: rgba(248, 245, 245, 0.448);
+    background-color: rgba(246, 237, 237, 0.448);
     width: 25%;
     height: 50%;
     position: relative;
@@ -14,6 +14,23 @@
     justify-content: space-around;
 }
 
+.head1{
+    color: rgba(252, 96, 6, 0.93);
+    font-style: bold;
+}
+
+.head2{
+    color: rgba(105, 98, 94, 0.785);
+    font-size: medium;
+    font-family:forte;
+    text-align: center;
+    
+}
+
+.log1{
+    color: rgba(252, 96, 6, 0.93);
+    padding-top: 10px;
+}
 
 .pwd{
     color: rgba(252, 96, 6, 0.448);
