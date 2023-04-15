@@ -3,12 +3,14 @@ import 'devextreme/dist/css/dx.light.css';
 import DataGrid, { Column, SearchPanel, Editing } from 'devextreme-react/data-grid';
 import { Button } from 'devextreme-react';
 
-export default function ProductCategory() {
-    const myDataSource = [{ AutoID: 1, CategoryCode: 'Tyres', CategoryStatus: 'true' },
-    { AutoID: 1, CategoryCode: 'Tyres', CategoryStatus: 'true' },
-    { AutoID: 2, CategoryCode: 'Nuts', CategoryStatus: 'true' },
-    { AutoID: 3, CategoryCode: 'Bolts', CategoryStatus: 'true' },
-    { AutoID: 4, CategoryCode: 'Air Freshner', CategoryStatus: 'false' }]
+export default function ProductCategoryview() {
+    const myDataSource = [
+        { AutoID: 1, CatCode: 'Tyres', Brand: 'DSI', CategoryStatus: 'true' },
+        { AutoID: 1, CatCode: 'Tyres',Brand: 'Nankang', CategoryStatus: 'true' },
+        { AutoID: 2, CatCode: 'Nuts', Brand: 'Anchor',CategoryStatus: 'true' },
+        { AutoID: 3, CatCode: 'Bolts', Brand: 'Anchor',CategoryStatus: 'true' },
+        { AutoID: 4, CatCode: 'Air Freshner', Brand: 'Airwick', CategoryStatus: 'false' }
+    ]
 
     return (
         <React.Fragment>
@@ -26,13 +28,14 @@ export default function ProductCategory() {
                         allowDeleting={true}
                         allowAdding={true} />
 
-                    <Column dataField='CategoryCode' caption='Code' dataType='string' />
+                    <Column dataField='CatCode' caption='Code' dataType='string' />
+                    <Column dataField='Brand' caption='Brand' dataType='string' />
                     <Column dataField='CategoryStatus' caption='Status' />
                 </DataGrid>
                 <br></br>
                 <div>
-                    <Button>View List</Button>
-                    <Button>Clear</Button>
+                    <Button>Print PDF</Button>
+                    <Button>Clear Table</Button>
                 </div>
             </div>
         </React.Fragment>
