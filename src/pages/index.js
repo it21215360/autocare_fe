@@ -56,6 +56,8 @@ export { default as OrderForm } from "./ordering/Order_details";
 export { default as CardForm } from "./ordering/Card_details";
 export { default as ProductPage } from "./ordering/Product";
 export { default as ReturnProduct } from "./ordering/Return_products";
+export { default as Cart } from "./ordering/Cart";
+
 
 //Amanda
 export { default as RaiseTicket } from "./customer_care/raiseTicket";

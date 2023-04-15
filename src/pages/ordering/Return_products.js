@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
+import { RequiredRule } from "devextreme-react/data-grid";
+import { Navbar } from "react-bootstrap";
+import 'devextreme/dist/css/dx.light.css';
+import { Button } from 'devextreme-react';
 
 function ReturnProduct() {
   const [budgetdefinition, setBudgetdefinition] = useState({
@@ -14,7 +19,7 @@ function ReturnProduct() {
 
   return (
     <>
-      {/* <div className={'content-block'}>
+      { <div className={'content-block'}>
                 <h2>Return Product Details</h2>
                 <Form formData={budgetdefinition}>
                     <GroupItem colCount={1}>
@@ -50,7 +55,7 @@ function ReturnProduct() {
                     <Button stylingMode="contained" type="success">Confirm</Button>
                     <Button stylingMode="contained" type="default">Clear</Button>
                 </Navbar>
-            </div> */}
+            </div> }
     </>
   );
 }
