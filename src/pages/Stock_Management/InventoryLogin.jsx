@@ -9,78 +9,77 @@ import './invLogin.scss';
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
 
-
 function InventoryLogin() {
 
-    const [LoginDetails,setLoginDetails] = useState({});
+  const [LoginDetails, setLoginDetails] = useState({});
 
-    const onSaveBtnClick = (e) => {
-        try {
-          console.log(LoginDetails);
-          
-          axios
-            .post(`${API_BASE_URL}/api/inventoryLogin/add-inventoryLogin`, {
-                InventoryLogDetails : JSON.stringify(LoginDetails),
-             
-            })
-            .then((response) => {
-              console.log(response);
-            })
-            .catch((error) => {});
-        } catch (error) {
-          console.error(error);
-        }
-      };
-    
-    return(
-        <>
-        
-           <div className={'back-box'}>
-            <h2 className="head1">AutoCare</h2>
-            
-            <Card style={{ width: '100%' }}>
-            <Card.Body>
+  const onSaveBtnClick = (e) => {
+    try {
+      console.log(LoginDetails);
+
+      axios
+        .post(`${API_BASE_URL}/api/inventoryLogin/add-inventoryLogin`, {
+          InventoryLogDetails: JSON.stringify(LoginDetails),
+
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => { });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <>
+
+      <div className={'back-box'}>
+        <h2 className="head1">AutoCare</h2>
+
+        <Card style={{ width: '100%' }}>
+          <Card.Body>
             <Card.Title className="head2">Stock Management Login</Card.Title>
-            
+
             <Card.Text className="log1">
-                 Please Log in to Continue!
+              Please Log in to Continue!
             </Card.Text>
-            <br/>
+            <br />
             <Form formData={LoginDetails}>
-                <GroupItem >
-             
-                    <Item dataField="UserName" editorType="dxTextBox" editorOptions={{
-                            readOnly: false,
-                            }}>
-                            <Label  text="User Name" ></Label>
-                            <RequiredRule message="Enter Your username" />
-                    </Item>
-            
-                    <Item dataField="Password" editorType="dxTextBox" editorOptions={{
-                            readOnly: false,
-                            }}>
-                            <Label text="Password"></Label>
-                            <RequiredRule message="Enter your password" />
-                    </Item>
-                   
-                </GroupItem>  
-                </Form> 
-                </Card.Body>
-                </Card> 
-                <br/>
-                <Card.Text className="pwd">
-                 Forgot Password?
-            </Card.Text>   
-                 <br/>
-                <Navbar bg="light" variant="light" className="log">
-                    <Button className="log" stylingMode="contained" type="success"  onClick={onSaveBtnClick}>Login</Button>
-                   
-                </Navbar>
-               <br/>
-            </div>
-           
-        </>
-    )
+              <GroupItem >
+
+                <Item dataField="UserName" editorType="dxTextBox" editorOptions={{
+                  readOnly: false,
+                }}>
+                  <Label text="User Name" ></Label>
+                  <RequiredRule message="Enter Your username" />
+                </Item>
+
+                <Item dataField="Password" editorType="dxTextBox" editorOptions={{
+                  readOnly: false,
+                }}>
+                  <Label text="Password"></Label>
+                  <RequiredRule message="Enter your password" />
+                </Item>
+
+              </GroupItem>
+            </Form>
+          </Card.Body>
+        </Card>
+        <br />
+        <Card.Text className="pwd">
+          Forgot Password?
+        </Card.Text>
+        <br />
+        <Navbar bg="light" variant="light" className="log">
+          <Button className="log" stylingMode="contained" type="success" onClick={onSaveBtnClick}>Login</Button>
+
+        </Navbar>
+        <br />
+      </div>
+
+    </>
+  )
 }
 
 export default InventoryLogin

@@ -31,7 +31,7 @@ import {
   OrderForm,
   CardForm,
   ProductPage,
-  ReturnProduct,,
+  ReturnProduct,
   Confirm
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
