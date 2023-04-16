@@ -27,6 +27,7 @@ export default function Storage() {
                         allowDeleting={true}
                         allowAdding={true} />
 
+
                     <Column dataField='StorageID' caption='Stock ID' dataType='string'><ValidationRule type="required" /></Column>
                     <Column dataField='ProductCategory' caption='Product Category' dataType='string'><ValidationRule type="required" /></Column>
                     <Column dataField='ProductName' caption='Product Name' dataType='string'><ValidationRule type="required" /></Column>
@@ -34,6 +35,8 @@ export default function Storage() {
                     <Column dataField='UnitPrice' caption='Unit Price' dataType='float'><ValidationRule type="required" /></Column>
                     <Column dataField='ReorderLevel' caption='Reorder Level' dataType='int'><ValidationRule type="required" /></Column>
                     <Column dataField='StoredDate' caption='Date' dataType='date'><ValidationRule type="required" /></Column>
+                 
+                    
                 </DataGrid>
                 <br></br>
                 <div>
