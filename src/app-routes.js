@@ -30,8 +30,10 @@ import {
   RaiseTicket,
   OrderForm,
   CardForm,
+  Cart,
   ProductPage,
   ReturnProduct,
+  Confirm
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
@@ -67,6 +69,7 @@ const routes = [
   { path: "/scheduling/Package", element: PackageDetails },
   { path: "/scheduling/Update_appointment", element: Update },
   { path: "/scheduling/Cancel_appointment", element: Cancel },
+  { path: "/scheduling/Confirm_appointment", element: Confirm },
 
   //it21198090@my.sliit.lk - Shania
   { path: "ProductCategory", element: ProductCategory },
@@ -88,7 +91,7 @@ const routes = [
 
   //it21326936@my.sliit.lk - Amandi
   { path: "Ordering/Order_details", element: OrderForm },
-  //{ path: 'Ordering/Cart', element: AddtoCart },
+  { path: 'Ordering/Cart', element: Cart },
   { path: "Ordering/Card_details", element: CardForm },
   { path: "Ordering/Product", element: ProductPage },
   { path: "Ordering/Return_product", element: ReturnProduct },

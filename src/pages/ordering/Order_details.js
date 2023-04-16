@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
 import { Navbar, ListGroup } from "react-bootstrap";
-import { LoadPanel } from "devextreme-react/load-panel";
-import notify from "devextreme/ui/notify";
+//import { LoadPanel } from "devextreme-react/load-panel";
+//import notify from "devextreme/ui/notify";
 import { useState } from "react";
-import { SelectBox } from "devextreme-react";
+//import { SelectBox } from "devextreme-react";
 import { Button } from 'devextreme-react/button';
-import { DateBox } from 'devextreme-react/calendar';
+//import { DateBox } from 'devextreme-react/calendar';
 
 function CardForm() {
 
