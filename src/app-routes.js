@@ -8,7 +8,7 @@ import {
   Salary,
   LeaveApproval,
   AttendanceViewer,
-  CourierLogin,
+  
   CourierRegistration,
   VehicleReg,
   DeliveryRequestForm,
@@ -79,7 +79,7 @@ const routes = [
   //it21198090@my.sliit.lk - Shania
 
   //it21307362@my.sliit.lk - Fernando ST
-  { path: "courier/CourierLogin", element: CourierLogin },
+ 
   { path: "courier/CourierRegistration", element: CourierRegistration },
   { path: "courier/VehicleReg", element: VehicleReg },
   { path: "courier/DeliveryRequestForm", element: DeliveryRequestForm },

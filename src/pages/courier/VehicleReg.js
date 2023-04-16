@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import React, { Component } from "react";
 import { Button } from "devextreme-react/button";
 import { useState } from "react";
@@ -25,8 +27,33 @@ const VehicleReg = () => {
     }
   };
 
+<<<<<<< HEAD
+   const onSaveBtnClick = (e) => {
+       try {
+         console.log(VehicleInfo);
+        
+   
+         axios
+           .post(`${API_BASE_URL}/api/vehiclereg/add-vehiclereg`, {
+             VehicleDetails : JSON.stringify(VehicleInfo),
+             
+           })
+           .then((response) => {
+             console.log(response);
+           })
+           .catch((error) => {});
+       } catch (error) {
+         console.error(error);
+       }
+     };
+
+
+    return (
+      <div className="vehiReg">
+=======
   return (
     <div className="vehiReg">
+>>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31
       <div className="Reg">
         <div className="title">Register your vehicle today</div>
         <form formData={VehicleInfo}>
@@ -34,6 +61,46 @@ const VehicleReg = () => {
             <input type="radio" name="vehicle" id="dot-1" />
             <input type="radio" name="vehicle" id="dot-2" />
 
+<<<<<<< HEAD
+      
+
+      <div className="gender__details">
+      <input type="radio" name="vehicle" id="dot-1"/>
+      <input type="radio" name="vehicle" id="dot-2"/>
+     
+      <span className="gender__title">Vehicle Type</span>
+      <div className="category">
+        <label>
+          <span className="dot one"></span>
+          <span>Van</span>
+        </label>
+        <label>
+          <span className="dot two"></span>
+          <span>Mini Lorry</span>
+        </label>
+     
+    </div>
+        <div className="user__details">
+          <div className="input__box">
+            <span className="details">Vehicle Brand</span>
+            <input type="text" placeholder="E.g: Toyota" />
+          </div>
+          <div className="input__box">
+            <span className="details">Vehicle Model</span>
+            <input type="text" placeholder="Toyota TR" />
+          </div>
+          <div className="input__box">
+            <span className="details">Vehicle No</span>
+            <input type="text" placeholder="******" />
+          </div>
+       </div>
+     </div>
+    
+     <Link to="/component/login-form/LoginForm">
+        <Button type="success"  onClick={onSaveBtnClick}>Submit</Button>
+      </Link>
+     
+=======
             <span className="gender__title">Vehicle Type</span>
             <div className="category">
               <label>
@@ -64,10 +131,20 @@ const VehicleReg = () => {
           <Button type="success" onClick={onSaveBtnClick}>
             Submit
           </Button>
+>>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31
         </form>
       </div>
     </div>
   );
 };
 
+<<<<<<< HEAD
+    )
+     }
+
 export default VehicleReg;
+
+
+=======
+export default VehicleReg;
+>>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31

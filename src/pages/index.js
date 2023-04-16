@@ -44,7 +44,7 @@ export { default as Confirm } from './scheduling/Confirm_appointment';
 //it21198090@my.sliit.lk - Shania
 
 //it21307362@my.sliit.lk - Fernando ST
-export { default as CourierLogin } from "./courier/CourierLogin";
+
 export { default as CourierRegistration } from "./courier/CourierRegistration";
 export { default as VehicleReg } from "./courier/VehicleReg";
 export { default as DeliveryRequestForm } from "./courier/DeliveryRequestForm";
