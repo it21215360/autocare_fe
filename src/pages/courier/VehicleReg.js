@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import React, { Component } from "react";
 import { Button } from 'devextreme-react/button';
 import { useState } from "react";
@@ -17,7 +19,7 @@ const VehicleReg = () => {
         
    
          axios
-           .post(`${API_BASE_URL}/api/courier/add-vehicle`, {
+           .post(`${API_BASE_URL}/api/vehiclereg/add-vehiclereg`, {
              VehicleDetails : JSON.stringify(VehicleInfo),
              
            })
@@ -37,7 +39,8 @@ const VehicleReg = () => {
       <div className="title">Register your vehicle today</div>
       <form formData={VehicleInfo} >
 
-  
+      
+
       <div className="gender__details">
       <input type="radio" name="vehicle" id="dot-1"/>
       <input type="radio" name="vehicle" id="dot-2"/>
@@ -70,9 +73,9 @@ const VehicleReg = () => {
        </div>
      </div>
     
-       
+     <Link to="/component/login-form/LoginForm">
         <Button type="success"  onClick={onSaveBtnClick}>Submit</Button>
-      
+      </Link>
      
         </form>
      
@@ -85,6 +88,6 @@ const VehicleReg = () => {
     )
      }
 
-export default VehicleReg
+export default VehicleReg;
 
 
