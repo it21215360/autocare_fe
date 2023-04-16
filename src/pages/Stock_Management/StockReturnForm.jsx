@@ -45,7 +45,7 @@ const  StockReturnForm = () => {
                 <h2><b>Stock Return Form</b></h2>
                 <Form formData={stockReturnInfo}>
                     <GroupItem colCount={2}>
-                        <Item dataField="returnID" editorType="dxTextBox" editorOptions={{
+                        <Item dataField="StockReturnID" editorType="dxTextBox" editorOptions={{
                             readOnly: true,
                         }}>
                             <Label text="Return ID"></Label>
@@ -53,17 +53,17 @@ const  StockReturnForm = () => {
                         </Item>
 
                         <Item
-                  dataField="productCategory"
+                  dataField="ProductCategory"
                   editorType="dxSelectBox"
                   editorOptions={{
                     items: [
-                      { AutoID: 0, Name: "AT - Automobile Tyres" },
-                      { AutoID: 1, Name: "ACC - Automobile Care & Clean" },
-                      { AutoID: 2, Name: "EL - Engine Oil & Lubricants" },
-                      { AutoID: 3, Name: "AB - Automobile Batteries" },
-                      { AutoID: 4, Name: "AS - Automobile Spare Parts" },
-                      { AutoID: 5, Name: "AE - Automobile Electronics" },
-                      { AutoID: 6, Name: "AL - Automobile Lighting" },
+                      { AutoID: 0, Name: "Automobile Tyres" },
+                      { AutoID: 1, Name: "Automobile Care and Clean" },
+                      { AutoID: 2, Name: "Engine Oil and Lubricants" },
+                      { AutoID: 3, Name: "Automobile Batteries" },
+                      { AutoID: 4, Name: "Automobile Spare Parts" },
+                      { AutoID: 5, Name: "Automobile Electronics" },
+                      { AutoID: 6, Name: "Automobile Lighting" },
 
                     ],
                     searchEnabled: true,
@@ -76,31 +76,31 @@ const  StockReturnForm = () => {
                 </Item>
 
                 <Item
-                  dataField="productSubCategory"
+                  dataField="ProductSubCategory"
                   editorType="dxSelectBox"
                   editorOptions={{
                     items: [
-                      { AutoID: 0, Name: "AT/Federal" },
-                      { AutoID: 1, Name: "AT/Minewa" },
-                      { AutoID: 2, Name: "AT/Toyo" },
-                      { AutoID: 3, Name: "ACC/Brake Oil" },
-                      { AutoID: 4, Name: "ACC/Coolant" },
-                      { AutoID: 5, Name: "ACC/Exteriror Cleaner" },
-                      { AutoID: 6, Name: "ACC/Wax Range" },
-                      { AutoID: 7, Name: "ACC/Air Freshner" },
-                      { AutoID: 8, Name: "ACC/Car Polish" },
-                      { AutoID: 9, Name: "EL/Mobil" },
-                      { AutoID: 10, Name: "EL/Valvoline" },
-                      { AutoID: 11, Name: "AB/Panasonic" },
-                      { AutoID: 12, Name: "AB/TATA Batteries" },
-                      { AutoID: 13, Name: "AS/Cabin Filter" },
-                      { AutoID: 14, Name: "AS/Air Filter" },
-                      { AutoID: 15, Name: "AS/Horns" },
-                      { AutoID: 16, Name: "AE/Car Alarm" },
-                      { AutoID: 17, Name: "AE/Speakers" },
-                      { AutoID: 18, Name: "AL/Fog Lights" },
-                      { AutoID: 19, Name: "AL/Head Lights" },
-                      { AutoID: 20, Name: "AL/Interior Lights" },
+                      { AutoID: 0, Name: "ATfederal" },
+                      { AutoID: 1, Name: "ATminewa" },
+                      { AutoID: 2, Name: "ATtoyo" },
+                      { AutoID: 3, Name: "ACCbrake Oil" },
+                      { AutoID: 4, Name: "ACCcoolant" },
+                      { AutoID: 5, Name: "ACCexteriror Cleaner" },
+                      { AutoID: 6, Name: "ACCwax Range" },
+                      { AutoID: 7, Name: "ACCair Freshner" },
+                      { AutoID: 8, Name: "ACCcar Polish" },
+                      { AutoID: 9, Name: "ELmobil" },
+                      { AutoID: 10, Name: "ELvalvoline" },
+                      { AutoID: 11, Name: "ABpanasonic" },
+                      { AutoID: 12, Name: "ABtATA Batteries" },
+                      { AutoID: 13, Name: "AScabin Filter" },
+                      { AutoID: 14, Name: "ASair Filter" },
+                      { AutoID: 15, Name: "AShorns" },
+                      { AutoID: 16, Name: "AEcar Alarm" },
+                      { AutoID: 17, Name: "AEspeakers" },
+                      { AutoID: 18, Name: "ALfog Lights" },
+                      { AutoID: 19, Name: "ALhead Lights" },
+                      { AutoID: 20, Name: "ALinterior Lights" },
 
 
                     ],
@@ -114,7 +114,7 @@ const  StockReturnForm = () => {
                 </Item>
 
 
-                        <Item dataField=" product " editorType="dxTextBox" editorOptions={{
+                        <Item dataField="Product" editorType="dxTextBox" editorOptions={{
                             readOnly: false,
                         }}>
 
@@ -123,20 +123,20 @@ const  StockReturnForm = () => {
                             <RequiredRule message="Field required" />
                         </Item>
                         
-                        <Item dataField="quantity" editorType="dxTextBox" editorOptions={{
+                        <Item dataField="Quantity" editorType="dxTextBox" editorOptions={{
                             readOnly: false,
                         }}>
                             <Label text="Quantity"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
-                        <Item dataField="reasonToReturn" editorType="dxTextBox" editorOptions={{
+                        <Item dataField="ReturningReason" editorType="dxTextBox" editorOptions={{
                             readOnly: false,
                         }}>
                             <Label text="Returning Reason"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
                         
-                        <Item dataField="returnDate" editorType="dxDateBox">
+                        <Item dataField="ReturnDate" editorType="dxDateBox">
                             <Label text="Return Date"></Label>
                             <RequiredRule message="Field required" />
                         </Item>

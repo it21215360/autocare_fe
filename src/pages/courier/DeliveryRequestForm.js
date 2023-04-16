@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
+=======
+import { useState } from "react";
+import React, { Component } from "react";
+import { Button } from "devextreme-react/button";
+>>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
 import { Navbar, ListGroup } from "react-bootstrap";
@@ -12,19 +18,22 @@ import axios from "axios";
 
 
 import { API_BASE_URL } from "../../appconfig/config";
-import './DeliveryRequestForm.css';
-
 
 const DeliveryRequestForm = () => {
   const [RequestInfo, setRequestInfo] = useState({});
-  
+
   const onSaveBtnClick = (e) => {
     try {
       console.log('data='.RequestInfo);
       axios
+<<<<<<< HEAD
         .post(`${API_BASE_URL}/api/Request/add-Request`, {
           RequestDetails : JSON.stringify(RequestInfo),
           
+=======
+        .post(`${API_BASE_URL}/api/courier/add-Request`, {
+          RequestDetails: JSON.stringify(RequestInfo),
+>>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31
         })
         .then((response) => {
           console.log(response);
@@ -35,8 +44,8 @@ const DeliveryRequestForm = () => {
     }
   };
 
-
   return (
+<<<<<<< HEAD
     <>
     <div className={'content-block'}>
            <h2>Request for a delivery</h2>
@@ -122,4 +131,40 @@ const DeliveryRequestForm = () => {
 };
 
 
+=======
+    <form formData={RequestInfo}>
+      <h2>Request for a delivery</h2>
+      <div className="form-group">
+        <label>Order ID:</label>
+        <input type="text" />
+      </div>
+      <div className="form-group">
+        <label>Name:</label>
+        <input type="text" required />
+      </div>
+      <div className="form-group">
+        <label>Phone:</label>
+        <input type="text" required />
+      </div>
+      <div className="form-group">
+        <label>Address:</label>
+        <input type="text" required />
+      </div>
+      <div className="form-group">
+        <label>City:</label>
+        <input type="text" required />
+      </div>
+      <div className="form-group">
+        <label>Province:</label>
+        <input type="text" id="province" required />
+      </div>
+
+      <Button type="success" onClick={onSaveBtnClick}>
+        Submit
+      </Button>
+    </form>
+  );
+};
+
+>>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31
 export default DeliveryRequestForm;
