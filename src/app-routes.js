@@ -94,7 +94,7 @@ const routes = [
   { path: 'Ordering/Cart', element: Cart },
   { path: "Ordering/Card_details", element: CardForm },
   { path: "Ordering/Product", element: ProductPage },
-  { path: "Ordering/Return_product", element: ReturnProduct },
+  { path: "Ordering/Return_products", element: ReturnProduct },
 ];
 
 export default routes.map((route) => {
