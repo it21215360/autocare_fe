@@ -29,7 +29,12 @@ const PackageDetails = () => {
                             A car wash is a facility used to clean the exterior, and in some cases the interior of cars. Car washes can be self-service, full-service (with attendants who wash the vehicle), 
                             or fully automated (possibly connected to a filling station).
                             </p>
-
+                            <p>
+                                Price:1000/=
+                            </p>
+                            <p>
+                                Time:30 min
+                            </p>
                             <h4 id="list-item-2">Package 02</h4>
                             <div>
                                 <img src={img2} alt=""/>
