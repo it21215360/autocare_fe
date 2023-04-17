@@ -17,7 +17,9 @@ import { API_BASE_URL } from "../../appconfig/config";
 import EmployeeMasterList from "./employeeMasterList";
 
 const EmployeeMaster = () => {
-  const [empBasicInfo, setEmpBasicInfo] = useState({});
+  const [empBasicInfo, setEmpBasicInfo] = useState({
+    DateOfBirth: "2023-04-19",
+  });
   const [empJobInfo, setEmpJobInfo] = useState({});
   const [empPayrollInfo, setEmpPayrollInfo] = useState({});
   const [empLeaveInfo, setEmpLeaveInfo] = useState({});
@@ -29,6 +31,12 @@ const EmployeeMaster = () => {
   });
 
   const [showList, setShowList] = useState(false);
+  const currencyFormat = {
+    style: "currency",
+    currency: "LKR",
+    useGrouping: true,
+    minimumSignificantDigits: 3,
+  };
 
   const onSaveBtnClick = (e) => {
     try {
@@ -50,8 +58,6 @@ const EmployeeMaster = () => {
 
   const OnLoadData = (empId) => {
     try {
-      debugger;
-      //if (pageProperties.EmployeeID != 0 && pageProperties.UpdateMode)
       axios
         .get(`${API_BASE_URL}/api/employee/get-employee`, {
           params: {
@@ -60,12 +66,11 @@ const EmployeeMaster = () => {
         })
         .then((res) => {
           console.log(res.data);
-          console.log(res.data[0][0]);
-          console.log(typeof res.data[0][0]);
+
           setEmpBasicInfo(res.data[0][0]);
           setEmpJobInfo(res.data[1][0]);
           setEmpLeaveInfo(res.data[2][0]);
-          setEmpLeaveInfo(res.data[3][0]);
+          setEmpPayrollInfo(res.data[3][0]);
         })
         .catch((error) => {
           console.log(error);
@@ -247,6 +252,7 @@ const EmployeeMaster = () => {
                   <Item
                     dataField="BasicSalary"
                     editorType="dxNumberBox"
+                    format={currencyFormat}
                     editorOptions={{
                       readOnly: false,
                     }}
