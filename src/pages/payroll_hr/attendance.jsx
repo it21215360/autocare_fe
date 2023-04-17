@@ -77,15 +77,6 @@ const Attendance = () => {
                 <Form formData={employeeAttendance}>
                     <GroupItem colCount={2}>
                         
-                        <Item dataField="Name" 
-                            editorType="dxTextBox" 
-                            editorOptions={{
-                                readOnly: false,
-                        }}>
-                            <Label text="Name"></Label>
-                            <RequiredRule message="Field required" />
-                        </Item>
-                        
                         <Item dataField="EmployeeID" 
                             editorType="dxTextBox" 
                             editorOptions={{
@@ -94,6 +85,20 @@ const Attendance = () => {
                             <Label text="Employee Id"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
+
+                        <Item dataField="Date"
+                            editorType="dxDateBox"
+                            editorOptions={{
+                                readOnly: true,
+                                disabled: true,
+                                displayFormat: "yyyy/MM/dd",
+                                value: new Date()
+                            }}>
+                    
+                    <Label text="Date"></Label>
+                    <RequiredRule message="Field required" />
+                    </Item>
+
                     </GroupItem>
 
                     <GroupItem colCount={2}>
