@@ -1,6 +1,5 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
-import './CourierProfile.scss';
-import Form from 'devextreme-react/form';
 
 export default function CourierProfile() {
   const [notes, setNotes] = useState(
@@ -20,37 +19,52 @@ export default function CourierProfile() {
   };
 
   return (
-    <React.Fragment>
-      <h2 className={'content-block'}>Courier Profile</h2>
-
-      <div className={'content-block dx-card responsive-paddings'}>
-        <div className={'form-avatar1'}>
-          <img
-            alt={''}
-            src={`https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/${
-              Courier.Picture
-  }`}
-          />
-        </div>
-        <span>{notes}</span>
-      </div>
-
-      <div className={'content-block dx-card responsive-paddings'}>
-        <Form
-          id={'form'}
-          defaultFormData={Courier}
-          onFieldDataChanged={e => e.dataField === 'Notes' && setNotes(e.value)}
-          labelLocation={'top'}
-          colCountByScreen={colCountByScreen}
-        />
-      </div>
-    </React.Fragment>
+    <div>
+      <h2> Ruwan Perera</h2>
+      <label htmlFor="profile-image-input">
+        {profileImage ? (
+          <img src={profileImage} alt="Profile image"   style={{ maxWidth: 150, maxHeight: 150 }} />
+        
+        ) : (
+          <div>Upload profile image</div>
+        )}
+      </label>
+      <input
+        id="profile-image-input"
+        type="file"
+        accept="image/*"
+        onChange={handleImageUpload}
+        style={{ display: 'none' }}
+      />
+    </div>
   );
 }
 
-const colCountByScreen = {
-  xs: 1,
-  sm: 2,
-  md: 3,
-  lg: 4
-};
+=======
+import React from "react";
+
+function CourierProfile() {
+  return (
+    <div className="courier-menu">
+      <h1 className="title-pen">
+        {" "}
+        User Profile <span>UI</span>
+      </h1>
+      <div className="user-profile">
+        <img
+          className="avatar"
+          src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTF_erFD1SeUnxEpvFjzBCCDxLvf-wlh9ZuPMqi02qGnyyBtPWdE-3KoH3s"
+          alt="Ash"
+        />
+        <div className="username">Will Smith</div>
+        <div className="bio">Senior UI Designer</div>
+        <div className="description">
+          I use to design websites and applications for the web.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+>>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31
+export default CourierProfile;

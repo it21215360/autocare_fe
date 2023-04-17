@@ -156,7 +156,7 @@ export const navigation = [
       { text: 'Cart', path: 'Ordering/Cart' },
       { text: 'Card Details', path: 'Ordering/Card_details' },
       { text: 'Products', path: 'Ordering/Product' },
-      { text: 'Return Product', path: 'Ordering/Return_product' },
+      { text: 'Return Product', path: 'Ordering/Return_products' },
 
     ]
   },
