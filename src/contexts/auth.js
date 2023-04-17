@@ -25,7 +25,6 @@ function AuthProvider(props) {
   const signIn = useCallback(async (username, password) => {
     const result = await sendSignInRequest(username, password);
     if (result.isOk) {
-      debugger;
       setUser(result.data);
       setLoading(false);
     }
