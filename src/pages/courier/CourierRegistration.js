@@ -36,27 +36,29 @@ const  CourierRegistration = () => {
       <div className="signup">
       <div className="sign">
       <div className="title">Registration</div>
-      <form>
+      <form formData={RegInfo}>
+     
         <div className="user__details">
+          
           <div className="input__box">
             <span className="details">Full Name</span>
-            <input type="text" placeholder="E.g: John Smith" />
+            <input type="text" placeholder="E.g: John Smith" dataField="CourierName" />
           </div>
           <div className="input__box">
             <span className="details">NIC</span>
-            <input type="text" placeholder="**********" />
+            <input type="text" placeholder="**********" dataField="NIC" />
           </div>
           <div className="input__box">
             <span className="details">Email</span>
-            <input type="email" placeholder="johnsmith@hotmail.com" />
+            <input type="email" placeholder="johnsmith@hotmail.com" dataField="Email" />
           </div>
           <div className="input__box">
             <span className="details">Phone Number</span>
-            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="012-345-6789" />
+            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="012-345-6789" dataField="Phone"  />
           </div>
           <div className="input__box">
             <span className="details">Password</span>
-            <input type="password" placeholder="********" />
+            <input type="password" placeholder="********" dataField="Password"  />
           </div>
          
     
@@ -64,7 +66,7 @@ const  CourierRegistration = () => {
        
         <div className="buttonsub">
         <Link to="/courier/VehicleReg">
-        <input type="submit" value="Next" />
+        <input type="submit" value="Next" stylingMode="contained" onClick={onSaveBtnClick} />
        
     </Link>
         </div>

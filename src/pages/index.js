@@ -50,6 +50,7 @@ export { default as VehicleReg } from "./courier/VehicleReg";
 export { default as DeliveryRequestForm } from "./courier/DeliveryRequestForm";
 export { default as ShippingManage } from "./courier/ShippingManage";
 export { default as CourierProfile } from "./courier/CourierProfile";
+export { default as DeliveryConfirm } from "./courier/DeliveryConfirm";
 
 //it21326936@my.sliit.lk - Amandi
 export { default as OrderForm } from "./ordering/Order_details";

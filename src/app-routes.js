@@ -8,7 +8,7 @@ import {
   Salary,
   LeaveApproval,
   AttendanceViewer,
-  
+  DeliveryConfirm,
   CourierRegistration,
   VehicleReg,
   DeliveryRequestForm,
@@ -85,6 +85,7 @@ const routes = [
   { path: "courier/DeliveryRequestForm", element: DeliveryRequestForm },
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
+  { path: "courier/DeliveryConfirm", element:DeliveryConfirm },
 
   //it21238994@my.sliit.lk - Amanda
   { path: "customer_care/raiseTicket", element: RaiseTicket },
