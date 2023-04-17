@@ -1,7 +1,34 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
+import { useState } from "react";
+import axios from "axios";
+import { API_BASE_URL } from "../../appconfig/config";
 import "./CourierRegistration.css";
 
-function CourierRegistration () {
+
+const  CourierRegistration = () => {
+
+
+   const [RegInfo, setRegInfo] = useState({});
+
+   const onSaveBtnClick = (e) => {
+       try {
+         console.log(RegInfo);
+        
+   
+         axios
+           .post(`${API_BASE_URL}/api/register/add-register`, {
+             RegDetails : JSON.stringify(RegInfo),
+             
+           })
+           .then((response) => {
+             console.log(response);
+           })
+           .catch((error) => {});
+       } catch (error) {
+         console.error(error);
+       }
+     };
 
 
     return (
@@ -31,15 +58,15 @@ function CourierRegistration () {
             <span className="details">Password</span>
             <input type="password" placeholder="********" />
           </div>
-          <div className="input__box">
-            <span className="details">Confirm Password</span>
-            <input type="password" placeholder="********" />
-          </div>
+         
     
         </div>
        
         <div className="buttonsub">
+        <Link to="/courier/VehicleReg">
         <input type="submit" value="Next" />
+       
+    </Link>
         </div>
 
       
@@ -49,6 +76,6 @@ function CourierRegistration () {
     )
      }
 
-export default CourierRegistration
+export default CourierRegistration;
 
 

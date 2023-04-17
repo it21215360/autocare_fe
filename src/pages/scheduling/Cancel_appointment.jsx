@@ -1,6 +1,6 @@
 import React from 'react';
 import 'devextreme/dist/css/dx.light.css';
-import DataGrid, { Column, SearchPanel, Editing, ValidationRule } from 'devextreme-react/data-grid';
+import DataGrid, { Column, SearchPanel, Editing} from 'devextreme-react/data-grid';
 import { Button } from 'devextreme-react';
 
 export default function Cancel() {
