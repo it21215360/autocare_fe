@@ -48,21 +48,28 @@ const EmployeeMaster = () => {
     }
   };
 
-  const OnLoadData = () => {
+  const OnLoadData = (empId) => {
     try {
-      if (pageProperties.EmployeeID != 0 && pageProperties.UpdateMode)
-        axios
-          .get(`${API_BASE_URL}/api/employee/get-employee`, {
-            params: {
-              EmpID: pageProperties.EmployeeID,
-            },
-          })
-          .then((res) => {
-            console.log(res.data[0]);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+      debugger;
+      //if (pageProperties.EmployeeID != 0 && pageProperties.UpdateMode)
+      axios
+        .get(`${API_BASE_URL}/api/employee/get-employee`, {
+          params: {
+            EmpID: empId, //pageProperties.EmployeeID,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          console.log(res.data[0][0]);
+          console.log(typeof res.data[0][0]);
+          setEmpBasicInfo(res.data[0][0]);
+          setEmpJobInfo(res.data[1][0]);
+          setEmpLeaveInfo(res.data[2][0]);
+          setEmpLeaveInfo(res.data[3][0]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (error) {
       console.error(error);
     }
@@ -83,7 +90,7 @@ const EmployeeMaster = () => {
         UpdateMode: true,
       });
 
-      OnLoadData();
+      OnLoadData(viewListSelectedID);
     }
   };
 
