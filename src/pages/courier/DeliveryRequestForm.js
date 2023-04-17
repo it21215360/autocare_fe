@@ -13,7 +13,7 @@ const DeliveryRequestForm = () => {
 
   const onSaveBtnClick = (e) => {
     try {
-      console.log("data=".RequestInfo);
+      console.log(RequestInfo);
       axios
         .post(`${API_BASE_URL}/api/courier/add-Request`, {
           RequestDetails: JSON.stringify(RequestInfo),
@@ -37,7 +37,7 @@ const DeliveryRequestForm = () => {
               dataField="OrderID"
               editorType="dxTextBox"
               editorOptions={{
-                readOnly: false,
+                readOnly: true,
               }}
             >
               <Label text="Order ID"></Label>
