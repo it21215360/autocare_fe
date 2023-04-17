@@ -1,7 +1,17 @@
-import React from 'react'; 
+import React, { Component } from "react";
+import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
+import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
+import { Navbar, ListGroup } from "react-bootstrap";
+import { LoadPanel } from "devextreme-react/load-panel";
+import notify from "devextreme/ui/notify";
+import { useState } from "react";
+import { SelectBox } from "devextreme-react";
+import { Button } from 'devextreme-react/button';
+import axios from "axios";
+import { API_BASE_URL } from "../../appconfig/config";
 import 'devextreme/dist/css/dx.light.css';
 import DataGrid, { Column, SearchPanel, Editing,ValidationRule } from 'devextreme-react/data-grid';
-import { Button } from 'devextreme-react';
+
 
 export default function  ShippingManage() {
     const myDataSource = [{DeliveryID:1 ,OrderID: 776, Address: 'Kadawatha ',  CustomerName: 'Ajith Kumar', Phone:'0777455534' , City:'Kalaniya',Province:'Western ', DeliveryCharge: 300.00, OrderedDate: '01/02/2023', Status: 'Successful'},
@@ -36,6 +46,7 @@ export default function  ShippingManage() {
                     <Column dataField='OrderedDate' caption='Ordered Date' dataType='date'> <ValidationRule type="required" /></Column>
                     <Column dataField='Status' caption='Order Status' dataType='String'> <ValidationRule type="required" /></Column>
                     
+
         
                 </DataGrid>
                 <br></br>

@@ -172,10 +172,8 @@ const Scheduling = () => {
 
                     <Navbar bg="light" variant="light">
                             <Link to = "./scheduling/Package.js">
-                                <Button stylingMode="contained" type="success">Package Details</Button>
-                                <a href="scheduling/Oil.js">
-                                <Button stylingMode="contained" type="success">Oil Details</Button> 
-                                </a>
+                                <Button stylingMode="contained" type="success" >Package Details</Button>
+                                
                             </Link>     
                     </Navbar>       
                       
@@ -225,11 +223,12 @@ const Scheduling = () => {
 
                                 <br></br>
                                 <br></br>
-
+                             
+                             
                             <Navbar bg="light" variant="light">
-                                <Button stylingMode="contained" type="success">Save</Button>
+                                <Button className="button1" style={{margin:10}}stylingMode="contained" type="success">Save</Button>
                             
-                                <Button stylingMode="contained" type="default">Clear</Button>
+                                <Button className="button2" style={{margin:10}} stylingMode="contained" type="default">Clear</Button>
                             </Navbar>
                         </div>
 

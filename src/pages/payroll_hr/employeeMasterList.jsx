@@ -25,12 +25,16 @@ const EmployeeMasterList = (props) => {
       });
   }, []);
 
-  const onSelectClick = (e) => {};
+  const onSelectClick = (e) => {
+    props.OnHide(selectedID);
+  };
 
-  const onCloseClick = (e) => {};
+  const onCloseClick = (e) => {
+    props.HideTheList();
+  };
 
   const onSelectionChanged = (e) => {
-    console.log(e.selectedRowsData[0]);
+    setSelectedID(e.selectedRowsData[0].AutoID);
   };
 
   return (
@@ -54,7 +58,7 @@ const EmployeeMasterList = (props) => {
         <Column dataField="FName" caption="First Name" />
         <Column dataField="LName" caption="Last Name" />
       </DataGrid>
-      <hr></hr>
+      <br></br>
       <Navbar bg="light" variant="light" className="crud_panel_buttons">
         <Button
           className="crud_panel_buttons"

@@ -8,12 +8,13 @@ import {
   Salary,
   LeaveApproval,
   AttendanceViewer,
-  CourierLogin,
+  DeliveryConfirm,
   CourierRegistration,
   VehicleReg,
   DeliveryRequestForm,
   ShippingManage,
   CourierProfile,
+  InventoryLogin,
   Storage,
   Order,
   Suppliers,
@@ -29,8 +30,10 @@ import {
   RaiseTicket,
   OrderForm,
   CardForm,
+  Cart,
   ProductPage,
   ReturnProduct,
+  Confirm
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
@@ -49,7 +52,8 @@ const routes = [
   { path: "payroll_hr/employee-master", element: EmployeeMaster },
 
   //it21324406@my.sliit.lk - Shanoli
-
+ 
+  { path: "stock_management/inventory-login", element: InventoryLogin },
   { path: "stock_management/storage", element: Storage },
   { path: "stock_management/suppliers", element: Suppliers },
   { path: "stock_management/order", element: Order },
@@ -65,6 +69,7 @@ const routes = [
   { path: "/scheduling/Package", element: PackageDetails },
   { path: "/scheduling/Update_appointment", element: Update },
   { path: "/scheduling/Cancel_appointment", element: Cancel },
+  { path: "/scheduling/Confirm_appointment", element: Confirm },
 
   //it21198090@my.sliit.lk - Shania
   { path: "ProductCategory", element: ProductCategory },
@@ -74,22 +79,23 @@ const routes = [
   //it21198090@my.sliit.lk - Shania
 
   //it21307362@my.sliit.lk - Fernando ST
-  { path: "courier/CourierLogin", element: CourierLogin },
+ 
   { path: "courier/CourierRegistration", element: CourierRegistration },
   { path: "courier/VehicleReg", element: VehicleReg },
   { path: "courier/DeliveryRequestForm", element: DeliveryRequestForm },
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
+  { path: "courier/DeliveryConfirm", element:DeliveryConfirm },
 
   //it21238994@my.sliit.lk - Amanda
   { path: "customer_care/raiseTicket", element: RaiseTicket },
 
   //it21326936@my.sliit.lk - Amandi
   { path: "Ordering/Order_details", element: OrderForm },
-  //{ path: 'Ordering/Cart', element: AddtoCart },
+  { path: 'Ordering/Cart', element: Cart },
   { path: "Ordering/Card_details", element: CardForm },
   { path: "Ordering/Product", element: ProductPage },
-  { path: "Ordering/Return_product", element: ReturnProduct },
+  { path: "Ordering/Return_products", element: ReturnProduct },
 ];
 
 export default routes.map((route) => {

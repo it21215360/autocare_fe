@@ -51,6 +51,7 @@ export const navigation = [
     text: 'Stock Management', icon: 'product',
     items: [
       
+      { text: 'Inventory Login', path: 'stock_management/inventory-login' },
       { text: 'Stock', path: 'stock_management/storage' },
       { text: 'Suppliers', path: 'stock_management/suppliers' },
       { text: 'PO History', path: 'stock_management/order' },
@@ -79,6 +80,7 @@ export const navigation = [
       //   { text: ' memo viewer', path: 'scheduling/emp_payroll' },
       { text: 'Booked memo viewer', path: 'scheduling/Memo' },
       { text: 'Package Details', path: 'scheduling/Package' },
+      
     ]
   },
 
@@ -110,14 +112,13 @@ export const navigation = [
   {
     text: 'Delivery', icon: 'globe',
     items: [
-      { text: 'Courier Login', path: './courier/CourierLogin' },
+      
       { text: 'Courier Registration', path: './courier/CourierRegistration' },
       { text: 'Vehicle Register', path: 'courier/VehicleReg' },
       { text: 'Delivery Request Form', path: 'courier/DeliveryRequestForm' },
       { text: 'Shipping Manage', path: 'courier/ShippingManage' },
       { text: 'Courier Profile', path: 'courier/CourierProfile' },
-      { text: 'Delivery Charge', path: 'courier/DeliveryChargeCalculator' },
-      { text: 'City Distance', path: 'courier/CityDistance' },
+      { text: 'Delivery Confirm', path: 'courier/DeliveryConfirm' },
       { text: 'Export to Excel', path: 'courier/ExportToExcel' },
       
     ]
@@ -155,7 +156,7 @@ export const navigation = [
       { text: 'Cart', path: 'Ordering/Cart' },
       { text: 'Card Details', path: 'Ordering/Card_details' },
       { text: 'Products', path: 'Ordering/Product' },
-      { text: 'Return Product', path: 'Ordering/Return_product' },
+      { text: 'Return Product', path: 'Ordering/Return_products' },
 
     ]
   },

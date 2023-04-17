@@ -158,13 +158,11 @@ export default function Update(){
 
                 </Form> */}
                 <br></br>
-
+                
                     <Navbar bg="light" variant="light">
                             <Link to = "./scheduling/Package.js">
                                 <Button stylingMode="contained" type="success">Package Details</Button>
-                                <a href="scheduling/Oil.js">
-                                <Button stylingMode="contained" type="success">Oil Details</Button> 
-                                </a>
+                             
                             </Link>     
                     </Navbar>       
                       
@@ -216,7 +214,7 @@ export default function Update(){
                                 <br></br>
 
                             <Navbar bg="light" variant="light">
-                                <Button stylingMode="contained" type="success">Save</Button>
+                                <Button stylingMode="contained" type="success">Update</Button>
                             
                                 <Button stylingMode="contained" type="default">Clear</Button>
                             </Navbar>
