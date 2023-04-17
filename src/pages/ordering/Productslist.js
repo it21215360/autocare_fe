@@ -38,7 +38,7 @@ class Productslist extends React.PureComponent {
               <div className="price large-text">{formatCurrency(house.Price)}</div>
               <div className="agent">
                 <div id={`house${house.ID}`}>
-                  <img src="images/icon-agent.svg" />
+                  <img src="image/Products/icon-agent.svg" />
                                     Listing agent
                 </div>
               </div>

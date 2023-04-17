@@ -1,7 +1,0 @@
-[
-    { "AutoID":"HVJHV845", "ProdCatID":1,"ProdSubCat":"E05","Code":"Review Mirrors","Brand":"Toyota","OnHand":50,"Quantity":80 ,"CreatedDate":"14/01/2023", "UpdatedDate":"28/02/2023"},
-    { "AutoID":"GFHB5515", "ProdCatID":2,"ProdSubCat":"L07","Code":"Bolts","Brand":"Suzuki","OnHand":1000,"Quantity":1000 ,"CreatedDate":"66/01/2023", "UpdatedDate":""},
-    { "AutoID":"YYJ21007", "ProdCatID":3,"ProdSubCat":"N85","Code":"Side Mirrors","Brand":"Benz","OnHand":10,"Quantity":12 ,"CreatedDate":"26/01/2023", "UpdatedDate":""},
-    { "AutoID":"GVI03578", "ProdCatID":1, "ProdSubCat":"X78","Code":"Silencer","Brand":"Toyota","OnHand":35,"Quantity":35 ,"CreatedDate":"11/02/2023", "UpdatedDate":""},
-    { "AutoID":"HVG98632", "ProdCatID":5,"ProdSubCat":"L55","Code":"Rear Axle","Brand":"Toshiba","OnHand":55,"Quantity":55 ,"CreatedDate":"14/03/2023", "UpdatedDate":""}  
-]

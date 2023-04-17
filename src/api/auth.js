@@ -1,9 +1,17 @@
-import defaultUser from '../utils/default-user';
+import defaultUser from "../utils/default-user";
+import axios from "axios";
+import { API_BASE_URL } from "../appconfig/config";
 
-export async function signIn(email, password) {
+export async function signIn(username, password) {
+  return {
+    isOk: true,
+    data: defaultUser,
+  };
+  /*let returnObject = {};
+
   try {
+    debugger;
     // Send request
-    console.log(email, password);
 
     return {
       isOk: true,
@@ -15,7 +23,7 @@ export async function signIn(email, password) {
       isOk: false,
       message: "Authentication failed"
     };
-  }
+  }*/
 }
 
 export async function getUser() {
@@ -24,63 +32,61 @@ export async function getUser() {
 
     return {
       isOk: true,
-      data: defaultUser
+      data: defaultUser,
     };
-  }
-  catch {
+  } catch {
     return {
-      isOk: false
+      isOk: false,
     };
   }
 }
 
-export async function createAccount(email, password) {
+export async function createAccount(username, password) {
   try {
     // Send request
-    console.log(email, password);
+    console.log(username, password);
 
     return {
-      isOk: true
+      isOk: true,
     };
-  }
-  catch {
+  } catch {
     return {
       isOk: false,
-      message: "Failed to create account"
+      message: "Failed to create account",
     };
   }
 }
 
-export async function changePassword(email, recoveryCode) {
+export async function changePassword(username, recoveryCode) {
   try {
     // Send request
-    console.log(email, recoveryCode);
+    console.log(username, recoveryCode);
 
     return {
-      isOk: true
+      isOk: true,
+      isOk: true,
     };
-  }
-  catch {
+  } catch {
     return {
       isOk: false,
-      message: "Failed to change password"
-    }
+      message: "Failed to change password",
+    };
   }
 }
 
-export async function resetPassword(email) {
+export async function resetPassword(username) {
   try {
     // Send request
-    console.log(email);
+    console.log(username);
 
     return {
-      isOk: true
+      isOk: true,
+      isOk: true,
     };
-  }
-  catch {
+  } catch {
     return {
       isOk: false,
-      message: "Failed to reset password"
+      message: "Failed to reset password",
     };
   }
 }

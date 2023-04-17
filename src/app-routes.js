@@ -8,30 +8,32 @@ import {
   Salary,
   LeaveApproval,
   AttendanceViewer,
-  CourierLogin,
+  DeliveryConfirm,
   CourierRegistration,
   VehicleReg,
   DeliveryRequestForm,
   ShippingManage,
   CourierProfile,
+  InventoryLogin,
   Storage,
   Order,
   Suppliers,
   PurchaseOrderForm,
   StockReturnForm,
+  GoodReceiveForm,
   Scheduling,
   PackageDetails,
   Update,
   Cancel,
   EmpLogin,
-  ProductCategoryview,
-  App,
+  EmployeeMaster,
   RaiseTicket,
   OrderForm,
-  AddtoCart,
   CardForm,
+  Cart,
   ProductPage,
-  ReturnProduct
+  ReturnProduct,
+  Confirm
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
@@ -39,17 +41,6 @@ const routes = [
   { path: "/tasks", element: TasksPage },
   { path: "/profile", element: ProfilePage },
   { path: "/home", element: HomePage },
-  { path: "master/product-category", element: ProductCategory },
-
-  //shamith
-
-
-
-
-
-
-
-
 
   //it21215360@my.sliit.lk - Maheesha
   { path: "payroll_hr/leave-request-form", element: LeaveRequestForm },
@@ -58,88 +49,53 @@ const routes = [
   { path: "payroll_hr/leaveApproval", element: LeaveApproval },
   { path: "payroll_hr/dailyAttendanceViewer", element: AttendanceViewer },
   { path: "payroll_hr/employeeLogin", element: EmpLogin },
-
-
-
-
-
+  { path: "payroll_hr/employee-master", element: EmployeeMaster },
 
   //it21324406@my.sliit.lk - Shanoli
+ 
+  { path: "stock_management/inventory-login", element: InventoryLogin },
   { path: "stock_management/storage", element: Storage },
   { path: "stock_management/suppliers", element: Suppliers },
   { path: "stock_management/order", element: Order },
-  { path: "stock_management/stock-order-request-form", element: PurchaseOrderForm, },
+  {
+    path: "stock_management/stock-order-request-form",
+    element: PurchaseOrderForm,
+  },
   { path: "stock_management/stock-return-form", element: StockReturnForm },
-
-
-
-
+  { path: "stock_management/purchase", element: GoodReceiveForm },
 
   //it21197000@my.sliit.lk - Chethani
   { path: "/scheduling/Scheduling_appointment", element: Scheduling },
   { path: "/scheduling/Package", element: PackageDetails },
   { path: "/scheduling/Update_appointment", element: Update },
   { path: "/scheduling/Cancel_appointment", element: Cancel },
-
-
-
-
-
-
-
-
-
-
-
-
+  { path: "/scheduling/Confirm_appointment", element: Confirm },
 
   //it21198090@my.sliit.lk - Shania
-  { path: "/masters/ViewMasterProd", element: ProductCategoryview },
-  { path: "/masters/ProductCat", element: App },
-
-
-
-
-
+  { path: "ProductCategory", element: ProductCategory },
+  // { path: "/masters/ViewMasterProd", element: ProductCategoryview },
+  // { path: "/masters/ProductCat", element: App },
 
   //it21198090@my.sliit.lk - Shania
-
-
-
-
-
-
-
-
 
   //it21307362@my.sliit.lk - Fernando ST
-  { path: "courier/CourierLogin", element: CourierLogin },
+ 
   { path: "courier/CourierRegistration", element: CourierRegistration },
   { path: "courier/VehicleReg", element: VehicleReg },
   { path: "courier/DeliveryRequestForm", element: DeliveryRequestForm },
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
-
-
+  { path: "courier/DeliveryConfirm", element:DeliveryConfirm },
 
   //it21238994@my.sliit.lk - Amanda
   { path: "customer_care/raiseTicket", element: RaiseTicket },
 
-
-
-
-
-
-
-
   //it21326936@my.sliit.lk - Amandi
-  { path: 'Ordering/Order_details', element: OrderForm },
-  //{ path: 'Ordering/Cart', element: AddtoCart },
-  { path: 'Ordering/Card_details', element: CardForm },
-  { path: 'Ordering/Product', element: ProductPage },
-  { path: 'Ordering/Return_product', element: ReturnProduct }
-
-
+  { path: "Ordering/Order_details", element: OrderForm },
+  { path: 'Ordering/Cart', element: Cart },
+  { path: "Ordering/Card_details", element: CardForm },
+  { path: "Ordering/Product", element: ProductPage },
+  { path: "Ordering/Return_products", element: ReturnProduct },
 ];
 
 export default routes.map((route) => {

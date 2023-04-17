@@ -3,12 +3,13 @@ export const employees = [{
     FirstName: 'John',
     LastName: 'Heart',
     EmpId: '157426',
-    Position: 'HR Manager',
-    BirthDate: '1964/03/16',
-    HireDate: '1995/01/15',
-    Notes: 'John has been in the Audio/Video industry since 1990. He has led DevAv as its CEO since 2003.\r\n\r\nWhen not working hard as the CEO, John loves to golf and bowl. He once bowled a perfect game of 300.',
-    Address: '351 S Hill St.',
-    StateID: 5,
+    Department: 'HR',
+    LeaveCategory: 'Casual leave',
+    LeaveType: 'Half Day',
+    LeaveFrom: '2022/04/04',
+    LeaveTo: '2022/04/05',
+    DayCount: '1',
+    Status: 'Pending...'
   }, {
     ID: 2,
     FirstName: 'Olivia',
@@ -308,4 +309,5 @@ export const employees = [{
     ID: 51,
     Name: 'North Dakota',
   }];
+  
   
