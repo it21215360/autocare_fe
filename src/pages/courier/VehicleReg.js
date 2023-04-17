@@ -1,18 +1,14 @@
 import { Link } from 'react-router-dom';
 
 import React, { Component } from "react";
-import { Button } from "devextreme-react/button";
+import { Button } from 'devextreme-react/button';
 import { useState } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
 import "./VehicleReg.css";
 
 const VehicleReg = () => {
-  const [VehicleInfo, setVehicleInfo] = useState({});
 
-  const onSaveBtnClick = (e) => {
-    try {
-      console.log(VehicleInfo);
 
       axios
         .post(`${API_BASE_URL}/api/courier/add-vehicle`, {
@@ -27,7 +23,6 @@ const VehicleReg = () => {
     }
   };
 
-<<<<<<< HEAD
    const onSaveBtnClick = (e) => {
        try {
          console.log(VehicleInfo);
@@ -50,10 +45,6 @@ const VehicleReg = () => {
 
     return (
       <div className="vehiReg">
-=======
-  return (
-    <div className="vehiReg">
->>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31
       <div className="Reg">
         <div className="title">Register your vehicle today</div>
         <form formData={VehicleInfo}>
@@ -61,7 +52,6 @@ const VehicleReg = () => {
             <input type="radio" name="vehicle" id="dot-1" />
             <input type="radio" name="vehicle" id="dot-2" />
 
-<<<<<<< HEAD
       
 
       <div className="gender__details">
@@ -138,13 +128,9 @@ const VehicleReg = () => {
   );
 };
 
-<<<<<<< HEAD
     )
      }
 
 export default VehicleReg;
 
 
-=======
-export default VehicleReg;
->>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31
