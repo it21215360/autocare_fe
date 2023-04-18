@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import DataGrid, {
   RequiredRule,
@@ -17,12 +17,26 @@ import { API_BASE_URL } from "../../appconfig/config";
 import EmployeeMasterList from "./employeeMasterList";
 
 const EmployeeMaster = () => {
-  const [empBasicInfo, setEmpBasicInfo] = useState({});
+  const [empBasicInfo, setEmpBasicInfo] = useState({
+    DateOfBirth: "2023-04-19",
+  });
   const [empJobInfo, setEmpJobInfo] = useState({});
   const [empPayrollInfo, setEmpPayrollInfo] = useState({});
   const [empLeaveInfo, setEmpLeaveInfo] = useState({});
+  const [pageProperties, setPageProperties] = useState({
+    EmployeeID: 0,
+    DataLoading: false,
+    isDocReadOnly: false,
+    UpdateMode: false,
+  });
 
   const [showList, setShowList] = useState(false);
+  const currencyFormat = {
+    style: "currency",
+    currency: "LKR",
+    useGrouping: true,
+    minimumSignificantDigits: 3,
+  };
 
   const onSaveBtnClick = (e) => {
     try {
@@ -30,6 +44,8 @@ const EmployeeMaster = () => {
         .post(`${API_BASE_URL}/api/employee/add-employee`, {
           BasicInfo: JSON.stringify(empBasicInfo),
           JobInfo: JSON.stringify(empJobInfo),
+          LeaveInfo: JSON.stringify(empLeaveInfo),
+          PayrollInfo: JSON.stringify(empPayrollInfo),
         })
         .then((response) => {
           console.log(response);
@@ -40,12 +56,58 @@ const EmployeeMaster = () => {
     }
   };
 
-  
+  const OnLoadData = (empId) => {
+    try {
+      axios
+        .get(`${API_BASE_URL}/api/employee/get-employee`, {
+          params: {
+            EmpID: empId, //pageProperties.EmployeeID,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+
+          setEmpBasicInfo(res.data[0][0]);
+          setEmpJobInfo(res.data[1][0]);
+          setEmpLeaveInfo(res.data[2][0]);
+          setEmpPayrollInfo(res.data[3][0]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onListClose = () => {
+    setShowList(false);
+  };
+
+  const onListClickEvent = (viewListSelectedID) => {
+    debugger;
+    if (showList && viewListSelectedID != 0) {
+      setShowList(!showList);
+      setPageProperties({
+        EmployeeID: viewListSelectedID,
+        DataLoading: true,
+        isDocReadOnly: true,
+        UpdateMode: true,
+      });
+
+      OnLoadData(viewListSelectedID);
+    }
+  };
+
   return (
     <>
       {showList ? (
         <div className={"content-block"}>
-          <EmployeeMasterList Show={showList}></EmployeeMasterList>
+          <EmployeeMasterList
+            Show={showList}
+            OnHide={onListClickEvent}
+            HideTheList={onListClose}
+          ></EmployeeMasterList>
         </div>
       ) : (
         <div className={"content-block"}>
@@ -99,7 +161,7 @@ const EmployeeMaster = () => {
                   </Item>
                   <Item
                     dataField="DateOfBirth"
-                    editorType="dxTextBox"
+                    editorType="dxDateBox"
                     editorOptions={{
                       readOnly: false,
                     }}
@@ -147,7 +209,6 @@ const EmployeeMaster = () => {
               </Form>
             </Card.Body>
           </Card>
-          <hr></hr>
           <Card style={{ width: "100%", paddingTop: "20px" }}>
             <Card.Body>
               <Card.Title>
@@ -180,7 +241,6 @@ const EmployeeMaster = () => {
               </Form>
             </Card.Body>
           </Card>
-          <hr></hr>
           <Card style={{ width: "100%", paddingTop: "20px" }}>
             <Card.Body>
               <Card.Title>
@@ -191,7 +251,8 @@ const EmployeeMaster = () => {
                 <GroupItem colCount={4}>
                   <Item
                     dataField="BasicSalary"
-                    editorType="dxTextBox"
+                    editorType="dxNumberBox"
+                    format={currencyFormat}
                     editorOptions={{
                       readOnly: false,
                     }}
@@ -201,7 +262,7 @@ const EmployeeMaster = () => {
                   </Item>
                   <Item
                     dataField="OTRate"
-                    editorType="dxTextBox"
+                    editorType="dxNumberBox"
                     editorOptions={{
                       readOnly: false,
                     }}
@@ -211,7 +272,7 @@ const EmployeeMaster = () => {
                   </Item>
                   <Item
                     dataField="FuelAllowance"
-                    editorType="dxTextBox"
+                    editorType="dxNumberBox"
                     editorOptions={{
                       readOnly: false,
                     }}
@@ -220,8 +281,8 @@ const EmployeeMaster = () => {
                     <RequiredRule message="Field required" />
                   </Item>
                   <Item
-                    dataField="LivingCostAllowance"
-                    editorType="dxTextBox"
+                    dataField="LCAllowance"
+                    editorType="dxNumberBox"
                     editorOptions={{
                       readOnly: false,
                     }}
@@ -233,7 +294,6 @@ const EmployeeMaster = () => {
               </Form>
             </Card.Body>
           </Card>
-          <hr></hr>
           <Card style={{ width: "100%", paddingTop: "20px" }}>
             <Card.Body>
               <Card.Title>
@@ -243,8 +303,8 @@ const EmployeeMaster = () => {
               <Form formData={empLeaveInfo}>
                 <GroupItem colCount={4}>
                   <Item
-                    dataField="AnnualLeaveCount"
-                    editorType="dxTextBox"
+                    dataField="AnnualCount"
+                    editorType="dxNumberBox"
                     editorOptions={{
                       readOnly: false,
                     }}
@@ -253,8 +313,8 @@ const EmployeeMaster = () => {
                     <RequiredRule message="Field required" />
                   </Item>
                   <Item
-                    dataField="CasualLeaveCount"
-                    editorType="dxTextBox"
+                    dataField="CasualCount"
+                    editorType="dxNumberBox"
                     editorOptions={{
                       readOnly: false,
                     }}
@@ -266,7 +326,7 @@ const EmployeeMaster = () => {
               </Form>
             </Card.Body>
           </Card>
-          <hr></hr>
+          <br></br>
           <Navbar bg="light" variant="light" className="crud_panel_buttons">
             <Button
               className="crud_panel_buttons"

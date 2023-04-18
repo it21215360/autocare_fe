@@ -2,14 +2,14 @@ import React from 'react';
 import notify from 'devextreme/ui/notify';
 import Button from 'devextreme-react/button';
 import Popup from 'devextreme-react/popup';
-
+import './styles.scss';
 import { housesSource } from './data.js';
 import Productslist from './Productslist.js';
 
 //function ProductPage(){
 
 const ADD_TO_CART = 'Add to Cart';
-const REMOVE_FROM_FAVORITES = 'Remove from Favorites';
+const REMOVE_FROM_CART = 'Remove from Cart';
 
 const formatCurrency = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -68,8 +68,8 @@ class Product extends React.Component {
         <div className="large-text">{formatCurrency(currentHouse.Price)}</div>
         <div className="opacity">{currentHouse.Address}, {currentHouse.City}, {currentHouse.State}</div>
         <Button
-          icon="favorites"
-          text={currentHouse.Favorite ? REMOVE_FROM_FAVORITES : ADD_TO_CART}
+          icon="cart"
+          text={currentHouse.Favorite ? REMOVE_FROM_CART : ADD_TO_CART}
           width={210}
           height={44}
           elementAttr={favButtonAttrs}

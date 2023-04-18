@@ -44,18 +44,21 @@ export { default as Confirm } from './scheduling/Confirm_appointment';
 //it21198090@my.sliit.lk - Shania
 
 //it21307362@my.sliit.lk - Fernando ST
-export { default as CourierLogin } from "./courier/CourierLogin";
+
 export { default as CourierRegistration } from "./courier/CourierRegistration";
 export { default as VehicleReg } from "./courier/VehicleReg";
 export { default as DeliveryRequestForm } from "./courier/DeliveryRequestForm";
 export { default as ShippingManage } from "./courier/ShippingManage";
 export { default as CourierProfile } from "./courier/CourierProfile";
+export { default as DeliveryConfirm } from "./courier/DeliveryConfirm";
 
 //it21326936@my.sliit.lk - Amandi
 export { default as OrderForm } from "./ordering/Order_details";
 export { default as CardForm } from "./ordering/Card_details";
 export { default as ProductPage } from "./ordering/Product";
 export { default as ReturnProduct } from "./ordering/Return_products";
+export { default as Cart } from "./ordering/Cart";
+
 
 //Amanda
 export { default as RaiseTicket } from "./customer_care/raiseTicket";

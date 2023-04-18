@@ -8,7 +8,7 @@ import {
   Salary,
   LeaveApproval,
   AttendanceViewer,
-  CourierLogin,
+  DeliveryConfirm,
   CourierRegistration,
   VehicleReg,
   DeliveryRequestForm,
@@ -30,6 +30,7 @@ import {
   RaiseTicket,
   OrderForm,
   CardForm,
+  Cart,
   ProductPage,
   ReturnProduct,
   Confirm
@@ -78,22 +79,23 @@ const routes = [
   //it21198090@my.sliit.lk - Shania
 
   //it21307362@my.sliit.lk - Fernando ST
-  { path: "courier/CourierLogin", element: CourierLogin },
+ 
   { path: "courier/CourierRegistration", element: CourierRegistration },
   { path: "courier/VehicleReg", element: VehicleReg },
   { path: "courier/DeliveryRequestForm", element: DeliveryRequestForm },
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
+  { path: "courier/DeliveryConfirm", element:DeliveryConfirm },
 
   //it21238994@my.sliit.lk - Amanda
   { path: "customer_care/raiseTicket", element: RaiseTicket },
 
   //it21326936@my.sliit.lk - Amandi
   { path: "Ordering/Order_details", element: OrderForm },
-  //{ path: 'Ordering/Cart', element: AddtoCart },
+  { path: 'Ordering/Cart', element: Cart },
   { path: "Ordering/Card_details", element: CardForm },
   { path: "Ordering/Product", element: ProductPage },
-  { path: "Ordering/Return_product", element: ReturnProduct },
+  { path: "Ordering/Return_products", element: ReturnProduct },
 ];
 
 export default routes.map((route) => {
