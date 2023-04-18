@@ -7,13 +7,13 @@ import { Button } from 'devextreme-react';
 
 const FAQ_PDF_URL = 'http://localhost:3000/#/customer_care/freaquentQuestion/faq_pdf.pdf'
 
-function FreaquentQuestionPage({faq, index}){
+function FreaquentQuestionPage({ faq, index }) {
     const [faqs, setfaqs] = useState([
         {
             question: 'How Often Should I Get an Oil Change?',
             answer: 'The general belief is that a driver\'s oil should be changed every 3,000 to 7,000 miles, or every three months. You can, however, always consult your owner\'s manual for the suggested oil change interval for your individual make and model. Many of today\'s newer vehicles will even notify you when they need service. Remember that an oil change is necessary since it lubricates the internal cogs and gears under the hood. Without it, oil might clog and prevent your vehicle from running properly.',
             open: true
-            
+
         },
         {
             question: 'How Often Should I Check My Vehicle\'s Fluid Levels?',
@@ -59,7 +59,7 @@ function FreaquentQuestionPage({faq, index}){
 
     const toggleFAQ = index => {
         setfaqs(faqs.map((faq, i) => {
-            if (i=== index) {
+            if (i === index) {
                 faq.open = !faq.open
             } else {
                 faq.open = false;
@@ -68,44 +68,46 @@ function FreaquentQuestionPage({faq, index}){
             return faq;
         }))
 
-    const downloadFileAtURL=(url)=>{
-        fetch(url).then(response=>response.blob()).then(blob=>{
-            const blobURL = window.URL.createObjectURL(new Blob([blob]))
-            const fileName = url.split("/").pop();
-            const aTag = document.createElement("a");
-            aTag.href = blobURL;
-            aTag.setAttribute("download", fileName);
-            document.body.appendChild(aTag);
+        const downloadFileAtURL = (url) => {
+            fetch(url).then(response => response.blob()).then(blob => {
+                const blobURL = window.URL.createObjectURL(new Blob([blob]))
+                const fileName = url.split("/").pop();
+                const aTag = document.createElement("a");
+                aTag.href = blobURL;
+                aTag.setAttribute("download", fileName);
+                document.body.appendChild(aTag);
                 aTag.click();
-        aTag.remove();
-        })        
-    };
+                aTag.remove();
+            })
+        };
 
     }
 
+    const downloadFileAtURL = () => { }
+
     return (
-        <div className= {'content-block'}>
+        <div className={'content-block'}>
             <h1>Freaquently Asked Question Page</h1>
-            <div className = "faqs">
+            <div className="faqs">
                 {faqs.map((faq, i) => (
-                    <faq faq={faq} index={i} toggleFAQ={toggleFAQ}/>
-                    ))}
-                    <div
-                        className={"faq" + (faq.open ? 'open' : '')}
-                        key={index}
-                        onClick={() => toggleFAQ(index)}
-                    >
-                        <div className = "faq-question">
-                            {faq.question}
-                        </div>
-                        <div className = "faq-answer">
-                            {faq.answer}
-                        </div>
+                    <faq faq={faq} index={i} toggleFAQ={toggleFAQ} />
+                ))}
+                <div
+                    className={"faq" + (faq.open ? 'open' : '')}
+                    key={index}
+                    onClick={() => toggleFAQ(index)}
+                >
+                    <div className="faq-question">
+                        {faq.question}
                     </div>
-                
+                    <div className="faq-answer">
+                        {faq.answer}
+                    </div>
+                </div>
+
             </div>
             <div className="button">
-            <Button onClick={()=>{downloadFileAtURL(FAQ_PDF_URL)}}>Download FAQ Page</Button>
+                <Button onClick={() => { downloadFileAtURL(FAQ_PDF_URL) }}>Download FAQ Page</Button>
             </div>
         </div>
 
