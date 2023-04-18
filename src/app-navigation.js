@@ -23,9 +23,6 @@ export const navigation = [
 
 
 
-
-
-
   //it21215360@my.sliit.lk - Maheesha
   {
     text: 'Payroll and HR', icon: 'group',
@@ -43,9 +40,6 @@ export const navigation = [
 
 
 
-
-
-
   //it21324406@my.sliit.lk - Shanoli
   {
     text: 'Stock Management', icon: 'product',
@@ -60,11 +54,6 @@ export const navigation = [
       { text: 'Good Receive Form', path: 'stock_management/purchase' },
     ]
   },
-
-
-
-
-
 
 
 
@@ -86,10 +75,6 @@ export const navigation = [
 
 
 
-
-
-
-
   //it21198090@my.sliit.lk - Shania
   {
     text: 'Master Data', icon: 'data',
@@ -100,10 +85,6 @@ export const navigation = [
       { text: 'Data Form Fill2', path: 'Appform2' },
     ]
   },
-
-
-
-
 
 
 
@@ -126,25 +107,17 @@ export const navigation = [
   
 
 
-
-
-
-
-
-
   //it21238994@my.sliit.lk - Amanda
   {
     text: 'Customer Care',
     icon: 'tips',
     items: [
       { text: 'Raise a Ticket', path: 'customer_care/raiseTicket' },
-      { text: 'FAQ', path: 'customer_care/faq' }
+      { text: 'My Ticket', path: 'customer_care/myTicket'},
+      { text: 'Track Ticket', path: 'customer_care/trackTicket'},
+      { text: 'FAQ', path: 'customer_care/freaquentQuestion' },
     ]
   },
-
-
-
-
 
 
 
@@ -152,19 +125,17 @@ export const navigation = [
   {
     text: 'Order', icon: 'folder',
     items: [
-      { text: 'Customer Payment', path: 'Ordering/Order_details' },
+      { text: 'Checkout', path: 'Ordering/Order_details' },
       { text: 'Cart', path: 'Ordering/Cart' },
       { text: 'Card Details', path: 'Ordering/Card_details' },
       { text: 'Products', path: 'Ordering/Product' },
       { text: 'Return Product', path: 'Ordering/Return_products' },
+      { text: 'Orders', path: 'Ordering/Orders_Admin' },
+      { text: 'Invoice View', path: 'Ordering/Invoice' },
+      { text: 'new', path: 'Ordering/new' },
 
     ]
   },
-
-
-
-
-
 
 
 ];
