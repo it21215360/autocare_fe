@@ -12,21 +12,36 @@ import DataGrid, { Column, SearchPanel, Editing, ValidationRule, RequiredRule } 
 import Card from 'react-bootstrap/Card';
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
+import  Orders from "./Order";
 
 const PurchaseOrderForm = () => {
 
-    const [POrderDetails, setPOrderDetails] = useState({});
+    //const [POrderDetails, setPOrderDetails] = useState({});
     const [POther] = [{}];
+    const [pOrderDetails, setPOrderDetails] = useState({});
+    const [pageProperties, setPageProperties] = useState({
+      OrderID : 0,
+      DataLoading: false,
+      isDocReadOnly: false,
+      UpdateMode: false,
+    });
+
    // const productCategory = [{ AutoID: 1, Name: 'Automobile Tyres' }, { AutoID: 2, Name: 'Automobile Clean & Care' }, { AutoID: 3, Name: 'Automobile Spare Parts' }, { AutoID: 4, Name: 'Engine Oil & Lubricant' }, { AutoID: 5, Name: 'Automobile Lighting' }, { AutoID: 6, Name: 'Automobile Electronics' }]
+
+   const [showList, setShowList] = useState(false);
+   const currencyFormat = {
+     style: "currency",
+     currency: "LKR",
+     useGrouping: true,
+     minimumSignificantDigits: 3,
+   };
 
     const onSaveBtnClick = (e) => {
         try {
-          console.log(POrderDetails);
-    
           axios
             .post(`${API_BASE_URL}/api/stockOrder/add-stockOrder`, {
 
-                PurchaseOrderInfo : JSON.stringify(POrderDetails),
+                PurchaseOrderInfo : JSON.stringify(pOrderDetails),
              
             })
             .then((response) => {
@@ -38,9 +53,59 @@ const PurchaseOrderForm = () => {
         }
       };
     
+      const OnLoadData = (orderId) => {
+        try {
+          axios
+            .get(`${API_BASE_URL}/api/stockOrder/get-stockOrder`, {
+              params: {
+                PurchaseID: orderId, //pageProperties.StockReturnID,
+              },
+            })
+            .then((res) => {
+              console.log(res.data);
+              setPOrderDetails(res.data[0][0]);
+             
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      const onListClose = () => {
+        setShowList(false);
+      };
+
+      const onListClickEvent = (viewListSelectedID) => {
+        debugger;
+        if (showList && viewListSelectedID != 0) {
+          setShowList(!showList);
+          setPageProperties({
+            OrderID: viewListSelectedID,
+            DataLoading: true,
+            isDocReadOnly: true,
+            UpdateMode: true,
+          });
+          
+      OnLoadData(viewListSelectedID);
+    }
+  };
 
     return (
         <>
+
+{showList ? (
+    <div className={"content-block"}>
+      <Orders
+        Show={showList}
+        OnHide={onListClickEvent}
+        HideTheList={onListClose}
+      ></Orders>
+    </div>
+  ) : (
+
             <div className={'content-block'}>
                 <h2>Purchase Order</h2>
                 <Card style={{ width: '100%' }}>
@@ -49,15 +114,20 @@ const PurchaseOrderForm = () => {
                         <Card.Text>
                             We can place the purchase order here. User should be able to add multiple orders for the same supplier. therefore we have to use a datagrid with this form
                         </Card.Text>
-                        <Form formData={POrderDetails}>
-                            <GroupItem colCount={2}>
+                        <Form formData={pOrderDetails}>
+                            <GroupItem colCount={3}>
                                 <Item dataField=" OrderID" editorType="dxTextBox" editorOptions={{
                                     readOnly: true,
                                 }}>
                                     <Label text="Order #"></Label>
                                     <RequiredRule message="Field required" />
                                 </Item>
-                                <EmptyItem></EmptyItem>
+                                
+  
+                                <Item dataField="PurchaseOrderNumber" editorType="dxTextBox">
+                                    <Label text="Purchase Order Number"></Label>
+                                    <RequiredRule message="Field required" />
+                                </Item>
                                 <Item dataField="OrderDate" editorType="dxDateBox">
                                     <Label text="Order Date"></Label>
                                     <RequiredRule message="Field required" />
@@ -72,31 +142,31 @@ const PurchaseOrderForm = () => {
                                     <Label text="Supplier"></Label>
                                     <RequiredRule message="Field required" />
                                 </Item>
-                                <EmptyItem></EmptyItem>
+                                
                                 <Item
                                     dataField="ProductCategory"
                                     editorType="dxSelectBox"
                                     editorOptions={{
-                                        items: [{ AutoID: 1, Name: 'Automobile Tyres' }, { AutoID: 2, Name: 'Automobile Clean & Care' }, { AutoID: 3, Name: 'Automobile Spare Parts' }, { AutoID: 4, Name: 'Engine Oil & Lubricant' }, { AutoID: 5, Name: 'Automobile Lighting' }, { AutoID: 6, Name: 'Automobile Electronics' }],
+                                        items: [{Name: "Automobile Tyres" }, {Name: "Automobile Clean & Care" }, {Name: "Automobile Spare Parts" }, { Name: "Engine Oil & Lubricant" }, { Name: 'Automobile Lighting' }, {Name: 'Automobile Electronics' }],
                                         searchEnabled: true,
                                         displayExpr: "Name",
-                                        valueExpr: "AutoID",
+                                        valueExpr: "Name",
                                     }}
                                 >
-                                    <Label text="Product Catogory"></Label>
+                                    <Label text="Product Category"></Label>
                                     <RequiredRule message="Field required" />
                                 </Item>
                                 <Item
                                     dataField="ProductSubCategory"
                                     editorType="dxSelectBox"
                                     editorOptions={{
-                                        items: [{ AutoID: 1, Name: 'Kelani Tyres' }, { AutoID: 2, Name: 'DSI' }, { AutoID: 3, Name: 'Michelin' }],
+                                        items: [{ Name: "Kelani Tyres" }, { Name: "DSI"}, { Name: "Michelin" }],
                                         searchEnabled: true,
                                         displayExpr: "Name",
-                                        valueExpr: "AutoID",
+                                        valueExpr: "Name",
                                     }}
                                 >
-                                    <Label text="Product Sub-Catogory"></Label>
+                                    <Label text="Product Sub-Category"></Label>
                                     <RequiredRule message="Field required" />
                                 </Item>
                                 
@@ -104,10 +174,10 @@ const PurchaseOrderForm = () => {
                                     dataField="Product"
                                     editorType="dxSelectBox"
                                     editorOptions={{
-                                        items: [{ AutoID: 1, Name: 'TR/001ST' }, { AutoID: 2, Name: 'TR/002ST' }, { AutoID: 3, Name: 'TR/003ST' }],
+                                        items: [{Name: "TR/001ST" }, { Name: "TR/002ST" }, { Name: "TR/003ST" }],
                                         searchEnabled: true,
                                         displayExpr: "Name",
-                                        valueExpr: "AutoID",
+                                        valueExpr: "Name",
                                     }}
                                 >
                                     <Label text="Product Name"></Label>
@@ -178,10 +248,11 @@ const PurchaseOrderForm = () => {
                 <br/><br/>
                 <Navbar bg="light" variant="light" className="crud_panel_buttons">
                     <Button className="crud_panel_buttons" stylingMode="contained" type="success" onClick={onSaveBtnClick}>Save</Button>
-                    <Button className="crud_panel_buttons" stylingMode="contained" type="default">View List</Button>
+                    <Button stylingMode="contained" type="default"  onClick={() => setShowList(true)}>View List</Button>
                     <Button className="crud_panel_buttons" stylingMode="contained" type="default">Clear</Button>
                 </Navbar>
             </div>
+  )}
             {/* 
                 <List
                     Show={this.state.isListViewing}
