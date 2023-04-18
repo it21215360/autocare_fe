@@ -1,87 +1,77 @@
-import React, { useState } from "react";
+import React, { Fragment,useEffect, useState } from "react";
 import Button from "devextreme-react/button";
 import DataGrid, {
   Column,
   Editing,
   Paging,
   Lookup,
+  SearchPanel
 } from "devextreme-react/data-grid";
-import axio from "axios";
 
-import { employees, states } from "./data.js";
+import axios from "axios";
+import { API_BASE_URL } from "../../appconfig/config.js";
 
-class LeaveApproval extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { events: [] };
-    this.logEvent = this.logEvent.bind(this);
-    this.onEditingStart = this.logEvent.bind(this, "EditingStart");
-    this.onInitNewRow = this.logEvent.bind(this, "InitNewRow");
-    this.onRowInserting = this.logEvent.bind(this, "RowInserting");
-    this.onRowInserted = this.logEvent.bind(this, "RowInserted");
-    this.onRowUpdating = this.logEvent.bind(this, "RowUpdating");
-    this.onRowUpdated = this.logEvent.bind(this, "RowUpdated");
-    this.onRowRemoving = this.logEvent.bind(this, "RowRemoving");
-    this.onRowRemoved = this.logEvent.bind(this, "RowRemoved");
-    this.onSaving = this.logEvent.bind(this, "Saving");
-    this.onSaved = this.logEvent.bind(this, "Saved");
-    this.onEditCanceling = this.logEvent.bind(this, "EditCanceling");
-    this.onEditCanceled = this.logEvent.bind(this, "EditCanceled");
+//import { employees, states } from "./data.js";
 
-    this.clearEvents = this.clearEvents.bind(this);
-  }
+const LeaveApproval = (props) => {
+  const [leaveApproval, setLeaveApproval] = useState([]);
+  const [isLoadingData, setIsdataLoading] = useState(true);
+  const fetchURL = `${API_BASE_URL}/api/employee/leave-approval`;
 
-  logEvent(eventName) {
-    this.setState((state) => ({ events: [eventName].concat(state.events) }));
-  }
+  useEffect(() => {
+    if(isLoadingData) {
+      axios.get(fetchURL).then((response) => {
+        console.log(response);
+        setLeaveApproval(response.data);
+        setIsdataLoading(false);
+      });
+    } 
+  }, []);
+ 
 
-  clearEvents() {
-    this.setState({ events: [] });
-  }
-
-  render() {
+  
     return (
-      <React.Fragment>
+      <Fragment>
         <div className={"content-block"}>
           <h5>Leave Approval</h5>
 
           <DataGrid
-            id="gridContainer"
-            dataSource={employees}
-            keyExpr="ID"
-            allowColumnReordering={true}
+            id="grid-list"
+            dataSource={leaveApproval}
+            keyExpr="AutoID"
             showBorders={true}
-            onEditingStart={this.onEditingStart}
-            onInitNewRow={this.onInitNewRow}
-            onRowInserting={this.onRowInserting}
-            onRowInserted={this.onRowInserted}
-            onRowUpdating={this.onRowUpdating}
-            onRowUpdated={this.onRowUpdated}
-            onRowRemoving={this.onRowRemoving}
-            onRowRemoved={this.onRowRemoved}
-            onSaving={this.onSaving}
-            onSaved={this.onSaved}
-            onEditCanceling={this.onEditCanceling}
-            onEditCanceled={this.onEditCanceled}
+            wordWrapEnabled={true}
+            allowSearch={true}
+            selection={{ mode: "single" }}
+            hoverStateEnabled={true}
           >
+            <Editing
+            mode="cell"
+            allowUpdating={true}
+            useIcons={true}
+            allowAdding={false}
+            allowDeleting={false}
+          />
+            <SearchPanel visible={true} />
             <Paging enabled={true} />
-
+            <Column dataField="AutoID" visible={false} />
             <Column dataField="FirstName" />
             <Column dataField="LastName" />
-            <Column dataField="EmpId" width={130} />
-            <Column dataField="Department" />
+            <Column dataField="EmployeeID" /*width={130}*/ />
+            <Column dataField="EmpDepartment" caption="Department" />
             <Column dataField="LeaveCategory" caption="Leave Category" />
             <Column dataField="LeaveType" caption="Leave Type" />
             <Column dataField="LeaveFrom" caption="Leave From" />
             <Column dataField="LeaveTo" caption="Leave To" />
             <Column dataField="DayCount" caption="Day Count" />
-            <Column dataField="Status" />
-            <Column dataField="Action" />
+            <Column 
+              dataField="Status"
+            />
           </DataGrid>
         </div>
-      </React.Fragment>
+      </Fragment>
     );
-  }
+  
 }
 
 export default LeaveApproval;
