@@ -7,7 +7,7 @@ import { Button } from 'devextreme-react';
 
 export default function Cart() {
     
-    const [cartItem] = [{AutoID: 1, ProdID: 23, ProductCategory:'Automobile Clean and Care', ProductName: 'Carseat', UnitPrice: '385', Quantity: '3', TotalPrice: '1128'}]
+    const [cartItem] = [{AutoID: 1, ProdID: 23, ProductCategory:'Automobile Clean and Care', ProductName: 'Carseat', UnitPrice: '385', Quantity: 3, TotalPrice: '1128'}]
    
     return (
         <React.Fragment>
@@ -25,7 +25,7 @@ export default function Cart() {
                         allowDeleting={true}
                         allowAdding={true} />
 
-                    <Column dataField='ProdID' caption='Product ID' dataType='string'><ValidationRule type="hidden" /></Column>
+                    <Column dataField='ProdID' caption='Product ID' dataType='int'><ValidationRule type="required" /></Column>
                     <Column dataField='ProductCategory' caption='Product  Category' dataType='string'><ValidationRule type="required" /></Column>
                     <Column dataField='ProductName' caption='Product' dataType='string'><ValidationRule type="required" /></Column>
                     <Column dataField='UnitPrice' caption='Price' dataType='float'><ValidationRule type="required" /></Column>

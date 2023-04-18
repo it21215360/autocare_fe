@@ -19,8 +19,7 @@ const Attendance = () => {
     //const [empInfo, setempInfo] = useState({ Name: 'Maheesha Rosa', employeeId: '200202' })
 
     //const [value, setValue] = useState();
-
-    const[empAttendance,setEmpAttendance] = useState({});
+    
 
     const [inTime, setInTime] = useState(null);
     const [outTime, setOutTime] = useState(null);

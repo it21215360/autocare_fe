@@ -26,11 +26,6 @@ export { default as GoodReceiveForm} from './stock_management/GoodReceiveForm';
 
 
 
-
-
-
-
-
 //it21197000@my.sliit.lk - Chethani
 //default as <function/class name>
 export { default as Scheduling } from './scheduling/Scheduling_appointment';
@@ -58,6 +53,9 @@ export { default as CardForm } from "./ordering/Card_details";
 export { default as ProductPage } from "./ordering/Product";
 export { default as ReturnProduct } from "./ordering/Return_products";
 export { default as Cart } from "./ordering/Cart";
+export { default as Ordersdet } from "./ordering/Orders_Admin";
+export { default as invoice } from "./ordering/Invoice";
+export { default as newpage } from "./ordering/new";
 
 
 //Amanda

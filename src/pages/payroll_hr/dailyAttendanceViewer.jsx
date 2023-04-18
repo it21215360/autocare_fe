@@ -1,76 +1,62 @@
-import React from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Button from "devextreme-react/button";
 import DataGrid, {
   Column,
   Editing,
   Paging,
   Lookup,
+  SearchPanel
 } from "devextreme-react/data-grid";
 
-import { employees } from "./data2.js";
+import { API_BASE_URL } from "../../appconfig/config.js";
+import axios from "axios";
 
-class AttendanceViewer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { events: [] };
-    this.logEvent = this.logEvent.bind(this);
-    this.onEditingStart = this.logEvent.bind(this, "EditingStart");
-    this.onInitNewRow = this.logEvent.bind(this, "InitNewRow");
-    this.onRowInserting = this.logEvent.bind(this, "RowInserting");
-    this.onRowInserted = this.logEvent.bind(this, "RowInserted");
-    this.onRowUpdating = this.logEvent.bind(this, "RowUpdating");
-    this.onRowUpdated = this.logEvent.bind(this, "RowUpdated");
-    this.onRowRemoving = this.logEvent.bind(this, "RowRemoving");
-    this.onRowRemoved = this.logEvent.bind(this, "RowRemoved");
-    this.onSaving = this.logEvent.bind(this, "Saving");
-    this.onSaved = this.logEvent.bind(this, "Saved");
-    this.onEditCanceling = this.logEvent.bind(this, "EditCanceling");
-    this.onEditCanceled = this.logEvent.bind(this, "EditCanceled");
 
-    this.clearEvents = this.clearEvents.bind(this);
-  }
 
-  logEvent(eventName) {
-    this.setState((state) => ({ events: [eventName].concat(state.events) }));
-  }
+const AttendanceViewer = (props) => {
+  const [employeeAttendance, setEmployeeAttendance] = useState([]);
+  const [isLoadingData, setIsdataLoading] = useState(true);
+  const fetchURL = `${API_BASE_URL}/api/employee/list-attendance`;
 
-  clearEvents() {
-    this.setState({ events: [] });
-  }
+  useEffect(() => {
+    if(isLoadingData){
+      axios.get(fetchURL).then((response) => {
+        console.log(response);
+        setEmployeeAttendance(response.data);
+        setIsdataLoading(false);
+      });
+    }  
+  }, []);
 
-  render() {
+
     return (
-      <React.Fragment>
+      <Fragment>
         <div className={"content-block"}>
           <h5>Attendance Logs</h5>
           <DataGrid
-            id="gridContainer"
-            dataSource={employees}
-            keyExpr="ID"
-            allowColumnReordering={true}
+            id="grid-list"
+            dataSource={employeeAttendance}
+            keyExpr="AutoID"
             showBorders={true}
-            onEditingStart={this.onEditingStart}
-            onInitNewRow={this.onInitNewRow}
-            onRowInserting={this.onRowInserting}
-            onRowInserted={this.onRowInserted}
-            onRowUpdating={this.onRowUpdating}
-            onRowUpdated={this.onRowUpdated}
-            onRowRemoving={this.onRowRemoving}
-            onRowRemoved={this.onRowRemoved}
-            onSaving={this.onSaving}
-            onSaved={this.onSaved}
-            onEditCanceling={this.onEditCanceling}
-            onEditCanceled={this.onEditCanceled}
+            wordWrapEnabled={true}
+            allowSearch={true}
+            selection={{ mode: "single" }}
+            hoverStateEnabled={true}
           >
+            <SearchPanel visible={true} />
+            <Paging defaultPageSize={10} />
+            <Column dataField="AutoID" visible={false} />
             <Column dataField="Date" />
+            <Column dataField="EmployeeID" />
             <Column dataField="TimeIn" caption="Time-In" />
             <Column dataField="TimeOut" caption="Time-Out" />
-            <Column dataField="TotalHours" caption="Total Hours" />
+            <Column dataField="WorkingHours" caption="Total Hours" />
+            
           </DataGrid>
         </div>
-      </React.Fragment>
+      </Fragment>
     );
   }
-}
+
 
 export default AttendanceViewer;

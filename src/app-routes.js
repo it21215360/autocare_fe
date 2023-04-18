@@ -39,9 +39,12 @@ import {
   Cart,
   ProductPage,
   ReturnProduct,
-  Confirm
+  Confirm,
+  Ordersdet,
+  newpage
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
+import invoice from "./pages/ordering/Invoice";
 
 const routes = [
   { path: "/tasks", element: TasksPage },
@@ -110,7 +113,12 @@ const routes = [
   { path: 'Ordering/Cart', element: Cart },
   { path: "Ordering/Card_details", element: CardForm },
   { path: "Ordering/Product", element: ProductPage },
+  { path: "Ordering/Orders_Admin", element: Ordersdet },
   { path: "Ordering/Return_products", element: ReturnProduct },
+  { path: "Ordering/Invoice", element: invoice },
+  { path: "Ordering/new", element: newpage },
+
+
 ];
 
 export default routes.map((route) => {

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
-import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
+import { RequiredRule } from "devextreme-react/data-grid";
 import { Navbar, ListGroup } from "react-bootstrap";
-import DataGrid, { Column, SearchPanel, Editing, ValidationRule } from 'devextreme-react/data-grid';
+import DataGrid, { Column, Editing, ValidationRule } from 'devextreme-react/data-grid';
 //import { LoadPanel } from "devextreme-react/load-panel";
 import { useState } from "react";
 //import { SelectBox } from "devextreme-react";
