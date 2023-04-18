@@ -17,7 +17,7 @@ import 'devextreme/dist/css/dx.light.css';
 import DataGrid, { Column, SearchPanel, Editing,ValidationRule } from 'devextreme-react/data-grid';
 import { Margin } from "devextreme-react/bar-gauge";
 
-
+import './Update.scss';
 export default function Update(){
 
     const myDataSource = [
@@ -214,9 +214,19 @@ export default function Update(){
                                 <br></br>
 
                             <Navbar bg="light" variant="light">
-                                <Button stylingMode="contained" type="success">Update</Button>
+                                <Button 
+                                    className="button"
+                                    stylingMode="contained" 
+                                    type="success">
+                                        Update
+                                    </Button>
                             
-                                <Button stylingMode="contained" type="default">Clear</Button>
+                                <Button 
+                                    className="button"
+                                    stylingMode="contained" 
+                                    type="default">
+                                        Clear
+                                    </Button>
                             </Navbar>
                         </div>
       

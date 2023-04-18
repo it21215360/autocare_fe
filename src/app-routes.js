@@ -33,6 +33,7 @@ import {
   Cart,
   ProductPage,
   ReturnProduct,
+  ServiceLogin,
   Confirm
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
@@ -70,6 +71,7 @@ const routes = [
   { path: "/scheduling/Update_appointment", element: Update },
   { path: "/scheduling/Cancel_appointment", element: Cancel },
   { path: "/scheduling/Confirm_appointment", element: Confirm },
+  { path: "/scheduling/Login", element: ServiceLogin },
 
   //it21198090@my.sliit.lk - Shania
   { path: "ProductCategory", element: ProductCategory },
