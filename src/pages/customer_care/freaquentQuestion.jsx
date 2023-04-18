@@ -1,4 +1,11 @@
+import react from "react";
 import React, { useState } from "react";
+import "./freaquentQuestion.scss"
+import { Button } from 'devextreme-react';
+//import  {downloadFileAtURL} from './src/pages/customer_care/faq_pdf.pdf';
+
+
+const FAQ_PDF_URL = 'http://localhost:3000/#/customer_care/freaquentQuestion/faq_pdf.pdf'
 
 function FreaquentQuestionPage({faq, index}){
     const [faqs, setfaqs] = useState([
@@ -6,6 +13,7 @@ function FreaquentQuestionPage({faq, index}){
             question: 'How Often Should I Get an Oil Change?',
             answer: 'The general belief is that a driver\'s oil should be changed every 3,000 to 7,000 miles, or every three months. You can, however, always consult your owner\'s manual for the suggested oil change interval for your individual make and model. Many of today\'s newer vehicles will even notify you when they need service. Remember that an oil change is necessary since it lubricates the internal cogs and gears under the hood. Without it, oil might clog and prevent your vehicle from running properly.',
             open: true
+            
         },
         {
             question: 'How Often Should I Check My Vehicle\'s Fluid Levels?',
@@ -60,6 +68,19 @@ function FreaquentQuestionPage({faq, index}){
             return faq;
         }))
 
+    const downloadFileAtURL=(url)=>{
+        fetch(url).then(response=>response.blob()).then(blob=>{
+            const blobURL = window.URL.createObjectURL(new Blob([blob]))
+            const fileName = url.split("/").pop();
+            const aTag = document.createElement("a");
+            aTag.href = blobURL;
+            aTag.setAttribute("download", fileName);
+            document.body.appendChild(aTag);
+                aTag.click();
+        aTag.remove();
+        })        
+    };
+
     }
 
     return (
@@ -83,7 +104,11 @@ function FreaquentQuestionPage({faq, index}){
                     </div>
                 
             </div>
+            <div className="button">
+            <Button onClick={()=>{downloadFileAtURL(FAQ_PDF_URL)}}>Download FAQ Page</Button>
+            </div>
         </div>
+
 
     );
 }

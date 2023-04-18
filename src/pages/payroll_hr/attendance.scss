@@ -1,3 +1,4 @@
+
 .rect {
   text-align: center;
   font-size: 30px;
@@ -20,4 +21,23 @@
 
 .demo-dark {
   background: rgba(148, 215, 199, 0.5);
+}
+
+#timeOut {
+  background-color: red;
+  border-radius: 25px;
+  width: 400px;
+  height: 100px;
+}
+
+#timeIn {
+  background-color: green;
+  border-radius: 25px;
+  width: 400px;
+  height: 100px;
+}
+
+#btn {
+  background-color: transparent;
+
 }
