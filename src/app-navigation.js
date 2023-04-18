@@ -119,10 +119,12 @@ export const navigation = [
   //it21238994@my.sliit.lk - Amanda
   {
     text: 'Customer Care',
-    icon: 'folder',
+    icon: 'group',
     items: [
+      { text: 'My Tickets', path: '/myTicket' },
+      { text: 'Track Tickets', path: '/trackTicket'},
       { text: 'Raise a Ticket', path: '/raiseTicket' },
-      { text: 'FAQ', path: '/faq' }
+      { text: 'FAQs', path: '/freaquentQuestion' },
     ]
   },
 

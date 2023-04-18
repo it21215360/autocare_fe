@@ -22,7 +22,13 @@ import {
   Scheduling,
   PackageDetails,
   Update,
-  Cancel
+  Cancel,
+  MyTicket,
+  TrackTicket,
+  RaiseTicketForm,
+  FreaquentQuestionPage,
+  
+
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 
@@ -84,6 +90,11 @@ const routes = [
   { path: "courier/CourierProfile", element: CourierProfile },
 
   //it21238994@my.sliit.lk - Amanda
+  { path: "customer_care/myTicket", element: MyTicket },
+  { path: "cystomer_care/trackTicket", element: TrackTicket},
+  { path: "customer_care/raiseTikcket", element: RaiseTicketForm },
+  { path: "customer_care/freaquentQuestion", element: FreaquentQuestionPage },
+  
 
 
 
@@ -91,9 +102,7 @@ const routes = [
 
 
 
-
-
-  //it21326936@my.sliit.lk - Amandi
+ //it21326936@my.sliit.lk - Amandi
 
 
 

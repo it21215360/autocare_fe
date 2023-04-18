@@ -71,3 +71,16 @@ export { default as CourierProfile } from './courier/CourierProfile';
 
 
 //it21326936@my.sliit.lk - Amandi
+
+
+
+
+
+
+
+
+//it21238994@my.sliit.lk - Amanda
+export { default as MyTicket } from './customer_care/myTicket';
+export { default as TrackTicket } from './customer_care/trackTicket'
+export { default as RaiseTicketForm } from './customer_care/raiseTicket';
+export { default as FreaquentQuestionPage} from './customer_care/freaquentQuestion';
