@@ -215,14 +215,14 @@ export default function Update(){
 
                             <Navbar bg="light" variant="light">
                                 <Button 
-                                    className="button"
+                                    className="button1"
                                     stylingMode="contained" 
                                     type="success">
                                         Update
                                     </Button>
                             
                                 <Button 
-                                    className="button"
+                                    className="button2"
                                     stylingMode="contained" 
                                     type="default">
                                         Clear
