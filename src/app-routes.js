@@ -40,7 +40,10 @@ import {
   ServiceLogin,
   MyTicket,
   TrackTicket,
+  AppointList,
+  ServiceAppoinment,
   RaiseTicketForm,
+  ServiceList,
   FreaquentQuestionPage,
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
