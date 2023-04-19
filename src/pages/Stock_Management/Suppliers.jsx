@@ -4,17 +4,14 @@ import DataGrid, { Column, SearchPanel, Editing, ValidationRule } from 'devextre
 import { Button } from 'devextreme-react';
 
 export default function Supplier() {
-    const myDataSource = [{ AutoID: 1, SupplierName: 'Carmart(Pvt)Limited', Address: '385, Tewatta Road, Ragama', Email: 'nimal@gmail.com',Telephone: '0112879567',ProductCatogory: 'Automobile Clean and Care',ProductSubCatogory:'asdff', Product:'265/70R17 11ST'},
-    { AutoID: 2, SupplierName: 'CEAT Kelani Holdings(Pvt)Limited', Address: '19,Jaya Road, Colombo 04' , Email: 'sunil@gmail.com',Telephone: '0115678964',ProductCatogory: 'Automobile Electronics',ProductSubCatogory:'adrghb', Product:'265/70R17 11ST' },
-    { AutoID: 3, SupplierName: 'Micro cars Ltd', Address: '20/A,Galle Road, Colombo 02', Email:'microCars@gmail.com',Telephone: '0112872456',ProductCatogory:'Automobile Batteries',ProductSubCatogory:'gsftrhy', Product:'265/70R17 11ST' },
-    { AutoID: 4, SupplierName: 'Nano Tuff(Pvt)Limited', Address: '123,Araliya Lane, Ragama', Email:'nanotuff@gmail.com', Telephone: '0113389765',ProductCatogory: 'Automobile Spare Parts', ProductSubCatogory:'hkeujd', Product:'265/70R17 11ST'}]
+    const supplierDataSource = [{}]
    
     return (
         <React.Fragment>
             <div className={'content-block'}>
                 <h5><b>Suppliers</b></h5>
                 <DataGrid id='sample'
-                    dataSource={myDataSource}
+                    dataSource={supplierDataSource}
                     rowAlternationEnabled={true}
                     showBorders={true}>
                     <SearchPanel visible={true} highlightCaseSensitive={true} />

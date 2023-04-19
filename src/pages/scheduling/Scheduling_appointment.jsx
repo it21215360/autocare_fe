@@ -10,30 +10,37 @@ import { Button } from 'devextreme-react/button';
 import { DateBox } from 'devextreme-react/calendar';
 import { Link } from 'react-router-dom';
 import { alignPropType } from "react-bootstrap/esm/types";
-
-
-
+import axios from 'axios';
+import { API_BASE_URL  } from '../../appconfig/config.js';
 import 'devextreme/dist/css/dx.light.css';
 import DataGrid, { Column, SearchPanel, Editing,ValidationRule } from 'devextreme-react/data-grid';
-
-
-
-<style>
-   
-.button{
-    
-};
-</style>
+import './Scheduling.scss';
 const Scheduling = () => {
+
+    const [cusAppoinmentInfo, setCusAppoinmentInfo] = useState({});
+    const onSaveBtnClick = (e) => {
+    try{
+      console.log(cusAppoinmentInfo);
+  
+      axios  
+        .post(`${API_BASE_URL}/api/employee/appointment-scheduling-request-form`, {
+          AppoinmentInfo: JSON.stringify(cusAppoinmentInfo)
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {});
+      }catch (error) {
+        console.error(error);
+      }
+  };
 
     let jBudgetDefinition = [{
         fname:'Kusum',lanem:'Nimal',phone:'0112345678',email:'kusumnimali1232@gmail.com',vnumber:'CAB1243',vtype:'Car'
         ,package:'Package 1',oil:'Oil 2',aname:'Anura Kumara'
     }]
     const myDataSource = [
-        {  date: '01/02/2023', time: '4.00pm',venue:'Dehiwala'},
-        {  date: '01/02/2023', time: '4.00pm',venue:'Dehiwala'},
-        {  date: '01/02/2023', time: '4.00pm',venue:'Dehiwala'},
+        {  date: '01/02/2023', time: '4.00pm',venue:'Dehiwala'}
     ]
 
    
@@ -42,7 +49,9 @@ const Scheduling = () => {
         
             <div className={'content-block'}>
                 <h3>Scheduling appointment</h3>
-                <Form formData={jBudgetDefinition}>
+                <Form 
+                className="mainform"
+                formData={cusAppoinmentInfo}>
                 
                     <GroupItem colCount={3}>
                     
@@ -114,6 +123,7 @@ const Scheduling = () => {
                         
                     <GroupItem colCount={3}>
                         <Item
+                            className="checkbox"
                             dataField="leaveCategory"
                             editorType="dxSelectBox"
                             editorOptions={{
@@ -129,6 +139,7 @@ const Scheduling = () => {
                         </Item>
                          
                         <Item
+                            className="checkbox"
                             dataField="leaveType"
                             editorType="dxSelectBox"
                             editorOptions={{
@@ -146,7 +157,7 @@ const Scheduling = () => {
                        
 
                         <Item dataField="aname" editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
+                            readOnly: false,
                         }}>
                             <Label text="Agent Name"></Label>
                           
@@ -172,7 +183,12 @@ const Scheduling = () => {
 
                     <Navbar bg="light" variant="light">
                             <Link to = "./scheduling/Package.js">
-                                <Button stylingMode="contained" type="success" >Package Details</Button>
+                                <Button 
+                                className="button3"
+                                stylingMode="contained" 
+                                type="success" >
+                                    Package Details
+                                </Button>
                                 
                             </Link>     
                     </Navbar>       
@@ -206,6 +222,8 @@ const Scheduling = () => {
                 </div>
                 </React.Fragment>   
                 <br></br> 
+
+
                 <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="checkCustomer"></input>
                             <label class="form-check-label" for="flexCheckDefault">
@@ -224,12 +242,25 @@ const Scheduling = () => {
                                 <br></br>
                                 <br></br>
                              
-                             
+
                             <Navbar bg="light" variant="light">
-                                <Button className="button1" style={{margin:10}}stylingMode="contained" type="success">Save</Button>
-                            
-                                <Button className="button2" style={{margin:10}} stylingMode="contained" type="default">Clear</Button>
+                                <Button 
+                                    className="button1"
+                                    stylingMode="contained" 
+                                    type="success" 
+                                    onClick={onSaveBtnClick}
+                                >
+                                        Save
+                                </Button>
+                                <Button 
+                                    className="button2"
+                                    stylingMode="contained" 
+                                    type="default"
+                                >
+                                        Clear
+                                </Button>
                             </Navbar>
+
                         </div>
 
                        
