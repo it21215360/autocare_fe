@@ -29,8 +29,81 @@ const EmployeeMaster = () => {
   });
 
   const [showList, setShowList] = useState(false);
+  // const currencyFormat = {
+  //   style: "currency",
+  //   currency: "LKR",
+  //   useGrouping: true,
+  //   minimumSignificantDigits: 3,
+  // };
+
+  const currencyFormat = `LKR #,###.##`;
 
   const onSaveBtnClick = (e) => {
+    try {
+      pageProperties.UpdateMode ? updateEmployee() : addEmployee();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const resetPageProperties = () => {
+    setPageProperties({
+      EmployeeID: 0,
+      DataLoading: false,
+      isDocReadOnly: false,
+      UpdateMode: false,
+    });
+  };
+
+  const showErrorAlert = (errorMsg) => {
+    notify(
+      {
+        message: errorMsg.toString(),
+        width: 450,
+      },
+      "error",
+      3000
+    );
+  };
+
+  const showSuccessAlert = (successMsg) => {
+    notify(
+      {
+        message: successMsg.toString(),
+        width: 450,
+      },
+      "success",
+      3000
+    );
+  };
+
+  const updateEmployee = () => {
+    try {
+      if (pageProperties.EmployeeID > 0)
+        axios
+          .put(`${API_BASE_URL}/api/employee/update-employee`, {
+            EmployeeID: pageProperties.EmployeeID,
+            BasicInfo: JSON.stringify(empBasicInfo),
+            JobInfo: JSON.stringify(empJobInfo),
+            LeaveInfo: JSON.stringify(empLeaveInfo),
+            PayrollInfo: JSON.stringify(empPayrollInfo),
+          })
+          .then((response) => {
+            console.log(response);
+            if (response.data.affectedRows === 1) {
+              showSuccessAlert(`Employee information updated`);
+            }
+          })
+          .catch((error) => {
+            showErrorAlert(error);
+          });
+    } catch (error) {
+      console.error(error);
+      showErrorAlert(error);
+    }
+  };
+
+  const addEmployee = () => {
     try {
       axios
         .post(`${API_BASE_URL}/api/employee/add-employee`, {
@@ -41,28 +114,39 @@ const EmployeeMaster = () => {
         })
         .then((response) => {
           console.log(response);
+          if (response.data.affectedRows > 0) {
+            showSuccessAlert(`Employee created.`);
+            onClearBtnClick();
+          }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          showErrorAlert(error);
+        });
     } catch (error) {
       console.error(error);
+      showErrorAlert(error);
     }
   };
 
-  const OnLoadData = () => {
+  const OnLoadData = (empId) => {
     try {
-      if (pageProperties.EmployeeID != 0 && pageProperties.UpdateMode)
-        axios
-          .get(`${API_BASE_URL}/api/employee/get-employee`, {
-            params: {
-              EmpID: pageProperties.EmployeeID,
-            },
-          })
-          .then((res) => {
-            console.log(res.data[0]);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+      axios
+        .get(`${API_BASE_URL}/api/employee/get-employee`, {
+          params: {
+            EmpID: empId,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+
+          setEmpBasicInfo(res.data[0][0]);
+          setEmpJobInfo(res.data[1][0]);
+          setEmpLeaveInfo(res.data[2][0]);
+          setEmpPayrollInfo(res.data[3][0]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (error) {
       console.error(error);
     }
@@ -73,7 +157,6 @@ const EmployeeMaster = () => {
   };
 
   const onListClickEvent = (viewListSelectedID) => {
-    debugger;
     if (showList && viewListSelectedID != 0) {
       setShowList(!showList);
       setPageProperties({
@@ -83,8 +166,16 @@ const EmployeeMaster = () => {
         UpdateMode: true,
       });
 
-      OnLoadData();
+      OnLoadData(viewListSelectedID);
     }
+  };
+
+  const onClearBtnClick = () => {
+    resetPageProperties();
+    setEmpBasicInfo({});
+    setEmpJobInfo({});
+    setEmpPayrollInfo({});
+    setEmpLeaveInfo({});
   };
 
   return (
@@ -178,7 +269,7 @@ const EmployeeMaster = () => {
                     <RequiredRule message="Field required" />
                   </Item>
                   <Item
-                    dataField="IsActive"
+                    dataField="EmpStatus"
                     editorType="dxSelectBox"
                     editorOptions={{
                       items: [
@@ -242,6 +333,7 @@ const EmployeeMaster = () => {
                     editorType="dxNumberBox"
                     editorOptions={{
                       readOnly: false,
+                      format: "LKR #,###.##",
                     }}
                   >
                     <Label text="Basic Salary"></Label>
@@ -252,6 +344,7 @@ const EmployeeMaster = () => {
                     editorType="dxNumberBox"
                     editorOptions={{
                       readOnly: false,
+                      format: "LKR #,###.##",
                     }}
                   >
                     <Label text="OT Rate"></Label>
@@ -262,6 +355,7 @@ const EmployeeMaster = () => {
                     editorType="dxNumberBox"
                     editorOptions={{
                       readOnly: false,
+                      format: "LKR #,###.##",
                     }}
                   >
                     <Label text="Fuel Allowance"></Label>
@@ -272,6 +366,7 @@ const EmployeeMaster = () => {
                     editorType="dxNumberBox"
                     editorOptions={{
                       readOnly: false,
+                      format: "LKR #,###.##",
                     }}
                   >
                     <Label text="Living Cost Allowance"></Label>
@@ -294,6 +389,7 @@ const EmployeeMaster = () => {
                     editorType="dxNumberBox"
                     editorOptions={{
                       readOnly: false,
+                      format: "##.##",
                     }}
                   >
                     <Label text="Annual Leave"></Label>
@@ -304,6 +400,7 @@ const EmployeeMaster = () => {
                     editorType="dxNumberBox"
                     editorOptions={{
                       readOnly: false,
+                      format: "##.##",
                     }}
                   >
                     <Label text="Casual Leave"></Label>
@@ -321,7 +418,7 @@ const EmployeeMaster = () => {
               type="success"
               onClick={onSaveBtnClick}
             >
-              Save
+              {pageProperties.UpdateMode ? "Save Changes" : "Add"}
             </Button>
             <Button
               className="crud_panel_buttons"
@@ -335,6 +432,7 @@ const EmployeeMaster = () => {
               className="crud_panel_buttons"
               stylingMode="contained"
               type="default"
+              onClick={onClearBtnClick}
             >
               Clear
             </Button>

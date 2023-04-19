@@ -21,3 +21,25 @@
 .demo-dark {
   background: rgba(148, 215, 199, 0.5);
 }
+
+#timeOut {
+  background-color: lightblue;
+  border-radius: 25px;
+  width: 400px;
+  height: 100px;
+
+  #btn {
+    border-color: black;
+  }
+}
+
+#timeIn {
+  background-color: lightgreen;
+  border-radius: 25px;
+  width: 400px;
+  height: 100px;
+}
+
+#btn {
+  background-color: transparent;
+}

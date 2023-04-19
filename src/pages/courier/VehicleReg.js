@@ -9,9 +9,25 @@ import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
 import "./VehicleReg.css";
-
+import { Link } from "react-router-dom";
+import React, { Component } from "react";
+import { Button } from "devextreme-react/button";
 
 const VehicleReg = () => {
+  // const onSaveBtnClick = () => {
+  //   try {
+  //     axios
+  //       .post(`${API_BASE_URL}/api/vehiclereg/add-vehiclereg`, {
+  //         VehicleDetails: JSON.stringify(VehicleInfo),
+  //       })
+  //       .then((response) => {
+  //         console.log(response);
+  //       })
+  //       .catch((error) => {});
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const [VehicleInfo, setVehicleInfo] = useState({});
 
@@ -21,18 +37,9 @@ const VehicleReg = () => {
          
 
 
-      axios
-        .post(`${API_BASE_URL}/api/vehiclereg/add-vehiclereg`, {
-          VehicleDetails: JSON.stringify(VehicleInfo),
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {});
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //           <div className="gender__details">
+  //             <input type="radio" name="vehicle" id="dot-1" />
+  //             <input type="radio" name="vehicle" id="dot-2" />
 
   return (
     <>
