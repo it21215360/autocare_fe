@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { Button } from "devextreme-react/button";
 import DataGrid, { Column,SearchPanel,Paging,} from "devextreme-react/data-grid";
 import { Navbar } from "react-bootstrap";
+import './goodReceivedList.scss';
 import { API_BASE_URL } from "../../appconfig/config";
 import axios from "axios";
 
@@ -62,7 +63,7 @@ const GoodReceivedList = (props) => {
       <br></br>
       <Navbar bg="light" variant="light" className="crud_panel_buttons">
         <Button
-          className="crud_panel_buttons"
+          className="openBtn1"
           stylingMode="contained"
           type="success"
           onClick={onSelectClick}
@@ -70,7 +71,7 @@ const GoodReceivedList = (props) => {
           Open
         </Button>
         <Button
-          className="crud_panel_buttons"
+          className="closeBtn2"
           stylingMode="contained"
           type="default"
           onClick={onCloseClick}

@@ -9,8 +9,10 @@ import { SelectBox } from "devextreme-react";
 import { Button } from 'devextreme-react/button';
 import { DateBox } from 'devextreme-react/calendar';
 import axios from "axios";
+import './stockReturn.scss';
 import { API_BASE_URL } from "../../appconfig/config";
 import  ReturnStockList from "./ReturnStockList";
+
 
 const  StockReturnForm = () => {
 
@@ -27,27 +29,97 @@ const  StockReturnForm = () => {
     });
 
     const [showList, setShowList] = useState(false);
-    const currencyFormat = {
+    /*const currencyFormat = {
       style: "currency",
       currency: "LKR",
       useGrouping: true,
       minimumSignificantDigits: 3,
-    };
+    };*/
 
     const onSaveBtnClick = (e) => {
         try {
+          pageProperties.UpdateMode ? updateReturnStock() : addReturnStock();
+         
+            } catch (error) {
+          console.error(error);
+        }
+      };
+
+      const resetPageProperties = () => {
+        setPageProperties({
+          StockReturnID: 0,
+          DataLoading: false,
+          isDocReadOnly: false,
+          UpdateMode: false,
+        });
+      };
     
+      const showErrorAlert = (errorMsg) => {
+        notify(
+          {
+            message: errorMsg.toString(),
+            width: 450,
+          },
+          "error",
+          3000
+        );
+      };
+    
+      const showSuccessAlert = (successMsg) => {
+        notify(
+          {
+            message: successMsg.toString(),
+            width: 450,
+          },
+          "success",
+          3000
+        );
+      };
+
+      const updateReturnStock = () => {
+        try {
+          if (pageProperties.StockReturnID > 0)
+            axios
+              .put(`${API_BASE_URL}/api/returnStock/update-returnStock`, {
+                StockReturnID: pageProperties.StockReturnID,
+                ReturnDetails : JSON.stringify(stockReturnInfo),
+               
+              })
+              .then((response) => {
+                console.log(response);
+                if (response.data.affectedRows === 1) {
+                  showSuccessAlert(`Returned Stock Details Updated!`);
+                }
+              })
+              .catch((error) => {
+                showErrorAlert(error);
+              });
+        } catch (error) {
+          console.error(error);
+          showErrorAlert(error);
+        }
+      };
+    
+      const addReturnStock  = () => {
+        try {
           axios
             .post(`${API_BASE_URL}/api/returnStock/add-returnStock`, {
-              ReturnDetails : JSON.stringify(stockReturnInfo),
-              
+              ReturnDetails: JSON.stringify(stockReturnInfo),
+             
             })
             .then((response) => {
               console.log(response);
+              if (response.data.affectedRows > 0) {
+                showSuccessAlert(`Returned Stock Details Added!`);
+                onClearBtnClick();
+              }
             })
-            .catch((error) => {});
+            .catch((error) => {
+              showErrorAlert(error);
+            });
         } catch (error) {
           console.error(error);
+          showErrorAlert(error);
         }
       };
 
@@ -78,7 +150,7 @@ const  StockReturnForm = () => {
       };
 
       const onListClickEvent = (viewListSelectedID) => {
-        debugger;
+     
         if (showList && viewListSelectedID != 0) {
           setShowList(!showList);
           setPageProperties({
@@ -92,6 +164,11 @@ const  StockReturnForm = () => {
     }
   };
 
+  const onClearBtnClick = () => {
+    resetPageProperties();
+    setStockReturnInfo({});
+   
+  };
 
     return (
         <>
@@ -106,7 +183,7 @@ const  StockReturnForm = () => {
         </div>
       ) : (
 
-            <div className={'content-block'}>
+            <div className={'he1'}>
                 <h2><b>Stock Return Form</b></h2>
                 <Form formData={stockReturnInfo}>
                     <GroupItem colCount={2}>
@@ -223,9 +300,9 @@ const  StockReturnForm = () => {
 
 
                 <Navbar bg="light" variant="light">
-                    <Button stylingMode="contained" type="success"  onClick={onSaveBtnClick}>Submit</Button>
-                    <Button stylingMode="contained" type="default"  onClick={() => setShowList(true)}>View List</Button>
-                    <Button stylingMode="contained" type="default">Clear</Button>
+                    <Button className="btn1" stylingMode="contained" type="success" onClick={onSaveBtnClick}> {pageProperties.UpdateMode ? "Save Changes" : "Submit"}</Button>
+                    <Button className="btn2" stylingMode="contained" type="default" onClick={() => setShowList(true)}>View List</Button>
+                    <Button className="btn3" stylingMode="contained" type="default" onClick={onClearBtnClick}>Clear</Button>
                 </Navbar>
             </div>
               )}
