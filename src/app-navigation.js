@@ -64,12 +64,12 @@ export const navigation = [
     items: [
       { text: 'Scheduling Appointment', path: 'scheduling/Scheduling_appointment' },
       { text: 'Update Appointment', path: 'scheduling/Update_appointment' },
-      { text: 'Confirm Appointment', path: 'scheduling/Confirm_appointment' },
+      { text: 'Confirm Appointment viewer', path: 'scheduling/Confirm_appointment' },
       { text: 'Cancel Appointment', path: 'scheduling/Cancel_appointment' },
-      //   { text: ' memo viewer', path: 'scheduling/emp_payroll' },
       { text: 'Booked memo viewer', path: 'scheduling/Memo' },
       { text: 'Package Details', path: 'scheduling/Package' },
       { text: 'Service Manager Login', path: 'scheduling/Login' },
+      { text: 'Service Scheduling', path: 'scheduling/Service' },
     ]
   },
 

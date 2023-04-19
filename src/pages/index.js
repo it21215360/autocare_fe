@@ -32,10 +32,12 @@ export { default as Scheduling } from './scheduling/Scheduling_appointment';
 export { default as PackageDetails } from './scheduling/PackageDetails';
 export { default as Update } from './scheduling/Update_appointment';
 export { default as Cancel } from './scheduling/Cancel_appointment';
-export { default as oil } from './scheduling/Cancel_appointment';
 export { default as Confirm } from './scheduling/Confirm_appointment';
 export { default as ServiceLogin } from './scheduling/Login';
-
+export { default as AppointList } from './scheduling/AppointmentList';
+export { default as Memo } from './scheduling/Memo';
+export { default as ServiceAppoinment } from './scheduling/Service';
+export { default as ServiceList } from './scheduling/ServiceList';
 //it21198090@my.sliit.lk - Shania
 
 //it21307362@my.sliit.lk - Fernando ST
