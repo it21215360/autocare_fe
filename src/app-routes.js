@@ -11,7 +11,7 @@ import {
   DeliveryConfirm,
   CourierRegistration,
   VehicleReg,
-  DeliveryRequestForm,
+  deliveryRequest,
   ShippingManage,
   CourierProfile,
   InventoryLogin,
@@ -25,10 +25,9 @@ import {
   PackageDetails,
   Update,
   Cancel,
-  MyTicket,
-  TrackTicket,
-  RaiseTicketForm,
-  FreaquentQuestionPage,
+ 
+  //ViewMasterProd,
+
 
 
   EmpLogin,
@@ -40,9 +39,19 @@ import {
   ProductPage,
   ReturnProduct,
   Confirm,
+  Memo,
   Ordersdet,
-  newpage
+  newpage,
+  ServiceLogin,
+  MyTicket,
+  TrackTicket,
+  AppointList,
+  ServiceAppoinment,
+  RaiseTicketForm,
+  ServiceList,
+  FreaquentQuestionPage,
 } from "./pages";
+import {ProductMaster} from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 import invoice from "./pages/ordering/Invoice";
 
@@ -79,9 +88,16 @@ const routes = [
   { path: "/scheduling/Update_appointment", element: Update },
   { path: "/scheduling/Cancel_appointment", element: Cancel },
   { path: "/scheduling/Confirm_appointment", element: Confirm },
+  { path: "/scheduling/Login", element: ServiceLogin },
+  { path: "/scheduling/AppointmentList", element: AppointList },
+  { path: "/scheduling/Memo", element: Memo },
+  { path: "/scheduling/Service", element: ServiceAppoinment },
+  { path: "/scheduling/ServiceList", element: ServiceList },
 
   //it21198090@my.sliit.lk - Shania
   { path: "ProductCategory", element: ProductCategory },
+  { path: "ProductMaster",element:ProductMaster},
+  
   // { path: "/masters/ViewMasterProd", element: ProductCategoryview },
   // { path: "/masters/ProductCat", element: App },
 
@@ -91,7 +107,7 @@ const routes = [
 
   { path: "courier/CourierRegistration", element: CourierRegistration },
   { path: "courier/VehicleReg", element: VehicleReg },
-  { path: "courier/DeliveryRequestForm", element: DeliveryRequestForm },
+  { path: "courier/deliveryRequest", element: deliveryRequest },
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
   { path: "courier/DeliveryConfirm", element: DeliveryConfirm },
@@ -102,23 +118,17 @@ const routes = [
   { path: "customer_care/raiseTikcket", element: RaiseTicketForm },
   { path: "customer_care/freaquentQuestion", element: FreaquentQuestionPage },
 
-
-
-//where's the prettier formtter??
-
-
+  //where's the prettier formtter??
 
   //it21326936@my.sliit.lk - Amandi
   { path: "Ordering/Order_details", element: OrderForm },
-  { path: 'Ordering/Cart', element: Cart },
+  { path: "Ordering/Cart", element: Cart },
   { path: "Ordering/Card_details", element: CardForm },
   { path: "Ordering/Product", element: ProductPage },
   { path: "Ordering/Orders_Admin", element: Ordersdet },
   { path: "Ordering/Return_products", element: ReturnProduct },
   { path: "Ordering/Invoice", element: invoice },
   { path: "Ordering/new", element: newpage },
-
-
 ];
 
 export default routes.map((route) => {

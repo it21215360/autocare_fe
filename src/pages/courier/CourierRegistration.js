@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import { useState } from "react";
+import { Button } from "devextreme-react/button";
+
+import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
+import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
+
+
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
 import "./CourierRegistration.css";
@@ -18,7 +24,7 @@ const  CourierRegistration = () => {
    
          axios
            .post(`${API_BASE_URL}/api/register/add-register`, {
-             RegDetails : JSON.stringify(RegInfo),
+             CourierDetails : JSON.stringify(RegInfo),
              
            })
            .then((response) => {
@@ -32,52 +38,71 @@ const  CourierRegistration = () => {
 
 
     return (
-      
-      <div className="signup">
-      <div className="sign">
-      <div className="title">Registration</div>
-      <form formData={RegInfo}>
-     
-        <div className="user__details">
-          
-          <div className="input__box">
-            <span className="details">Full Name</span>
-            <input type="text" placeholder="E.g: John Smith" dataField="CourierName" />
-          </div>
-          <div className="input__box">
-            <span className="details">NIC</span>
-            <input type="text" placeholder="**********" dataField="NIC" />
-          </div>
-          <div className="input__box">
-            <span className="details">Email</span>
-            <input type="email" placeholder="johnsmith@hotmail.com" dataField="Email" />
-          </div>
-          <div className="input__box">
-            <span className="details">Phone Number</span>
-            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="012-345-6789" dataField="Phone"  />
-          </div>
-          <div className="input__box">
-            <span className="details">Password</span>
-            <input type="password" placeholder="********" dataField="Password"  />
-          </div>
+    <> 
+     <div className={'content-block'}>
+                <h2><b>Courier Registration</b></h2>
+                <Form formData={RegInfo}>
+                    <GroupItem colCount={2}>
+                        <Item dataField="CourierID" editorType="dxTextBox" editorOptions={{
+                            readOnly: false,
+                        }}>
+                            <Label text="Courier ID"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+    
+                        <Item dataField="CourierName" editorType="dxTextBox" editorOptions={{
+                            readOnly: false,
+                        }}>
+                            <Label text="Full Name"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+                        <Item dataField="NIC" editorType="dxTextBox" editorOptions={{
+                            readOnly: false,
+                        }}>
+                            <Label text="NIC"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+                        <Item dataField="Email" editorType="dxTextBox" editorOptions={{
+                            readOnly: false,
+                        }}>
+                            <Label text="Email"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+                        <Item dataField="Phone" editorType="dxTextBox" editorOptions={{
+                            readOnly: false,
+                        }}>
+                            <Label text="Phone"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+                        <Item dataField="Password" editorType="dxTextBox" editorOptions={{
+                            readOnly: false,
+                        }}>
+                            <Label text="Password"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
          
     
-        </div>
-       
-        <div className="buttonsub">
+                        </GroupItem>
+                        <GroupItem colCount={3}>
+                        </GroupItem>
+                        </Form>
+                    
         <Link to="/courier/VehicleReg">
-        <input type="submit" value="Next" stylingMode="contained" onClick={onSaveBtnClick} />
+        <Button type="success"  stylingMode="contained" onClick={onSaveBtnClick}>Next</Button>
        
     </Link>
         </div>
 
-      
-      </form>
-    </div>
-    </div>
-    )
-     }
+           
 
+   
+      
+     
+      
+     </>
+      
+  );
+};
 export default CourierRegistration;
 
 

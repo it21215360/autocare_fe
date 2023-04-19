@@ -13,7 +13,6 @@ import axios from 'axios';
 import { API_BASE_URL} from "../../appconfig/config";
 
 
-
 const Attendance = () => {
 
     //const [empInfo, setempInfo] = useState({ Name: 'Maheesha Rosa', employeeId: '200202' })
@@ -137,6 +136,8 @@ const Attendance = () => {
                             Clear
                         </Button>
                 </Navbar>
+
+
    
     </div> 
         </>

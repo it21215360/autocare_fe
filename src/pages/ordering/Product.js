@@ -6,7 +6,7 @@ import './styles.scss';
 import { housesSource } from './data.js';
 import Productslist from './Productslist.js';
 
-//function ProductPage(){
+
 
 const ADD_TO_CART = 'Add to Cart';
 const REMOVE_FROM_CART = 'Remove from Cart';
@@ -75,6 +75,19 @@ class Product extends React.Component {
           elementAttr={favButtonAttrs}
           onClick={this.changeFavoriteState}
         />
+        <div>
+          <Button 
+            elementAttr={favButtonAttrs}
+            type="success">
+            View Cart
+          </Button><br></br>
+        </div>
+        <Button 
+          //elementAttr={favButtonAttrs}
+          type="success">
+          View Cart
+        </Button>
+        
         <div className="images">
           <img src={currentHouse.Image} />
           <img src={currentHouse.Image.replace('.jpg', 'b.jpg')} />
