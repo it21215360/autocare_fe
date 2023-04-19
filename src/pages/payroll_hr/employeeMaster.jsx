@@ -273,12 +273,12 @@ const EmployeeMaster = () => {
                     editorType="dxSelectBox"
                     editorOptions={{
                       items: [
-                        { AutoID: 1, Name: "Active" },
-                        { AutoID: 0, Name: "Inactive" },
+                        {  Name: "Active" },
+                        { Name: "Inactive" },
                       ],
                       searchEnabled: true,
                       displayExpr: "Name",
-                      valueExpr: "AutoID",
+                      valueExpr: "Name",
                     }}
                   >
                     <Label text="Status"></Label>

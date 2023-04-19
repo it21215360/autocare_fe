@@ -48,7 +48,7 @@ export const navigation = [
       { text: 'Inventory Login', path: 'stock_management/inventory-login' },
       { text: 'Stock', path: 'stock_management/storage' },
       { text: 'Suppliers', path: 'stock_management/suppliers' },
-      { text: 'PO History', path: 'stock_management/order' },
+      { text: 'Stock Order History', path: 'stock_management/order' },
       { text: 'Purchase Order Form', path: 'stock_management/stock-order-request-form' },
       { text: 'Stock Return form', path: 'stock_management/stock-return-form' },
       { text: 'Good Receive Form', path: 'stock_management/purchase' },
@@ -64,12 +64,12 @@ export const navigation = [
     items: [
       { text: 'Scheduling Appointment', path: 'scheduling/Scheduling_appointment' },
       { text: 'Update Appointment', path: 'scheduling/Update_appointment' },
-      { text: 'Confirm Appointment', path: 'scheduling/Confirm_appointment' },
+      { text: 'Confirm Appointment viewer', path: 'scheduling/Confirm_appointment' },
       { text: 'Cancel Appointment', path: 'scheduling/Cancel_appointment' },
-      //   { text: ' memo viewer', path: 'scheduling/emp_payroll' },
       { text: 'Booked memo viewer', path: 'scheduling/Memo' },
       { text: 'Package Details', path: 'scheduling/Package' },
-      
+      { text: 'Service Manager Login', path: 'scheduling/Login' },
+      { text: 'Service Scheduling', path: 'scheduling/Service' },
     ]
   },
 
@@ -96,7 +96,7 @@ export const navigation = [
       
       { text: 'Courier Registration', path: './courier/CourierRegistration' },
       { text: 'Vehicle Register', path: 'courier/VehicleReg' },
-      { text: 'Delivery Request Form', path: 'courier/DeliveryRequestForm' },
+      { text: 'Delivery Request Form', path: 'courier/deliveryRequest' },
       { text: 'Shipping Manage', path: 'courier/ShippingManage' },
       { text: 'Courier Profile', path: 'courier/CourierProfile' },
       { text: 'Delivery Confirm', path: 'courier/DeliveryConfirm' },
