@@ -376,7 +376,7 @@ const ProductMaster = () => {
           <Card style={{ width: "100%", paddingTop: "20px" }}>
             <Card.Body>
               <Card.Title>
-                <h6>Product Sub Category Data</h6> 
+                <h6>Product Sub Category Data</h6>  
               </Card.Title>
               <Card.Text></Card.Text>
               <Form formData={prodSubCatInfo}> 
