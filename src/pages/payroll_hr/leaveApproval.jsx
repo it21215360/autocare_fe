@@ -96,23 +96,43 @@ const LeaveApproval = (props) => {
   }, []);
 
   const onRowUpdated = (e) => {
-    // const updatedData = [...leaveApproval];
-    // const index = updatedData.findIndex((d) => d.EmployeeID === e.EmployeeID); //changed
-    // updatedData[index] = e.data;
-    // debugger;
-    // console.log("Hello ", e.data);
-    // setLeaveApproval(updatedData);
-    // setPageProperties({
-    //   ...pageProperties,
-    //   UpdateMode: true,
-    // });
+    if (e.data) {
+      updateLeaveStatus(e.data.EmployeeID, e.data.Status);
+    }
+  };
+
+  const updateLeaveStatus = (employeeID, status) => {
+    axios
+      .put(`${API_BASE_URL}/api/employee/leave-request-approval`, {
+        EmployeeID: employeeID,
+        Status: status,
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.affectedRows > 0) {
+          //has to change
+          showSuccessAlert(`Leave Request Status updated`);
+        }
+      })
+      .catch((error) => {
+        showErrorAlert(error);
+      });
   };
 
   const onSaveBtnClick = (e) => {
     try {
+      let putRequestBody = [];
+      leaveApproval.forEach((element) => {
+        putRequestBody.push({
+          EmployeeID: element.EmployeeID,
+          Status: element.Status,
+        });
+      });
+
+      console.log("###", putRequestBody);
       axios
         .put(`${API_BASE_URL}/api/employee/leave-request-approval`, {
-          LeaveInfo: JSON.stringify(leaveApproval),
+          LeaveInfo: JSON.stringify(putRequestBody),
         })
         .then((response) => {
           console.log(response);
@@ -134,7 +154,8 @@ const LeaveApproval = (props) => {
     }
   };
 
-  const statesStore = [
+  const leaveStatusList = [
+    { ID: 0, Name: "Pending" },
     { ID: 1, Name: "Accepted" },
     { ID: 2, Name: "Rejected" },
   ];
@@ -153,12 +174,9 @@ const LeaveApproval = (props) => {
           allowSearch={true}
           selection={{ mode: "single" }}
           hoverStateEnabled={true}
+          onRowUpdated={onRowUpdated}
         >
-          <Editing
-            mode="cell"
-            allowUpdating={true}
-            onRowUpdated={onRowUpdated}
-          />
+          <Editing mode="cell" allowUpdating={true} />
           <SearchPanel visible={true} />
           <Paging enabled={true} />
           <Column dataField="AutoID" visible={false} />
@@ -168,7 +186,7 @@ const LeaveApproval = (props) => {
           <Column dataField="Position" allowEditing={false} />
           <Column
             dataField="LeaveCategory"
-            caption="Leave Category"
+            caption="Category"
             allowEditing={false}
           />
           <Column
@@ -176,20 +194,13 @@ const LeaveApproval = (props) => {
             caption="Leave Type"
             allowEditing={false}
           />
-          <Column
-            dataField="LeaveFrom"
-            caption="Leave From"
-            allowEditing={false}
-          />
-          <Column dataField="LeaveTo" caption="Leave To" allowEditing={false} />
-          <Column
-            dataField="DayCount"
-            caption="Day Count"
-            allowEditing={false}
-          />
+          <Column dataField="LeaveFrom" caption="From" allowEditing={false} />
+          <Column dataField="LeaveTo" caption="To" allowEditing={false} />
+          <Column dataField="DayCount" caption="Days" allowEditing={false} />
           <Column dataField="Status">
             <Lookup
-              dataSource={statesStore}
+              value={1}
+              dataSource={leaveStatusList}
               displayExpr="Name"
               valueExpr="ID"
             />
