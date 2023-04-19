@@ -16,7 +16,7 @@ const CardForm = () => {
 
     const payMethod = [{ AutoID: 1, Name: 'Direct Bank Transfer' }, { AutoID: 2, Name: 'Card Payment' }]
 
-const [cartItem] = [{/*AutoID: 1, ProdID: 23, ProductCategory:'Automobile Clean and Care', ProductName: 'Carseat', UnitPrice: '385', Quantity: '3', TotalPrice: '1128'*/}]
+    const [cartItem] = [{AutoID: 1, ProdID: 23, ProductCategory:'Automobile Clean and Care', ProductName: 'Carseat', UnitPrice: '385', Quantity: '3', TotalPrice: '1128'}]
 
     const onSaveBtnClick = (e) => {
         try {
@@ -111,8 +111,10 @@ const [cartItem] = [{/*AutoID: 1, ProdID: 23, ProductCategory:'Automobile Clean 
                 </Form>
    
        <React.Fragment>
+
+        
            <div className={'content-block'}>
-               <h5><b>Cart</b></h5>
+               <h5><b>Ordered Items</b></h5>
                <DataGrid id='sample'
                    dataSource={cartItem}
                    rowAlternationEnabled={true}
@@ -121,9 +123,9 @@ const [cartItem] = [{/*AutoID: 1, ProdID: 23, ProductCategory:'Automobile Clean 
                    <Column dataField='ProdID' caption='Product ID' dataType='string'><ValidationRule type="hidden" /></Column>
                    <Column dataField='ProductCategory' caption='Product  Category' dataType='string'><ValidationRule type="required" /></Column>
                    <Column dataField='ProductName' caption='Product' dataType='string'><ValidationRule type="required" /></Column>
-                   <Column dataField='UnitPrice' caption='Price' dataType='float'><ValidationRule type="required" /></Column>
-                   <Column dataField='Quantity' caption='Quantity' dataType='int'><ValidationRule type="required" /></Column>
-                   <Column dataField='TotalPrice' caption='Total' dataType='float'><ValidationRule type="required" /></Column>
+                   <Column dataField='Price' caption='Price' dataType='float'><ValidationRule type="required" /></Column>
+                   <Column dataField='Qty' caption='Quantity' dataType='int'><ValidationRule type="required" /></Column>
+                   <Column dataField='SubTotal' caption='Total' dataType='float'><ValidationRule type="required" /></Column>
 
                </DataGrid>
                <br></br>

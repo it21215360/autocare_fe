@@ -4,8 +4,10 @@ import { RequiredRule } from "devextreme-react/data-grid";
 import { Navbar } from "react-bootstrap";
 import 'devextreme/dist/css/dx.light.css';
 import { Button } from 'devextreme-react';
+import axios from "axios";
+import { API_BASE_URL } from "../../appconfig/config";
 
-function ReturnProduct() {
+const ReturnProduct = () => {
   const [budgetdefinition, setBudgetdefinition] = useState({
     fullName: "Amandi Gunaratne",
     address: "11B, Ward Place, Colombo 07",
@@ -17,6 +19,26 @@ function ReturnProduct() {
     { AutoID: 2, Name: "Card Payment" },
   ];
 
+    const [cartItem] = [{AutoID: 1, ProdID: 23, ProductCategory:'Automobile Clean and Care', ProductName: 'Carseat', UnitPrice: '385', Quantity: '3', TotalPrice: '1128'}]
+
+    const onSaveBtnClick = (e) => {
+        try {
+          console.log(budgetdefinition);
+    
+          axios
+            .post(`${API_BASE_URL}/api/order/add-orderdet`, {
+                OrderDetails: JSON.stringify(budgetdefinition),
+             
+            })
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {});
+        } catch (error) {
+          console.error(error);
+        }
+      
+    };
   return (
     <>
       { <div className={'content-block'}>
