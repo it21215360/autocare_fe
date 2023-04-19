@@ -3,8 +3,6 @@ export { default as ProfilePage } from "./profile/profile";
 export { default as TasksPage } from "./tasks/tasks";
 export { default as ProductCategory } from "./masters/productCategory";
 
-//shamith
-
 //it21215360@my.sliit.lk - Maheesha
 export { default as Attendance } from "./payroll_hr/attendance";
 export { default as LeaveRequestForm } from "./payroll_hr/LeaveRequestForm";
@@ -16,30 +14,27 @@ export { default as EmployeeMaster } from "./payroll_hr/employeeMaster";
 
 //it21324406@my.sliit.lk - Shanoli
 
-export { default as InventoryLogin} from './stock_management/InventoryLogin';
-export { default as Storage} from './stock_management/Storage';
-export { default as Suppliers} from './stock_management/Suppliers';
-export { default as Order} from './stock_management/Order';
-export { default as PurchaseOrderForm} from './stock_management/purchaseOrderForm';
-export { default as StockReturnForm} from './stock_management/StockReturnForm';
-export { default as GoodReceiveForm} from './stock_management/GoodReceiveForm';
-
-
+export { default as InventoryLogin } from "./stock_management/InventoryLogin";
+export { default as Storage } from "./stock_management/Storage";
+export { default as Suppliers } from "./stock_management/Suppliers";
+export { default as Order } from "./stock_management/Order";
+export { default as PurchaseOrderForm } from "./stock_management/purchaseOrderForm";
+export { default as StockReturnForm } from "./stock_management/StockReturnForm";
+export { default as GoodReceiveForm } from "./stock_management/GoodReceiveForm";
 
 //it21197000@my.sliit.lk - Chethani
-
-export { default as Scheduling } from './scheduling/Scheduling_appointment';
-export { default as PackageDetails } from './scheduling/PackageDetails';
-export { default as Update } from './scheduling/Update_appointment';
-export { default as Cancel } from './scheduling/Cancel_appointment';
-export { default as oil } from './scheduling/Cancel_appointment';
-export { default as Confirm } from './scheduling/Confirm_appointment';
-export { default as ServiceLogin } from './scheduling/Login';
+export { default as ProductMaster } from "./masters/productMaster";
 
 //it21198090@my.sliit.lk - Shania
+export { default as Scheduling } from "./scheduling/Scheduling_appointment";
+export { default as PackageDetails } from "./scheduling/PackageDetails";
+export { default as Update } from "./scheduling/Update_appointment";
+export { default as Cancel } from "./scheduling/Cancel_appointment";
+export { default as oil } from "./scheduling/Cancel_appointment";
+export { default as Confirm } from "./scheduling/Confirm_appointment";
+export { default as ServiceLogin } from "./scheduling/Login";
 
 //it21307362@my.sliit.lk - Fernando ST
-
 export { default as CourierRegistration } from "./courier/CourierRegistration";
 export { default as VehicleReg } from "./courier/VehicleReg";
 export { default as deliveryRequest } from "./courier/deliveryRequest";
@@ -57,9 +52,8 @@ export { default as Ordersdet } from "./ordering/Orders_Admin";
 export { default as invoice } from "./ordering/Invoice";
 export { default as newpage } from "./ordering/new";
 
-
 //it21238994@my.sliit.lk - Amanda
-export { default as MyTicket } from './customer_care/myTicket';
-export { default as TrackTicket } from './customer_care/trackTicket'
-export { default as RaiseTicketForm } from './customer_care/raiseTicket';
-export { default as FreaquentQuestionPage} from './customer_care/freaquentQuestion';
+export { default as MyTicket } from "./customer_care/myTicket";
+export { default as TrackTicket } from "./customer_care/trackTicket";
+export { default as RaiseTicketForm } from "./customer_care/raiseTicket";
+export { default as FreaquentQuestionPage } from "./customer_care/freaquentQuestion";

@@ -98,19 +98,23 @@ function FreaquentQuestionPage({ faq, index }) {
 
   return (
     <div className={"content-block"}>
-      <h1>Freaquently Asked Question Page</h1>
+      <h4>Frequently Asked Questions</h4>
       <div className="faqs">
         {faqs.map((faq, i) => (
-          <faq faq={faq} index={i} toggleFAQ={toggleFAQ} />
+          <div>
+            <faq faq={faq} index={i} toggleFAQ={toggleFAQ} />
+            <div
+              className={"faq" + (faq.open ? "open" : "")}
+              key={index}
+              onClick={() => toggleFAQ(index)}
+            >
+              <div className="faq-question">
+                <h6>{faq.question}</h6>
+              </div>
+              <div className="faq-answer">{faq.answer}</div>
+            </div>
+          </div>
         ))}
-        <div
-          className={"faq" + (faq.open ? "open" : "")}
-          key={index}
-          onClick={() => toggleFAQ(index)}
-        >
-          <div className="faq-question">{faq.question}</div>
-          <div className="faq-answer">{faq.answer}</div>
-        </div>
       </div>
       <div className="button">
         <Button
