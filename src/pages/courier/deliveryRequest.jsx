@@ -1,22 +1,33 @@
+
+import React, { useEffect } from "react";
 import { useState } from "react";
-import React, { Component } from "react";
 import { Button } from "devextreme-react/button";
+
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
-
 import axios from "axios";
+import ShippingManage from "./ShippingManage";
 
 import { API_BASE_URL } from "../../appconfig/config";
-import "./DeliveryRequestForm.css";
+//import './DeliveryRequestForm.css';
 
-const DeliveryRequestForm = () => {
+
+const DeliveryRequest = () => {
   const [RequestInfo, setRequestInfo] = useState({});
+  const [pageProperties, setPageProperties] = useState({
+    DeliverReqID: 0,
+    DataLoading: false,
+    isDocReadOnly: false,
+    UpdateMode: false,
+  });
 
+  const [showList, setShowList] = useState(false);
+  
   const onSaveBtnClick = (e) => {
     try {
       console.log(RequestInfo);
       axios
-        .post(`${API_BASE_URL}/api/courier/add-Request`, {
+        .post(`${API_BASE_URL}/api/deliveryrequest/add-deliveryrequest`, {
           RequestDetails: JSON.stringify(RequestInfo),
         })
         .then((response) => {
@@ -27,22 +38,70 @@ const DeliveryRequestForm = () => {
       console.error(error);
     }
   };
+  const OnLoadData = () => {
+    try {
+      if (pageProperties.DeliverReqID != 0 && pageProperties.UpdateMode)
+        axios
+          .get(`${API_BASE_URL}/api/deliveryrequest/get-deliveryrequest`, {
+            params: {
+              EmpID: pageProperties.DeliverReqID,
+            },
+          })
+          .then((res) => {
+            console.log(res.data[0]);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onListClose = () => {
+    setShowList(false);
+  };
+
+  const onListClickEvent = (viewListSelectedID) => {
+    debugger;
+    if (showList && viewListSelectedID != 0) {
+      setShowList(!showList);
+      setPageProperties({
+        DeliveryReqID: viewListSelectedID,
+        DataLoading: true,
+        isDocReadOnly: true,
+        UpdateMode: true,
+      });
+
+      OnLoadData();
+    }
+  };
 
   return (
     <>
-      <div className={"content-block"}>
-        <h2>Request for a delivery</h2>
-        <Form formData={RequestInfo}>
-          <GroupItem colCount={2}>
-            <Item
-              dataField="OrderID"
-              editorType="dxTextBox"
-              editorOptions={{
-                readOnly: false,
-              }}
-            >
-              <Label text="Order ID"></Label>
-            </Item>
+     {showList ? (
+        <div className={"content-block"}>
+          <ShippingManage
+            Show={showList}
+            OnHide={onListClickEvent}
+            HideTheList={onListClose}
+          ></ShippingManage>
+        </div>
+      ) : (
+    <div className={'content-block'}>
+           <h2>Request for a delivery</h2>
+      <Form formData={RequestInfo}>
+      <GroupItem colCount={2}>
+                        
+      
+      
+                    <Item dataField="OrderID" editorType="dxTextBox" editorOptions={{
+                            readOnly: false,
+                        }}>
+                            <Label text="Order ID"></Label>
+                           
+                        </Item>
+    
 
             <Item
               dataField="Name"
@@ -143,12 +202,34 @@ const DeliveryRequestForm = () => {
           <input type="text" id="province" required />
         </div>
 
-        <Button type="success" onClick={onSaveBtnClick}>
-          Submit
-        </Button>
-      </form>
-    </>
+                    ],
+                    searchEnabled: true,
+                    displayExpr: "Name",
+                    valueExpr: "AutoID",
+                  }}
+                >
+                  <Label text="Province"></Label>
+                  <RequiredRule message="Field required" />
+                </Item>
+
+                        </GroupItem>
+                        <GroupItem colCount={3}>
+                        </GroupItem>
+                        </Form>
+      
+     
+     <Button type="success"  stylingMode="contained" onClick={onSaveBtnClick}>Submit</Button>
+
+     
+
+     </div>
+      )}
+     
+      
+     </>
+      
   );
 };
 
-export default DeliveryRequestForm;
+
+export default DeliveryRequest;

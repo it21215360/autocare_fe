@@ -27,14 +27,14 @@ export { default as GoodReceiveForm} from './stock_management/GoodReceiveForm';
 
 
 //it21197000@my.sliit.lk - Chethani
-//default as <function/class name>
+
 export { default as Scheduling } from './scheduling/Scheduling_appointment';
 export { default as PackageDetails } from './scheduling/PackageDetails';
 export { default as Update } from './scheduling/Update_appointment';
 export { default as Cancel } from './scheduling/Cancel_appointment';
 export { default as oil } from './scheduling/Cancel_appointment';
 export { default as Confirm } from './scheduling/Confirm_appointment';
-
+export { default as ServiceLogin } from './scheduling/Login';
 
 //it21198090@my.sliit.lk - Shania
 
@@ -42,7 +42,7 @@ export { default as Confirm } from './scheduling/Confirm_appointment';
 
 export { default as CourierRegistration } from "./courier/CourierRegistration";
 export { default as VehicleReg } from "./courier/VehicleReg";
-export { default as DeliveryRequestForm } from "./courier/DeliveryRequestForm";
+export { default as deliveryRequest } from "./courier/deliveryRequest";
 export { default as ShippingManage } from "./courier/ShippingManage";
 export { default as CourierProfile } from "./courier/CourierProfile";
 export { default as DeliveryConfirm } from "./courier/DeliveryConfirm";
@@ -58,5 +58,8 @@ export { default as invoice } from "./ordering/Invoice";
 export { default as newpage } from "./ordering/new";
 
 
-//Amanda
-export { default as RaiseTicket } from "./customer_care/raiseTicket";
+//it21238994@my.sliit.lk - Amanda
+export { default as MyTicket } from './customer_care/myTicket';
+export { default as TrackTicket } from './customer_care/trackTicket'
+export { default as RaiseTicketForm } from './customer_care/raiseTicket';
+export { default as FreaquentQuestionPage} from './customer_care/freaquentQuestion';

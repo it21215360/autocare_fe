@@ -1,40 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { Button } from "devextreme-react/button";
 
-function DeliveryConfirm() {
-  const [order, setOrder] = useState({});
+import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
+import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
+import axios from "axios";
 
-  useEffect(() => {
-    // This is where you would typically make an API call to retrieve the order details
-    // In this example, we're just hardcoding some sample data
-    const sampleOrder = {
-      id: 123,
-      date: '2023-04-17T09:30:00.000Z',
-      items: [
-        { id: 1, name: 'Product A', price: 9.99 },
-        { id: 2, name: 'Product B', price: 14.99 },
-      ],
-      total: 24.98,
+import { API_BASE_URL } from "../../appconfig/config";
+
+const DeliveryConfirm = () => {
+    const [RequestInfo, setRequestInfo] = useState({});
+    const [pageProperties, setPageProperties] = useState({
+      DeliverReqID: 0,
+      DataLoading: false,
+      isDocReadOnly: false,
+      UpdateMode: false,
+    });
+  
+    return (
+        <>
+       
+           <h2><center>Thank you for your Order</center></h2>
+      <Form formData={RequestInfo}>
+      
+                        
+      
+      
+                    <Item dataField="OrderID"  editorOptions={{
+                            readOnly: false,
+                        }}>
+                            <Label text="Order ID"></Label>
+                           
+
+
+                        </Item>
+                       
+                        </Form>
+     
+      </>
+      
+      );
     };
-    setOrder(sampleOrder);
-  }, []);
 
-  return (
-    <div>
-      <h1>Order Confirmation</h1>
-      <p>Thank you for your order! Here are your order details:</p>
-      <p>Order ID: {order.id}</p>
-      <p>Order Date: {new Date(order.date).toLocaleString()}</p>
-      <ul>
-        {order.items &&
-          order.items.map((item) => (
-            <li key={item.id}>
-              {item.name} - ${item.price.toFixed(2)}
-            </li>
-          ))}
-      </ul>
-      <p>Total: ${order.total.toFixed(2)}</p>
-    </div>
-  );
-}
-
-export default DeliveryConfirm;
+    export default DeliveryConfirm;

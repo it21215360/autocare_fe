@@ -11,7 +11,7 @@ import {
   DeliveryConfirm,
   CourierRegistration,
   VehicleReg,
-  DeliveryRequestForm,
+  deliveryRequest,
   ShippingManage,
   CourierProfile,
   InventoryLogin,
@@ -55,7 +55,7 @@ const routes = [
   { path: "payroll_hr/employee-master", element: EmployeeMaster },
 
   //it21324406@my.sliit.lk - Shanoli
- 
+
   { path: "stock_management/inventory-login", element: InventoryLogin },
   { path: "stock_management/storage", element: Storage },
   { path: "stock_management/suppliers", element: Suppliers },
@@ -73,6 +73,7 @@ const routes = [
   { path: "/scheduling/Update_appointment", element: Update },
   { path: "/scheduling/Cancel_appointment", element: Cancel },
   { path: "/scheduling/Confirm_appointment", element: Confirm },
+  { path: "/scheduling/Login", element: ServiceLogin },
 
   //it21198090@my.sliit.lk - Shania
   { path: "ProductCategory", element: ProductCategory },
@@ -82,16 +83,25 @@ const routes = [
   //it21198090@my.sliit.lk - Shania
 
   //it21307362@my.sliit.lk - Fernando ST
- 
+
   { path: "courier/CourierRegistration", element: CourierRegistration },
   { path: "courier/VehicleReg", element: VehicleReg },
-  { path: "courier/DeliveryRequestForm", element: DeliveryRequestForm },
+  { path: "courier/deliveryRequest", element: deliveryRequest },
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
-  { path: "courier/DeliveryConfirm", element:DeliveryConfirm },
+  { path: "courier/DeliveryConfirm", element: DeliveryConfirm },
 
   //it21238994@my.sliit.lk - Amanda
-  { path: "customer_care/raiseTicket", element: RaiseTicket },
+  { path: "customer_care/myTicket", element: MyTicket },
+  { path: "cystomer_care/trackTicket", element: TrackTicket },
+  { path: "customer_care/raiseTikcket", element: RaiseTicketForm },
+  { path: "customer_care/freaquentQuestion", element: FreaquentQuestionPage },
+
+
+
+//where's the prettier formtter??
+
+
 
   //it21326936@my.sliit.lk - Amandi
   { path: "Ordering/Order_details", element: OrderForm },

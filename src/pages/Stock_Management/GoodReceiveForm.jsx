@@ -10,6 +10,7 @@ import { Button } from 'devextreme-react/button';
 import { DateBox } from 'devextreme-react/calendar';
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
+import  GoodReceivedList from "./GoodReceivedList";
 
 const  GoodReceiveForm = () => {
 
@@ -21,10 +22,24 @@ const  GoodReceiveForm = () => {
 
     //const productCategory = [{ AutoID: 1, Name: 'Automobile Tyres' }, { AutoID: 2, Name: 'Automobile Clean & Care' }, { AutoID: 3, Name: 'Automobile Spare Parts' }, { AutoID: 4, Name: 'Engine Oil & Lubricant'}, {AutoID:5, Name:'Automobile Lighting'}, {AutoID:6, Name:'Automobile Electronics'}]
 
+    const [pageProperties, setPageProperties] = useState({
+        GoodReceiveID : 0,
+        DataLoading: false,
+        isDocReadOnly: false,
+        UpdateMode: false,
+      });
+
+      const [showList, setShowList] = useState(false);
+      const currencyFormat = {
+        style: "currency",
+        currency: "LKR",
+        useGrouping: true,
+        minimumSignificantDigits: 3,
+      };
+  
+
     const onSaveBtnClick = (e) => {
         try {
-          console.log(stockReceiveInfo);
-    
           axios
             .post(`${API_BASE_URL}/api/receiveStock/add-receiveStock`, {
                 ReceiveDetails: JSON.stringify(stockReceiveInfo),
@@ -38,9 +53,60 @@ const  GoodReceiveForm = () => {
           console.error(error);
         }
       };
+      
+      const OnLoadData = (receiveId) => {
+        try {
+          axios
+            .get(`${API_BASE_URL}/api/receiveStock/get-receiveStock`, {
+              params: {
+                ReceiveID: receiveId, //pageProperties.GoodReceiveID,
+              },
+            })
+            .then((res) => {
+              console.log(res.data);
+    
+              setStockReceiveInfo(res.data[0][0]);
+             
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      const onListClose = () => {
+        setShowList(false);
+      };
+
+      const onListClickEvent = (viewListSelectedID) => {
+        debugger;
+        if (showList && viewListSelectedID != 0) {
+          setShowList(!showList);
+          setPageProperties({
+            GoodReceiveID: viewListSelectedID,
+            DataLoading: true,
+            isDocReadOnly: true,
+            UpdateMode: true,
+          });
+          
+      OnLoadData(viewListSelectedID);
+    }
+  };
 
     return (
         <>
+{showList ? (
+        <div className={"content-block"}>
+          <GoodReceivedList
+            Show={showList}
+            OnHide={onListClickEvent}
+            HideTheList={onListClose}
+          ></GoodReceivedList>
+        </div>
+      ) : (
+
             <div className={'content-block'}>
                 <h2><b>Good Receive Form</b></h2>
                 <Form formData={stockReceiveInfo}>
@@ -102,14 +168,14 @@ const  GoodReceiveForm = () => {
                   editorOptions={{
                     items: [
 
-                      { AutoID: 0, Name: "New" },
-                      { AutoID: 1, Name: "Used" },
-                      { AutoID: 2, Name: "Damaged" },
+                      { Name: "New" },
+                      { Name: "Used" },
+                      { Name: "Damaged" },
                 
                     ],
                     searchEnabled: true,
                     displayExpr: "Name",
-                    valueExpr: "AutoID",
+                    valueExpr: "Name",
                   }}
                 >
                   <Label text="Product Condition"></Label>
@@ -144,9 +210,13 @@ const  GoodReceiveForm = () => {
 
                 <Navbar bg="light" variant="light">
                     <Button stylingMode="contained" type="success" onClick={onSaveBtnClick}>Save</Button>
+                    <Button stylingMode="contained" type="default"  onClick={() => setShowList(true)}>View List</Button>
                     <Button stylingMode="contained" type="default">Clear</Button>
                 </Navbar>
             </div>
+
+            )}
+
             {/* <LoadPanel
                 message="Processing.... Please, wait..."
                 shadingColor="rgba(0,0,0,0.4)"

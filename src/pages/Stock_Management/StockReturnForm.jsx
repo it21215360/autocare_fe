@@ -10,6 +10,7 @@ import { Button } from 'devextreme-react/button';
 import { DateBox } from 'devextreme-react/calendar';
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
+import  ReturnStockList from "./ReturnStockList";
 
 const  StockReturnForm = () => {
 
@@ -18,11 +19,23 @@ const  StockReturnForm = () => {
     }*/
 
     const [stockReturnInfo, setStockReturnInfo] = useState({});
+    const [pageProperties, setPageProperties] = useState({
+      StockReturnID : 0,
+      DataLoading: false,
+      isDocReadOnly: false,
+      UpdateMode: false,
+    });
+
+    const [showList, setShowList] = useState(false);
+    const currencyFormat = {
+      style: "currency",
+      currency: "LKR",
+      useGrouping: true,
+      minimumSignificantDigits: 3,
+    };
 
     const onSaveBtnClick = (e) => {
         try {
-          console.log(stockReturnInfo);
-         
     
           axios
             .post(`${API_BASE_URL}/api/returnStock/add-returnStock`, {
@@ -38,9 +51,61 @@ const  StockReturnForm = () => {
         }
       };
 
+      const OnLoadData = (returnId) => {
+        try {
+          axios
+            .get(`${API_BASE_URL}/api/returnStock/get-returnStock`, {
+              params: {
+                ReturnID: returnId, //pageProperties.StockReturnID,
+              },
+            })
+            .then((res) => {
+              console.log(res.data);
+    
+              setStockReturnInfo(res.data[0][0]);
+             
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      const onListClose = () => {
+        setShowList(false);
+      };
+
+      const onListClickEvent = (viewListSelectedID) => {
+        debugger;
+        if (showList && viewListSelectedID != 0) {
+          setShowList(!showList);
+          setPageProperties({
+            StockReturnID: viewListSelectedID,
+            DataLoading: true,
+            isDocReadOnly: true,
+            UpdateMode: true,
+          });
+          
+      OnLoadData(viewListSelectedID);
+    }
+  };
+
 
     return (
         <>
+
+{showList ? (
+        <div className={"content-block"}>
+          <ReturnStockList
+            Show={showList}
+            OnHide={onListClickEvent}
+            HideTheList={onListClose}
+          ></ReturnStockList>
+        </div>
+      ) : (
+
             <div className={'content-block'}>
                 <h2><b>Stock Return Form</b></h2>
                 <Form formData={stockReturnInfo}>
@@ -57,18 +122,18 @@ const  StockReturnForm = () => {
                   editorType="dxSelectBox"
                   editorOptions={{
                     items: [
-                      { AutoID: 0, Name: "Automobile Tyres" },
-                      { AutoID: 1, Name: "Automobile Care and Clean" },
-                      { AutoID: 2, Name: "Engine Oil and Lubricants" },
-                      { AutoID: 3, Name: "Automobile Batteries" },
-                      { AutoID: 4, Name: "Automobile Spare Parts" },
-                      { AutoID: 5, Name: "Automobile Electronics" },
-                      { AutoID: 6, Name: "Automobile Lighting" },
+                      { Name: "Automobile Tyres" },
+                      { Name: "Automobile Care and Clean" },
+                      { Name: "Engine Oil and Lubricants" },
+                      { Name: "Automobile Batteries" },
+                      { Name: "Automobile Spare Parts" },
+                      { Name: "Automobile Electronics" },
+                      { Name: "Automobile Lighting" },
 
                     ],
                     searchEnabled: true,
                     displayExpr: "Name",
-                    valueExpr: "AutoID",
+                    valueExpr: "Name",
                   }}
                 >
                   <Label text="Product Category"></Label>
@@ -80,33 +145,31 @@ const  StockReturnForm = () => {
                   editorType="dxSelectBox"
                   editorOptions={{
                     items: [
-                      { AutoID: 0, Name: "ATfederal" },
-                      { AutoID: 1, Name: "ATminewa" },
-                      { AutoID: 2, Name: "ATtoyo" },
-                      { AutoID: 3, Name: "ACCbrake Oil" },
-                      { AutoID: 4, Name: "ACCcoolant" },
-                      { AutoID: 5, Name: "ACCexteriror Cleaner" },
-                      { AutoID: 6, Name: "ACCwax Range" },
-                      { AutoID: 7, Name: "ACCair Freshner" },
-                      { AutoID: 8, Name: "ACCcar Polish" },
-                      { AutoID: 9, Name: "ELmobil" },
-                      { AutoID: 10, Name: "ELvalvoline" },
-                      { AutoID: 11, Name: "ABpanasonic" },
-                      { AutoID: 12, Name: "ABtATA Batteries" },
-                      { AutoID: 13, Name: "AScabin Filter" },
-                      { AutoID: 14, Name: "ASair Filter" },
-                      { AutoID: 15, Name: "AShorns" },
-                      { AutoID: 16, Name: "AEcar Alarm" },
-                      { AutoID: 17, Name: "AEspeakers" },
-                      { AutoID: 18, Name: "ALfog Lights" },
-                      { AutoID: 19, Name: "ALhead Lights" },
-                      { AutoID: 20, Name: "ALinterior Lights" },
-
-
+                      {  Name: "ATfederal" },
+                      {  Name: "ATminewa"},
+                      {  Name: "ATtoyo"},
+                      {  Name: "ACCbrake Oil" },
+                      {  Name: "ACCcoolant" },
+                      {  Name: "ACCexteriror Cleaner" },
+                      {  Name: "ACCwax Range" },
+                      {  Name: "ACCair Freshner" },
+                      {  Name: "ACCcar Polish" },
+                      {  Name: "ELmobil" },
+                      {  Name: "ELvalvoline" },
+                      {  Name: "ABpanasonic" },
+                      {  Name: "ABtATA Batteries" },
+                      {  Name: "AScabin Filter" },
+                      {  Name: "ASair Filter" },
+                      {  Name: "AShorns" },
+                      {  Name: "AEcar Alarm" },
+                      {  Name: "AEspeakers" },
+                      {  Name: "ALfog Lights" },
+                      {  Name: "ALhead Lights" },
+                      {  Name: "ALinterior Lights" }
                     ],
                     searchEnabled: true,
                     displayExpr: "Name",
-                    valueExpr: "AutoID",
+                    valueExpr: "Name",
                   }}
                 >
                   <Label text="Product Sub-Category"></Label>
@@ -161,9 +224,11 @@ const  StockReturnForm = () => {
 
                 <Navbar bg="light" variant="light">
                     <Button stylingMode="contained" type="success"  onClick={onSaveBtnClick}>Submit</Button>
+                    <Button stylingMode="contained" type="default"  onClick={() => setShowList(true)}>View List</Button>
                     <Button stylingMode="contained" type="default">Clear</Button>
                 </Navbar>
             </div>
+              )}
             {/* <LoadPanel
                 message="Processing.... Please, wait..."
                 shadingColor="rgba(0,0,0,0.4)"
