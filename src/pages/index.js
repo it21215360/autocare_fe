@@ -27,14 +27,14 @@ export { default as GoodReceiveForm} from './stock_management/GoodReceiveForm';
 
 
 //it21197000@my.sliit.lk - Chethani
-//default as <function/class name>
+
 export { default as Scheduling } from './scheduling/Scheduling_appointment';
 export { default as PackageDetails } from './scheduling/PackageDetails';
 export { default as Update } from './scheduling/Update_appointment';
 export { default as Cancel } from './scheduling/Cancel_appointment';
 export { default as oil } from './scheduling/Cancel_appointment';
 export { default as Confirm } from './scheduling/Confirm_appointment';
-
+export { default as ServiceLogin } from './scheduling/Login';
 
 //it21198090@my.sliit.lk - Shania
 
