@@ -25,6 +25,11 @@ import {
   PackageDetails,
   Update,
   Cancel,
+ 
+  //ViewMasterProd,
+
+
+
   EmpLogin,
   EmployeeMaster,
   RaiseTicket,
@@ -34,15 +39,20 @@ import {
   ProductPage,
   ReturnProduct,
   Confirm,
+  Memo,
   Ordersdet,
   newpage,
   ServiceLogin,
   MyTicket,
   TrackTicket,
+  AppointList,
+  ServiceAppoinment,
   RaiseTicketForm,
+  ServiceList,
   FreaquentQuestionPage,
   ProductMaster,
 } from "./pages";
+import {ProductMaster} from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 import invoice from "./pages/ordering/Invoice";
 
@@ -79,6 +89,10 @@ const routes = [
   { path: "/scheduling/Cancel_appointment", element: Cancel },
   { path: "/scheduling/Confirm_appointment", element: Confirm },
   { path: "/scheduling/Login", element: ServiceLogin },
+  { path: "/scheduling/AppointmentList", element: AppointList },
+  { path: "/scheduling/Memo", element: Memo },
+  { path: "/scheduling/Service", element: ServiceAppoinment },
+  { path: "/scheduling/ServiceList", element: ServiceList },
 
   //it21198090@my.sliit.lk - Shania
   { path: "ProductCategory", element: ProductCategory },

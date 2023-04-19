@@ -69,11 +69,16 @@ const onSelectionChanged = (e) => {
             
          
 
-         <h2>Service Management</h2>
+       
          <Fragment>
-      <h4>Confirm Scheduled Appointment</h4>
+          <div className="topic">
+            <h4>Service StationManagement</h4> 
+          </div>
+           
+          <h2>Confirm Scheduled Appointment</h2>
       <DataGrid
         id="grid-list"
+        className="dataform"
         dataSource={getAppointmentDetails}
         keyExpr="ID"
         showBorders={true}
@@ -87,16 +92,14 @@ const onSelectionChanged = (e) => {
         <Paging defaultPageSize={10} />
        
       
-		<Column dataField="ID" visible={false} />
+		<Column  dataField="ID" visible={false} />
 		<Column dataField='fname' caption='First Name' dataType='string'></Column>
 	    <Column dataField='lname' caption='Last Name' dataType='string'></Column>
 		<Column dataField='phone' caption='Phone Number' dataType='int'></Column>
 		<Column dataField='email' caption='Email Address' dataType='email'></Column>
 		<Column dataField='vnumber' caption='Vehicle Number' dataType='int'></Column>
 		<Column dataField='vtype' caption='Vehicle Type' dataType='String'></Column>
-		<Column dataField='date' caption='Scehduled Date' dataType='date'></Column>
-		<Column dataField='time' caption='Time' dataType='time'></Column>
-		<Column dataField='venue' caption='Venue' dataType='String'></Column>
+		
 					
 
       </DataGrid>
@@ -122,9 +125,7 @@ const onSelectionChanged = (e) => {
     </Fragment>
 
        <h5></h5>
-            <Button className="button"  stylingMode="contained" >Confirm Appointment</Button>
-            <Button className="button"  stylingMode="contained" >Update Appointment</Button>
-            <Button className="button"  stylingMode="contained" >Delete Appointment</Button>
+            
 
          
         </React.Fragment>

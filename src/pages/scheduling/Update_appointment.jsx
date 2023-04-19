@@ -10,16 +10,21 @@ import { Button } from 'devextreme-react/button';
 import { DateBox } from 'devextreme-react/calendar';
 import { Link } from 'react-router-dom';
 import { alignPropType } from "react-bootstrap/esm/types";
-
-
-
 import 'devextreme/dist/css/dx.light.css';
 import DataGrid, { Column, SearchPanel, Editing,ValidationRule } from 'devextreme-react/data-grid';
 import { Margin } from "devextreme-react/bar-gauge";
-
 import './Update.scss';
-export default function Update(){
+import axios from "axios";
+import { API_BASE_URL } from "../../appconfig/config";
 
+export default function Update(){
+    const [pageProperties, setPageProperties] = useState({
+        ID: 0,
+        DataLoading: false,
+        isDocReadOnly: false,
+        UpdateMode: false,
+      });
+    
     const myDataSource = [
         {  ScheduledDate: '01/02/2023', Time: '4.00pm',Venue:'Dehiwala'},
     ]
@@ -28,120 +33,228 @@ export default function Update(){
         ,package:'Package 1',oil:'Oil 2',aname:'Anura Kumara'
     }]
 
+
+    const onSaveBtnClick = (e) => {
+        try {
+          pageProperties.UpdateMode ? updateEmployee() : addEmployee();
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      const updateEmployee = () => {
+        try {
+          if (pageProperties.EmployeeID > 0)
+            axios
+              .put(`${API_BASE_URL}/api/employee/update-Appointment`, {
+                EmployeeID: pageProperties.EmployeeID,
+               
+              })
+              .then((response) => {
+                console.log(response);
+                if (response.data.affectedRows === 1) {
+                  showSuccessAlert(`Appointment information updated`);
+                }
+              })
+              .catch((error) => {
+                showErrorAlert(error);
+              });
+        } catch (error) {
+          console.error(error);
+          showErrorAlert(error);
+        }
+      };
+      const [cusAppoinmentInfo, setCusAppoinmentInfo] = useState({});
+      const addEmployee = (e) => {
+          try{
+            console.log(cusAppoinmentInfo);
+        
+            axios  
+              .post(`${API_BASE_URL}/api/employee/appointment-scheduling-request-form`, {
+                AppoinmentInfo: JSON.stringify(cusAppoinmentInfo)
+              })
+              .then((response) => {
+                console.log(response);
+                if (response.data.affectedRows === 1) {
+                  showSuccessAlert(`Appointment information updated`);
+                  
+                }
+              })
+              .catch((error) => {});
+            }catch (error) {
+              console.error(error);
+            }
+        };
+      const showErrorAlert = (errorMsg) => {
+        notify(
+          {
+            message: errorMsg.toString(),
+            width: 450,
+          },
+          "error",
+          3000
+        );
+      };
+    
+      const showSuccessAlert = (successMsg) => {
+        notify(
+          {
+            message: successMsg.toString(),
+            width: 450,
+          },
+          "success",
+          3000
+        );
+      };
+
+     
+
     return(
         <>
        
       <div className={'content-block'}>
                 <h3>Update Scheduled appointment</h3>
-                <Form formData={jaBudgetDefinition}>
+                <Form 
+                    className="mainform"
+                    formData={cusAppoinmentInfo}>
                 
-                    <GroupItem colCount={3}>
-                    
-                        <Item dataField="firstName"  editorOptions={{
-                            readOnly: true,
-                        }}>
-                            <Label text="First Name"></Label>
-                            <RequiredRule message="Field required" />
+                        <GroupItem colCount={3}>
+                        
+                            <Item 
+                                dataField="fname"  
+                                editorOptions={{
+                                readOnly: false,
+                            }}>
+                                <Label text="First Name" ></Label>
+                                <RequiredRule message="Field required" />
+                                
+                            </Item>
+
+                        
+                            <Item 
+                                dataField="lname" 
+                                editorType="dxTextBox" 
+                                editorOptions={{
+                                readOnly: false,
+                            }}>
+                                <Label text="Last Name"></Label>
+                                <RequiredRule message="Field required" />
+                            </Item>
+
+                            <Item 
+                                dataField="phone" 
+                                editorType="dxTextBox" 
+                                editorOptions={{
+                                readOnly: false,
+                            }}>
+                                <Label text="Customer Phone Number"></Label>
+                                <RequiredRule message="Field required" />
+                            </Item>
                             
-                        </Item>
+                        </GroupItem>
 
-                       
-                        <Item dataField="lastName" editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
-                        }}>
-                            <Label text="Last Name"></Label>
-                            <RequiredRule message="Field required" />
-                        </Item>
-                        <Item dataField="phone" editorType="dxTextBox" editorOptions={{
-                            readOnly: false,
-                        }}>
-                            <Label text="Customer Phone Number"></Label>
-                            <RequiredRule message="Field required" />
-                        </Item>
+                        <GroupItem colCount={3}>
+                            <Item 
+                                dataField="email" 
+                                editorType="dxTextBox" 
+                                editorOptions={{
+                                readOnly: false,
+                            }}>
+                                <Label text="Customer Email"></Label>
+                                <RequiredRule message="Field required" />
+                            </Item>
+
+                            <Item 
+                                dataField="vnumber" 
+                                editorType="dxTextBox" 
+                                editorOptions={{
+                                readOnly: false,
+                            }}>
+                                <Label text="Vehicle Number"></Label>
+                                <RequiredRule message="Field required" />
+                            </Item>
+                            <Item 
+                                dataField="vtype" 
+                                editorType="dxTextBox" 
+                                editorOptions={{
+                                readOnly: false,
+                            }}>
+                                <Label text="Vehicle Type"></Label>
+                                <RequiredRule message="Field required" />
+                            </Item>
+
+                        </GroupItem>
+                        {/**
+                        <GroupItem colCount={3}>
                         
-                    </GroupItem>
+                            <Item dataField="vehicleNo" editorType="dxTextBox" editorOptions={{
+                                readOnly: false,
+                            }}>
+                                <Label text="Vehicle Number"></Label>
+                                <RequiredRule message="Field required" />
+                            </Item>
+                            <Item dataField="type" editorType="dxTextBox" editorOptions={{
+                                readOnly: false,
+                            }}>
+                                <Label text="Vehicle Type"></Label>
+                                <RequiredRule message="Field required" />
+                            </Item>
 
-                    <GroupItem colCount={3}>
-                        <Item dataField="email" editorType="dxTextBox" editorOptions={{
-                            readOnly: false,
-                        }}>
-                            <Label text="Customer Email"></Label>
-                            <RequiredRule message="Field required" />
-                        </Item>
+                            <Item></Item>
+                        </GroupItem> */}
 
-                        <Item dataField="vehicleNo" editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
-                        }}>
-                            <Label text="Vehicle Number"></Label>
-                            <RequiredRule message="Field required" />
-                        </Item>
-                        <Item dataField="type" editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
-                        }}>
-                            <Label text="Vehicle Type"></Label>
-                            <RequiredRule message="Field required" />
-                        </Item>
-
-                    </GroupItem>
-                     {/**
-                    <GroupItem colCount={3}>
-                      
-                        <Item dataField="vehicleNo" editorType="dxTextBox" editorOptions={{
-                            readOnly: false,
-                        }}>
-                            <Label text="Vehicle Number"></Label>
-                            <RequiredRule message="Field required" />
-                        </Item>
-                        <Item dataField="type" editorType="dxTextBox" editorOptions={{
-                            readOnly: false,
-                        }}>
-                            <Label text="Vehicle Type"></Label>
-                            <RequiredRule message="Field required" />
-                        </Item>
-
-                        <Item></Item>
-                    </GroupItem> */}
+                            
+                        <GroupItem colCount={3}>
+                            <Item
+                                className="checkbox"
+                                dataField="leaveCategory"
+                                editorType="dxSelectBox"
+                                editorOptions={{
+                                    items: [{  Name: 'Package 1' }, 
+                                            { Name: 'Package 2' }, 
+                                            {  Name: 'Package 3' }
+                                        ],
+                                    dataField:'package',
+                                    searchEnabled: true,
+                                    displayExpr: "Name",
+                                // valueExpr: "AutoID",
+                                }}
+                            >
+                                <Label text="Package Type"></Label>
+                                <RequiredRule message="Field required" />
+                            </Item>
+                            
+                            <Item
+                                className="checkbox"
+                                dataField="leaveType"
+                                editorType="dxSelectBox"
+                                editorOptions={{
+                                    items: [{ Name: 'oil type 1' }, 
+                                            {  Name: 'oil type 2' }
+                                    ],
+                                    searchEnabled: true,
+                                    displayExpr: "Name",
+                                    dataField:'oil',
+                                //  valueExpr: "AutoID",
+                                }}
+                            >
+                                <Label text="Oil Type"></Label>
+                                <RequiredRule message="Field required" />
+                            </Item>
 
                         
-                    <GroupItem colCount={3}>
-                        <Item
-                            dataField="leaveCategory"
-                            editorType="dxSelectBox"
-                            editorOptions={{
-                                items: [{ Name: 'Package 1' }, { Name: 'Package 2' }, {  Name: 'Package 3' }],
-                                searchEnabled: true,
-                                displayExpr: "Name",
-                               // valueExpr: "AutoID",
-                            }}
-                        >
-                            <Label text="Package Type"></Label>
-                            <RequiredRule message="Field required" />
-                        </Item>
-                         
-                        <Item
-                            dataField="leaveType"
-                            editorType="dxSelectBox"
-                            editorOptions={{
-                                items: [{ AutoID: 1, Name: 'oil type 1' }, { AutoID: 2, Name: 'oil type 2' }],
-                                searchEnabled: true,
-                                displayExpr: "Name",
-                                valueExpr: "AutoID",
-                            }}
-                        >
-                            <Label text="Oil Type"></Label>
-                            <RequiredRule message="Field required" />
-                        </Item>
 
-                       
+                            <Item 
+                                dataField="aname" 
+                                editorType="dxTextBox" 
+                                editorOptions={{
+                                readOnly: false,
+                            }}>
+                                <Label text="Agent Name"></Label>
+                            
+                            </Item>
 
-                        <Item dataField="aName" editorType="dxTextBox" editorOptions={{
-                            readOnly: true,
-                        }}>
-                            <Label text="Agent Name"></Label>
-                          
-                        </Item>
-
-                    </GroupItem>
+                        </GroupItem>
                     </Form>
                     {/**
                     <GroupItem colCount={3}>
@@ -214,11 +327,13 @@ export default function Update(){
                                 <br></br>
 
                             <Navbar bg="light" variant="light">
-                                <Button 
-                                    className="button1"
-                                    stylingMode="contained" 
-                                    type="success">
-                                        Update
+                            <Button
+                                className="button1"
+                                stylingMode="contained"
+                                type="success"
+                                onClick={onSaveBtnClick}
+                                >
+                                    {pageProperties.UpdateMode ? "Save Changes" : "Update"}
                                     </Button>
                             
                                 <Button 
@@ -227,6 +342,8 @@ export default function Update(){
                                     type="default">
                                         Clear
                                     </Button>
+
+                                    
                             </Navbar>
                         </div>
       

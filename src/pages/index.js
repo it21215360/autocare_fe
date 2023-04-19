@@ -23,8 +23,17 @@ export { default as StockReturnForm } from "./stock_management/StockReturnForm";
 export { default as GoodReceiveForm } from "./stock_management/GoodReceiveForm";
 
 //it21197000@my.sliit.lk - Chethani
-export { default as ProductMaster } from "./masters/productMaster";
 
+export { default as Scheduling } from './scheduling/Scheduling_appointment';
+export { default as PackageDetails } from './scheduling/PackageDetails';
+export { default as Update } from './scheduling/Update_appointment';
+export { default as Cancel } from './scheduling/Cancel_appointment';
+export { default as Confirm } from './scheduling/Confirm_appointment';
+export { default as ServiceLogin } from './scheduling/Login';
+export { default as AppointList } from './scheduling/AppointmentList';
+export { default as Memo } from './scheduling/Memo';
+export { default as ServiceAppoinment } from './scheduling/Service';
+export { default as ServiceList } from './scheduling/ServiceList';
 //it21198090@my.sliit.lk - Shania
 export { default as Scheduling } from "./scheduling/Scheduling_appointment";
 export { default as PackageDetails } from "./scheduling/PackageDetails";

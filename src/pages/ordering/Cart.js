@@ -1,14 +1,41 @@
-import React from 'react';
+import React, { Component, Fragment, useEffect, useState } from "react";
 import 'devextreme/dist/css/dx.light.css';
 import DataGrid, { Column, SearchPanel, Editing, ValidationRule } from 'devextreme-react/data-grid';
 import { Button } from 'devextreme-react';
+import { API_BASE_URL } from "../../appconfig/config";
+import axios from "axios";
 
 
-
-export default function Cart() {
+const Cart = (props) => {
     
-    const [cartItem] = [{AutoID: 1, ProdID: 23, ProductCategory:'Automobile Clean and Care', ProductName: 'Carseat', UnitPrice: '385', Quantity: 3, TotalPrice: '1128'}]
+    //const [cartItem] = [{AutoID: 1, ProdID: 23, ProductCategory:'Automobile Clean and Care', ProductName: 'Carseat', UnitPrice: '385', Quantity: 3, TotalPrice: '1128'}]
    
+    const [selectedID, setSelectedID] = useState(0);
+    const [cartItem, setCartItem] = useState([]);
+    const [isLoadingData, setIsdataLoading] = useState(true);
+    const fetchURL = `${API_BASE_URL}/api/order/list-cart`;
+  
+    useEffect(() => {
+      if (isLoadingData)
+        axios.get(fetchURL).then((response) => {
+          console.log(response);
+          setCartItem(response.data);
+          setIsdataLoading(false);
+        });
+    }, []);
+  
+    const onSelectClick = (e) => {
+      props.OnHide(selectedID);
+    };
+  
+    const onCloseClick = (e) => {
+      props.HideTheList();
+    };
+  
+    const onSelectionChanged = (e) => {
+      setSelectedID(e.selectedRowsData[0].CartID);
+    };
+
     return (
         <React.Fragment>
             <div className={'content-block'}>
@@ -43,4 +70,6 @@ export default function Cart() {
         </React.Fragment>
 
     )
-}
+};
+
+export default Cart;

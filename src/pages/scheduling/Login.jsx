@@ -7,6 +7,7 @@ import { useState } from "react";
 import Card from 'react-bootstrap/Card';
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
+import notify from "devextreme/ui/notify";
 
 function ServiceLogin() {
 
@@ -21,6 +22,10 @@ function ServiceLogin() {
       })
       .then((response) => {
         console.log(response);
+        if (response.data.affectedRows === 1) {
+          showSuccessAlert(`Successfuly Loged In!`);
+         
+        }
       })
       .catch((error) => {});
     }catch (error) {
@@ -28,12 +33,25 @@ function ServiceLogin() {
     }
 };
 
-
+const showSuccessAlert = (successMsg) => {
+  notify(
+    {
+      message: successMsg.toString(),
+      width: 450,
+    },
+    "success",
+    3000
+  );
+};
 
   return (
     <>
       <div className={'back-box'}>
-        <h2 className="head1">Service Station Management</h2>
+        <h2 
+        style={{margin:30}
+        }>
+          Service Station Management
+          </h2>
         <Form formData={userloginInfo}>
           <GroupItem colCount={1}>
             <Item 
@@ -53,7 +71,7 @@ function ServiceLogin() {
                 editorOptions={{                  
                 readOnly: false,
                 }}>
-              <Label text="User Name">
+              <Label text="Password">
               </Label>
               <RequiredRule message="Field required"></RequiredRule>
             </Item>
@@ -62,22 +80,16 @@ function ServiceLogin() {
         </Form>
 
         <Navbar bg="light" variant="light">
-                                <Button 
-                                    className="button1"
-                                    stylingMode="contained" 
-                                    type="success" 
-                                    onClick={onSaveBtnClick}
-                                >
-                                        Save
-                                </Button>
-                                <Button 
-                                    className="button2"
-                                    stylingMode="contained" 
-                                    type="default"
-                                >
-                                        Clear
-                                </Button>
-                                </Navbar>
+          <Button 
+              className="button1"
+              stylingMode="contained" 
+              type="success" 
+              onClick={onSaveBtnClick}
+          >
+                  Save
+          </Button>
+          
+          </Navbar>
         <br />
       </div>
 
