@@ -4,7 +4,7 @@ import Popover from 'devextreme-react/popover';
 
 const formatCurrency = new Intl.NumberFormat('en-US', {
   style: 'currency',
-  currency: 'USD',
+  currency: 'Rs.',
   minimumFractionDigits: 0,
   maximumFractionDigits: 2,
 }).format;
