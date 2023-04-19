@@ -58,16 +58,6 @@ export { default as invoice } from "./ordering/Invoice";
 export { default as newpage } from "./ordering/new";
 
 
-//Amanda
-export { default as RaiseTicket } from "./customer_care/raiseTicket";
-
-
-
-
-
-
-
-
 //it21238994@my.sliit.lk - Amanda
 export { default as MyTicket } from './customer_care/myTicket';
 export { default as TrackTicket } from './customer_care/trackTicket'
