@@ -29,6 +29,8 @@ import {
   TrackTicket,
   RaiseTicketForm,
   FreaquentQuestionPage,
+ 
+  //ViewMasterProd,
 
 
   EmpLogin,
@@ -43,6 +45,7 @@ import {
   Ordersdet,
   newpage
 } from "./pages";
+import {ProductMaster} from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 import invoice from "./pages/ordering/Invoice";
 
@@ -82,6 +85,8 @@ const routes = [
 
   //it21198090@my.sliit.lk - Shania
   { path: "ProductCategory", element: ProductCategory },
+  { path: "ProductMaster",element:ProductMaster},
+  
   // { path: "/masters/ViewMasterProd", element: ProductCategoryview },
   // { path: "/masters/ProductCat", element: App },
 

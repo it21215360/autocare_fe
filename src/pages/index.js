@@ -37,6 +37,7 @@ export { default as Confirm } from './scheduling/Confirm_appointment';
 
 
 //it21198090@my.sliit.lk - Shania
+export {default as ProductMaster} from './masters/ProductMaster';
 
 //it21307362@my.sliit.lk - Fernando ST
 
