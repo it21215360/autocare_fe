@@ -25,11 +25,6 @@ import {
   PackageDetails,
   Update,
   Cancel,
- 
-  //ViewMasterProd,
-
-
-
   EmpLogin,
   EmployeeMaster,
   RaiseTicket,
@@ -52,7 +47,7 @@ import {
   FreaquentQuestionPage,
   ProductMaster,
 } from "./pages";
-import {ProductMaster} from "./pages";
+
 import { withNavigationWatcher } from "./contexts/navigation";
 import invoice from "./pages/ordering/Invoice";
 

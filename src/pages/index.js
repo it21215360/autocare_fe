@@ -13,7 +13,6 @@ export { default as EmpLogin } from "./payroll_hr/employeeLogin";
 export { default as EmployeeMaster } from "./payroll_hr/employeeMaster";
 
 //it21324406@my.sliit.lk - Shanoli
-
 export { default as InventoryLogin } from "./stock_management/InventoryLogin";
 export { default as Storage } from "./stock_management/Storage";
 export { default as Suppliers } from "./stock_management/Suppliers";
@@ -23,25 +22,19 @@ export { default as StockReturnForm } from "./stock_management/StockReturnForm";
 export { default as GoodReceiveForm } from "./stock_management/GoodReceiveForm";
 
 //it21197000@my.sliit.lk - Chethani
-
-export { default as Scheduling } from './scheduling/Scheduling_appointment';
-export { default as PackageDetails } from './scheduling/PackageDetails';
-export { default as Update } from './scheduling/Update_appointment';
-export { default as Cancel } from './scheduling/Cancel_appointment';
-export { default as Confirm } from './scheduling/Confirm_appointment';
-export { default as ServiceLogin } from './scheduling/Login';
-export { default as AppointList } from './scheduling/AppointmentList';
-export { default as Memo } from './scheduling/Memo';
-export { default as ServiceAppoinment } from './scheduling/Service';
-export { default as ServiceList } from './scheduling/ServiceList';
-//it21198090@my.sliit.lk - Shania
 export { default as Scheduling } from "./scheduling/Scheduling_appointment";
 export { default as PackageDetails } from "./scheduling/PackageDetails";
 export { default as Update } from "./scheduling/Update_appointment";
 export { default as Cancel } from "./scheduling/Cancel_appointment";
-export { default as oil } from "./scheduling/Cancel_appointment";
 export { default as Confirm } from "./scheduling/Confirm_appointment";
 export { default as ServiceLogin } from "./scheduling/Login";
+export { default as AppointList } from "./scheduling/AppointmentList";
+export { default as Memo } from "./scheduling/Memo";
+export { default as ServiceAppoinment } from "./scheduling/Service";
+export { default as ServiceList } from "./scheduling/ServiceList";
+export { default as ProductMaster } from "./masters/ProductMaster";
+
+//it21198090@my.sliit.lk - Shania
 
 //it21307362@my.sliit.lk - Fernando ST
 export { default as CourierRegistration } from "./courier/CourierRegistration";

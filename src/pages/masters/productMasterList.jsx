@@ -14,7 +14,7 @@ const ProductMasterList = (props) => {
   const [selectedID, setSelectedID] = useState(0);
   const [productList, setProductList] = useState([]);
   const [isLoadingData, setIsdataLoading] = useState(true);
-  const fetchURL = `${API_BASE_URL}/api/product/list-product`;
+  const fetchURL = `${API_BASE_URL}/api/product/list-product`; 
 
   useEffect(() => {
     if (isLoadingData)
@@ -54,7 +54,7 @@ const ProductMasterList = (props) => {
         <SearchPanel visible={true} />
         <Paging defaultPageSize={10} />
         <Column dataField="AutoID" visible={false} />
-        <Column dataField="Code" caption="Product Code" />
+        <Column dataField="Code" caption="Product Code"/>
         <Column dataField="IsActive" caption="IsActive Status" />
         <Column dataField="CreatedDate" caption="Date Created" />
         <Column dataField="UpdatedDate" caption="Date Updated" />
