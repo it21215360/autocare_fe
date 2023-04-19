@@ -11,7 +11,7 @@ import {
   DeliveryConfirm,
   CourierRegistration,
   VehicleReg,
-  DeliveryRequestForm,
+  deliveryRequest,
   ShippingManage,
   CourierProfile,
   InventoryLogin,
@@ -25,12 +25,6 @@ import {
   PackageDetails,
   Update,
   Cancel,
-  MyTicket,
-  TrackTicket,
-  RaiseTicketForm,
-  FreaquentQuestionPage,
-  AppointList,
-  ServiceLogin,
   EmpLogin,
   EmployeeMaster,
   RaiseTicket,
@@ -42,9 +36,12 @@ import {
   Confirm,
   Memo,
   Ordersdet,
-  ServiceAppoinment,
-  ServiceList,
-  newpage
+  newpage,
+  ServiceLogin,
+  MyTicket,
+  TrackTicket,
+  RaiseTicketForm,
+  FreaquentQuestionPage,
 } from "./pages";
 import { withNavigationWatcher } from "./contexts/navigation";
 import invoice from "./pages/ordering/Invoice";
@@ -99,7 +96,7 @@ const routes = [
 
   { path: "courier/CourierRegistration", element: CourierRegistration },
   { path: "courier/VehicleReg", element: VehicleReg },
-  { path: "courier/DeliveryRequestForm", element: DeliveryRequestForm },
+  { path: "courier/deliveryRequest", element: deliveryRequest },
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
   { path: "courier/DeliveryConfirm", element: DeliveryConfirm },
@@ -110,23 +107,17 @@ const routes = [
   { path: "customer_care/raiseTikcket", element: RaiseTicketForm },
   { path: "customer_care/freaquentQuestion", element: FreaquentQuestionPage },
 
-
-
-//where's the prettier formtter??
-
-
+  //where's the prettier formtter??
 
   //it21326936@my.sliit.lk - Amandi
   { path: "Ordering/Order_details", element: OrderForm },
-  { path: 'Ordering/Cart', element: Cart },
+  { path: "Ordering/Cart", element: Cart },
   { path: "Ordering/Card_details", element: CardForm },
   { path: "Ordering/Product", element: ProductPage },
   { path: "Ordering/Orders_Admin", element: Ordersdet },
   { path: "Ordering/Return_products", element: ReturnProduct },
   { path: "Ordering/Invoice", element: invoice },
   { path: "Ordering/new", element: newpage },
-
-
 ];
 
 export default routes.map((route) => {

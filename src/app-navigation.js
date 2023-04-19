@@ -96,7 +96,7 @@ export const navigation = [
       
       { text: 'Courier Registration', path: './courier/CourierRegistration' },
       { text: 'Vehicle Register', path: 'courier/VehicleReg' },
-      { text: 'Delivery Request Form', path: 'courier/DeliveryRequestForm' },
+      { text: 'Delivery Request Form', path: 'courier/deliveryRequest' },
       { text: 'Shipping Manage', path: 'courier/ShippingManage' },
       { text: 'Courier Profile', path: 'courier/CourierProfile' },
       { text: 'Delivery Confirm', path: 'courier/DeliveryConfirm' },

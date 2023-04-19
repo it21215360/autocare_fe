@@ -44,7 +44,7 @@ export { default as ServiceList } from './scheduling/ServiceList';
 
 export { default as CourierRegistration } from "./courier/CourierRegistration";
 export { default as VehicleReg } from "./courier/VehicleReg";
-export { default as DeliveryRequestForm } from "./courier/DeliveryRequestForm";
+export { default as deliveryRequest } from "./courier/deliveryRequest";
 export { default as ShippingManage } from "./courier/ShippingManage";
 export { default as CourierProfile } from "./courier/CourierProfile";
 export { default as DeliveryConfirm } from "./courier/DeliveryConfirm";
@@ -58,16 +58,6 @@ export { default as Cart } from "./ordering/Cart";
 export { default as Ordersdet } from "./ordering/Orders_Admin";
 export { default as invoice } from "./ordering/Invoice";
 export { default as newpage } from "./ordering/new";
-
-
-//Amanda
-export { default as RaiseTicket } from "./customer_care/raiseTicket";
-
-
-
-
-
-
 
 
 //it21238994@my.sliit.lk - Amanda
