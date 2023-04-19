@@ -1,41 +1,34 @@
-<<<<<<< HEAD
-import React, { Component } from "react";
-=======
+
+import React, { useEffect } from "react";
 import { useState } from "react";
-import React, { Component } from "react";
 import { Button } from "devextreme-react/button";
->>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31
+
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
-import { Navbar, ListGroup } from "react-bootstrap";
-import { LoadPanel } from "devextreme-react/load-panel";
-import notify from "devextreme/ui/notify";
-import { useState } from "react";
-import { SelectBox } from "devextreme-react";
-import { Button } from 'devextreme-react/button';
-
 import axios from "axios";
-
+import ShippingManage from "./ShippingManage";
 
 import { API_BASE_URL } from "../../appconfig/config";
-import './DeliveryRequestForm.css';
+//import './DeliveryRequestForm.css';
 
 
-const DeliveryRequestForm = () => {
+const DeliveryRequest = () => {
   const [RequestInfo, setRequestInfo] = useState({});
+  const [pageProperties, setPageProperties] = useState({
+    DeliverReqID: 0,
+    DataLoading: false,
+    isDocReadOnly: false,
+    UpdateMode: false,
+  });
+
+  const [showList, setShowList] = useState(false);
   
   const onSaveBtnClick = (e) => {
     try {
       console.log(RequestInfo);
       axios
-<<<<<<< HEAD
-        .post(`${API_BASE_URL}/api/Request/add-Request`, {
-          RequestDetails : JSON.stringify(RequestInfo),
-          
-=======
-        .post(`${API_BASE_URL}/api/courier/add-Request`, {
+        .post(`${API_BASE_URL}/api/deliveryrequest/add-deliveryrequest`, {
           RequestDetails: JSON.stringify(RequestInfo),
->>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31
         })
         .then((response) => {
           console.log(response);
@@ -45,10 +38,56 @@ const DeliveryRequestForm = () => {
       console.error(error);
     }
   };
+  const OnLoadData = () => {
+    try {
+      if (pageProperties.DeliverReqID != 0 && pageProperties.UpdateMode)
+        axios
+          .get(`${API_BASE_URL}/api/deliveryrequest/get-deliveryrequest`, {
+            params: {
+              EmpID: pageProperties.DeliverReqID,
+            },
+          })
+          .then((res) => {
+            console.log(res.data[0]);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
+  const onListClose = () => {
+    setShowList(false);
+  };
+
+  const onListClickEvent = (viewListSelectedID) => {
+    debugger;
+    if (showList && viewListSelectedID != 0) {
+      setShowList(!showList);
+      setPageProperties({
+        DeliveryReqID: viewListSelectedID,
+        DataLoading: true,
+        isDocReadOnly: true,
+        UpdateMode: true,
+      });
+
+      OnLoadData();
+    }
+  };
 
   return (
     <>
+     {showList ? (
+        <div className={"content-block"}>
+          <ShippingManage
+            Show={showList}
+            OnHide={onListClickEvent}
+            HideTheList={onListClose}
+          ></ShippingManage>
+        </div>
+      ) : (
     <div className={'content-block'}>
            <h2>Request for a delivery</h2>
       <Form formData={RequestInfo}>
@@ -133,46 +172,17 @@ const DeliveryRequestForm = () => {
       
      
      <Button type="success"  stylingMode="contained" onClick={onSaveBtnClick}>Submit</Button>
+
+     
+
      </div>
+      )}
+     
+      
      </>
+      
   );
 };
 
 
-=======
-    <form formData={RequestInfo}>
-      <h2>Request for a delivery</h2>
-      <div className="form-group">
-        <label>Order ID:</label>
-        <input type="text" />
-      </div>
-      <div className="form-group">
-        <label>Name:</label>
-        <input type="text" required />
-      </div>
-      <div className="form-group">
-        <label>Phone:</label>
-        <input type="text" required />
-      </div>
-      <div className="form-group">
-        <label>Address:</label>
-        <input type="text" required />
-      </div>
-      <div className="form-group">
-        <label>City:</label>
-        <input type="text" required />
-      </div>
-      <div className="form-group">
-        <label>Province:</label>
-        <input type="text" id="province" required />
-      </div>
-
-      <Button type="success" onClick={onSaveBtnClick}>
-        Submit
-      </Button>
-    </form>
-  );
-};
-
->>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31
-export default DeliveryRequestForm;
+export default DeliveryRequest;

@@ -11,7 +11,7 @@ import {
   DeliveryConfirm,
   CourierRegistration,
   VehicleReg,
-  DeliveryRequestForm,
+  deliveryRequest,
   ShippingManage,
   CourierProfile,
   InventoryLogin,
@@ -25,6 +25,7 @@ import {
   PackageDetails,
   Update,
   Cancel,
+
   EmpLogin,
   EmployeeMaster,
   RaiseTicket,
@@ -82,7 +83,7 @@ const routes = [
  
   { path: "courier/CourierRegistration", element: CourierRegistration },
   { path: "courier/VehicleReg", element: VehicleReg },
-  { path: "courier/DeliveryRequestForm", element: DeliveryRequestForm },
+  { path: "courier/deliveryRequest", element: deliveryRequest },
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
   { path: "courier/DeliveryConfirm", element:DeliveryConfirm },

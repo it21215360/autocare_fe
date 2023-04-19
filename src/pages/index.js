@@ -47,7 +47,7 @@ export { default as Confirm } from './scheduling/Confirm_appointment';
 
 export { default as CourierRegistration } from "./courier/CourierRegistration";
 export { default as VehicleReg } from "./courier/VehicleReg";
-export { default as DeliveryRequestForm } from "./courier/DeliveryRequestForm";
+export { default as deliveryRequest } from "./courier/deliveryRequest";
 export { default as ShippingManage } from "./courier/ShippingManage";
 export { default as CourierProfile } from "./courier/CourierProfile";
 export { default as DeliveryConfirm } from "./courier/DeliveryConfirm";

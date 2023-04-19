@@ -1,70 +1,56 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
+
+import Form from 'devextreme-react/form';
 
 export default function CourierProfile() {
   const [notes, setNotes] = useState(
-    'Ruwan is our new courier man '
+    'Sandra is a CPA and has been our controller since 2008. She loves to interact with staff so if you`ve not met her, be certain to say hi.\r\n\r\nSandra has 2 daughters both of whom are accomplished gymnasts.'
   );
-  const Courier = {
+  const courier = {
     ID: 7,
-    FirstName: 'Ruwan',
-    LastName: 'Perera',
-    Prefix: 'Mr.',
-    Position: 'Delivery Driver',
-    Picture: 'image/Courier/delivery.jpg',
-    NIC: '73892829282',
-    JoinDate: new Date('2022/05/11'),
+    FirstName: 'Sandra',
+    LastName: 'Johnson',
+    Prefix: 'Mrs.',
+    Position: 'Controller',
+    Picture: 'images/employees/06.png',
+    BirthDate: new Date('1974/11/5'),
+    HireDate: new Date('2005/05/11'),
     Notes: notes,
-    Address: '46/B  Colombo Rd.'
+    Address: '4600 N Virginia Rd.'
   };
 
   return (
-    <div>
-      <h2> Ruwan Perera</h2>
-      <label htmlFor="profile-image-input">
-        {profileImage ? (
-          <img src={profileImage} alt="Profile image"   style={{ maxWidth: 150, maxHeight: 150 }} />
-        
-        ) : (
-          <div>Upload profile image</div>
-        )}
-      </label>
-      <input
-        id="profile-image-input"
-        type="file"
-        accept="image/*"
-        onChange={handleImageUpload}
-        style={{ display: 'none' }}
-      />
-    </div>
-  );
-}
+    <React.Fragment>
+      <h2 className={'content-block'}>Profile</h2>
 
-=======
-import React from "react";
-
-function CourierProfile() {
-  return (
-    <div className="courier-menu">
-      <h1 className="title-pen">
-        {" "}
-        User Profile <span>UI</span>
-      </h1>
-      <div className="user-profile">
-        <img
-          className="avatar"
-          src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTF_erFD1SeUnxEpvFjzBCCDxLvf-wlh9ZuPMqi02qGnyyBtPWdE-3KoH3s"
-          alt="Ash"
-        />
-        <div className="username">Will Smith</div>
-        <div className="bio">Senior UI Designer</div>
-        <div className="description">
-          I use to design websites and applications for the web.
+      <div className={'content-block dx-card responsive-paddings'}>
+        <div className={'form-avatar1'}>
+          <img
+            alt={''}
+            src={`https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/${
+              courier.Picture
+  }`}
+          />
         </div>
+        <span>{notes}</span>
       </div>
-    </div>
+
+      <div className={'content-block dx-card responsive-paddings'}>
+        <Form
+          id={'form'}
+          defaultFormData={courier}
+          onFieldDataChanged={e => e.dataField === 'Notes' && setNotes(e.value)}
+          labelLocation={'top'}
+          colCountByScreen={colCountByScreen}
+        />
+      </div>
+    </React.Fragment>
   );
 }
 
->>>>>>> e61951fafa09db7486dc8c4afaa9583afc111e31
-export default CourierProfile;
+const colCountByScreen = {
+  xs: 1,
+  sm: 2,
+  md: 3,
+  lg: 4
+};
