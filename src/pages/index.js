@@ -47,12 +47,11 @@ export { default as DeliveryConfirm } from "./courier/DeliveryConfirm";
 //it21326936@my.sliit.lk - Amandi
 export { default as OrderForm } from "./ordering/Order_details";
 export { default as CardForm } from "./ordering/Card_details";
-export { default as ProductPage } from "./ordering/Product";
+export { default as ProductPage } from "./ordering/ProductListView";
 export { default as ReturnProduct } from "./ordering/Return_products";
 export { default as Cart } from "./ordering/Cart";
 export { default as Ordersdet } from "./ordering/Orders_Admin";
 export { default as invoice } from "./ordering/Invoice";
-export { default as newpage } from "./ordering/new";
 
 //it21238994@my.sliit.lk - Amanda
 export { default as MyTicket } from "./customer_care/myTicket";

@@ -8,7 +8,7 @@ function RaiseTicketForm() {
   const inputRef = useRef();
   const [files, setFiles] = useState([]);
 
-  const [budgetdefinition, setBudgetdefinition] = useState({
+  const [ticketInfo, setTicketInfo] = useState({
     fullName: "Sandra Johnson",
     customerId: "000000",
     email: "sandra@example.com",
@@ -72,13 +72,13 @@ function RaiseTicketForm() {
     <>
       <div className={"content-block"}>
         <h2>Raise Ticket</h2>
-        <h4>
+        <h6>
           Please complete this form and one of our agents will reply to you by
           email as soon as possible.
-        </h4>
+        </h6>
         <hr />
 
-        <Form formData={budgetdefinition}>
+        <Form formData={ticketInfo}>
           <GroupItem colCount={2}>
             <Item
               dataField="fullName"
@@ -165,7 +165,7 @@ function RaiseTicketForm() {
               <RequiredRule message="Field required" />
             </Item>
 
-            <item>
+            {/* <item>
               {!files && (
                 <div
                   className="dropzone"
@@ -186,8 +186,8 @@ function RaiseTicketForm() {
                   </Button>
                 </div>
               )}
-              ;<Label text="Add Attachment"></Label>
-            </item>
+              <Label text="Add Attachment"></Label>
+            </item> */}
           </GroupItem>
         </Form>
 

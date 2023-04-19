@@ -7,8 +7,6 @@ import DataGrid, {
 } from "devextreme-react/data-grid";
 import { Button } from "devextreme-react";
 
-import RaiseTicketForm from "./raiseTicket";
-
 export default function MyTicket() {
   const myDataSource = [
     {
