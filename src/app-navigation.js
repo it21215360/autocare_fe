@@ -19,8 +19,6 @@ export const navigation = [
     ],
   },
 
-  //shamith
-
   //it21215360@my.sliit.lk - Maheesha
   {
     text: "Payroll and HR",
@@ -63,15 +61,21 @@ export const navigation = [
     text: "Scheduling",
     icon: "event",
     items: [
-      { text: 'Scheduling Appointment', path: 'scheduling/Scheduling_appointment' },
-      { text: 'Update Appointment', path: 'scheduling/Update_appointment' },
-      { text: 'Confirm Appointment viewer', path: 'scheduling/Confirm_appointment' },
-      { text: 'Cancel Appointment', path: 'scheduling/Cancel_appointment' },
-      { text: 'Booked memo viewer', path: 'scheduling/Memo' },
-      { text: 'Package Details', path: 'scheduling/Package' },
-      { text: 'Service Manager Login', path: 'scheduling/Login' },
-      { text: 'Service Scheduling', path: 'scheduling/Service' },
-    ]
+      {
+        text: "Scheduling Appointment",
+        path: "scheduling/Scheduling_appointment",
+      },
+      { text: "Update Appointment", path: "scheduling/Update_appointment" },
+      {
+        text: "Confirm Appointment viewer",
+        path: "scheduling/Confirm_appointment",
+      },
+      { text: "Cancel Appointment", path: "scheduling/Cancel_appointment" },
+      { text: "Booked memo viewer", path: "scheduling/Memo" },
+      { text: "Package Details", path: "scheduling/Package" },
+      { text: "Service Manager Login", path: "scheduling/Login" },
+      { text: "Service Scheduling", path: "scheduling/Service" },
+    ],
   },
 
   //it21198090@my.sliit.lk - Shania

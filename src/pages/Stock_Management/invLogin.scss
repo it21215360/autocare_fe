@@ -1,46 +1,41 @@
-
-.back-box{
-    background-color: rgba(246, 237, 237, 0.448);
-    width: 25%;
-    height: 50%;
-    position: relative;
-    margin: auto;
-    margin-top: 5rem;
-    border-radius: 1em;
-    box-shadow: 0 0.188em 1.550em rgb(143, 140, 140);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+.back-box {
+  background-color: rgba(246, 237, 237, 0.448);
+  width: 25%;
+  height: 50%;
+  position: relative;
+  margin: auto;
+  margin-top: 5rem;
+  border-radius: 1em;
+  box-shadow: 0 0.188em 1.55em rgb(143, 140, 140);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.head1{
-    color: rgba(252, 96, 6, 0.93);
-    font-style: bold;
+.head1 {
+  color: rgba(252, 96, 6, 0.93);
+  font-style: bold;
 }
 
-.head2{
-    color: rgba(105, 98, 94, 0.785);
-    font-size: medium;
-    font-family:forte;
-    text-align: center;
-    
+.head2 {
+  color: rgba(105, 98, 94, 0.785);
+  font-size: medium;
+  font-family: forte;
+  text-align: center;
 }
 
-.log1{
-    color: rgba(252, 96, 6, 0.93);
-    padding-top: 10px;
+.log1 {
+  color: rgba(252, 96, 6, 0.93);
+  padding-top: 10px;
 }
 
-.pwd{
-    color: rgba(252, 96, 6, 0.448);
-    padding-left: 50%;
-    font-size: smaller;
-    
+.pwd {
+  color: rgba(252, 96, 6, 0.448);
+  padding-left: 50%;
+  font-size: smaller;
 }
 
-.log{
-    align-items: center; 
-   
-
+.log {
+  align-items: center;
 }

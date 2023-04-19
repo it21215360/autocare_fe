@@ -104,7 +104,7 @@ const routes = [
   //it21238994@my.sliit.lk - Amanda
   { path: "customer_care/myTicket", element: MyTicket },
   { path: "customer_care/trackTicket", element: TrackTicket },
-  { path: "customer_care/raiseTikcket", element: RaiseTicketForm },
+  { path: "customer_care/raiseTicket", element: RaiseTicketForm },
   { path: "customer_care/freaquentQuestion", element: FreaquentQuestionPage },
 
   //it21326936@my.sliit.lk - Amandi
@@ -115,7 +115,6 @@ const routes = [
   { path: "Ordering/Orders_Admin", element: Ordersdet },
   { path: "Ordering/Return_products", element: ReturnProduct },
   { path: "Ordering/Invoice", element: invoice },
-  { path: "Ordering/new", element: newpage },
 ];
 
 export default routes.map((route) => {
