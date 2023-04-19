@@ -29,30 +29,102 @@ const PurchaseOrderForm = () => {
    // const productCategory = [{ AutoID: 1, Name: 'Automobile Tyres' }, { AutoID: 2, Name: 'Automobile Clean & Care' }, { AutoID: 3, Name: 'Automobile Spare Parts' }, { AutoID: 4, Name: 'Engine Oil & Lubricant' }, { AutoID: 5, Name: 'Automobile Lighting' }, { AutoID: 6, Name: 'Automobile Electronics' }]
 
    const [showList, setShowList] = useState(false);
-   const currencyFormat = {
+   /*const currencyFormat = {
      style: "currency",
      currency: "LKR",
      useGrouping: true,
      minimumSignificantDigits: 3,
-   };
+   };*/
 
-    const onSaveBtnClick = (e) => {
-        try {
-          axios
-            .post(`${API_BASE_URL}/api/stockOrder/add-stockOrder`, {
-
-                PurchaseOrderInfo : JSON.stringify(pOrderDetails),
-             
-            })
-            .then((response) => {
-              console.log(response);
-            })
-            .catch((error) => {});
+   const onSaveBtnClick = (e) => {
+    try {
+      pageProperties.UpdateMode ? updateStockOrder() : addStockOrder();
+     
         } catch (error) {
-          console.error(error);
-        }
-      };
-    
+      console.error(error);
+    }
+  };
+
+  const resetPageProperties = () => {
+    setPageProperties({
+      OrderID: 0,
+      DataLoading: false,
+      isDocReadOnly: false,
+      UpdateMode: false,
+    });
+  };
+
+   
+  const showErrorAlert = (errorMsg) => {
+    notify(
+      {
+        message: errorMsg.toString(),
+        width: 450,
+      },
+      "error",
+      3000
+    );
+  };
+
+  const showSuccessAlert = (successMsg) => {
+    notify(
+      {
+        message: successMsg.toString(),
+        width: 450,
+      },
+      "success",
+      3000
+    );
+  };
+
+  const updateStockOrder = () => {
+    try {
+      if (pageProperties.OrderID > 0)
+        axios
+          .put(`${API_BASE_URL}/api/stockOrder/update-stockOrder`, {
+            OrderID: pageProperties.OrderID,
+            PurchaseOrderInfo : JSON.stringify(pOrderDetails),
+           
+          })
+          .then((response) => {
+            console.log(response);
+            if (response.data.affectedRows === 1) {
+              showSuccessAlert(`Purchase Order Details Updated!`);
+            }
+          })
+          .catch((error) => {
+            showErrorAlert(error);
+          });
+    } catch (error) {
+      console.error(error);
+      showErrorAlert(error);
+    }
+  };
+
+  const addStockOrder  = () => {
+    try {
+      axios
+        .post(`${API_BASE_URL}/api/stockOrder/add-stockOrder`, {
+          PurchaseOrderInfo: JSON.stringify(pOrderDetails),
+         
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.affectedRows > 0) {
+            showSuccessAlert(`Stock Order Details Added!`);
+            onClearBtnClick();
+          }
+        })
+        .catch((error) => {
+          showErrorAlert(error);
+        });
+    } catch (error) {
+      console.error(error);
+      showErrorAlert(error);
+    }
+  };
+
+
       const OnLoadData = (orderId) => {
         try {
           axios
@@ -91,6 +163,12 @@ const PurchaseOrderForm = () => {
           
       OnLoadData(viewListSelectedID);
     }
+  };
+
+  const onClearBtnClick = () => {
+    resetPageProperties();
+    setPOrderDetails({});
+   
   };
 
     return (
@@ -247,9 +325,9 @@ const PurchaseOrderForm = () => {
                 </Card>
                 <br/><br/>
                 <Navbar bg="light" variant="light" className="crud_panel_buttons">
-                    <Button className="crud_panel_buttons" stylingMode="contained" type="success" onClick={onSaveBtnClick}>Save</Button>
+                    <Button className="crud_panel_buttons" stylingMode="contained" type="success" onClick={onSaveBtnClick}>{pageProperties.UpdateMode ? "Save Changes" : "Submit"}</Button>
                     <Button stylingMode="contained" type="default"  onClick={() => setShowList(true)}>View List</Button>
-                    <Button className="crud_panel_buttons" stylingMode="contained" type="default">Clear</Button>
+                    <Button className="crud_panel_buttons" stylingMode="contained" type="default" onClick={onClearBtnClick}>Clear</Button>
                 </Navbar>
             </div>
   )}

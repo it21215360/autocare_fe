@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import { Button } from "devextreme-react/button";
 import DataGrid, { Column,SearchPanel,Paging,} from "devextreme-react/data-grid";
 import { Navbar } from "react-bootstrap";
+import './returnList.scss';
 import { API_BASE_URL } from "../../appconfig/config";
 import axios from "axios";
 
@@ -61,7 +62,7 @@ const ReturnStockList = (props) => {
       <br></br>
       <Navbar bg="light" variant="light" className="crud_panel_buttons">
         <Button
-          className="crud_panel_buttons"
+          className="openBtn"
           stylingMode="contained"
           type="success"
           onClick={onSelectClick}
@@ -69,7 +70,7 @@ const ReturnStockList = (props) => {
           Open
         </Button>
         <Button
-          className="crud_panel_buttons"
+          className="closeBtn"
           stylingMode="contained"
           type="default"
           onClick={onCloseClick}

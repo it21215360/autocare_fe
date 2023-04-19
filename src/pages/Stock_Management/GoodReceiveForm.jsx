@@ -9,6 +9,7 @@ import { SelectBox } from "devextreme-react";
 import { Button } from 'devextreme-react/button';
 import { DateBox } from 'devextreme-react/calendar';
 import axios from "axios";
+import './goodReceiveForm.scss';
 import { API_BASE_URL } from "../../appconfig/config";
 import  GoodReceivedList from "./GoodReceivedList";
 
@@ -30,30 +31,103 @@ const  GoodReceiveForm = () => {
       });
 
       const [showList, setShowList] = useState(false);
-      const currencyFormat = {
+      /*const currencyFormat = {
         style: "currency",
         currency: "LKR",
         useGrouping: true,
         minimumSignificantDigits: 3,
-      };
+      };*/
   
 
-    const onSaveBtnClick = (e) => {
+      const onSaveBtnClick = (e) => {
+        try {
+          pageProperties.UpdateMode ? updateReceiveStock() : addReceiveStock();
+         
+            } catch (error) {
+          console.error(error);
+        }
+      };
+
+      const resetPageProperties = () => {
+        setPageProperties({
+          GoodReceiveID: 0,
+          DataLoading: false,
+          isDocReadOnly: false,
+          UpdateMode: false,
+        });
+      };
+
+       
+      const showErrorAlert = (errorMsg) => {
+        notify(
+          {
+            message: errorMsg.toString(),
+            width: 450,
+          },
+          "error",
+          3000
+        );
+      };
+    
+      const showSuccessAlert = (successMsg) => {
+        notify(
+          {
+            message: successMsg.toString(),
+            width: 450,
+          },
+          "success",
+          3000
+        );
+      };
+
+      const updateReceiveStock = () => {
+        try {
+          if (pageProperties.GoodReceiveID > 0)
+            axios
+              .put(`${API_BASE_URL}/api/receiveStock/update-receiveStock`, {
+                GoodReceiveID: pageProperties.GoodReceiveID,
+                ReceiveDetails : JSON.stringify(stockReceiveInfo),
+               
+              })
+              .then((response) => {
+                console.log(response);
+                if (response.data.affectedRows === 1) {
+                  showSuccessAlert(`Received Stock Details Updated!`);
+                }
+              })
+              .catch((error) => {
+                showErrorAlert(error);
+              });
+        } catch (error) {
+          console.error(error);
+          showErrorAlert(error);
+        }
+      };
+
+      const addReceiveStock  = () => {
         try {
           axios
             .post(`${API_BASE_URL}/api/receiveStock/add-receiveStock`, {
-                ReceiveDetails: JSON.stringify(stockReceiveInfo),
+              ReceiveDetails: JSON.stringify(stockReceiveInfo),
              
             })
             .then((response) => {
               console.log(response);
+              if (response.data.affectedRows > 0) {
+                showSuccessAlert(`Received Stock Details Added!`);
+                onClearBtnClick();
+              }
             })
-            .catch((error) => {});
+            .catch((error) => {
+              showErrorAlert(error);
+            });
         } catch (error) {
           console.error(error);
+          showErrorAlert(error);
         }
       };
-      
+
+
       const OnLoadData = (receiveId) => {
         try {
           axios
@@ -93,6 +167,12 @@ const  GoodReceiveForm = () => {
           
       OnLoadData(viewListSelectedID);
     }
+  };
+
+  const onClearBtnClick = () => {
+    resetPageProperties();
+    setStockReceiveInfo({});
+   
   };
 
     return (
@@ -209,9 +289,9 @@ const  GoodReceiveForm = () => {
 
 
                 <Navbar bg="light" variant="light">
-                    <Button stylingMode="contained" type="success" onClick={onSaveBtnClick}>Save</Button>
-                    <Button stylingMode="contained" type="default"  onClick={() => setShowList(true)}>View List</Button>
-                    <Button stylingMode="contained" type="default">Clear</Button>
+                    <Button className="recbtn1" recbtn1stylingMode="contained" type="success"  onClick={onSaveBtnClick}> {pageProperties.UpdateMode ? "Save Changes" : "Submit"}</Button>
+                    <Button className="recbtn2" stylingMode="contained" type="default"  onClick={() => setShowList(true)}>View List</Button>
+                    <Button className="recbtn3" stylingMode="contained" type="default" onClick={onClearBtnClick}>Clear</Button>
                 </Navbar>
             </div>
 
