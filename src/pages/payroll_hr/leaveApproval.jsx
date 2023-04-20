@@ -206,17 +206,6 @@ const LeaveApproval = (props) => {
             />
           </Column>
         </DataGrid>
-
-        <Navbar bg="light" variant="light" className="crud_panel_buttons">
-          <Button
-            className="crud_panel_buttons"
-            stylingMode="contained"
-            type="success"
-            onClick={onSaveBtnClick}
-          >
-            {pageProperties.UpdateMode ? "Save Changes" : "Save Changes"}
-          </Button>
-        </Navbar>
       </div>
     </Fragment>
   );
