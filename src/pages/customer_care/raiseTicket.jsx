@@ -131,7 +131,7 @@ function RaiseTicketForm() {
 
             <Item
               dataField="TktCategory"
-              editorType="dxSelectBpx"
+              editorType="dxSelectBox"
               editorOptions={{
                 items: TktCategory,
                 displayExpr: "Name",
@@ -144,7 +144,7 @@ function RaiseTicketForm() {
 
             <Item
               dataField="DeptCategory"
-              editorType="dxSelectBpx"
+              editorType="dxSelectBox"
               editorOptions={{
                 items: DeptCategory,
                 displayExpr: "Name",

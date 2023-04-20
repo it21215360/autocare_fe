@@ -90,7 +90,7 @@ const routes = [
   { path: "/scheduling/ServiceList", element: ServiceList },
 
   //it21198090@my.sliit.lk - Shania
-  { path: "ProductCategory", element: ProductCategory },
+  { path: "masters/ProductCategory", element: ProductCategory },
   { path: "masters/ProductMaster", element: ProductMaster },
 
   //it21307362@my.sliit.lk - Fernando ST

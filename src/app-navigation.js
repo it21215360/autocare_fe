@@ -10,14 +10,14 @@ export const navigation = [
       { text: "Delivery Tracker", path: "customer/delivery-tracker" },
     ],
   },
-  {
-    text: "Masters",
-    icon: "key",
-    items: [
-      { text: "Vehicle", path: "/vehicle" },
-      { text: "Product Category", path: "master/product-category" },
-    ],
-  },
+  // {
+  //   text: "Masters",
+  //   icon: "key",
+  //   items: [
+  //     { text: "Vehicle", path: "/vehicle" },
+  //     { text: "Product Category", path: "master/product-category" },
+  //   ],
+  // },
 
   //it21215360@my.sliit.lk - Maheesha
   {
@@ -81,11 +81,9 @@ export const navigation = [
   //it21198090@my.sliit.lk - Shania
   {
     text: "Master Data",
-    icon: "data",
+    icon: "key",
     items: [
-      { text: "View Product Master Data", path: "masters/ViewMasterProd" },
-      { text: "Product Category Data", path: "masters/ProductCat" },
-      { text: "Add Product", path: "masters/ProductAdd-form" },
+      { text: "Product Category Data", path: "masters/ProductCategory" },
       { text: "Product Master", path: "masters/ProductMaster" },
     ],
   },
