@@ -45,6 +45,21 @@ const LeaveRequestForm = () => {
     //const leaveCategory = [{ AutoID: 1, Name: 'Casual Leave' }, { AutoID: 2, Name: 'Annual Leave' }, { AutoID: 3, Name: 'Comp Leave' }]
     //const empDepartment = [{ DepID: 1, Name: 'HR Department' }, { DepID: 2, Name: 'Finance Department' }, { DepID: 3, Name: 'IT Department' }]
 
+  const clearForm = () => {
+    setEmpLeaveInfo({
+        FirstName: "",
+        LastName: "",
+        EmployeeID: "",
+        Position: "",
+        LeaveFrom:"",
+        LeaveTo: "",
+        LeaveCategory: "",
+        LeaveType: "",
+        DayCount: ""
+
+    });
+  }
+
     return (
 
         <>
@@ -181,6 +196,7 @@ const LeaveRequestForm = () => {
                     <Button 
                         stylingMode="contained" 
                         type="default"
+                        onClick={clearForm}
                         >
                             Clear
                         </Button>

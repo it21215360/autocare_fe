@@ -66,7 +66,15 @@ const Attendance = () => {
           }
       };
  
+      const clearForm = () => {
+        setEmployeeAttendance({
+            EmployeeID: "",
+            Date: "",
+            TimeIn:"",
+            TimeOut: ""
 
+        });
+      }
     return (
         <>
              <div className={'content-block'}>
@@ -132,6 +140,7 @@ const Attendance = () => {
                     <Button 
                         stylingMode="contained" 
                         type="default"
+                        onClick={clearForm}
                         >
                             Clear
                         </Button>
