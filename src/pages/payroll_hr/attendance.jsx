@@ -135,7 +135,7 @@ const Attendance = () => {
                         type="success" 
                         onClick={onSaveBtnClick}
                         >
-                            Save
+                            Add
                         </Button>
                     <Button 
                         stylingMode="contained" 

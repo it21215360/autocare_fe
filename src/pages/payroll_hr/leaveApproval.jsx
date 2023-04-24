@@ -25,16 +25,9 @@ const LeaveApproval = (props) => {
     isDocReadonly: false,
     UpdateMode: false,
   });
+  const [email,setEmail] = useState([]);  //new
 
-  //update button
-  /*  const onSaveBtnClick = (e) => {
-      try {
-        pageProperties.UpdateMode ? updateLeave() : LeaveApproval();
-      } catch (error) {
-        console.error(error);
-      }
-    };
-*/
+  
   const showErrorAlert = (errorMsg) => {
     notify(
       {
@@ -57,29 +50,7 @@ const LeaveApproval = (props) => {
     );
   };
 
-  /*  const updateLeave = () => {
-      try {
-        if (pageProperties.EmployeeID > 0)
-          axios
-            .put(`${API_BASE_URL}/api/employee/leave-request-approval`, {
-              EmployeeID: pageProperties.EmployeeID,
-              LeaveInfo: JSON.stringify(leaveApproval),
-             
-            })
-            .then((response) => {
-              console.log(response);
-              if (response.data.affectedRows === 1) {
-                showSuccessAlert(`Leave Requests updated`);
-              }
-            })
-            .catch((error) => {
-              showErrorAlert(error);
-            });
-      } catch (error) {
-        console.error(error);
-        showErrorAlert(error);
-      }
-    };*/
+  
 
   const [statusList, setStatusList] = useState([]);
 
@@ -93,39 +64,83 @@ const LeaveApproval = (props) => {
         setIsdataLoading(false);
       });
     }
+
   }, []);
 
-  const onRowUpdated = (e) => {
-    if (e.data) {
-      updateLeaveStatus(e.data.EmployeeID, e.data.Status);
-    }
-  };
+ 
 
-  const updateLeaveStatus = (employeeID, status) => {
+  const updateLeaveStatus = (employeeID, status, dayCount) => {
     axios
       .put(`${API_BASE_URL}/api/employee/leave-request-approval`, {
         EmployeeID: employeeID,
         Status: status,
+        DayCount: dayCount
       })
       .then((response) => {
         console.log(response);
         if (response.data.affectedRows > 0) {
-          //has to change
           showSuccessAlert(`Leave Request Status updated`);
         }
       })
       .catch((error) => {
         showErrorAlert(error);
       });
+
+      //new
+      /*const sendEmail = async(e) => {
+        e.preventDefault();
+
+        const res = await fetch("/register",{
+          method: "POST",
+          headers: {
+            "content-Type":"application/json"
+          },body:JSON.stringify({
+            email
+          })
+        });
+        console.log(res)
+      }*/
+      
   };
 
-  const onSaveBtnClick = (e) => {
+  //new
+  function sendEmail(email) {
+    fetch("/register", {
+      method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  
+  const onRowUpdated = (e) => {
+    if (e.data) {
+      updateLeaveStatus(e.data.EmployeeID, e.data.Status,e.data.DayCount);
+      sendEmail();  //new
+    }
+
+
+  };
+
+
+
+  /*const onSaveBtnClick = (e) => {
     try {
       let putRequestBody = [];
       leaveApproval.forEach((element) => {
         putRequestBody.push({
           EmployeeID: element.EmployeeID,
           Status: element.Status,
+          DayCount: element.DayCounts
         });
       });
 
@@ -152,7 +167,7 @@ const LeaveApproval = (props) => {
       console.error(error);
       showErrorAlert(error);
     }
-  };
+  };*/
 
   const leaveStatusList = [
     { ID: 0, Name: "Pending" },
@@ -196,7 +211,7 @@ const LeaveApproval = (props) => {
           />
           <Column dataField="LeaveFrom" caption="From" allowEditing={false} />
           <Column dataField="LeaveTo" caption="To" allowEditing={false} />
-          <Column dataField="DayCount" caption="Days" allowEditing={false} />
+          <Column dataField="DayCount" caption="No of Days" allowEditing={false} />
           <Column dataField="Status">
             <Lookup
               value={1}
