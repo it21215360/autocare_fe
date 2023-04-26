@@ -1,5 +1,6 @@
 import React from "react";
 import Popover from "devextreme-react/popover";
+import "./productView.scss";
 
 const formatCurrency = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -24,35 +25,25 @@ class ProductView extends React.PureComponent {
   }
 
   render() {
-    const { house } = this.props;
+    const { singleProduct } = this.props;
     return (
       <>
         <div className="productBox">
           <div onClick={this.show} className="item-content">
-            <img src={house.Image} style={{ width: "200px", height: "auto" }} />
+            <img
+              src={singleProduct.Image}
+              style={{ width: "200px", height: "auto" }}
+            />
 
             <div className="item-options">
               <div>
-                <div className="address">{house.Address}</div>
+                <div id="productTitle">{singleProduct.ProductName}</div>
                 <div className="price large-text">
-                  {formatCurrency(house.Price)}
+                  {formatCurrency(singleProduct.Price)}
                 </div>
-                <div className="agent">
-                  <div id={`house${house.ID}`}>
-                    <img src="image/Products/icon-agent.svg" />
-                    Listing agent
-                  </div>
-                </div>
+                <div id="onHandQty">On Hand Qty: {singleProduct.OnHandQty}</div>
               </div>
             </div>
-            <Popover
-              showEvent="mouseenter"
-              hideEvent="mouseleave"
-              position={position}
-              target={`#house${house.ID}`}
-              width={260}
-              contentRender={this.renderAgentDetails}
-            />
           </div>
         </div>
       </>
@@ -60,20 +51,11 @@ class ProductView extends React.PureComponent {
   }
 
   renderAgentDetails() {
-    const agent = this.props.house.Agent;
-    return (
-      <div className="agent-details">
-        <img src={agent.Picture} />
-        <div>
-          <div className="name large-text">{agent.Name}</div>
-          <div className="phone">Tel: {agent.Phone}</div>
-        </div>
-      </div>
-    );
+    return <></>;
   }
 
   show() {
-    this.props.show(this.props.house);
+    this.props.show(this.props.singleProduct);
   }
 }
 

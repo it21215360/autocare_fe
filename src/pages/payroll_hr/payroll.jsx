@@ -3,90 +3,237 @@ import { useState } from "react";
 import "./payroll.scss";
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { Navbar, ListGroup } from "react-bootstrap";
-import { Button } from 'devextreme-react/button';
+import { Button } from "devextreme-react/button";
+import Card from "react-bootstrap/Card";
+import PayrollList from "./payrollList";
+import DataGrid, {
+  Column,
+  SearchPanel,
+  Editing,
+  ValidationRule,
+  RequiredRule,
+} from "devextreme-react/data-grid";
 
 function Salary() {
   const [toggleState, setToggleState] = useState(1);
+  const [financialYears] = useState([
+    { name: "2018" },
+    { name: "2019" },
+    { name: "2020" },
+    { name: "2021" },
+    { name: "2022" },
+    { name: "2023" },
+    { name: "2024" },
+  ]);
+  const [monthList] = useState([
+    { value: 1, name: "January" },
+    { value: 2, name: "February" },
+    { value: 3, name: "March" },
+    { value: 4, name: "April" },
+    { value: 5, name: "May" },
+    { value: 6, name: "June" },
+    { value: 7, name: "July" },
+    { value: 8, name: "August" },
+    { value: 9, name: "September" },
+    { value: 10, name: "October" },
+    { value: 11, name: "November" },
+    { value: 12, name: "December" },
+  ]);
+  const [showList, setShowList] = useState(false);
+  const [payrollHeader, setPayrollHeader] = useState({});
+  const [payrollDetail, setPayrollDetail] = useState([]);
+  const [pageProperties, setPageProperties] = useState({});
 
-  const toggleTab = (index) => {
-    setToggleState(index);
-  };
+  const onListClickEvent = () => {};
+
+  const onClearBtnClick = () => {};
+
+  const onSaveBtnClick = () => {};
+
+  const onListClose = () => {};
 
   return (
-    <div className="container1">
-      <div className="bloc-tabs">
-        <button
-          className={toggleState === 1 ? "tabs active-tabs" : "tabs"}
-          onClick={() => toggleTab(1)}
-        >
-          Payroll Logs
-        </button>
-        <button
-          className={toggleState === 2 ? "tabs active-tabs" : "tabs"}
-          onClick={() => toggleTab(2)}
-        >
-          New Pay
-        </button>
-        
-      </div>
-
-      <div className="content-tabs">
-        <div
-          className={toggleState === 1 ? "content1  active-content" : "content1"}
-        >
-          <h4>Content 1</h4>
-          <hr />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-            praesentium incidunt quia aspernatur quasi quidem facilis quo nihil
-            vel voluptatum?
-          </p>
+    <>
+      {showList ? (
+        <div className={"content-block"}>
+          <PayrollList
+            Show={showList}
+            OnHide={onListClickEvent}
+            HideTheList={onListClose}
+          ></PayrollList>
         </div>
+      ) : (
+        <div className={"content-block"}>
+          <h2>Employee Payroll Processor</h2>
+          <Card style={{ width: "100%" }}>
+            <Card.Body>
+              <Card.Title>
+                <h6>Payroll Header</h6>
+              </Card.Title>
 
-        <div
-          className={toggleState === 2 ? "content1  active-content" : "content1"}
-        >
-          
-            <div className="w-screen h-screen grid grid-rows-2 md:grid-cols-2 ">
-              <div className="w-full h-full subContent md:h-screen">
-                <h7>NEW PAY</h7>
-                <Form>
-                  <GroupItem colCount={1}>
-                    <Item dataField="Employee: " editorType="dxTextBox" />
-                    <Item dataField="Position: " editorType="dxTextBox" />
-                    <Item dataField="Pay Date: " editorType="dxDateBox">
-                            <Label text="Pay Date"></Label>
-                    </Item>
-                    <Item dataField="Starting Date: " editorType="dxDateBox">
-                            <Label text="Starting Date"></Label>
-                    </Item>
-                    <Item dataField="Ending Date: " editorType="dxDateBox">
-                            <Label text="Ending Date"></Label>
-                    </Item>
-                  </GroupItem>
-                </Form>
-
-                <Navbar bg="light" variant="light">
-                  <Button stylingMode="contained" type="success">Enter</Button>
+              <Form formData={payrollHeader}>
+                <GroupItem colCount={3}>
+                  <Item
+                    dataField="FinancialYear"
+                    editorType="dxSelectBox"
+                    editorOptions={{
+                      items: financialYears,
+                      searchEnabled: true,
+                      displayExpr: "name",
+                      valueExpr: "name",
+                    }}
+                  />
+                  <Item
+                    dataField="Month"
+                    editorType="dxSelectBox"
+                    editorOptions={{
+                      items: monthList,
+                      searchEnabled: true,
+                      displayExpr: "name",
+                      valueExpr: "value",
+                    }}
+                  />
+                  <Item dataField="Starting Date: " editorType="dxDateBox">
+                    <Label text="Starting Date"></Label>
+                  </Item>
+                  <Item dataField="Ending Date: " editorType="dxDateBox">
+                    <Label text="Ending Date"></Label>
+                  </Item>
+                </GroupItem>
+                <Navbar bg="dark" variant="light">
+                  <Button stylingMode="contained" type="success">
+                    Load Data
+                  </Button>
                 </Navbar>
-              </div>
+              </Form>
+              <br />
+            </Card.Body>
+          </Card>
 
-              <div className="w-full h-full subContent bg-black">
-                <h7>EARNINGS</h7>
-                <Form>
-                  <GroupItem colCount={1}>
-                    <Item dataField="Employee: " editorType="dxTextBox" />
-                  </GroupItem>
-                </Form>
-                <Navbar bg="light" variant="light">
-                    <Button stylingMode="contained" type="success">Submit</Button>      
-                </Navbar> 
-              </div>
+          <Card style={{ width: "100%" }}>
+            <Card.Body>
+              <Card.Title>
+                <h6>Payroll Details</h6>
+              </Card.Title>
+              <br />
+              <DataGrid
+                id="payroll-grid"
+                dataSource={payrollDetail}
+                rowAlternationEnabled={true}
+                showBorders={true}
+              >
+                <SearchPanel visible={true} highlightCaseSensitive={true} />
 
-            </div>
+                <Editing
+                  mode="popup"
+                  allowUpdating={true}
+                  allowDeleting={true}
+                  allowAdding={true}
+                />
+                <Column
+                  dataField="EmployeeID"
+                  caption="Employee ID"
+                  dataType="int"
+                >
+                  <ValidationRule type="required" />
+                </Column>
+                <Column dataField="EPFNo" caption="EPF No" dataType="string">
+                  <ValidationRule type="required" />
+                </Column>
+                <Column dataField="EmpName" caption="Name" dataType="string">
+                  <ValidationRule type="required" />
+                </Column>
+                <Column
+                  dataField="JoinedDate"
+                  caption="Joined Date"
+                  dataType="string"
+                >
+                  <ValidationRule type="required" />
+                </Column>
+                <Column
+                  dataField="BasicSalary"
+                  caption="Basic Salary"
+                  dataType="double"
+                >
+                  <ValidationRule type="required" />
+                </Column>
+                <Column
+                  dataField="FuelAllwnce"
+                  caption="Fuel Allowance"
+                  dataType="double"
+                >
+                  <ValidationRule type="required" />
+                </Column>
+                <Column
+                  dataField="LvngAllwnce"
+                  caption="Living Allowance"
+                  dataType="double"
+                >
+                  <ValidationRule type="required" />
+                </Column>
+                <Column dataField="OTHours" caption="OTHours" dataType="double">
+                  <ValidationRule type="required" />
+                </Column>
+                <Column
+                  dataField="OTEarn"
+                  caption="OT Earning"
+                  dataType="double"
+                >
+                  <ValidationRule type="required" />
+                </Column>
+                <Column dataField="ETF" caption="ETF" dataType="double">
+                  <ValidationRule type="required" />
+                </Column>
+                <Column dataField="EPF" caption="EPF" dataType="double">
+                  <ValidationRule type="required" />
+                </Column>
+                <Column
+                  dataField="NoPayAmount"
+                  caption="Nopay Amount"
+                  dataType="double"
+                >
+                  <ValidationRule type="required" />
+                </Column>
+                <Column
+                  dataField="TotalPay"
+                  caption="Total Pay"
+                  dataType="double"
+                >
+                  <ValidationRule type="required" />
+                </Column>
+              </DataGrid>
+            </Card.Body>
+          </Card>
+          <br />
+          <br />
+          <Navbar bg="light" variant="light" className="crud_panel_buttons">
+            <Button
+              className="crud_panel_buttons"
+              stylingMode="contained"
+              type="success"
+              onClick={onSaveBtnClick}
+            >
+              {pageProperties.UpdateMode ? "Save Changes" : "Submit"}
+            </Button>
+            <Button
+              stylingMode="contained"
+              type="default"
+              onClick={() => setShowList(true)}
+            >
+              View List
+            </Button>
+            <Button
+              className="crud_panel_buttons"
+              stylingMode="contained"
+              type="default"
+              onClick={onClearBtnClick}
+            >
+              Clear
+            </Button>
+          </Navbar>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

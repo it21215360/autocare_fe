@@ -2,11 +2,12 @@ import React from "react";
 import notify from "devextreme/ui/notify";
 import Button from "devextreme-react/button";
 import Popup from "devextreme-react/popup";
-import "./styles.scss";
-import { housesSource } from "./data.js";
+import { productDataSource } from "./data.js";
 import ProductView from "./ProductView.js";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
+import "./productView.scss";
+import axios from "axios";
+import { API_BASE_URL } from "../../appconfig/config";
 
 const ADD_TO_CART = "Add to Cart";
 const REMOVE_FROM_CART = "Remove from Cart";
@@ -27,13 +28,14 @@ class ProductListView extends React.Component {
     super(props);
 
     this.state = {
-      currentHouse: housesSource[0],
+      selectedProduct: productDataSource[0],
     };
 
     this.renderPopup = this.renderPopup.bind(this);
-    this.showHouse = this.showHouse.bind(this);
-    this.changeFavoriteState = this.changeFavoriteState.bind(this);
+    this.showProduct = this.showProduct.bind(this);
+    this.addRemoveFromCart = this.addRemoveFromCart.bind(this);
     this.handlePopupHidden = this.handlePopupHidden.bind(this);
+    this.showAlert = this.showAlert.bind(this);
   }
 
   render() {
@@ -42,14 +44,18 @@ class ProductListView extends React.Component {
         <div className={"content-block"}>
           <h3>Product List View</h3>
           <div className="images">
-            {housesSource.map((h) => (
-              <ProductView house={h} show={this.showHouse} key={h.ID} />
+            {productDataSource.map((product) => (
+              <ProductView
+                singleProduct={product}
+                show={this.showProduct}
+                key={product.ID}
+              />
             ))}
             <Popup
               width={660}
               height={540}
               showTitle={true}
-              title={this.state.currentHouse.Address}
+              title={this.state.selectedProduct.ProductName}
               dragEnabled={false}
               hideOnOutsideClick={true}
               visible={this.state.popupVisible}
@@ -63,44 +69,36 @@ class ProductListView extends React.Component {
   }
 
   renderPopup() {
-    const { currentHouse } = this.state;
+    const { selectedProduct } = this.state;
     return (
-      <div className="popup-property-details">
-        <div className="large-text">{formatCurrency(currentHouse.Price)}</div>
-        <div className="opacity">
-          {currentHouse.Address}, {currentHouse.City}, {currentHouse.State}
+      <div id="popup-property-details">
+        <div id="popup-img">
+          <img src={selectedProduct.Image} />
         </div>
+        <div className="large-text">
+          {formatCurrency(selectedProduct.Price)}
+        </div>
+        <div id="onHandQty">On Hand Qty: {selectedProduct.OnHandQty}</div>
+        <p>{selectedProduct.Description}</p>
         <Button
           icon="cart"
-          text={currentHouse.Favorite ? REMOVE_FROM_CART : ADD_TO_CART}
+          text={selectedProduct.AddedToTheCart ? REMOVE_FROM_CART : ADD_TO_CART}
           width={210}
           height={44}
-          elementAttr={favButtonAttrs}
-          onClick={this.changeFavoriteState}
+          onClick={this.addRemoveFromCart}
+          id="myButton"
         />
+        <br></br>
         <div>
-        <Link to="/ordering/Cart">
-          <Button elementAttr={favButtonAttrs} type="success">
-            View Cart
-          </Button>
-          </Link>
-          <br></br>
+          <Link to="/ordering/Cart">View Cart</Link>
         </div>
-
-        
-
-        <div className="images">
-          <img src={currentHouse.Image} />
-          <img src={currentHouse.Image.replace(".jpg", "b.jpg")} />
-        </div>
-        <div>{currentHouse.Features}</div>
       </div>
     );
   }
 
-  showHouse(house) {
+  showProduct(_product) {
     this.setState({
-      currentHouse: house,
+      selectedProduct: _product,
       popupVisible: true,
     });
   }
@@ -111,25 +109,63 @@ class ProductListView extends React.Component {
     });
   }
 
-  changeFavoriteState() {
-    const { currentHouse } = this.state;
-    currentHouse.Favorite = !currentHouse.Favorite;
+  showAlert(_message, _type) {
+    notify(
+      {
+        message: _message.toString(),
+        width: 500,
+      },
+      _type,
+      1500
+    );
+  }
+
+  addRemoveFromCart() {
+    const { selectedProduct } = this.state;
+    selectedProduct.AddedToTheCart = !selectedProduct.AddedToTheCart;
 
     this.renderPopup = this.renderPopup.bind(this);
     this.setState({
-      currentHouse,
+      selectedProduct,
     });
 
-    notify(
-      {
-        message: `This item has been ${
-          currentHouse.Favorite ? "added to" : "removed from"
-        } the Cart!`,
-        width: 450,
-      },
-      currentHouse.Favorite ? "success" : "error",
-      2000
-    );
+    //call the API endpoint
+    let passingObject = {
+      CustomerID: 1,
+      ProductID: selectedProduct.ID,
+      Quantity: 1,
+      Price: selectedProduct.Price,
+      Total: 1 * selectedProduct.Price,
+      Add: selectedProduct.AddedToTheCart,
+    };
+
+    const postURL = `${API_BASE_URL}/api/order/add-to-cart`;
+    try {
+      axios
+        .post(postURL, {
+          productInfo: JSON.stringify(passingObject),
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.affectedRows > 0) {
+            notify(
+              {
+                message: `This item has been ${
+                  selectedProduct.AddedToTheCart ? "added to" : "removed from"
+                } the Cart!`,
+                width: 500,
+              },
+              selectedProduct.AddedToTheCart ? "success" : "warning",
+              1500
+            );
+          }
+        })
+        .catch((error) => {
+          this.showAlert(error, "error");
+        });
+    } catch (error) {
+      this.showAlert(error, "error");
+    }
   }
 }
 export default ProductListView;
