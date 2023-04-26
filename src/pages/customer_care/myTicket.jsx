@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import "devextreme/dist/css/dx.light.css";
 import DataGrid, {
   Column,
@@ -6,9 +7,12 @@ import DataGrid, {
   Editing,
 } from "devextreme-react/data-grid";
 import { Button } from "devextreme-react";
+import { Navbar } from "react-bootstrap";
+import { API_BASE_URL } from "../../appconfig/config";
+import axios from "axios";
 
 export default function MyTicket() {
-  const myDataSource = [
+  const ticketInfo = [
     {
       AutoID: 1,
       TicketID: "1005",
@@ -51,13 +55,29 @@ export default function MyTicket() {
     },
   ];
 
-  const buttonStyle = {
+  /*const buttonStyle = {
     backgroundColor: "blue",
     color: "white",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
-  };
+  };*/
+
+  const MyTicket = (props) => {
+    const [ticketInfo, setTicketInfo] = useState([]);
+    const [isLoadingData, setIsdataLoading] = useState(true);
+    const fetchURL = `${API_BASE_URL}/api/customer/get-ticket`;
+
+  useEffect(() => {
+    if(isLoadingData){
+      axios.get(fetchURL).then((response) => {
+        console.log(response);
+        setTicketInfo(response.data);
+        setIsdataLoading(false);
+      });
+    }  
+  }, []);
+}
 
   return (
     <React.Fragment>
@@ -67,7 +87,7 @@ export default function MyTicket() {
         </h5>
         <DataGrid
           classNAme={"dx-card wide-card"}
-          dataSource={myDataSource}
+          dataSource={ticketInfo}
           rowAlternationEnabled={true}
           showBorders={true}
         >
@@ -103,9 +123,11 @@ export default function MyTicket() {
         </DataGrid>
         <br></br>
         <div>
-          <Button style={buttonStyle}>
+          <Navbar bg="light" variant="light" className="crud_panel_buttons">
+          <Button className="crud_panel_buttons" stylingMode="contained" type="default">
             <b>Submit a Ticket</b>
-          </Button>
+            </Button>
+            </Navbar>
         </div>
       </div>
     </React.Fragment>
