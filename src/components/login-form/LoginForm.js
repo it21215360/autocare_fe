@@ -11,8 +11,8 @@ import Form, {
 import LoadIndicator from "devextreme-react/load-indicator";
 import notify from "devextreme/ui/notify";
 import { useAuth } from "../../contexts/auth";
-import { LANDING_PAGE_URL } from "../../appconfig/config";
-
+import { LANDING_PAGE_URL, API_BASE_URL } from "../../appconfig/config";
+import axios from "axios";
 import "./LoginForm.scss";
 
 export default function LoginForm() {
@@ -24,32 +24,31 @@ export default function LoginForm() {
   const onSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    
-    signIn(formData.username, formData.password);
-    // axios
-    //   .get(fetchURL, {
-    //     params: {
-    //       userName: formData.username,
-    //       password: formData.password,
-    //     },
-    //   })
-    //   .then(
-    //     (response) => {
-    //       if (response.data.length == 0) {
-    //         setLoading(false);
-    //         notify("Access denied", "error", 2000);
-    //       } else {
-    //         setLoading(false);
-    //         notify("Access granted", "success", 3000);
-    //         navigate(LANDING_PAGE_URL);
-    //         //onSuccessfulLogin();
-    //       }
-    //     },
-    //     (error) => {
-    //       setLoading(false);
-    //       notify(error, "error", 2000);
-    //     }
-    //   );
+
+    let fetchURL = `${API_BASE_URL}/api/user/authenticate`;
+    axios
+      .get(fetchURL, {
+        params: {
+          userName: formData.username,
+          password: formData.password,
+        },
+      })
+      .then(
+        (response) => {
+          if (response.data.length == 0) {
+            setLoading(false);
+            notify("Access denied", "error", 2000);
+          } else {
+            setLoading(false);
+            notify("Access granted", "success", 3000);
+            signIn(response.data[0]);
+          }
+        },
+        (error) => {
+          setLoading(false);
+          notify(error, "error", 2000);
+        }
+      );
   };
 
   const onCreateAccountClick = useCallback(() => {
@@ -75,28 +74,6 @@ export default function LoginForm() {
           <RequiredRule message="Password is required" />
           <Label visible={false} />
         </Item>
-        <GroupItem colCount={2}>
-          <Item
-            dataField={"isEmployee"}
-            editorType={"dxCheckBox"}
-            editorOptions={{
-              text: "Employee",
-              elementAttr: { class: "form-text" },
-            }}
-          >
-            <Label visible={false} />
-          </Item>
-          <Item
-            dataField={"isCourier"}
-            editorType={"dxCheckBox"}
-            editorOptions={{
-              text: "Courier",
-              elementAttr: { class: "form-text" },
-            }}
-          >
-            <Label visible={false} />
-          </Item>
-        </GroupItem>
         <ButtonItem>
           <ButtonOptions
             width={"100%"}
@@ -133,6 +110,7 @@ const emailEditorOptions = {
   stylingMode: "filled",
   placeholder: "Username",
 };
+
 const passwordEditorOptions = {
   stylingMode: "filled",
   placeholder: "Password",

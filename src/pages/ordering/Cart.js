@@ -1,75 +1,116 @@
 import React, { Component, Fragment, useEffect, useState } from "react";
-import 'devextreme/dist/css/dx.light.css';
-import DataGrid, { Column, SearchPanel, Editing, ValidationRule } from 'devextreme-react/data-grid';
-import { Button } from 'devextreme-react';
+import "devextreme/dist/css/dx.light.css";
+import DataGrid, {
+  Column,
+  SearchPanel,
+  Editing,
+} from "devextreme-react/data-grid";
+import { Button } from "devextreme-react";
 import { API_BASE_URL } from "../../appconfig/config";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/auth";
 
+const Cart = () => {
+  const { user } = useAuth();
+  const [cartItem, setCartItem] = useState([]);
+  const [isLoadingData, setIsdataLoading] = useState(true);
+  const fetchURL = `${API_BASE_URL}/api/order/get-cart-info?CustomerID=${user.ID}`;
 
-const Cart = (props) => {
-    
-    //const [cartItem] = [{AutoID: 1, ProdID: 23, ProductCategory:'Automobile Clean and Care', ProductName: 'Carseat', UnitPrice: '385', Quantity: 3, TotalPrice: '1128'}]
-   
-    const [selectedID, setSelectedID] = useState(0);
-    const [cartItem, setCartItem] = useState([]);
-    const [isLoadingData, setIsdataLoading] = useState(true);
-    const fetchURL = `${API_BASE_URL}/api/order/list-cart`;
-  
-    useEffect(() => {
-      if (isLoadingData)
-        axios.get(fetchURL).then((response) => {
-          console.log(response);
+  useEffect(() => {
+    if (isLoadingData && user.ID)
+      axios.get(fetchURL).then((response) => {
+        console.log(response.data);
+        if (response.data) {
           setCartItem(response.data);
-          setIsdataLoading(false);
-        });
-    }, []);
-  
-    const onSelectClick = (e) => {
-      props.OnHide(selectedID);
-    };
-  
-    const onCloseClick = (e) => {
-      props.HideTheList();
-    };
-  
-    const onSelectionChanged = (e) => {
-      setSelectedID(e.selectedRowsData[0].CartID);
-    };
+        }
 
-    return (
-        <React.Fragment>
-            <div className={'content-block'}>
-                <h5><b>Cart</b></h5>
-                <DataGrid id='sample'
-                    dataSource={cartItem}
-                    rowAlternationEnabled={true}
-                    showBorders={true}>
-                    <SearchPanel visible={true} highlightCaseSensitive={true} />
+        setIsdataLoading(false);
+      });
+  }, []);
 
-                    <Editing
-                        mode="popup"
-                        allowUpdating={true}
-                        allowDeleting={true}
-                        allowAdding={true} />
+  const onRowUpdating = (e) => {
+    console.log(e);
+  };
 
-                    <Column dataField='ProdID' caption='Product ID' dataType='int'><ValidationRule type="required" /></Column>
-                    <Column dataField='ProductCategory' caption='Product  Category' dataType='string'><ValidationRule type="required" /></Column>
-                    <Column dataField='ProductName' caption='Product' dataType='string'><ValidationRule type="required" /></Column>
-                    <Column dataField='UnitPrice' caption='Price' dataType='float'><ValidationRule type="required" /></Column>
-                    <Column dataField='Quantity' caption='Quantity' dataType='int'><ValidationRule type="required" /></Column>
-                    <Column dataField='TotalPrice' caption='Total' dataType='float'><ValidationRule type="required" /></Column>
+  return user.userType == "Customer" ? (
+    <React.Fragment>
+      <div className={"content-block"}>
+        <h5>
+          <b>My Cart</b>
+        </h5>
+        <DataGrid
+          id="cart-grid"
+          dataSource={cartItem}
+          rowAlternationEnabled={true}
+          showBorders={true}
+          onRowUpdating={onRowUpdating}
+        >
+          <SearchPanel visible={true} highlightCaseSensitive={true} />
+          <Editing mode="row" allowUpdating={true} allowDeleting={true} />
 
-                </DataGrid>
-                <br></br>
-                <div>
-                  
-                    <Button><b>Update Cart</b></Button>
-                    <Button><b>Proceed to Checkout</b></Button>
-                </div>
-            </div>
-        </React.Fragment>
-
-    )
+          <Column
+            dataField="CustomerID"
+            caption="CustomerID"
+            visible={false}
+            editorOptions={{
+              readOnly: true,
+            }}
+          ></Column>
+          <Column
+            dataField="FirstName"
+            caption="Customer"
+            editorOptions={{
+              readOnly: true,
+            }}
+          ></Column>
+          <Column
+            dataField="ProductID"
+            caption="ProductID"
+            visible={false}
+          ></Column>
+          <Column
+            dataField="ProdName"
+            caption="Product"
+            editorOptions={{
+              readOnly: true,
+            }}
+          ></Column>
+          <Column
+            dataField="Price"
+            caption="Price"
+            editorOptions={{
+              readOnly: true,
+              format: "LKR #,###.##",
+            }}
+          ></Column>
+          <Column dataField="Quantity" caption="Quantity"></Column>
+          <Column
+            dataField="Total"
+            caption="Total"
+            editorOptions={{
+              readOnly: true,
+              format: "LKR #,###.##",
+            }}
+          ></Column>
+        </DataGrid>
+        <br></br>
+        <div>
+          <Link to="/ordering/Order_details">
+            <Button>
+              <b>Proceed to Checkout</b>
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </React.Fragment>
+  ) : (
+    <>
+      <div className={"content-block"}>
+        <h6>Login as a Customer to view the cart</h6>
+      </div>
+    </>
+  );
 };
 
 export default Cart;

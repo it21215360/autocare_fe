@@ -45,7 +45,7 @@ function invoice() {
     <React.Fragment>
       <div className={"content-block"}>
         <h5>
-          <b>Order Details</b>
+          <b>Invoice</b>
         </h5>
         <DataGrid
           id="sample"

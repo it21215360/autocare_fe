@@ -1,44 +1,36 @@
-import defaultUser from "../utils/default-user";
-import axios from "axios";
-import { API_BASE_URL } from "../appconfig/config";
+export async function signIn(userInfo) {
+  let resultObject = {};
 
-export async function signIn(username, password) {
-  return {
-    isOk: true,
-    data: defaultUser,
-  };
-  /*let returnObject = {};
-
-  try {
-    debugger;
-    // Send request
-
-    return {
+  if (userInfo.CusID > 0) {
+    //customer
+    resultObject = {
       isOk: true,
-      data: defaultUser
+      data: {
+        ID: userInfo.CusID,
+        FirstName: userInfo.CusFirstName,
+        LastName: userInfo.CusLastName,
+        Email: userInfo.CusEmail,
+        userType: "Customer",
+      },
+      message: "Authenticated",
+    };
+  } else if (userInfo.EmpID > 0) {
+    //employee
+    resultObject = {
+      isOk: true,
+      data: {
+        ID: userInfo.EmpID,
+        FirstName: userInfo.EmpFirstName,
+        LastName: userInfo.EmpLastName,
+        Email: userInfo.EmpEmail,
+        EPFNo: userInfo.EPFNo,
+        userType: "Employee",
+      },
+      message: "Authenticated",
     };
   }
-  catch {
-    return {
-      isOk: false,
-      message: "Authentication failed"
-    };
-  }*/
-}
 
-export async function getUser() {
-  try {
-    // Send request
-
-    return {
-      isOk: true,
-      data: defaultUser,
-    };
-  } catch {
-    return {
-      isOk: false,
-    };
-  }
+  return resultObject;
 }
 
 export async function createAccount(username, password) {
