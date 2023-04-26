@@ -5,6 +5,8 @@ import Popup from "devextreme-react/popup";
 import "./styles.scss";
 import { housesSource } from "./data.js";
 import ProductView from "./ProductView.js";
+import { Link } from 'react-router-dom';
+
 
 const ADD_TO_CART = "Add to Cart";
 const REMOVE_FROM_CART = "Remove from Cart";
@@ -77,12 +79,15 @@ class ProductListView extends React.Component {
           onClick={this.changeFavoriteState}
         />
         <div>
+        <Link to="/ordering/Cart">
           <Button elementAttr={favButtonAttrs} type="success">
             View Cart
           </Button>
+          </Link>
           <br></br>
         </div>
-        <Button type="success">View Cart</Button>
+
+        
 
         <div className="images">
           <img src={currentHouse.Image} />

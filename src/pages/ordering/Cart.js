@@ -1,9 +1,11 @@
 import React, { Component, Fragment, useEffect, useState } from "react";
 import 'devextreme/dist/css/dx.light.css';
-import DataGrid, { Column, SearchPanel, Editing, ValidationRule } from 'devextreme-react/data-grid';
+import DataGrid, { Column, SearchPanel, Editing } from 'devextreme-react/data-grid';
 import { Button } from 'devextreme-react';
 import { API_BASE_URL } from "../../appconfig/config";
 import axios from "axios";
+import { Link } from 'react-router-dom';
+import Card from "react-bootstrap/Card";
 
 
 const Cart = (props) => {
@@ -13,7 +15,7 @@ const Cart = (props) => {
     const [selectedID, setSelectedID] = useState(0);
     const [cartItem, setCartItem] = useState([]);
     const [isLoadingData, setIsdataLoading] = useState(true);
-    const fetchURL = `${API_BASE_URL}/api/order/list-cart`;
+    const fetchURL = `${API_BASE_URL}/api/order/get-cart`;
   
     useEffect(() => {
       if (isLoadingData)
@@ -24,17 +26,7 @@ const Cart = (props) => {
         });
     }, []);
   
-    const onSelectClick = (e) => {
-      props.OnHide(selectedID);
-    };
-  
-    const onCloseClick = (e) => {
-      props.HideTheList();
-    };
-  
-    const onSelectionChanged = (e) => {
-      setSelectedID(e.selectedRowsData[0].CartID);
-    };
+      
 
     return (
         <React.Fragment>
@@ -52,19 +44,21 @@ const Cart = (props) => {
                         allowDeleting={true}
                         allowAdding={true} />
 
-                    <Column dataField='ProdID' caption='Product ID' dataType='int'><ValidationRule type="required" /></Column>
-                    <Column dataField='ProductCategory' caption='Product  Category' dataType='string'><ValidationRule type="required" /></Column>
-                    <Column dataField='ProductName' caption='Product' dataType='string'><ValidationRule type="required" /></Column>
-                    <Column dataField='UnitPrice' caption='Price' dataType='float'><ValidationRule type="required" /></Column>
-                    <Column dataField='Quantity' caption='Quantity' dataType='int'><ValidationRule type="required" /></Column>
-                    <Column dataField='TotalPrice' caption='Total' dataType='float'><ValidationRule type="required" /></Column>
+                    <Column dataField='ProdID' caption='Product ID' ></Column>
+                    <Column dataField='ProdCatID' caption='Product  Category' ></Column>
+                    <Column dataField='ProdName' caption='Product' ></Column>
+                    <Column dataField='Price' caption='Price' ></Column>
+                    <Column dataField='Quantity' caption='Quantity' ></Column>
+                    <Column dataField='TotalPrice' caption='Total' ></Column>
 
                 </DataGrid>
                 <br></br>
                 <div>
-                  
                     <Button><b>Update Cart</b></Button>
+
+                    <Link to="/ordering/Order_details">
                     <Button><b>Proceed to Checkout</b></Button>
+                    </Link>
                 </div>
             </div>
         </React.Fragment>
