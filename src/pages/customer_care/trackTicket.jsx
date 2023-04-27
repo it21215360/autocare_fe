@@ -1,15 +1,124 @@
 import React from "react";
+import { useState, useEffect, Fragment } from "react"
 import "devextreme/dist/css/dx.light.css";
 import DataGrid, {
   Column,
   SearchPanel,
+  Lookup,
   Editing,
   ValidationRule,
 } from "devextreme-react/data-grid";
 import { Button } from "devextreme-react";
+import { Navbar, ListGroup } from "react-bootstrap";
+import axios from "axios";
+import { API_BASE_URL } from "../../appconfig/config.js";
+import notify from "devextreme/ui/notify";
 
-export default function TrackTicket() {
-  const myDataSource = [
+const TrackTicket = (props) => {
+  const [ticketInfo, setTicketInfo] = useState([]);
+  const [isLoadingData, setIsdataLoading] = useState(true);
+  const [pageProperties, setPageProperties] = useState({
+    TicketID: 0,
+    DataLoading: false,
+    isDocReadonly: false,
+    UpdateMode: false,
+  });
+
+  const showErrorAlert = (errorMsg) => {
+    notify(
+      {
+        message: errorMsg.toString(),
+        width: 450,
+      },
+      "error",
+      3000
+    );
+  };
+
+  const showSuccessAlert = (successMsg) => {
+    notify(
+      {
+        message: successMsg.toString(),
+        width: 450,
+      },
+      "success",
+      3000
+    );
+  };
+  const [StatusList, setStatusList] = useState([]);
+
+  const fetchURL = `${API_BASE_URL}/api/employee/update-ticket`;
+
+  useEffect(() => {
+    if (isLoadingData) {
+      axios.get(fetchURL).then((response) => {
+        console.log(response);
+        setStatusList(response.data);
+        setIsdataLoading(false);
+      });
+    }
+  }, []);
+
+  const onRowUpdated = (e) => {
+    if (e.data) {
+      updateTicketStatus(e.data.TicketID, e.data.Status);
+    }
+  };
+
+  const updateTicketStatus = (TicketID, status) => {
+    axios
+      .put(`${API_BASE_URL}/api/employee/update-ticket`, {
+        TicketID: TicketID,
+        Status: status,
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.affectedRows > 0) {
+          //has to change
+          showSuccessAlert(`Ticket Status updated`);
+        }
+      })
+      .catch((error) => {
+        showErrorAlert(error);
+      });
+  };
+
+  const onSaveBtnClick = (e) => {
+    try {
+      let putTicketBody = [];
+      ticketInfo.forEach((element) => {
+        putTicketBody.push({
+          TicketID: element.TicketID,
+          Status: element.Status,
+        });
+      });
+
+      console.log("###", putTicketBody);
+      axios
+        .put(`${API_BASE_URL}/api/employee/update-ticket`, {
+          TicketInfo: JSON.stringify(putTicketBody),
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.affectedRows >= 1) {
+            //has to change
+            showSuccessAlert(`Status updated`);
+            setPageProperties({
+              ...pageProperties,
+              UpdateMode: false,
+            });
+          }
+        })
+        .catch((error) => {
+          showErrorAlert(error);
+        });
+    } catch (error) {
+      console.error(error);
+      showErrorAlert(error);
+    }
+  };
+
+ /* const myDataSource = [
     {
       AutoID: 1,
       TicketID: "1005",
@@ -65,6 +174,12 @@ export default function TrackTicket() {
       AssignedTo: "KJH Silva",
       Status: "Completed",
     },
+  ];*/
+
+  const statusList = [
+    { ID: 0, Name: "Pending" },
+    { ID: 1, Name: "Under Review" },
+    { ID: 2, Name: "Addressed" },
   ];
 
   return (
@@ -75,9 +190,14 @@ export default function TrackTicket() {
         </h5>
         <DataGrid
           classNAme={"dx-card wide-card"}
-          dataSource={myDataSource}
+          dataSource={ticketInfo}
           rowAlternationEnabled={true}
           showBorders={true}
+          wordWrapEnabled={true}
+          allowSearch={true}
+          selection={{ mode: "single" }}
+          hoverStateEnabled={true}
+          onRowUpdated={onRowUpdated}
         >
           <SearchPanel visible={true} highlightCaseSensitive={true} />
 
@@ -118,15 +238,26 @@ export default function TrackTicket() {
             dataField="Status"
             caption="Status"
             dataType="tinyint"
-          ></Column>
+          >
+            <Lookup
+              value={1}
+              dataSource={statusList}
+              displayExpr="Name"
+              valueExpr="ID"
+            />
+          </Column>
         </DataGrid>
         <br></br>
         <div>
-          <button>
-            <b>COMPLETED</b>
-          </button>
+        <Navbar bg="light" variant="light" className="crud_panel_buttons">
+          <Button  className="crud_panel_buttons"stylingMode="contained" type="default">
+            COMPLETED
+          </Button>
+          </Navbar>
         </div>
       </div>
     </React.Fragment>
   );
-}
+  };
+
+export default TrackTicket;

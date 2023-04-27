@@ -11,10 +11,11 @@ import { API_BASE_URL } from "../../appconfig/config";
 import axios from "axios";
 
 const ReturnProdList = (props) => {
+  
   const [selectedID, setSelectedID] = useState(0);
   const [returnProdList, setreturnProdList] = useState([]);
   const [isLoadingData, setIsdataLoading] = useState(true);
-  const fetchURL = `${API_BASE_URL}/api/employee/list-employee`;
+  const fetchURL = `${API_BASE_URL}/api/order/list-return-prod`;
 
   useEffect(() => {
     if (isLoadingData)
@@ -34,12 +35,12 @@ const ReturnProdList = (props) => {
   };
 
   const onSelectionChanged = (e) => {
-    setSelectedID(e.selectedRowsData[0].AutoID);
+    setSelectedID(e.selectedRowsData[0].ReturnProdID);
   };
 
   return (
     <Fragment>
-      <h4>List of Employees</h4>
+      <h4>List of Returned Products</h4>
       <DataGrid
         id="grid-list"
         dataSource={returnProdList}
