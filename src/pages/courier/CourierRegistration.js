@@ -9,7 +9,7 @@ import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
 
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
-import "./CourierRegistration.css";
+
 
 
 const  CourierRegistration = () => {

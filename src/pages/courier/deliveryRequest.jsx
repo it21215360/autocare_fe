@@ -2,14 +2,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "devextreme-react/button";
-
+import notify from "devextreme/ui/notify";
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
 import axios from "axios";
 import ShippingManage from "./ShippingManage";
 
 import { API_BASE_URL } from "../../appconfig/config";
-//import './DeliveryRequestForm.css';
+import './deliveryRequest.scss';
 
 
 const DeliveryRequest = () => {
@@ -39,7 +39,7 @@ const DeliveryRequest = () => {
     }
   };
 
-  const resetPageProperties = () => {
+   const resetPageProperties = () => {
     setPageProperties({
       DeliveryReqID: 0,
       DataLoading: false,
@@ -169,6 +169,7 @@ const DeliveryRequest = () => {
       ) : (
     <div className={'content-block'}>
            <h2>Request for a delivery</h2>
+           
       <Form formData={RequestInfo}>
       <GroupItem colCount={2}>
                         
@@ -253,51 +254,8 @@ const DeliveryRequest = () => {
         <Button type="success" stylingMode="contained"  onClick={onSaveBtnClick}>
           Submit
         </Button>
-      </div>
-      <form formData={RequestInfo}>
-        <h2>Request for a delivery</h2>
-        <div className="form-group">
-          <label>Order ID:</label>
-          <input type="text" />
         </div>
-        <div className="form-group">
-          <label>Name:</label>
-          <input type="text" required />
-        </div>
-        <div className="form-group">
-          <label>Phone:</label>
-          <input type="text" required />
-        </div>
-        <div className="form-group">
-          <label>Address:</label>
-          <input type="text" required />
-        </div>
-        <div className="form-group">
-          <label>City:</label>
-          <input type="text" required />
-        </div>
-        <div className="form-group">
-          <label>Province:</label>
-          <input type="text" id="province" required />
-        </div>
-
-                    ],
-                    searchEnabled: true,
-                    displayExpr: "Name",
-                    valueExpr: "AutoID",
-                  }}
-                >
-                  <Label text="Province"></Label>
-                  <RequiredRule message="Field required" />
-                </Item>
-
-                        </GroupItem>
-                        <GroupItem colCount={3}>
-                        </GroupItem>
-                        </Form>
-      
-     
-     <Button type="success"  stylingMode="contained" onClick={onSaveBtnClick}>Submit</Button>
+           
 
      
 

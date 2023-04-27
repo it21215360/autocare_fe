@@ -46,6 +46,8 @@ export { default as deliveryRequest } from "./courier/deliveryRequest";
 export { default as ShippingManage } from "./courier/ShippingManage";
 export { default as CourierProfile } from "./courier/CourierProfile";
 export { default as DeliveryConfirm } from "./courier/DeliveryConfirm";
+export { default as exportToExcel } from "./courier/exportToExcel";
+export { default as deliveryAlocation } from "./courier/deliveryAlocation";
 
 //it21326936@my.sliit.lk - Amandi
 export { default as OrderForm } from "./ordering/Order_details";

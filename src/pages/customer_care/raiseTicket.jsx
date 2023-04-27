@@ -1,5 +1,5 @@
 
-import React, { Component } from "react";
+/*import React, { Component } from "react";
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
 import { Navbar, ListGroup } from "react-bootstrap";
@@ -10,7 +10,7 @@ import { SelectBox } from "devextreme-react";
 import { Button } from 'devextreme-react/button';
 import { DateBox } from 'devextreme-react/calendar';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from 'axios';*/
 
 /*import { API_BASE_URL  } from '../../appconfig/config.js';*/
 
@@ -36,7 +36,7 @@ import axios from 'axios';
       }
   };*/
 
-function RaiseTicketForm() {
+/*function RaiseTicketForm() {
 
     const [budgetdefinition, setBudgetdefinition] = useState({fullName: "Sandra Johnson", customerId: "000000", email: "sandra@example.com",phone:"**********", date: "YYYY/MM/DD", description: "abdc"})
 
@@ -70,7 +70,8 @@ function RaiseTicketForm() {
             </div>
         )
     }
-
+*/
+/*
     return (
 
         <>
@@ -203,6 +204,7 @@ function RaiseTicketForm() {
                         
 
 export default RaiseTicketForm;
+*/
 
 /*import React, { useState } from "react";
 import Form, { EmptyItem, GroupItem, Item, Label} from "devextreme-react/form";

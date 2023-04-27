@@ -100,7 +100,9 @@ export const navigation = [
       { text: 'Shipping Manage', path: 'courier/ShippingManage' },
       { text: 'Courier Profile', path: 'courier/CourierProfile' },
       { text: 'Delivery Confirm', path: 'courier/DeliveryConfirm' },
-      { text: 'Export to Excel', path: 'courier/ExportToExcel' },
+      { text: 'Export to Excel', path: 'courier/exportToExcel' },
+      { text: 'Delivery Alocation', path: 'courier/deliveryAlocation' },
+
       
     ]
   },

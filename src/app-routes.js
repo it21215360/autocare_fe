@@ -6,6 +6,7 @@ import {
   LeaveRequestForm,
   Attendance,
   Salary,
+  deliveryAlocation,
   LeaveApproval,
   AttendanceViewer,
   DeliveryConfirm,
@@ -23,6 +24,7 @@ import {
   GoodReceiveForm,
   Scheduling,
   PackageDetails,
+  exportToExcel,
   Update,
   Cancel,
   EmpLogin,
@@ -73,7 +75,7 @@ const routes = [
   { path: "/scheduling/Update_appointment", element: Update },
   { path: "/scheduling/Cancel_appointment", element: Cancel },
   { path: "/scheduling/Confirm_appointment", element: Confirm },
-  { path: "/scheduling/Login", element: ServiceLogin },
+ // { path: "/scheduling/Login", element: ServiceLogin },
 
   //it21198090@my.sliit.lk - Shania
   { path: "ProductCategory", element: ProductCategory },
@@ -90,12 +92,14 @@ const routes = [
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
   { path: "courier/DeliveryConfirm", element: DeliveryConfirm },
+  { path: "courier/exportToExcel", element: exportToExcel },
+  { path: "courier/deliveryAlocation", element: deliveryAlocation },
 
   //it21238994@my.sliit.lk - Amanda
-  { path: "customer_care/myTicket", element: MyTicket },
-  { path: "cystomer_care/trackTicket", element: TrackTicket },
-  { path: "customer_care/raiseTikcket", element: RaiseTicketForm },
-  { path: "customer_care/freaquentQuestion", element: FreaquentQuestionPage },
+//  { path: "customer_care/myTicket", element: MyTicket },
+ // { path: "cystomer_care/trackTicket", element: TrackTicket },
+ // { path: "customer_care/raiseTikcket", element: RaiseTicketForm },
+ // { path: "customer_care/freaquentQuestion", element: FreaquentQuestionPage },
 
 
 
