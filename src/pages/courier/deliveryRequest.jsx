@@ -38,6 +38,85 @@ const DeliveryRequest = () => {
       console.error(error);
     }
   };
+
+  const resetPageProperties = () => {
+    setPageProperties({
+      DeliveryReqID: 0,
+      DataLoading: false,
+      isDocReadOnly: false,
+      UpdateMode: false,
+    });
+  };
+
+  const showErrorAlert = (errorMsg) => {
+    notify(
+      {
+        message: errorMsg.toString(),
+        width: 450,
+      },
+      "error",
+      3000
+    );
+  };
+
+  const showSuccessAlert = (successMsg) => {
+    notify(
+      {
+        message: successMsg.toString(),
+        width: 450,
+      },
+      "success",
+      3000
+    );
+  };
+
+  const updateRequest = () => {
+    try {
+      if (pageProperties.DeliverReqID > 0)
+        axios
+          .put(`${API_BASE_URL}/api/deliveryrequest/update-deliveryrequest`, {
+            DeliverReqID: pageProperties.DeliverReqID,
+           
+          })
+          .then((response) => {
+            console.log(response);
+            if (response.data.affectedRows === 1) {
+              showSuccessAlert(`Request information updated`);
+            }
+          })
+          .catch((error) => {
+            showErrorAlert(error);
+          });
+    } catch (error) {
+      console.error(error);
+      showErrorAlert(error);
+    }
+  };
+
+  const addRequest = () => {
+    try {
+      axios
+        .post(`${API_BASE_URL}/api/deliveryrequest/add-deliveryrequest`, {
+          RequestInfo: JSON.stringify(RequestInfo),
+       
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.affectedRows > 0) {
+            showSuccessAlert(`Request created.`);
+            // eslint-disable-next-line no-undef
+            onClearBtnClick();
+          }
+        })
+        .catch((error) => {
+          showErrorAlert(error);
+        });
+    } catch (error) {
+      console.error(error);
+      showErrorAlert(error);
+    }
+  };
+
   const OnLoadData = () => {
     try {
       if (pageProperties.DeliverReqID != 0 && pageProperties.UpdateMode)
@@ -170,8 +249,8 @@ const DeliveryRequest = () => {
           </GroupItem>
           <GroupItem colCount={3}></GroupItem>
         </Form>
-
-        <Button type="success" stylingMode="contained" onClick={onSaveBtnClick}>
+<div id="subBtn">
+        <Button type="success" stylingMode="contained"  onClick={onSaveBtnClick}>
           Submit
         </Button>
       </div>

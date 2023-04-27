@@ -12,8 +12,6 @@ const ShippingManage = (props) => {
     const [requestList, setRequestList] = useState([]);
     const [isLoadingData, setIsdataLoading] = useState(true);
     const [showList, setShowList] = useState(false);
-
-   
     const fetchURL = `${API_BASE_URL}/api/deliveryrequest/list-deliveryrequest`;
   
     useEffect(() => {

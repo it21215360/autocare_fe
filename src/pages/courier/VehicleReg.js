@@ -14,20 +14,6 @@ import React, { Component } from "react";
 import { Button } from "devextreme-react/button";
 
 const VehicleReg = () => {
-  // const onSaveBtnClick = () => {
-  //   try {
-  //     axios
-  //       .post(`${API_BASE_URL}/api/vehiclereg/add-vehiclereg`, {
-  //         VehicleDetails: JSON.stringify(VehicleInfo),
-  //       })
-  //       .then((response) => {
-  //         console.log(response);
-  //       })
-  //       .catch((error) => {});
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   const [VehicleInfo, setVehicleInfo] = useState({});
 
@@ -37,9 +23,6 @@ const VehicleReg = () => {
          
 
 
-  //           <div className="gender__details">
-  //             <input type="radio" name="vehicle" id="dot-1" />
-  //             <input type="radio" name="vehicle" id="dot-2" />
 
   return (
     <>
