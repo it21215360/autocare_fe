@@ -3,18 +3,26 @@ import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
 import { Navbar, ListGroup } from "react-bootstrap";
 import { Button } from "devextreme-react/button";
+import { DateBox } from "devextreme-react";
+import notify from "devextreme/ui/notify";
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { API_BASE_URL  } from '../../appconfig/config.js';
+import 'devextreme/dist/css/dx.light.css';
+import DataGrid, { Column, SearchPanel, Editing,ValidationRule } from 'devextreme-react/data-grid';
+import './raiseTicket.scss';
 
 function RaiseTicketForm() {
   const inputRef = useRef();
   const [files, setFiles] = useState([]);
 
   const [ticketInfo, setTicketInfo] = useState({
-    fullName: "Sandra Johnson",
-    customerId: "000000",
-    email: "sandra@example.com",
-    phone: "**********",
+    fullName: "",
+    customerId: "",
+    email: "",
+    phone: "",
     date: "YYYY/MM/DD",
-    description: "abdc",
+    description: "",
   });
 
   const TktCategory = [
@@ -67,6 +75,83 @@ function RaiseTicketForm() {
   const handleDragOver = () => {};
 
   const handleDrop = () => {};
+
+  const [pageProperties, setPageProperties] = useState({
+        ID: 0,
+        DataLoading: false,
+        isDocReadOnly: false,
+        UpdateMode: false,
+      });
+
+  const onSaveBtnClick = (e) => {
+    try {
+      pageProperties.UpdateMode ? addTicket() : addTicket();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const showSuccessAlert = (successMsg) => {
+    notify(
+      {
+        message: successMsg.toString(),
+        width: 450,
+      },
+      "success",
+      3000
+    );
+  };
+
+  const resetPageProperties = () => {
+    setPageProperties({
+      ID: 0,
+      DataLoading: false,
+      isDocReadOnly: false,
+      UpdateMode: false,
+    });
+  };
+
+  const showErrorAlert = (errorMsg) => {
+    notify(
+      {
+        message: errorMsg.toString(),
+        width: 450,
+      },
+      "error",
+      3000
+    );
+  };
+
+  /*const raiseTicket = () => {
+    const [TicketInfo, setTicketInfo] = useState ({});
+  };*/
+
+  const addTicket = () => {
+    try{
+      axios
+        .post(`${API_BASE_URL}/api/customer/raise-ticket-form`,{
+          TicketInfo: JSON.stringify(ticketInfo),
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.affectedRows > 0){
+            showSuccessAlert(`Ticket Created`);
+            onClearBtnClick();
+          }
+        })
+        .catch((error) => {
+          showErrorAlert(error);
+        });
+    }catch (error) {
+      console.error(error);
+      showErrorAlert(error);
+    }
+  };
+
+  const onClearBtnClick = () => {
+    resetPageProperties();
+    setTicketInfo({});
+    showSuccessAlert(`Done!`);
+  }
 
   return (
     <>
@@ -191,11 +276,11 @@ function RaiseTicketForm() {
           </GroupItem>
         </Form>
 
-        <Navbar bg="light" variant="light">
-          <Button stylingMode="contained" type="success">
+        <Navbar bg="light" variant="light" className="crud_panel_buttons">
+          <Button  className="crud_panel_buttons"stylingMode="contained" type="success" onClick={onSaveBtnClick}>
             Submit
           </Button>
-          <Button stylingMode="contained" type="default">
+          <Button className="crud_panel_buttons" stylingMode="contained" type="default" onClick={onClearBtnClick}>
             Clear
           </Button>
         </Navbar>
