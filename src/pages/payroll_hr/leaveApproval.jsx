@@ -25,9 +25,7 @@ const LeaveApproval = (props) => {
     isDocReadonly: false,
     UpdateMode: false,
   });
-  const [email,setEmail] = useState([]);  //new
 
-  
   const showErrorAlert = (errorMsg) => {
     notify(
       {
@@ -50,8 +48,6 @@ const LeaveApproval = (props) => {
     );
   };
 
-  
-
   const [statusList, setStatusList] = useState([]);
 
   const fetchURL = `${API_BASE_URL}/api/employee/leave-approval`;
@@ -64,17 +60,15 @@ const LeaveApproval = (props) => {
         setIsdataLoading(false);
       });
     }
-
   }, []);
 
- 
-
-  const updateLeaveStatus = (employeeID, status, dayCount) => {
+  const updateLeaveStatus = (employeeID, status, dayCount, empEmail) => {
     axios
       .put(`${API_BASE_URL}/api/employee/leave-request-approval`, {
         EmployeeID: employeeID,
         Status: status,
-        DayCount: dayCount
+        DayCount: dayCount,
+        EmployeeEmail: empEmail,
       })
       .then((response) => {
         console.log(response);
@@ -85,110 +79,18 @@ const LeaveApproval = (props) => {
       .catch((error) => {
         showErrorAlert(error);
       });
-
-      //new
-      /*const sendEmail = async(e) => {
-        e.preventDefault();
-
-        const res = await fetch("/register",{
-          method: "POST",
-          headers: {
-            "content-Type":"application/json"
-          },body:JSON.stringify({
-            email
-          })
-        });
-        console.log(res)
-      }*/
-      
   };
 
-  //new
-  /*function sendEmail(email) {
-    fetch("/register", {
-      method: "POST",
-      headers: {
-        "content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-      }),
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }*/
-
-  //new
-  /*useEffect (() => {
-    const getEmail= async() =>{
-      const res = await fetch("/register", {
-                                method: "POST",
-                                headers: {
-                                  "content-Type": "application/json",
-                                },
-                                body: JSON.stringify({
-                                  email,
-                                }),
-                              })
-      const getdata = await res.json();
-      setEmail(getdata);                        
-    }
-    getEmail();
-  }, [])*/
-  
   const onRowUpdated = (e) => {
     if (e.data) {
-      updateLeaveStatus(e.data.EmployeeID, e.data.Status,e.data.DayCount);
-      //sendEmail(getcate.Email);  //new
-      /*email.map( (getEmail)=> (
-        {getEmail,email}
-      ))
-      */
+      updateLeaveStatus(
+        e.data.EmployeeID,
+        e.data.Status,
+        e.data.DayCount,
+        e.data.Email
+      );
     }
-
   };
-
-
-
-  /*const onSaveBtnClick = (e) => {
-    try {
-      let putRequestBody = [];
-      leaveApproval.forEach((element) => {
-        putRequestBody.push({
-          EmployeeID: element.EmployeeID,
-          Status: element.Status,
-          DayCount: element.DayCounts
-        });
-      });
-
-      console.log("###", putRequestBody);
-      axios
-        .put(`${API_BASE_URL}/api/employee/leave-request-approval`, {
-          LeaveInfo: JSON.stringify(putRequestBody),
-        })
-        .then((response) => {
-          console.log(response);
-          if (response.data.affectedRows >= 1) {
-            //has to change
-            showSuccessAlert(`Leave Requests updated`);
-            setPageProperties({
-              ...pageProperties,
-              UpdateMode: false,
-            });
-          }
-        })
-        .catch((error) => {
-          showErrorAlert(error);
-        });
-    } catch (error) {
-      console.error(error);
-      showErrorAlert(error);
-    }
-  };*/
 
   const leaveStatusList = [
     { ID: 0, Name: "Pending" },
@@ -218,7 +120,8 @@ const LeaveApproval = (props) => {
           <Column dataField="AutoID" visible={false} />
           <Column dataField="FirstName" allowEditing={false} />
           <Column dataField="LastName" allowEditing={false} />
-          <Column dataField="EmployeeID" allowEditing={false} /*width={130}*/ />
+          <Column dataField="Email" allowEditing={false} />
+          <Column dataField="EmployeeID" allowEditing={false} />
           <Column dataField="Position" allowEditing={false} />
           <Column
             dataField="LeaveCategory"
@@ -232,7 +135,11 @@ const LeaveApproval = (props) => {
           />
           <Column dataField="LeaveFrom" caption="From" allowEditing={false} />
           <Column dataField="LeaveTo" caption="To" allowEditing={false} />
-          <Column dataField="DayCount" caption="No of Days" allowEditing={false} />
+          <Column
+            dataField="DayCount"
+            caption="No of Days"
+            allowEditing={false}
+          />
           <Column dataField="Status">
             <Lookup
               value={1}
@@ -246,6 +153,5 @@ const LeaveApproval = (props) => {
     </Fragment>
   );
 };
-
 
 export default LeaveApproval;
