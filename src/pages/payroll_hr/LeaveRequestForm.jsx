@@ -149,6 +149,16 @@ const showErrorAlert = (errorMsg) => {
                             <RequiredRule message="Field required" />
                         </Item>
 
+                        <Item dataField="Email" 
+                            editorType="dxTextBox" 
+                            editorOptions={{
+                                readOnly: false,
+                            }}>
+
+                            <Label text="Email"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+
                     </GroupItem>
 
                     <GroupItem colCount={3}>

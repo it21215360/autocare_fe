@@ -104,7 +104,7 @@ const LeaveApproval = (props) => {
   };
 
   //new
-  function sendEmail(email) {
+  /*function sendEmail(email) {
     fetch("/register", {
       method: "POST",
       headers: {
@@ -120,14 +120,35 @@ const LeaveApproval = (props) => {
       .catch((err) => {
         console.log(err);
       });
-  }
+  }*/
+
+  //new
+  /*useEffect (() => {
+    const getEmail= async() =>{
+      const res = await fetch("/register", {
+                                method: "POST",
+                                headers: {
+                                  "content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                  email,
+                                }),
+                              })
+      const getdata = await res.json();
+      setEmail(getdata);                        
+    }
+    getEmail();
+  }, [])*/
   
   const onRowUpdated = (e) => {
     if (e.data) {
       updateLeaveStatus(e.data.EmployeeID, e.data.Status,e.data.DayCount);
-      sendEmail();  //new
+      //sendEmail(getcate.Email);  //new
+      /*email.map( (getEmail)=> (
+        {getEmail,email}
+      ))
+      */
     }
-
 
   };
 
@@ -225,5 +246,6 @@ const LeaveApproval = (props) => {
     </Fragment>
   );
 };
+
 
 export default LeaveApproval;

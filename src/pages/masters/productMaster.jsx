@@ -14,7 +14,7 @@ import { DateBox } from "devextreme-react/calendar";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
-import ProductMasterList from "./ProductMasterList";
+import ProductMasterList from "./productMasterList";
 
 const ProductMaster = () => {
   const [prodBasicInfo, setProdBasicInfo] = useState({});
