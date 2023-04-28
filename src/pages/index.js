@@ -32,7 +32,7 @@ export { default as AppointList } from "./scheduling/AppointmentList";
 export { default as Memo } from "./scheduling/Memo";
 export { default as ServiceAppoinment } from "./scheduling/Service";
 export { default as ServiceList } from "./scheduling/ServiceList";
-export { default as ProductMaster } from "./masters/productMaster";
+export { default as ProductMaster } from "./masters/ProductMaster";
 
 //it21198090@my.sliit.lk - Shania
 
