@@ -14,7 +14,7 @@ import { DateBox } from "devextreme-react/calendar";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
-import ProductListView from "../ordering/ProductListView";
+import ProductMasterList from "./productMasterList";
 
 const ProductMaster = () => { 
   const [prodBasicInfo, setProdBasicInfo] = useState({}); 
@@ -180,11 +180,11 @@ const ProductMaster = () => {
     <>
       {showList ? (
         <div className={"content-block"}>
-          <ProductListView 
+          <ProductMasterList 
             Show={showList}
             OnHide={onListClickEvent}
             HideTheList={onListClose}
-          ></ProductListView> 
+          ></ProductMasterList> 
         </div>
       ) : (
         <div className={"content-block"}>
