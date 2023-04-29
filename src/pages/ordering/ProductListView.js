@@ -23,6 +23,8 @@ const favButtonAttrs = {
   class: "favorites",
 };
 
+
+
 class ProductListView extends React.Component {
   constructor(props) {
     super(props);
@@ -166,6 +168,8 @@ class ProductListView extends React.Component {
     } catch (error) {
       this.showAlert(error, "error");
     }
+
+    
   }
 }
 export default ProductListView;
