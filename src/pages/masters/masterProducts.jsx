@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import DataGrid, {
   RequiredRule,
-  Form as GridForm, 
+  Form as GridForm,
 } from "devextreme-react/data-grid";
 import { Navbar, ListGroup } from "react-bootstrap";
 import { LoadPanel } from "devextreme-react/load-panel";
@@ -14,11 +14,11 @@ import { DateBox } from "devextreme-react/calendar";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
-import ProductMasterList from "./ProductMasterList"; // 
+import ProductMasterList from "./masterProductList";
 
-const ProductMaster = () => { 
-  const [prodBasicInfo, setProdBasicInfo] = useState({}); 
-  const [prodSubCatInfo, setProdSubCatInfo] = useState({}); 
+const ProductMaster = () => {
+  const [prodBasicInfo, setProdBasicInfo] = useState({});
+  const [prodSubCatInfo, setProdSubCatInfo] = useState({});
   const [prodCatInfo, setProdCatInfo] = useState({});
   const [pageProperties, setPageProperties] = useState({
     ProductID: 0,
@@ -39,13 +39,13 @@ const ProductMaster = () => {
 
   const onSaveBtnClick = (e) => {
     try {
-      pageProperties.UpdateMode ? updateProduct() : addProduct(); 
+      pageProperties.UpdateMode ? updateProduct() : addProduct();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const resetPageProperties = () => { 
+  const resetPageProperties = () => {
     setPageProperties({
       ProductID: 0,
       DataLoading: false,
@@ -60,7 +60,7 @@ const ProductMaster = () => {
         message: errorMsg.toString(),
         width: 450,
       },
-      "Error Occurred!", 
+      "Error Occurred!",
       3000
     );
   };
@@ -71,25 +71,25 @@ const ProductMaster = () => {
         message: successMsg.toString(),
         width: 450,
       },
-      "Process Success", 
+      "Process Success",
       3000
     );
   };
 
-  const updateProduct = () => { 
+  const updateProduct = () => {
     try {
-      if (pageProperties.ProductID > 0) 
+      if (pageProperties.ProductID > 0)
         axios
-          .put(`${API_BASE_URL}/api/product/update-product`, { 
-            ProductID: pageProperties.ProductID, 
-            ProdBasicInfo: JSON.stringify(prodBasicInfo), 
-            ProdCatInfo: JSON.stringify(prodCatInfo), 
-            ProdSubCatInfo: JSON.stringify(prodSubCatInfo),  
+          .put(`${API_BASE_URL}/api/product/update-product`, {
+            ProductID: pageProperties.ProductID,
+            ProdBasicInfo: JSON.stringify(prodBasicInfo),
+            ProdCatInfo: JSON.stringify(prodCatInfo),
+            ProdSubCatInfo: JSON.stringify(prodSubCatInfo),
           })
           .then((response) => {
             console.log(response);
             if (response.data.affectedRows === 1) {
-              showSuccessAlert(`Product Information Updated`); 
+              showSuccessAlert(`Product Information Updated`);
             }
           })
           .catch((error) => {
@@ -101,19 +101,18 @@ const ProductMaster = () => {
     }
   };
 
-  const addProduct = () => { 
+  const addProduct = () => {
     try {
       axios
-        .post(`${API_BASE_URL}/api/product/add-product`, { 
-          ProdBasicInfo: JSON.stringify(prodBasicInfo), 
-          ProdCatInfo: JSON.stringify(prodCatInfo), 
-          ProdSubCatInfo: JSON.stringify(prodSubCatInfo), 
-          
+        .post(`${API_BASE_URL}/api/product/add-product`, {
+          ProdBasicInfo: JSON.stringify(prodBasicInfo),
+          ProdCatInfo: JSON.stringify(prodCatInfo),
+          ProdSubCatInfo: JSON.stringify(prodSubCatInfo),
         })
         .then((response) => {
           console.log(response);
           if (response.data.affectedRows > 0) {
-            showSuccessAlert(`New Product Item Created.`); 
+            showSuccessAlert(`New Product Item Created.`);
             onClearBtnClick();
           }
         })
@@ -129,18 +128,17 @@ const ProductMaster = () => {
   const OnLoadData = (prodId) => {
     try {
       axios
-        .get(`${API_BASE_URL}/api/product/get-product`, { 
+        .get(`${API_BASE_URL}/api/product/get-product`, {
           params: {
-            ProdID: prodId, 
+            ProdID: prodId,
           },
         })
         .then((res) => {
           console.log(res.data);
 
-          setProdBasicInfo(res.data[0][0]); 
+          setProdBasicInfo(res.data[0][0]);
           setProdCatInfo(res.data[3][0]);
-          setProdSubCatInfo(res.data[1][0]);  
-           
+          setProdSubCatInfo(res.data[1][0]);
         })
         .catch((error) => {
           console.log(error);
@@ -158,7 +156,7 @@ const ProductMaster = () => {
     if (showList && viewListSelectedID != 0) {
       setShowList(!showList);
       setPageProperties({
-        ProductID: viewListSelectedID, 
+        ProductID: viewListSelectedID,
         DataLoading: true,
         isDocReadOnly: true,
         UpdateMode: true,
@@ -170,31 +168,30 @@ const ProductMaster = () => {
 
   const onClearBtnClick = () => {
     resetPageProperties();
-    setProdBasicInfo({}); 
-    setProdCatInfo({}); 
-    setProdSubCatInfo({}); 
-    
+    setProdBasicInfo({});
+    setProdCatInfo({});
+    setProdSubCatInfo({});
   };
 
   return (
     <>
       {showList ? (
         <div className={"content-block"}>
-          <ProductMasterList 
+          <ProductMasterList
             Show={showList}
             OnHide={onListClickEvent}
             HideTheList={onListClose}
-          ></ProductMasterList> 
+          ></ProductMasterList>
         </div>
       ) : (
         <div className={"content-block"}>
-          <h2>Product Master</h2> 
+          <h2>Product Master</h2>
           <Card style={{ width: "100%" }}>
             <Card.Body>
               <Card.Title>
-                <h6>Product Data</h6> 
+                <h6>Product Data</h6>
               </Card.Title>
-              <Form formData={prodBasicInfo}> 
+              <Form formData={prodBasicInfo}>
                 <GroupItem colCount={4}>
                   <Item
                     dataField="ProdID"
@@ -203,47 +200,47 @@ const ProductMaster = () => {
                       readOnly: true,
                     }}
                   >
-                    <Label text="Product ID"></Label> 
+                    <Label text="Product ID"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
                   <Item
-                    dataField="ProdCatID" 
+                    dataField="ProdCatID"
                     editorType="dxTextBox"
                     editorOptions={{
                       readOnly: false,
                     }}
                   >
-                    <Label text="Product Cat_ID"></Label> 
+                    <Label text="Product Cat_ID"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
                   <Item
-                    dataField="ProdSubCatID" 
+                    dataField="ProdSubCatID"
                     editorType="dxTextBox"
                     editorOptions={{
                       readOnly: false,
                     }}
                   >
-                    <Label text="Product SubCat_ID"></Label> 
+                    <Label text="Product SubCat_ID"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
                   <Item
-                    dataField="ProdName" 
+                    dataField="ProdName"
                     editorType="dxTextBox"
                     editorOptions={{
                       readOnly: false,
                     }}
                   >
-                    <Label text="Product Name"></Label> 
+                    <Label text="Product Name"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
                   <Item
-                    dataField="Brand" 
+                    dataField="Brand"
                     editorType="dxTextBox"
                     editorOptions={{
                       readOnly: false,
                     }}
                   >
-                    <Label text="Brand"></Label> 
+                    <Label text="Brand"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
 
@@ -255,49 +252,48 @@ const ProductMaster = () => {
                       format: "LKR #,###.##",
                     }}
                   >
-                    <Label text="Product Price"></Label> 
+                    <Label text="Product Price"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
                   <Item
-                    dataField="OnHandQty" 
+                    dataField="OnHandQty"
                     editorType="dxTextBox"
                     editorOptions={{
                       readOnly: false,
                     }}
                   >
-                    <Label text="On Hand Quantity"></Label> 
+                    <Label text="On Hand Quantity"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
                   <Item
-                    dataField="Rating" 
+                    dataField="Rating"
                     editorType="dxTextBox"
                     editorOptions={{
                       readOnly: false,
                     }}
                   >
-                    <Label text="Rating"></Label> 
+                    <Label text="Rating"></Label>
                   </Item>
                   <Item
-                    dataField="CreatedDate" 
-                    editorType="dxDateBox" 
-                    editorOptions={{
-                      readOnly: false,
-                    }}
-                  >
-                    <Label text="Created Date"></Label> 
-                    <RequiredRule message="Field required" />
-                  </Item>
-                  <Item
-                    dataField="UpdatedDate" 
+                    dataField="CreatedDate"
                     editorType="dxDateBox"
                     editorOptions={{
                       readOnly: false,
                     }}
                   >
-                    <Label text="Updated Date"></Label> 
+                    <Label text="Created Date"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
-                  
+                  <Item
+                    dataField="UpdatedDate"
+                    editorType="dxDateBox"
+                    editorOptions={{
+                      readOnly: false,
+                    }}
+                  >
+                    <Label text="Updated Date"></Label>
+                    <RequiredRule message="Field required" />
+                  </Item>
                 </GroupItem>
               </Form>
             </Card.Body>
@@ -306,12 +302,12 @@ const ProductMaster = () => {
           <Card style={{ width: "100%", paddingTop: "20px" }}>
             <Card.Body>
               <Card.Title>
-                <h6>Product Category</h6> 
+                <h6>Product Category</h6>
               </Card.Title>
               <Card.Text></Card.Text>
-              <Form formData={prodCatInfo}> 
+              <Form formData={prodCatInfo}>
                 <GroupItem colCount={4}>
-                <Item
+                  <Item
                     dataField="AutoID"
                     editorType="dxTextBox"
                     editorOptions={{
@@ -320,7 +316,7 @@ const ProductMaster = () => {
                   >
                     <Label text="ID"></Label>
                   </Item>
-                  
+
                   <Item
                     dataField="Code"
                     editorType="dxTextBox"
@@ -348,23 +344,23 @@ const ProductMaster = () => {
                     <RequiredRule message="Field required" />
                   </Item>
                   <Item
-                    dataField="CreatedDate" 
-                    editorType="dxDateBox" 
-                    editorOptions={{
-                      readOnly: false,
-                    }}
-                  >
-                    <Label text="Created Date"></Label> 
-                    <RequiredRule message="Field required" />
-                  </Item>
-                  <Item
-                    dataField="UpdatedDate" 
+                    dataField="CreatedDate"
                     editorType="dxDateBox"
                     editorOptions={{
                       readOnly: false,
                     }}
                   >
-                    <Label text="Updated Date"></Label> 
+                    <Label text="Created Date"></Label>
+                    <RequiredRule message="Field required" />
+                  </Item>
+                  <Item
+                    dataField="UpdatedDate"
+                    editorType="dxDateBox"
+                    editorOptions={{
+                      readOnly: false,
+                    }}
+                  >
+                    <Label text="Updated Date"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
                 </GroupItem>
@@ -372,16 +368,15 @@ const ProductMaster = () => {
             </Card.Body>
           </Card>
 
-
           <Card style={{ width: "100%", paddingTop: "20px" }}>
             <Card.Body>
               <Card.Title>
-                <h6>Product Sub Category Data</h6>  
+                <h6>Product Sub Category Data</h6>
               </Card.Title>
               <Card.Text></Card.Text>
-              <Form formData={prodSubCatInfo}> 
+              <Form formData={prodSubCatInfo}>
                 <GroupItem colCount={3}>
-                <Item
+                  <Item
                     dataField="AutoID"
                     editorType="dxTextBox"
                     editorOptions={{
@@ -417,20 +412,20 @@ const ProductMaster = () => {
                     <RequiredRule message="Field required" />
                   </Item>
                   <Item
-                    dataField="UpdatedDate" 
+                    dataField="UpdatedDate"
                     editorType="dxDateBox"
                     editorOptions={{
                       readOnly: false,
                     }}
                   >
-                    <Label text="Updated Date"></Label> 
+                    <Label text="Updated Date"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
                 </GroupItem>
               </Form>
             </Card.Body>
           </Card>
-          
+
           <br></br>
           <Navbar bg="light" variant="light" className="crud_panel_buttons">
             <Button
@@ -455,7 +450,7 @@ const ProductMaster = () => {
               type="default"
               onClick={onClearBtnClick}
             >
-              Discard  
+              Discard
             </Button>
           </Navbar>
         </div>
@@ -464,4 +459,4 @@ const ProductMaster = () => {
   );
 };
 
-export default ProductMaster; 
+export default ProductMaster;
