@@ -63,22 +63,19 @@ export const navigation = [
     items: [
       { text: "Service Scheduling", path: "scheduling/Service" },
       {
-        text: "Car Wash Scheduling",
+        text: "Car Wash Scheduling Appointment",
         path: "scheduling/Scheduling_appointment",
       },
-     
       { text: "Service Manager Login", path: "scheduling/Login" },
       {
         text: "Confirm Appointment viewer",
         path: "scheduling/Confirm_appointment",
       },
-      { text: "Update Appointment", path: "scheduling/Update_appointment" },
-      
-      { text: "Cancel Appointment", path: "scheduling/Cancel_appointment" },
-      { text: "Booked memo viewer", path: "scheduling/Memo" },
       { text: "Package Details", path: "scheduling/Package" },
+      { text: "Cancel Appointment", path: "scheduling/Cancel_appointment" },
+      { text: "Update Appointment", path: "scheduling/Update_appointment" },
+      { text: "Booked memo viewer", path: "scheduling/Memo" },
       
-     
     ],
   },
 
