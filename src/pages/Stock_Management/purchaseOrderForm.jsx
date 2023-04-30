@@ -283,7 +283,7 @@ const PurchaseOrderForm = () => {
                                 </Item>
 
                                 <Item dataField="TotalAmount" editorType="dxTextBox" editorOptions={{
-                                    readOnly: false,
+                                    readOnly: true,
                                 }}>
                                     <Label text="Total Amount"></Label>
                                     <RequiredRule message="Field required" />

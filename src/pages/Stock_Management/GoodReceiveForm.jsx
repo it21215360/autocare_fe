@@ -236,7 +236,7 @@ const  GoodReceiveForm = () => {
                         </Item>
 
                         <Item dataField="TotalCost" editorType="dxTextBox" editorOptions={{
-                            readOnly: false,
+                            readOnly: true,
                         }}>
                             <Label text="Total Cost"></Label>
                             <RequiredRule message="Field required" />
