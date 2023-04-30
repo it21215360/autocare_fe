@@ -44,7 +44,7 @@ class ProductListView extends React.Component {
     return (
       <>
         <div className={"content-block"}>
-          <h3>Product List View</h3>
+          <h4>Products List</h4>
           <div className="images">
             {productDataSource.map((product) => (
               <ProductView
