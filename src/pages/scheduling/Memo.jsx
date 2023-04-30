@@ -12,9 +12,6 @@ import axios from "axios";
 
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
-
-
-
 import Card from 'react-bootstrap/Card';
 
 

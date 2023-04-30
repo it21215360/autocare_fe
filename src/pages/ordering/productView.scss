@@ -1,4 +1,42 @@
 .productBox {
   padding: 20px;
   margin-top: 20px;
+  border-color: black;
+  border: solid;
+  width: fit-content;
+  display: flex;
+}
+
+.large-text {
+  font-size: 20px;
+  color: #ff6a50;
+}
+
+#onHandQty {
+  font-size: 18px;
+  color: darkgreen;
+  font-weight: 600;
+}
+
+#productTitle {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#popup-img > img {
+  height: 250px;
+  width: auto;
+}
+
+#popup-property-details {
+  overflow: hidden;
+  position: relative;
+}
+
+#myButton {
+  background-color: white;
+  color: black;
+  position: absolute;
+  top: 5px;
+  right: 0;
 }
