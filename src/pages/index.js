@@ -32,6 +32,8 @@ export { default as AppointList } from "./scheduling/AppointmentList";
 export { default as Memo } from "./scheduling/Memo";
 export { default as ServiceAppoinment } from "./scheduling/Service";
 export { default as ServiceList } from "./scheduling/ServiceList";
+export { default as Carwash } from "./scheduling/Carwash";
+//
 export { default as ProductMaster } from "./masters/masterProducts";
 
 //it21198090@my.sliit.lk - Shania

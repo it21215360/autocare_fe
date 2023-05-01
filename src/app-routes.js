@@ -46,6 +46,7 @@ import {
   ServiceList,
   FreaquentQuestionPage,
   ProductMaster,
+  Carwash,
 } from "./pages";
 
 import { withNavigationWatcher } from "./contexts/navigation";
@@ -88,7 +89,7 @@ const routes = [
   { path: "/scheduling/Memo", element: Memo },
   { path: "/scheduling/Service", element: ServiceAppoinment },
   { path: "/scheduling/ServiceList", element: ServiceList },
-
+  { path: "/scheduling/Carwash", element: Carwash },
   //it21198090@my.sliit.lk - Shania
   { path: "masters/ProductCategory", element: ProductCategory },
   { path: "masters/ProductMaster", element: ProductMaster },
