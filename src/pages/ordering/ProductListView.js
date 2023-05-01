@@ -19,9 +19,6 @@ const formatCurrency = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 2,
 }).format;
 
-const favButtonAttrs = {
-  class: "favorites",
-};
 
 
 
@@ -121,6 +118,46 @@ class ProductListView extends React.Component {
       1500
     );
   }
+
+
+
+
+
+
+  /*
+  onSaveBtnClick = (e) => {
+    try {
+      pageProperties.UpdateMode ? updateCart() : addRemoveFromCart();
+    } catch (error) {
+      console.error(error);
+    }
+  };*/
+/*
+  const updateCart = () => {
+    try {
+      if (pageProperties.CartID > 0)
+        axios
+          .put(`${API_BASE_URL}/api/order/update-cart`, {
+            CartID: pageProperties.CartID,
+            productInfo: JSON.stringify(cartInfo),
+          })
+          .then((response) => {
+            console.log(response);
+            if (response.data.affectedRows === 1) {
+              showSuccessAlert(`Quantity Updated`);
+            }
+          })
+          .catch((error) => {
+            showErrorAlert(error);
+          });
+    } catch (error) {
+      console.error(error);
+      showErrorAlert(error);
+    }
+  };*/
+
+
+
 
   addRemoveFromCart() {
     const { selectedProduct } = this.state;
