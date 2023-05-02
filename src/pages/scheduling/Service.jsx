@@ -15,6 +15,7 @@ import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
 import ServiceList from "./ServiceList";
+import './Service.scss';
 
 const ServiceAppoinment = () => {
   const [cusServiceInfo, setCusServiceInfo] = useState({});
@@ -263,7 +264,7 @@ const ServiceAppoinment = () => {
             
           <Navbar bg="light" variant="light" className="crud_panel_buttons">
             <Button
-              className="crud_panel_buttons"
+              className="crud_panel_buttons1"
               stylingMode="contained"
               type="success"
               onClick={onSaveBtnClick}
@@ -271,7 +272,7 @@ const ServiceAppoinment = () => {
               {pageProperties.UpdateMode ? "Save Changes" : "Add"}
             </Button>
             <Button
-              className="crud_panel_buttons"
+              className="crud_panel_buttons2"
               stylingMode="contained"
               type="default"
               onClick={() => setShowList(true)}
@@ -280,7 +281,7 @@ const ServiceAppoinment = () => {
             </Button>
             
             <Button
-              className="crud_panel_buttons"
+              className="crud_panel_buttons3"
               stylingMode="contained"
               type="default"
               onClick={onClearBtnClick}

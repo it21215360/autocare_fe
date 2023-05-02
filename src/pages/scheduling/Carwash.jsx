@@ -15,7 +15,7 @@ import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
 import AppointmentList from "./AppointmentList";
-
+import "./Service.scss"
 const Carwash = () => {
   const [cusAppointmentInfo, setCusAppointmentInfo] = useState({});
   
@@ -335,7 +335,7 @@ const Carwash = () => {
             
           <Navbar bg="light" variant="light" className="crud_panel_buttons">
             <Button
-              className="crud_panel_buttons"
+              className="crud_panel_buttons1"
               stylingMode="contained"
               type="success"
               onClick={onSaveBtnClick}
@@ -343,7 +343,7 @@ const Carwash = () => {
               {pageProperties.UpdateMode ? "Save Changes" : "Add"}
             </Button>
             <Button
-              className="crud_panel_buttons"
+              className="crud_panel_buttons2"
               stylingMode="contained"
               type="default"
               onClick={() => setShowList(true)}
@@ -352,7 +352,7 @@ const Carwash = () => {
             </Button>
             
             <Button
-              className="crud_panel_buttons"
+              className="crud_panel_buttons3"
               stylingMode="contained"
               type="default"
               onClick={onClearBtnClick}
