@@ -48,10 +48,16 @@ const Ordersdet = (props) => {
           <b>Order Details</b>
         </h5>
         <DataGrid
-          id="sample"
+          id="grid-list"
           dataSource={order}
           rowAlternationEnabled={true}
           showBorders={true}
+          keyExpr="OrderID"
+          wordWrapEnabled={true}
+          allowSearch={true}
+          selection={{ mode: "single" }}
+          hoverStateEnabled={true}
+          onSelectionChanged={onSelectionChanged}
         >
           <Editing
             mode="popup"
@@ -60,44 +66,18 @@ const Ordersdet = (props) => {
             allowAdding={false}
           />
 
-          <Column dataField="ProdID" caption="Product ID" dataType="int">
-            <ValidationRule type="hidden" />
+          <Column dataField="OrderID" 
+          caption="Order ID">
           </Column>
-          <Column
-            dataField="ProductCatID"
-            caption="Product Category ID"
-            dataType="int"
-          >
-            <ValidationRule type="required" />
+          <Column dataField="CartID" 
+          caption="Cart ID">
           </Column>
-          <Column
-            dataField="ProductSubCatID"
-            caption="Product Sub Category ID"
-            dataType="int"
-          >
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="ProductName" caption="Product" dataType="string">
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="UnitPrice" caption="Price" dataType="float">
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="Quantity" caption="Quantity" dataType="int">
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="Brand" caption="Brand" dataType="float">
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="CreatedDte" caption="Created Date" dataType="date">
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="UpdatedDte" caption="Updated Date" dataType="date">
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="Rating" caption="Rating" dataType="string">
-            <ValidationRule type="required" />
-          </Column>
+          <Column dataField="FName" caption="First Name"></Column>
+          <Column dataField="Address" caption="Address"></Column>
+          <Column dataField="City" caption="City"></Column>
+          <Column dataField="PayMethod" caption="Payment Method"></Column>
+          <Column dataField="PayStatus" caption="Pay Status"></Column>
+          <Column dataField="OrderDate" caption="Order Date"></Column>
         </DataGrid>
         <br></br>
 
