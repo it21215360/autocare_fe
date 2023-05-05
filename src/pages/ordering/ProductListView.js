@@ -19,9 +19,8 @@ const formatCurrency = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 2,
 }).format;
 
-const favButtonAttrs = {
-  class: "favorites",
-};
+
+
 
 class ProductListView extends React.Component {
   constructor(props) {
@@ -42,7 +41,7 @@ class ProductListView extends React.Component {
     return (
       <>
         <div className={"content-block"}>
-          <h3>Product List View</h3>
+          <h4>Products List</h4>
           <div className="images">
             {productDataSource.map((product) => (
               <ProductView
@@ -120,6 +119,46 @@ class ProductListView extends React.Component {
     );
   }
 
+
+
+
+
+
+  /*
+  onSaveBtnClick = (e) => {
+    try {
+      pageProperties.UpdateMode ? updateCart() : addRemoveFromCart();
+    } catch (error) {
+      console.error(error);
+    }
+  };*/
+/*
+  const updateCart = () => {
+    try {
+      if (pageProperties.CartID > 0)
+        axios
+          .put(`${API_BASE_URL}/api/order/update-cart`, {
+            CartID: pageProperties.CartID,
+            productInfo: JSON.stringify(cartInfo),
+          })
+          .then((response) => {
+            console.log(response);
+            if (response.data.affectedRows === 1) {
+              showSuccessAlert(`Quantity Updated`);
+            }
+          })
+          .catch((error) => {
+            showErrorAlert(error);
+          });
+    } catch (error) {
+      console.error(error);
+      showErrorAlert(error);
+    }
+  };*/
+
+
+
+
   addRemoveFromCart() {
     const { selectedProduct } = this.state;
     selectedProduct.AddedToTheCart = !selectedProduct.AddedToTheCart;
@@ -166,6 +205,8 @@ class ProductListView extends React.Component {
     } catch (error) {
       this.showAlert(error, "error");
     }
+
+    
   }
 }
 export default ProductListView;

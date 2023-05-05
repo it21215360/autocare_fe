@@ -10,6 +10,8 @@
     "axios": "^1.3.5",
     "devextreme": "^22.1.3",
     "devextreme-react": "^22.1.3",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.28",
     "react": "^18.2.0",
     "react-app-polyfill": "^1.0.0",
     "react-bootstrap": "^2.7.2",

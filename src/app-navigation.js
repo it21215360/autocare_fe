@@ -61,20 +61,23 @@ export const navigation = [
     text: "Scheduling",
     icon: "event",
     items: [
-      {
-        text: "Scheduling Appointment",
-        path: "scheduling/Scheduling_appointment",
-      },
-      { text: "Update Appointment", path: "scheduling/Update_appointment" },
+      { text: "Service Scheduling", path: "scheduling/Service" },
+      { text: "Car Wash Scheduling", path: "scheduling/Carwash" },
+    //  {
+   //     text: "Car Wash Scheduling Appointment",
+    //    path: "scheduling/Scheduling_appointment",
+    //  },
+      { text: "Service Manager Login", path: "scheduling/Login" },
       {
         text: "Confirm Appointment viewer",
         path: "scheduling/Confirm_appointment",
       },
-      { text: "Cancel Appointment", path: "scheduling/Cancel_appointment" },
-      { text: "Booked memo viewer", path: "scheduling/Memo" },
       { text: "Package Details", path: "scheduling/Package" },
-      { text: "Service Manager Login", path: "scheduling/Login" },
-      { text: "Service Scheduling", path: "scheduling/Service" },
+      { text: "Cancel Appointment", path: "scheduling/Cancel_appointment" },
+    //  { text: "Update Appointment", path: "scheduling/Update_appointment" },
+      { text: "Booked memo viewer", path: "scheduling/Memo" },
+      
+      
     ],
   },
 
@@ -84,7 +87,7 @@ export const navigation = [
     icon: "key",
     items: [
       { text: "Product Category Data", path: "masters/ProductCategory" },
-      { text: "Product Master", path: "masters/productMaster" },
+      { text: "Product Master", path: "masters/masterProducts" },
     ],
   },
 

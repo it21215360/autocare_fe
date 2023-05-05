@@ -6,6 +6,7 @@ import DataGrid, {
   Editing,
 } from "devextreme-react/data-grid";
 import { Button } from "devextreme-react";
+import notify from "devextreme/ui/notify";
 import { API_BASE_URL } from "../../appconfig/config";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -16,7 +17,15 @@ const Cart = () => {
   const [cartItem, setCartItem] = useState([]);
   const [isLoadingData, setIsdataLoading] = useState(true);
   const fetchURL = `${API_BASE_URL}/api/order/get-cart-info?CustomerID=${user.ID}`;
+  const [cartInfo, setCartInfo] = useState({});
+  const [pageProperties, setPageProperties] = useState({
+    CartID: 0,
+    DataLoading: false,
+    isDocReadOnly: false,
+    UpdateMode: true,
+  });
 
+  
   useEffect(() => {
     if (isLoadingData && user.ID)
       axios.get(fetchURL).then((response) => {
@@ -29,9 +38,69 @@ const Cart = () => {
       });
   }, []);
 
-  const onRowUpdating = (e) => {
-    console.log(e);
-  };
+  /*const onRowUpdating = (e) => {
+
+    try {
+      if (pageProperties.CartID > 0)
+        axios
+          .put(`${API_BASE_URL}/api/order/update-cart`, {
+            CartID: pageProperties.CartID,
+            productInfo: JSON.stringify(cartInfo),
+          })
+          .then((response) => {
+            console.log(response);
+            if (response.data.affectedRows === 1) {
+              showSuccessAlert(`Quantity Updated`);
+            }
+          })
+          .catch((error) => {
+            showErrorAlert(error);
+          });
+    } catch (error) {
+      console.error(error);
+      showErrorAlert(error);
+    }*/
+
+    /*
+      // Validate and process the updated data
+      const updatedData = { ...e.oldData, ...e.newData }; // Merge old and new data
+      // Add any additional validation or processing here
+    
+      // Make an API call to update the data source
+      fetch(`/api/data/${updatedData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to update data');
+        }
+        // Handle successful response
+      })
+      .catch(error => {
+        console.error(error);
+        // Handle error response
+      });
+    */
+    
+    //console.log(e);
+  //};
+
+  //const [cartItems, setCartItems] = useState([]);
+
+  const handleQuantityUpdate = (ProductID, newQuantity) => {
+    const newCartItems = cartItem.map((item) => {
+      if (item.id === ProductID) {
+        return { ...item, Quantity: newQuantity };
+      } else {
+        return item;
+      }
+    });
+    setCartItem(newCartItems);
+  }
 
   return user.userType == "Customer" ? (
     <React.Fragment>
@@ -44,7 +113,8 @@ const Cart = () => {
           dataSource={cartItem}
           rowAlternationEnabled={true}
           showBorders={true}
-          onRowUpdating={onRowUpdating}
+          //onRowUpdating={onRowUpdating}
+          //onRowUpdated={handleQuantityUpdate}
         >
           <SearchPanel visible={true} highlightCaseSensitive={true} />
           <Editing mode="row" allowUpdating={true} allowDeleting={true} />

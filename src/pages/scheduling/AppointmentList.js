@@ -14,7 +14,8 @@ const AppointList = (props) => {
   const [selectedID, setSelectedID] = useState(0);
   const [appointList, setapoointList] = useState([]);
   const [isLoadingData, setIsdataLoading] = useState(true);
-  const fetchURL = `${API_BASE_URL}/api/employee/list-employee`;
+
+  const fetchURL = `${API_BASE_URL}/api/customer/list-carwash-appointment`;
 
   useEffect(() => {
     if (isLoadingData)
@@ -34,7 +35,7 @@ const AppointList = (props) => {
   };
 
   const onSelectionChanged = (e) => {
-    setSelectedID(e.selectedRowsData[0].AutoID);
+    setSelectedID(e.selectedRowsData[0].ID);
   };
 
   return (
@@ -59,9 +60,11 @@ const AppointList = (props) => {
 	    <Column dataField='lname' caption='Last Name' dataType='string'></Column>
 		  <Column dataField='phone' caption='Phone Number' dataType='int'></Column>
 		  <Column dataField='email' caption='Email Address' dataType='email'></Column>
-		  <Column dataField='vnumber' caption='Vehicle Number' dataType='int'></Column>
+		  <Column dataField='vnum' caption='Vehicle Number' dataType='int'></Column>
 		  <Column dataField='vtype' caption='Vehicle Type' dataType='String'></Column>
-      
+      <Column dataField='date' caption='Date' dataType='String'></Column>
+      <Column dataField='time' caption='Time' dataType='String'></Column>
+      <Column dataField='venue' caption='Venue' dataType='String'></Column>
       </DataGrid>
       <br></br>
       <Navbar bg="light" variant="light" className="crud_panel_buttons">

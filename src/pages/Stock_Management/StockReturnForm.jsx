@@ -12,6 +12,8 @@ import axios from "axios";
 import "./stockReturn.scss";
 import { API_BASE_URL } from "../../appconfig/config";
 import ReturnStockList from "./ReturnStockList";
+import sendEmail from "./StockReturnForm"; 
+
 
 const StockReturnForm = () => {
   /* let jstockReturnInfo = {
@@ -34,13 +36,13 @@ const StockReturnForm = () => {
       minimumSignificantDigits: 3,
     };*/
 
-  const onSaveBtnClick = (e) => {
+ {/* const onSaveBtnClick = (e) => {
     try {
       pageProperties.UpdateMode ? updateReturnStock() : addReturnStock();
     } catch (error) {
       console.error(error);
     }
-  };
+  };*/}
 
   const resetPageProperties = () => {
     setPageProperties({
@@ -134,6 +136,15 @@ const StockReturnForm = () => {
         .catch((error) => {
           console.log(error);
         });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onSaveBtnClick = async (e) => {
+    try {
+      pageProperties.UpdateMode ? updateReturnStock() : addReturnStock();
+      sendEmail('shohanisilva1996@gmail.com', 'Stock return form submitted.');
     } catch (error) {
       console.error(error);
     }
@@ -283,6 +294,11 @@ const StockReturnForm = () => {
 
                 <Item dataField="ReturnDate" editorType="dxDateBox">
                   <Label text="Return Date"></Label>
+                  <RequiredRule message="Field required" />
+                </Item>
+
+                <Item dataField="Email" editorType="dxTextBox">
+                  <Label text="Supplier Email"></Label>
                   <RequiredRule message="Field required" />
                 </Item>
               </GroupItem>
