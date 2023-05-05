@@ -13,6 +13,10 @@ import DataGrid, {
   ValidationRule,
   RequiredRule,
 } from "devextreme-react/data-grid";
+import { employeeAttendance } from "./dataPayroll";
+import { calendarDays } from "./dataPayroll";
+import axios from "axios";
+import { API_BASE_URL } from "../../appconfig/config";
 
 function Salary() {
   const [toggleState, setToggleState] = useState(1);
@@ -51,6 +55,210 @@ function Salary() {
   const onSaveBtnClick = () => {};
 
   const onListClose = () => {};
+
+  const onProcessBtnClick = () => {
+    let _startDate = payrollHeader.StartDate;
+    let _endDate = payrollHeader.EndDate;
+
+    Promise.all([
+      axios.get(`${API_BASE_URL}/api/employee/list-employee-info`),
+      axios.get(`${API_BASE_URL}/api/employee-payroll/employee-attendance`, {
+        params: {
+          StartDate: _startDate,
+          EndDate: _endDate,
+        },
+      }),
+      axios.get(`${API_BASE_URL}/api/employee-payroll/company-calendar`, {
+        params: {
+          StartDate: _startDate,
+          EndDate: _endDate,
+        },
+      }),
+    ])
+      .then(([employeeInfo, empAttendanceList, companyCalendar]) => {
+        processPayroll(
+          employeeInfo.data,
+          empAttendanceList.data,
+          companyCalendar.data
+        );
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const processPayroll = (_employeeInfo, _empAttendance, _calendarDays) => {
+    debugger;
+    let _processedEmployeeList = [];
+    let _newEmployeeList = [];
+
+    let noOfCompanyWorkingdays = _calendarDays.filter(
+      (x) => x.DayType == 1
+    ).length;
+
+    _empAttendance.forEach((emp) => {
+      let _specificCalendarDay = _calendarDays.filter(
+        (y) => y.CalendarDate == emp.RecordDate
+      );
+
+      if (_specificCalendarDay)
+        if (_specificCalendarDay[0].DayType == 1) {
+          //working day
+          _processedEmployeeList.push({
+            EmployeeID: emp.EmployeeID,
+            WorkDayCount: 1,
+            WeekEndCount: 0,
+            HolidayCount: 0,
+            NormalOTHours:
+              emp.WorkedHours > 8
+                ? parseFloat(emp.WorkedHours.toFixed(2) - 8)
+                : 0,
+            WeekEndWorkHours: 0,
+            HolidayWorkHours: 0,
+          });
+        } else if (_specificCalendarDay[0].DayType == 2) {
+          //week end
+          _processedEmployeeList.push({
+            EmployeeID: emp.EmployeeID,
+            WorkDayCount: 0,
+            WeekEndCount: 1,
+            HolidayCount: 0,
+            NormalOTHours: 0,
+            WeekEndWorkHours: emp.WorkedHours,
+            HolidayWorkHours: 0,
+          });
+        } else if (_specificCalendarDay[0].DayType == 3) {
+          //public holiday
+          _processedEmployeeList.push({
+            EmployeeID: emp.EmployeeID,
+            WorkDayCount: 0,
+            WeekEndCount: 0,
+            HolidayCount: 1,
+            NormalOTHours: 0,
+            WeekEndWorkHours: 0,
+            HolidayWorkHours: emp.WorkedHours,
+          });
+        }
+    });
+
+    console.log(_processedEmployeeList);
+
+    _employeeInfo.forEach((empObject) => {
+      let specificEmployee = _processedEmployeeList.filter(
+        (x) => x.EmployeeID == empObject.EmployeeID
+      );
+
+      let _totWorkDayPresentCount = specificEmployee.reduce(
+        (n, { WorkDayCount }) => n + WorkDayCount,
+        0
+      );
+
+      let _totWorkDayAbsentCount =
+        noOfCompanyWorkingdays - _totWorkDayPresentCount;
+
+      let _totWeekendDayPresentCount = specificEmployee.reduce(
+        (n, { WeekEndCount }) => n + WeekEndCount,
+        0
+      );
+
+      let _totalHolidayPresentCount = specificEmployee.reduce(
+        (n, { HolidayCount }) => n + HolidayCount,
+        0
+      );
+
+      let _totalNormalOTHours = specificEmployee.reduce(
+        (n, { NormalOTHours }) => n + NormalOTHours,
+        0
+      );
+
+      let _totalWeekEndHours = specificEmployee.reduce(
+        (n, { WeekEndWorkHours }) => n + WeekEndWorkHours,
+        0
+      );
+
+      let _totalHolidayHours = specificEmployee.reduce(
+        (n, { HolidayWorkHours }) => n + HolidayWorkHours,
+        0
+      );
+
+      //construct new object and push
+      _newEmployeeList.push({
+        EmployeeID: empObject.EmployeeID,
+
+        PresentDayCount: _totWorkDayPresentCount,
+        TotalAbsentCount: _totWorkDayAbsentCount,
+        WeekendPresentCount: _totWeekendDayPresentCount,
+        HolidayPresentCount: _totalHolidayPresentCount,
+        TotalNormalOTHours: _totalNormalOTHours,
+        TotalWeekEndHours: _totalWeekEndHours,
+        TotalHolidayHours: _totalHolidayHours,
+
+        EmpName: empObject.FName + " " + empObject.LName,
+        BasicSalary: empObject.BasicSalary,
+        FuelAllwnce: empObject.FuelAllowance,
+        LvngAllwnce: empObject.LCAllowance,
+        HourlyRate: empObject.HourlyRate.toFixed(2),
+        OTRate: empObject.OTRate.toFixed(2),
+        OTHours: _totalNormalOTHours.toFixed(2),
+        OTEarn: (_totalNormalOTHours * empObject.OTRate).toFixed(2),
+        WeekEndHours: _totalWeekEndHours,
+        WeekEndEarning: (_totalWeekEndHours * empObject.HourlyRate * 2).toFixed(
+          2
+        ),
+        HolidayDayHours: _totalHolidayHours,
+        HolidayEarning: (_totalHolidayHours * empObject.HourlyRate * 2).toFixed(
+          2
+        ),
+        ETF: ((empObject.BasicSalary * 3) / 100).toFixed(2),
+        EPF: ((empObject.BasicSalary * 10) / 100).toFixed(2),
+        NoPayLeaves:
+          empObject.CasualCount +
+            empObject.AnnualCount -
+            _totWorkDayAbsentCount >=
+          0
+            ? 0
+            : _totWorkDayAbsentCount -
+              (empObject.CasualCount + empObject.AnnualCount),
+        NoPayAmount:
+          empObject.CasualCount +
+            empObject.AnnualCount -
+            _totWorkDayAbsentCount >=
+          0
+            ? 0
+            : (
+                _totWorkDayAbsentCount -
+                (empObject.CasualCount + empObject.AnnualCount)
+              ).toFixed(2) *
+              empObject.HourlyRate *
+              8,
+        TotalPay: (empObject.BasicSalary +
+          _totalNormalOTHours * empObject.OTRate +
+          empObject.FuelAllowance +
+          empObject.LCAllowance +
+          _totalWeekEndHours * empObject.HourlyRate * 2 +
+          _totalHolidayHours * empObject.HourlyRate * 2 -
+          (empObject.BasicSalary * 3) / 100 -
+          (empObject.BasicSalary * 10) / 100 -
+          empObject.CasualCount +
+          empObject.AnnualCount -
+          _totWorkDayAbsentCount >=
+        0
+          ? 0
+          : (
+              _totWorkDayAbsentCount -
+              (empObject.CasualCount + empObject.AnnualCount)
+            ).toFixed(2) *
+            empObject.HourlyRate *
+            8
+        ).toFixed(2),
+      });
+    });
+
+    console.log(_newEmployeeList);
+    setPayrollDetail(_newEmployeeList);
+  };
+
+  const onRowInserted = (e) => {
+    console.log(e);
+  };
 
   return (
     <>
@@ -93,10 +301,10 @@ function Salary() {
                       valueExpr: "value",
                     }}
                   />
-                  <Item dataField="Starting Date: " editorType="dxDateBox">
+                  <Item dataField="StartDate" editorType="dxDateBox">
                     <Label text="Starting Date"></Label>
                   </Item>
-                  <Item dataField="Ending Date: " editorType="dxDateBox">
+                  <Item dataField="EndDate" editorType="dxDateBox">
                     <Label text="Ending Date"></Label>
                   </Item>
                 </GroupItem>
@@ -121,72 +329,41 @@ function Salary() {
                 dataSource={payrollDetail}
                 rowAlternationEnabled={true}
                 showBorders={true}
+                wordWrapEnabled={true}
+                keyExpr="EmployeeID"
+                columnAutoWidth={true}
+                onRowInserted={onRowInserted}
               >
-                <SearchPanel visible={true} highlightCaseSensitive={true} />
-
-                <Editing
-                  mode="popup"
-                  allowUpdating={true}
-                  allowDeleting={true}
-                  allowAdding={true}
-                />
+                <Column dataField="EmployeeID" dataType="int"></Column>
                 <Column
-                  dataField="EmployeeID"
-                  caption="Employee ID"
-                  dataType="int"
-                >
-                  <ValidationRule type="required" />
-                </Column>
-                <Column dataField="EPFNo" caption="EPF No" dataType="string">
-                  <ValidationRule type="required" />
-                </Column>
-                <Column dataField="EmpName" caption="Name" dataType="string">
-                  <ValidationRule type="required" />
-                </Column>
-                <Column
-                  dataField="JoinedDate"
-                  caption="Joined Date"
+                  dataField="EPFNo"
                   dataType="string"
-                >
-                  <ValidationRule type="required" />
-                </Column>
+                  visible={false}
+                ></Column>
+                <Column dataField="EmpName" dataType="string"></Column>
+                <Column dataField="BasicSalary" dataType="double"></Column>
+                <Column dataField="FuelAllwnce" dataType="double"></Column>
+                <Column dataField="LvngAllwnce" dataType="double"></Column>
+                <Column dataField="HourlyRate" dataType="double"></Column>
+                <Column dataField="OTRate" dataType="double"></Column>
+                <Column dataField="OTHours" dataType="double"></Column>
+                <Column dataField="OTEarn" dataType="double"></Column>
+                <Column dataField="WeekEndHours" dataType="double"></Column>
+                <Column dataField="WeekEndEarning" dataType="double"></Column>
+                <Column dataField="HolidayDayHours" dataType="double"></Column>
+                <Column dataField="HolidayEarning" dataType="double"></Column>
+                <Column dataField="ETF" dataType="double"></Column>
+                <Column dataField="EPF" dataType="double"></Column>
                 <Column
-                  dataField="BasicSalary"
-                  caption="Basic Salary"
+                  dataField="TotalAbsentCount"
+                  caption="AbsentDays"
                   dataType="double"
-                >
-                  <ValidationRule type="required" />
-                </Column>
+                ></Column>
                 <Column
-                  dataField="FuelAllwnce"
-                  caption="Fuel Allowance"
+                  dataField="NoPayLeaves"
+                  caption="NopayDays"
                   dataType="double"
-                >
-                  <ValidationRule type="required" />
-                </Column>
-                <Column
-                  dataField="LvngAllwnce"
-                  caption="Living Allowance"
-                  dataType="double"
-                >
-                  <ValidationRule type="required" />
-                </Column>
-                <Column dataField="OTHours" caption="OTHours" dataType="double">
-                  <ValidationRule type="required" />
-                </Column>
-                <Column
-                  dataField="OTEarn"
-                  caption="OT Earning"
-                  dataType="double"
-                >
-                  <ValidationRule type="required" />
-                </Column>
-                <Column dataField="ETF" caption="ETF" dataType="double">
-                  <ValidationRule type="required" />
-                </Column>
-                <Column dataField="EPF" caption="EPF" dataType="double">
-                  <ValidationRule type="required" />
-                </Column>
+                ></Column>
                 <Column
                   dataField="NoPayAmount"
                   caption="Nopay Amount"
@@ -198,9 +375,7 @@ function Salary() {
                   dataField="TotalPay"
                   caption="Total Pay"
                   dataType="double"
-                >
-                  <ValidationRule type="required" />
-                </Column>
+                ></Column>
               </DataGrid>
             </Card.Body>
           </Card>
@@ -211,11 +386,20 @@ function Salary() {
               className="crud_panel_buttons"
               stylingMode="contained"
               type="success"
-              onClick={onSaveBtnClick}
+              onClick={onProcessBtnClick}
             >
-              {pageProperties.UpdateMode ? "Save Changes" : "Submit"}
+              Process
             </Button>
             <Button
+              className="crud_panel_buttons"
+              stylingMode="contained"
+              type="success"
+              onClick={onSaveBtnClick}
+            >
+              Save
+            </Button>
+            <Button
+              className="crud_panel_buttons"
               stylingMode="contained"
               type="default"
               onClick={() => setShowList(true)}
