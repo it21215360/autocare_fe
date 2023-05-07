@@ -13,8 +13,6 @@ import DataGrid, {
   ValidationRule,
   RequiredRule,
 } from "devextreme-react/data-grid";
-import { employeeAttendance } from "./dataPayroll";
-import { calendarDays } from "./dataPayroll";
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
 
