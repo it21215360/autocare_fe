@@ -47,6 +47,13 @@ function Salary() {
   const [payrollHeader, setPayrollHeader] = useState({});
   const [payrollDetail, setPayrollDetail] = useState([]);
   const [pageProperties, setPageProperties] = useState({});
+  /*const currencyAmountFormat = {
+    style: "currency",
+    currency: "LKR",
+    useGrouping: true,
+    minimumSignificantDigits: 4,
+  };
+  const qtyFormat = { useGrouping: true, minimumSignificantDigits: 4 };*/
 
   const onListClickEvent = () => {};
 
@@ -179,6 +186,31 @@ function Salary() {
         0
       );
 
+      //calculate the net salary
+      let _netSalary = 0.0;
+      let _noPayAmount = 0.0;
+      _netSalary =
+        empObject.BasicSalary + empObject.FuelAllowance + empObject.LCAllowance;
+      _netSalary +=
+        _totalNormalOTHours * empObject.OTRate +
+        _totalWeekEndHours * empObject.HourlyRate * 2 +
+        _totalHolidayHours * empObject.HourlyRate * 2;
+      _netSalary -=
+        (empObject.BasicSalary * 3) / 100 + (empObject.BasicSalary * 10) / 100;
+      _noPayAmount =
+        empObject.CasualCount +
+          empObject.AnnualCount -
+          _totWorkDayAbsentCount >=
+        0
+          ? 0
+          : (
+              _totWorkDayAbsentCount -
+              (empObject.CasualCount + empObject.AnnualCount)
+            ).toFixed(2) *
+            empObject.HourlyRate *
+            8;
+      _netSalary -= _noPayAmount;
+
       //construct new object and push
       _newEmployeeList.push({
         EmployeeID: empObject.EmployeeID,
@@ -217,38 +249,8 @@ function Salary() {
             ? 0
             : _totWorkDayAbsentCount -
               (empObject.CasualCount + empObject.AnnualCount),
-        NoPayAmount:
-          empObject.CasualCount +
-            empObject.AnnualCount -
-            _totWorkDayAbsentCount >=
-          0
-            ? 0
-            : (
-                _totWorkDayAbsentCount -
-                (empObject.CasualCount + empObject.AnnualCount)
-              ).toFixed(2) *
-              empObject.HourlyRate *
-              8,
-        TotalPay: (empObject.BasicSalary +
-          _totalNormalOTHours * empObject.OTRate +
-          empObject.FuelAllowance +
-          empObject.LCAllowance +
-          _totalWeekEndHours * empObject.HourlyRate * 2 +
-          _totalHolidayHours * empObject.HourlyRate * 2 -
-          (empObject.BasicSalary * 3) / 100 -
-          (empObject.BasicSalary * 10) / 100 -
-          empObject.CasualCount +
-          empObject.AnnualCount -
-          _totWorkDayAbsentCount >=
-        0
-          ? 0
-          : (
-              _totWorkDayAbsentCount -
-              (empObject.CasualCount + empObject.AnnualCount)
-            ).toFixed(2) *
-            empObject.HourlyRate *
-            8
-        ).toFixed(2),
+        NoPayAmount: _noPayAmount.toFixed(2),
+        TotalPay: _netSalary.toFixed(2),
       });
     });
 
@@ -341,40 +343,96 @@ function Salary() {
                   visible={false}
                 ></Column>
                 <Column dataField="EmpName" dataType="string"></Column>
-                <Column dataField="BasicSalary" dataType="double"></Column>
-                <Column dataField="FuelAllwnce" dataType="double"></Column>
-                <Column dataField="LvngAllwnce" dataType="double"></Column>
-                <Column dataField="HourlyRate" dataType="double"></Column>
-                <Column dataField="OTRate" dataType="double"></Column>
-                <Column dataField="OTHours" dataType="double"></Column>
-                <Column dataField="OTEarn" dataType="double"></Column>
-                <Column dataField="WeekEndHours" dataType="double"></Column>
-                <Column dataField="WeekEndEarning" dataType="double"></Column>
-                <Column dataField="HolidayDayHours" dataType="double"></Column>
-                <Column dataField="HolidayEarning" dataType="double"></Column>
-                <Column dataField="ETF" dataType="double"></Column>
-                <Column dataField="EPF" dataType="double"></Column>
+                <Column
+                  dataField="BasicSalary"
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
+                <Column
+                  dataField="FuelAllwnce"
+                  caption={"Fuel Allowance"}
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
+                <Column
+                  dataField="LvngAllwnce"
+                  caption={"Living Allowance"}
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
+                <Column
+                  dataField="HourlyRate"
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
+                <Column
+                  dataField="OTRate"
+                  caption={"OT Rate"}
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
+                <Column
+                  dataField="OTHours"
+                  caption={"OT Hours"}
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
+                <Column
+                  dataField="OTEarn"
+                  caption={"OT Earn"}
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
+                <Column
+                  dataField="WeekEndHours"
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
+                <Column
+                  dataField="WeekEndEarning"
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
+                <Column
+                  dataField="HolidayDayHours"
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
+                <Column
+                  dataField="HolidayEarning"
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
+                <Column
+                  dataField="ETF"
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
+                <Column
+                  dataField="EPF"
+                  dataType="double"
+                  format={{ useGrouping: true }}
+                ></Column>
                 <Column
                   dataField="TotalAbsentCount"
-                  caption="AbsentDays"
+                  caption="Absent Days"
                   dataType="double"
+                  format={{ useGrouping: true }}
                 ></Column>
                 <Column
                   dataField="NoPayLeaves"
-                  caption="NopayDays"
+                  caption="Nopay Days"
                   dataType="double"
                 ></Column>
                 <Column
                   dataField="NoPayAmount"
                   caption="Nopay Amount"
                   dataType="double"
-                >
-                  <ValidationRule type="required" />
-                </Column>
+                ></Column>
                 <Column
                   dataField="TotalPay"
                   caption="Total Pay"
-                  dataType="double"
+                  format={{ useGrouping: true }}
                 ></Column>
               </DataGrid>
             </Card.Body>
