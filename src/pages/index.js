@@ -9,7 +9,6 @@ export { default as LeaveRequestForm } from "./payroll_hr/LeaveRequestForm";
 export { default as Salary } from "./payroll_hr/payroll";
 export { default as LeaveApproval } from "./payroll_hr/leaveApproval";
 export { default as AttendanceViewer } from "./payroll_hr/dailyAttendanceViewer";
-export { default as EmpLogin } from "./payroll_hr/employeeLogin";
 export { default as EmployeeMaster } from "./payroll_hr/employeeMaster";
 
 //it21324406@my.sliit.lk - Shanoli
