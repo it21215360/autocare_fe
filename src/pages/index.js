@@ -53,7 +53,7 @@ export { default as ProductPage } from "./ordering/ProductListView";
 export { default as ReturnProduct } from "./ordering/Return_products";
 export { default as Cart } from "./ordering/Cart";
 export { default as Ordersdet } from "./ordering/Orders_Admin";
-export { default as invoice } from "./ordering/Invoice";
+export { default as Invoice } from "./ordering/Invoice";
 
 //it21238994@my.sliit.lk - Amanda
 export { default as MyTicket } from "./customer_care/myTicket";

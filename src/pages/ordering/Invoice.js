@@ -1,18 +1,51 @@
 //import { IconName } from "react-icons/ci";
-import React from "react";
+import React, { Component, Fragment, useEffect, useState } from "react";
 import DataGrid, {
   Column,
   SearchPanel,
   Editing,
   ValidationRule,
+  Export,
+  Paging,HeaderFilter,FilterPanel,
 } from "devextreme-react/data-grid";
-//import { useState } from "react";
 //import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
-//import { Navbar, ListGroup } from "react-bootstrap";
+import { Navbar, ListGroup } from "react-bootstrap";
 import { Button } from "devextreme-react/button";
+import { jsPDF } from 'jspdf';
+import { exportDataGrid } from 'devextreme/pdf_exporter';
+import { API_BASE_URL } from "../../appconfig/config";
+import axios from "axios";
 
-function invoice() {
-  const paydet = [
+const Invoice = (props) => {
+
+  const exportFormats = ['pdf'];
+  const [selectedID, setSelectedID] = useState(0);
+  const [paydet, setPaydet] = useState([]);
+  const [isLoadingData, setIsdataLoading] = useState(true);
+  const fetchURL = `${API_BASE_URL}/api/Order/list-Orders`;
+ 
+  useEffect(() => {
+    if (isLoadingData)
+      axios.get(fetchURL).then((response) => {
+        console.log(response);
+        setPaydet(response.data);
+        setIsdataLoading(false);
+      });
+  }, []);
+
+  const onSelectClick = (e) => {
+    props.OnHide(selectedID);
+  };
+
+  const onCloseClick = (e) => {
+    props.HideTheList();
+  };
+
+  const onSelectionChanged = (e) => {
+    setSelectedID(e.selectedRowsData[0].OrderID);
+  };
+
+  /*const paydet = [
     {
       AutoID: 1,
       ProdID: 2,
@@ -39,7 +72,19 @@ function invoice() {
       UpdatedDte: "2023/3/4",
       Rating: "5",
     },
-  ];
+  ];*/
+
+  const onExporting = React.useCallback((e) => {
+    const invoice = new jsPDF();
+
+    exportDataGrid({
+      jsPDFDocument: invoice,
+      component: e.component,
+      indent: 5,
+    }).then(() => {
+      invoice.save('OrderInvoice.pdf');
+    });
+  });
 
   return (
     <React.Fragment>
@@ -52,8 +97,11 @@ function invoice() {
           dataSource={paydet}
           rowAlternationEnabled={true}
           showBorders={true}
+          onExporting={onExporting} 
         >
-          <SearchPanel visible={true} highlightCaseSensitive={true} />
+          <SearchPanel visible={true} highlightCaseSensitive={false} />
+          <Paging defaultPageSize={10} />
+          <Export enabled={true} formats={exportFormats} allowExportSelectedData={true} />
 
           <Editing
             mode="popup"
@@ -115,4 +163,4 @@ function invoice() {
   );
 }
 
-export default invoice;
+export default Invoice;

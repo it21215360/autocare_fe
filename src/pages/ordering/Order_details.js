@@ -2,7 +2,7 @@ import React, { Component , useEffect} from "react";
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { RequiredRule } from "devextreme-react/data-grid";
 import { Navbar, ListGroup } from "react-bootstrap";
-import DataGrid, { Column, ValidationRule } from 'devextreme-react/data-grid';
+import DataGrid, { Column, ValidationRule, EmailRule } from 'devextreme-react/data-grid';
 //import { LoadPanel } from "devextreme-react/load-panel";
 import { useState } from "react";
 //import { SelectBox } from "devextreme-react";
@@ -64,6 +64,7 @@ const resetPageProperties = () => {
     UpdateMode: false,
   });
 };
+
 
 const showErrorAlert = (errorMsg) => {
   notify(
@@ -243,6 +244,7 @@ const onClearBtnClick = () => {
                         }}>
                             <Label text="Email"></Label>
                             <RequiredRule message="Field required" />
+                            <EmailRule message="Invalid email address" />
                         </Item>
                     </GroupItem>
                     <GroupItem colCount={2}>
@@ -295,14 +297,25 @@ const onClearBtnClick = () => {
             >
               {pageProperties.UpdateMode ? "Save Changes" : "Add"}
             </Button>
-            <Button
+            {/*<Button
               className="crud_panel_buttons"
               stylingMode="contained"
               type="default"
               onClick={() => setShowList(true)}
             >
               View List
-            </Button>
+                          </Button>*/}
+            
+          <Link to="/ordering/Card_details">
+            <Button
+              className="crud_panel_buttons"
+              stylingMode="contained"
+              type="default"
+            >
+              Proceed to Pay 
+            </Button></Link>
+
+
             <Button
               className="crud_panel_buttons"
               stylingMode="contained"
