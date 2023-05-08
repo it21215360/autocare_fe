@@ -2,16 +2,23 @@ import React from "react";
 import { useState } from "react";
 //import "./payroll.scss";
 import DataGrid, {
+  HeaderFilter,
+  FilterPanel,
   Column,
+  Export,
   SearchPanel,
   Editing,
   ValidationRule,
 } from "devextreme-react/data-grid";
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { Navbar, ListGroup } from "react-bootstrap";
+import { jsPDF } from 'jspdf';
+import { exportDataGrid } from 'devextreme/pdf_exporter';
 import { Button } from "devextreme-react/button";
 
 function Storage() {
+
+  const exportFormats = ['pdf'];
   const [toggleState, setToggleState] = useState(1);
   const [inventoryStock] = [{}];
   const [inventorySummary] = [{}];
@@ -19,6 +26,19 @@ function Storage() {
   const toggleTab = (index) => {
     setToggleState(index);
   };
+
+  const onExporting = React.useCallback((e) => {
+    const doc = new jsPDF();
+
+    exportDataGrid({
+      jsPDFDocument: doc,
+      component: e.component,
+      indent: 5,
+    }).then(() => {
+      doc.save('table.pdf');
+    });
+  });
+
 
   return (
     <div className={"content-block"}>
@@ -52,16 +72,22 @@ function Storage() {
                 dataSource={inventoryStock}
                 rowAlternationEnabled={true}
                 showBorders={true}
+                onExporting={onExporting}
               >
                 <SearchPanel visible={true} highlightCaseSensitive={true} />
-
+                <Export enabled={true} formats={exportFormats} allowExportSelectedData={true} />
                 <Editing
                   mode="popup"
                   allowUpdating={true}
                   allowDeleting={true}
                   allowAdding={true}
                 />
-
+                 <HeaderFilter
+                        visible={true}
+                         />
+                 <FilterPanel
+                        visible={true}
+                         />
                 <Column
                   dataField="ProductCategory"
                   caption="Product Category"
@@ -121,9 +147,10 @@ function Storage() {
               dataSource={inventorySummary}
               rowAlternationEnabled={true}
               showBorders={true}
+              onExporting={onExporting}
             >
               <SearchPanel visible={true} highlightCaseSensitive={true} />
-
+              <Export enabled={true} formats={exportFormats} allowExportSelectedData={true} />
               <Editing
                 mode="popup"
                 allowUpdating={true}

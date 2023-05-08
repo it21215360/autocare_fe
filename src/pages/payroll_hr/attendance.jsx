@@ -80,7 +80,7 @@ const Attendance = () => {
                 readOnly: true,
               }}
             >
-              <Label text="Employee #"></Label>
+              <Label text="Employee ID"></Label>
               <RequiredRule message="Field required" />
             </Item>
 

@@ -9,7 +9,6 @@ export { default as LeaveRequestForm } from "./payroll_hr/LeaveRequestForm";
 export { default as Salary } from "./payroll_hr/payroll";
 export { default as LeaveApproval } from "./payroll_hr/leaveApproval";
 export { default as AttendanceViewer } from "./payroll_hr/dailyAttendanceViewer";
-export { default as EmpLogin } from "./payroll_hr/employeeLogin";
 export { default as EmployeeMaster } from "./payroll_hr/employeeMaster";
 
 //it21324406@my.sliit.lk - Shanoli
@@ -32,7 +31,9 @@ export { default as AppointList } from "./scheduling/AppointmentList";
 export { default as Memo } from "./scheduling/Memo";
 export { default as ServiceAppoinment } from "./scheduling/Service";
 export { default as ServiceList } from "./scheduling/ServiceList";
-export { default as ProductMaster } from "./masters/productMaster";
+export { default as Carwash } from "./scheduling/Carwash";
+//
+export { default as ProductMaster } from "./masters/masterProducts";
 
 //it21198090@my.sliit.lk - Shania
 

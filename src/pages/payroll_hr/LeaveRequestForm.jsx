@@ -6,20 +6,54 @@ import { Navbar, ListGroup } from "react-bootstrap";
 import { LoadPanel } from "devextreme-react/load-panel";
 import notify from "devextreme/ui/notify";
 import { useState } from "react";
-import { SelectBox } from "devextreme-react";
+import { PieChart, SelectBox } from "devextreme-react";
 import { Button } from 'devextreme-react/button';
 import { DateBox } from 'devextreme-react/calendar';
 
 import { Link } from 'react-router-dom';
-import LeaveApproval from "./leaveApproval";
+import { Toast } from 'devextreme-react/toast';
 
 import axios from 'axios';
 import { API_BASE_URL  } from '../../appconfig/config.js';
 
+import { useAuth } from "../../contexts/auth";
+
+//PieChart
+
+
 
 const LeaveRequestForm = () => {
-    const [empLeaveInfo, setEmpLeaveInfo] = useState({});
+
+    const { user } = useAuth();
+
+    const [empLeaveInfo, setEmpLeaveInfo] = useState({
+        EmployeeID: user.ID,
+        FirstName: user.FirstName,
+        LastName: user.LastName,
+        Email: user.Email
+    });
   
+    const showSuccessAlert = (successMsg) => {
+        notify(
+        {
+            message: successMsg.toString(),
+            width: 450,
+        },
+        "success",
+        3000
+        );
+    };
+
+const showErrorAlert = (errorMsg) => {
+    notify(
+        {
+            message: errorMsg.toString(),
+            width: 450,
+        },
+        "error",
+        3000
+    );
+};
   
   const onSaveBtnClick = (e) => {
     try{
@@ -31,12 +65,17 @@ const LeaveRequestForm = () => {
         })
         .then((response) => {
           console.log(response);
-        })
+          if (response.data.affectedRows > 0) {
+            showSuccessAlert(`Leave Request Status updated`);
+          }
+        }) 
         .catch((error) => {});
       }catch (error) {
         console.error(error);
       }
   };
+
+ 
 
 //function LeaveRequestForm() {
 
@@ -55,10 +94,11 @@ const LeaveRequestForm = () => {
         LeaveTo: "",
         LeaveCategory: "",
         LeaveType: "",
-        DayCount: ""
-
+        
     });
   }
+
+
 
     return (
 
@@ -122,12 +162,23 @@ const LeaveRequestForm = () => {
                             <RequiredRule message="Field required" />
                         </Item>
 
+                        <Item dataField="Email" 
+                            editorType="dxTextBox" 
+                            editorOptions={{
+                                readOnly: false,
+                            }}>
+
+                            <Label text="Email"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
+
                     </GroupItem>
 
                     <GroupItem colCount={3}>
                         <Item 
                             dataField="LeaveFrom" 
-                            editorType="dxDateBox">
+                            editorType="dxDateBox"                         
+                            >
                             <Label text="Leave From"></Label>
 
                             <RequiredRule message="Field required" />
@@ -170,18 +221,12 @@ const LeaveRequestForm = () => {
 
                         <Item 
                             dataField="LeaveTo" 
-                            editorType="dxDateBox">
+                            editorType="dxDateBox"
+                            >
                             <Label text="Leave To"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
 
-                        <Item 
-                            dataField="DayCount" 
-                            editorOptions={{ readOnly: false }}>
-                            <RequiredRule message="Field required" />
-
-
-                        </Item>
                     </GroupItem>
                 </Form>
 

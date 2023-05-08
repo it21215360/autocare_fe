@@ -26,15 +26,6 @@ const LeaveApproval = (props) => {
     UpdateMode: false,
   });
 
-  //update button
-  /*  const onSaveBtnClick = (e) => {
-      try {
-        pageProperties.UpdateMode ? updateLeave() : LeaveApproval();
-      } catch (error) {
-        console.error(error);
-      }
-    };
-*/
   const showErrorAlert = (errorMsg) => {
     notify(
       {
@@ -57,30 +48,6 @@ const LeaveApproval = (props) => {
     );
   };
 
-  /*  const updateLeave = () => {
-      try {
-        if (pageProperties.EmployeeID > 0)
-          axios
-            .put(`${API_BASE_URL}/api/employee/leave-request-approval`, {
-              EmployeeID: pageProperties.EmployeeID,
-              LeaveInfo: JSON.stringify(leaveApproval),
-             
-            })
-            .then((response) => {
-              console.log(response);
-              if (response.data.affectedRows === 1) {
-                showSuccessAlert(`Leave Requests updated`);
-              }
-            })
-            .catch((error) => {
-              showErrorAlert(error);
-            });
-      } catch (error) {
-        console.error(error);
-        showErrorAlert(error);
-      }
-    };*/
-
   const [statusList, setStatusList] = useState([]);
 
   const fetchURL = `${API_BASE_URL}/api/employee/leave-approval`;
@@ -95,22 +62,18 @@ const LeaveApproval = (props) => {
     }
   }, []);
 
-  const onRowUpdated = (e) => {
-    if (e.data) {
-      updateLeaveStatus(e.data.EmployeeID, e.data.Status);
-    }
-  };
-
-  const updateLeaveStatus = (employeeID, status) => {
+  const updateLeaveStatus = (employeeID, status, dayCount, empEmail) => {  //new leaveCategory
     axios
       .put(`${API_BASE_URL}/api/employee/leave-request-approval`, {
         EmployeeID: employeeID,
         Status: status,
+        DayCount: dayCount,
+        EmployeeEmail: empEmail,
+        //LeaveCategory: leaveCategory, //new
       })
       .then((response) => {
         console.log(response);
         if (response.data.affectedRows > 0) {
-          //has to change
           showSuccessAlert(`Leave Request Status updated`);
         }
       })
@@ -119,38 +82,15 @@ const LeaveApproval = (props) => {
       });
   };
 
-  const onSaveBtnClick = (e) => {
-    try {
-      let putRequestBody = [];
-      leaveApproval.forEach((element) => {
-        putRequestBody.push({
-          EmployeeID: element.EmployeeID,
-          Status: element.Status,
-        });
-      });
-
-      console.log("###", putRequestBody);
-      axios
-        .put(`${API_BASE_URL}/api/employee/leave-request-approval`, {
-          LeaveInfo: JSON.stringify(putRequestBody),
-        })
-        .then((response) => {
-          console.log(response);
-          if (response.data.affectedRows >= 1) {
-            //has to change
-            showSuccessAlert(`Leave Requests updated`);
-            setPageProperties({
-              ...pageProperties,
-              UpdateMode: false,
-            });
-          }
-        })
-        .catch((error) => {
-          showErrorAlert(error);
-        });
-    } catch (error) {
-      console.error(error);
-      showErrorAlert(error);
+  const onRowUpdated = (e) => {
+    if (e.data) {
+      updateLeaveStatus(
+        e.data.EmployeeID,
+        e.data.Status,
+        e.data.DayCount,
+        e.data.Email,
+        //e.data.LeaveCategory  //NEW
+      );
     }
   };
 
@@ -182,7 +122,8 @@ const LeaveApproval = (props) => {
           <Column dataField="AutoID" visible={false} />
           <Column dataField="FirstName" allowEditing={false} />
           <Column dataField="LastName" allowEditing={false} />
-          <Column dataField="EmployeeID" allowEditing={false} /*width={130}*/ />
+          <Column dataField="Email" allowEditing={false} />
+          <Column dataField="EmployeeID" allowEditing={false} />
           <Column dataField="Position" allowEditing={false} />
           <Column
             dataField="LeaveCategory"
@@ -196,7 +137,11 @@ const LeaveApproval = (props) => {
           />
           <Column dataField="LeaveFrom" caption="From" allowEditing={false} />
           <Column dataField="LeaveTo" caption="To" allowEditing={false} />
-          <Column dataField="DayCount" caption="Days" allowEditing={false} />
+          <Column
+            dataField="DayCount"
+            caption="No of Days"
+            allowEditing={false}
+          />
           <Column dataField="Status">
             <Lookup
               value={1}

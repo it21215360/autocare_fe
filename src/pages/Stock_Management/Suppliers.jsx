@@ -1,11 +1,28 @@
 import React from 'react';
 import 'devextreme/dist/css/dx.light.css';
-import DataGrid, { Column, SearchPanel, Editing, ValidationRule } from 'devextreme-react/data-grid';
+import DataGrid, { Column, SearchPanel, Editing, ValidationRule, HeaderFilter,FilterPanel,Export } from 'devextreme-react/data-grid';
 import { Button } from 'devextreme-react';
+import { jsPDF } from 'jspdf';
+import { exportDataGrid } from 'devextreme/pdf_exporter';
+
+
 
 export default function Supplier() {
+    const exportFormats = ['pdf'];
     const supplierDataSource = [{}]
    
+    const onExporting = React.useCallback((e) => {
+        const doc = new jsPDF();
+    
+        exportDataGrid({
+          jsPDFDocument: doc,
+          component: e.component,
+          indent: 5,
+        }).then(() => {
+          doc.save('SupplierDetails.pdf');
+        });
+      });
+
     return (
         <React.Fragment>
             <div className={'content-block'}>
@@ -13,7 +30,8 @@ export default function Supplier() {
                 <DataGrid id='sample'
                     dataSource={supplierDataSource}
                     rowAlternationEnabled={true}
-                    showBorders={true}>
+                    showBorders={true}
+                    onExporting={onExporting}>
                     <SearchPanel visible={true} highlightCaseSensitive={true} />
 
                     <Editing
@@ -21,6 +39,18 @@ export default function Supplier() {
                         allowUpdating={true}
                         allowDeleting={true}
                         allowAdding={true} />
+                       <Export enabled={true} formats={exportFormats} allowExportSelectedData={true} />
+
+                    <HeaderFilter
+                        visible={true}
+                         />
+                    <FilterPanel
+                        visible={true}
+                         />
+             
+       {/*<FilterRow
+          visible={true}
+    />*/}
 
                     <Column dataField='SupplierName' caption='Supplier Name' dataType='string' ><ValidationRule type="required" /></Column>
                     <Column dataField='Address' caption='Address' dataType='string' ><ValidationRule type="required" /></Column>
