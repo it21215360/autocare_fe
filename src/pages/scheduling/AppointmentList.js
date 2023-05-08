@@ -5,15 +5,23 @@ import DataGrid, {
   Column,
   SearchPanel,
   Paging,
+  Editing, 
+  HeaderFilter,
+  FilterPanel,
+  Export 
 } from "devextreme-react/data-grid";
 import { Navbar } from "react-bootstrap";
 import { API_BASE_URL } from "../../appconfig/config";
 import axios from "axios";
+import { jsPDF } from 'jspdf';
+import { exportDataGrid } from 'devextreme/pdf_exporter';
 
 const AppointList = (props) => {
   const [selectedID, setSelectedID] = useState(0);
   const [appointList, setapoointList] = useState([]);
   const [isLoadingData, setIsdataLoading] = useState(true);
+
+   const exportFormats = ['pdf'];
 
   const fetchURL = `${API_BASE_URL}/api/customer/list-carwash-appointment`;
 
@@ -37,6 +45,17 @@ const AppointList = (props) => {
   const onSelectionChanged = (e) => {
     setSelectedID(e.selectedRowsData[0].ID);
   };
+const onExporting = React.useCallback((e) => {
+        const doc = new jsPDF();
+    
+        exportDataGrid({
+          jsPDFDocument: doc,
+          component: e.component,
+          indent: 5,
+        }).then(() => {
+          doc.save('Car Wash scheduling.pdf');
+        });
+      });
 
   return (
     <Fragment>
@@ -50,8 +69,23 @@ const AppointList = (props) => {
         allowSearch={true}
         selection={{ mode: "single" }}
         hoverStateEnabled={true}
+        rowAlternationEnabled={true}
+        onExporting={onExporting}
         onSelectionChanged={onSelectionChanged}
       >
+        <Editing
+                        mode="popup"
+                        allowUpdating={false}
+                        allowDeleting={false}
+                        allowAdding={false} />
+                       <Export enabled={true} formats={exportFormats} allowExportSelectedData={true} />
+
+                    <HeaderFilter
+                        visible={false}
+                         />
+                    <FilterPanel
+                        visible={true}
+                         />
         <SearchPanel visible={true} />
         <Paging defaultPageSize={10} />
 
