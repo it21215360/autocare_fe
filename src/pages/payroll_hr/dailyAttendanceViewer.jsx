@@ -13,6 +13,7 @@ import axios from "axios";
 
 
 
+
 const AttendanceViewer = (props) => {
   const [employeeAttendance, setEmployeeAttendance] = useState([]);
   const [isLoadingData, setIsdataLoading] = useState(true);
@@ -33,6 +34,9 @@ const AttendanceViewer = (props) => {
       <Fragment>
         <div className={"content-block"}>
           <h5>Attendance Logs</h5>
+
+      
+
           <DataGrid
             id="grid-list"
             dataSource={employeeAttendance}
@@ -44,7 +48,7 @@ const AttendanceViewer = (props) => {
             hoverStateEnabled={true}
           >
             <SearchPanel visible={true} />
-            <Paging defaultPageSize={10} />
+            <Paging defaultPageSize={15} />
             <Column dataField="AutoID" visible={false} />
             <Column dataField="Date" />
             <Column dataField="EmployeeID" />

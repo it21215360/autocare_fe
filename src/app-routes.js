@@ -25,7 +25,6 @@ import {
   PackageDetails,
   Update,
   Cancel,
-  EmpLogin,
   EmployeeMaster,
   RaiseTicket,
   OrderForm,
@@ -63,7 +62,6 @@ const routes = [
   { path: "payroll_hr/emp-payroll", element: Salary },
   { path: "payroll_hr/leaveApproval", element: LeaveApproval },
   { path: "payroll_hr/dailyAttendanceViewer", element: AttendanceViewer },
-  { path: "payroll_hr/employeeLogin", element: EmpLogin },
   { path: "payroll_hr/employee-master", element: EmployeeMaster },
 
   //it21324406@my.sliit.lk - Shanoli
