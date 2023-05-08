@@ -84,17 +84,12 @@ const routes = [
   { path: "/scheduling/Update_appointment", element: Update },
   { path: "/scheduling/Cancel_appointment", element: Cancel },
   { path: "/scheduling/Confirm_appointment", element: Confirm },
-<<<<<<< HEAD
- // { path: "/scheduling/Login", element: ServiceLogin },
-
-=======
   { path: "/scheduling/Login", element: ServiceLogin },
   { path: "/scheduling/AppointmentList", element: AppointList },
   { path: "/scheduling/Memo", element: Memo },
   { path: "/scheduling/Service", element: ServiceAppoinment },
   { path: "/scheduling/ServiceList", element: ServiceList },
   { path: "/scheduling/Carwash", element: Carwash },
->>>>>>> 4901f3a8754559d1f48be31ae5ca24289c287416
   //it21198090@my.sliit.lk - Shania
   { path: "masters/ProductCategory", element: ProductCategory },
   { path: "masters/ProductMaster", element: ProductMaster },
