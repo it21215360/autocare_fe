@@ -1,5 +1,6 @@
 import React, { Component, Fragment, useEffect, useState } from "react";
 import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
+import 'devextreme/dist/css/dx.light.css';
 import Modal from "react-bootstrap/Modal";
 import { Button } from 'devextreme-react/button';
 

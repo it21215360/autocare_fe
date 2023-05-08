@@ -5,30 +5,18 @@ import React, {
   useContext,
   useCallback,
 } from "react";
-import { getUser, signIn as sendSignInRequest } from "../api/auth";
+import { signIn as sendSignInRequest } from "../api/auth";
 
 function AuthProvider(props) {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   (async function () {
-  //     // const result = await getUser();
-  //     // if (result.isOk) {
-  //     //   setUser(result.data);
-  //     // }
-  //     //setUser(result.data);
-  //     setLoading(false);
-  //   })();
-  // }, []);
-
-  const signIn = useCallback(async (username, password) => {
-    const result = await sendSignInRequest(username, password);
+  const signIn = useCallback(async (userInfo) => {
+    const result = await sendSignInRequest(userInfo);
     if (result.isOk) {
       setUser(result.data);
-      setLoading(false);
     }
-
+    setLoading(false);
     return result;
   }, []);
 

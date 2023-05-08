@@ -1,23 +1,26 @@
 import React, { Component, Fragment, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "devextreme-react/button";
-import DataGrid, { Column,SearchPanel,Paging,} from "devextreme-react/data-grid";
+import DataGrid, {
+  Column,
+  SearchPanel,
+  Paging,
+} from "devextreme-react/data-grid";
 import { Navbar } from "react-bootstrap";
-import './returnList.scss';
 import { API_BASE_URL } from "../../appconfig/config";
 import axios from "axios";
 
-const ReturnStockList = (props) => {
+const AppointList = (props) => {
   const [selectedID, setSelectedID] = useState(0);
-  const [returnList, setReturnList] = useState([]);
+  const [appointList, setapoointList] = useState([]);
   const [isLoadingData, setIsdataLoading] = useState(true);
-  const fetchURL = `${API_BASE_URL}/api/returnStock/list-returnStock`;
+  const fetchURL = `${API_BASE_URL}/api/employee/list-employee`;
 
   useEffect(() => {
     if (isLoadingData)
       axios.get(fetchURL).then((response) => {
         console.log(response);
-        setReturnList(response.data);
+        setapoointList(response.data);
         setIsdataLoading(false);
       });
   }, []);
@@ -31,16 +34,16 @@ const ReturnStockList = (props) => {
   };
 
   const onSelectionChanged = (e) => {
-    setSelectedID(e.selectedRowsData[0].StockReturnID);
+    setSelectedID(e.selectedRowsData[0].AutoID);
   };
 
   return (
     <Fragment>
-      <h4>List of Returned Stock</h4>
+      <h4>List of Appointments</h4>
       <DataGrid
         id="grid-list"
-        dataSource={returnList}
-        keyExpr="StockReturnID"
+        dataSource={appointList}
+        keyExpr="ID"
         showBorders={true}
         wordWrapEnabled={true}
         allowSearch={true}
@@ -50,19 +53,20 @@ const ReturnStockList = (props) => {
       >
         <SearchPanel visible={true} />
         <Paging defaultPageSize={10} />
-       
-        <Column dataField="StockReturnID" visible={false} />
-        <Column dataField="ProductCategory" caption="Product Category" />
-        <Column dataField="ProductSubCategory" caption="Product Sub-Category" />
-        <Column dataField="Product" caption="Product" />
-        <Column dataField="ReturningReason" caption="Returning Reason" />
-        <Column dataField="ReturnDate" caption="Return Date" />
 
+      <Column dataField="ID" visible={false} />
+		  <Column dataField='fname' caption='First Name' dataType='string'></Column>
+	    <Column dataField='lname' caption='Last Name' dataType='string'></Column>
+		  <Column dataField='phone' caption='Phone Number' dataType='int'></Column>
+		  <Column dataField='email' caption='Email Address' dataType='email'></Column>
+		  <Column dataField='vnumber' caption='Vehicle Number' dataType='int'></Column>
+		  <Column dataField='vtype' caption='Vehicle Type' dataType='String'></Column>
+      
       </DataGrid>
       <br></br>
       <Navbar bg="light" variant="light" className="crud_panel_buttons">
         <Button
-          className="openBtn"
+          className="crud_panel_buttons"
           stylingMode="contained"
           type="success"
           onClick={onSelectClick}
@@ -70,7 +74,7 @@ const ReturnStockList = (props) => {
           Open
         </Button>
         <Button
-          className="closeBtn"
+          className="crud_panel_buttons"
           stylingMode="contained"
           type="default"
           onClick={onCloseClick}
@@ -82,4 +86,4 @@ const ReturnStockList = (props) => {
   );
 };
 
-export default ReturnStockList;
+export default AppointList;

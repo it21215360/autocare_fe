@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Button } from "devextreme-react/button";
@@ -7,7 +6,6 @@ import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
 import axios from "axios";
 import ShippingManage from "./ShippingManage";
-
 import { API_BASE_URL } from "../../appconfig/config";
 import './deliveryRequest.scss';
 
@@ -22,7 +20,7 @@ const DeliveryRequest = () => {
   });
 
   const [showList, setShowList] = useState(false);
-  
+
   const onSaveBtnClick = (e) => {
     try {
       console.log(RequestInfo);
@@ -158,7 +156,7 @@ const DeliveryRequest = () => {
 
   return (
     <>
-     {showList ? (
+      {showList ? (
         <div className={"content-block"}>
           <ShippingManage
             Show={showList}
@@ -183,25 +181,25 @@ const DeliveryRequest = () => {
                         </Item>
     
 
-            <Item
-              dataField="Name"
-              editorType="dxTextBox"
-              editorOptions={{
-                readOnly: false,
-              }}
-            >
-              <Label text="Name"></Label>
-            </Item>
+                <Item
+                  dataField="Name"
+                  editorType="dxTextBox"
+                  editorOptions={{
+                    readOnly: false,
+                  }}
+                >
+                  <Label text="Name"></Label>
+                </Item>
 
-            <Item
-              dataField="Phone"
-              editorType="dxTextBox"
-              editorOptions={{
-                readOnly: false,
-              }}
-            >
-              <Label text="Phone"></Label>
-            </Item>
+                <Item
+                  dataField="Phone"
+                  editorType="dxTextBox"
+                  editorOptions={{
+                    readOnly: false,
+                  }}
+                >
+                  <Label text="Phone"></Label>
+                </Item>
 
             <Item
               dataField="Address"
@@ -215,12 +213,43 @@ const DeliveryRequest = () => {
 
             <Item
               dataField="City"
-              editorType="dxTextBox"
+              editorType="dxSelectBox"
               editorOptions={{
-                readOnly: false,
+                items: [
+                  {  Name: "Jaela" },
+                  {  Name: "Ekala" },
+                  {  Name: "Ragama" },
+                  {  Name: "Gampaha" },
+                  {  Name: "Matara" },
+                  {  Name: "Dehiwala" },
+                  {  Name: "Moratuwa" },
+                  {  Name: "Seeduwa" },
+                  {  Name: "Colombo 7" },
+                  {  Name: "Colombo 10" },
+                  {  Name: "Colombo 1" },
+                  {  Name: "Colombo 2" },
+                  {  Name: "Colombo 3" },
+                  {  Name: "Colombo 4" },
+                  {  Name: "Colombo 5" },
+                  {  Name: "Colombo 6" },
+                  {  Name: "Colombo 9" },
+                  {  Name: "Colombo 11" },
+                  {  Name: "Colombo 12" },
+                  {  Name: "Colombo 13" },
+                  {  Name: "Chilaw" },
+                  {  Name: "Negambo" },
+                  {  Name: "Nugegoda" },
+                  {  Name: "Matara" },
+                  {  Name: "Kandy" },
+                ],
+                searchEnabled: true,
+                displayExpr: "Name",
+                valueExpr: "Name",
+              
               }}
             >
               <Label text="City"></Label>
+              <RequiredRule message="Field required" />
             </Item>
 
             <Item
@@ -228,25 +257,37 @@ const DeliveryRequest = () => {
               editorType="dxSelectBox"
               editorOptions={{
                 items: [
-                  { AutoID: 0, Name: "Eastern" },
-                  { AutoID: 1, Name: "North Western" },
-                  { AutoID: 2, Name: "Southern" },
-                  { AutoID: 3, Name: "Uva" },
-                  { AutoID: 4, Name: "Sabaragamuwa" },
-                  { AutoID: 5, Name: "Western" },
-                  { AutoID: 6, Name: "Central" },
-                  { AutoID: 7, Name: "North Central" },
-                  { AutoID: 8, Name: "Northern" },
-                  { AutoID: 9, Name: "Central" },
+                  {  Name: "Eastern" },
+                  {  Name: "North Western" },
+                  {  Name: "Southern" },
+                  {  Name: "Uva" },
+                  {  Name: "Sabaragamuwa" },
+                  {  Name: "Western" },
+                  {  Name: "Central" },
+                  {  Name: "North Central" },
+                  {  Name: "Northern" },
+                  {  Name: "Central" },
                 ],
                 searchEnabled: true,
                 displayExpr: "Name",
-                valueExpr: "AutoID",
+                valueExpr: "Name",
+                
               }}
             >
               <Label text="Province"></Label>
               <RequiredRule message="Field required" />
             </Item>
+
+            <Item
+              dataField="DeliveryCharge"
+              editorType="dxTextBox"
+              editorOptions={{
+                readOnly: true,
+              }}
+            >
+              <Label text="DeliveryCharge"></Label>
+            </Item>
+
           </GroupItem>
           <GroupItem colCount={3}></GroupItem>
         </Form>
@@ -261,12 +302,8 @@ const DeliveryRequest = () => {
 
      </div>
       )}
-     
-      
-     </>
-      
+    </>
   );
 };
-
 
 export default DeliveryRequest;

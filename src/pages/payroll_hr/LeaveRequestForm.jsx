@@ -42,8 +42,23 @@ const LeaveRequestForm = () => {
 
     /*const [budgetdefinition, setBudgetdefinition] = useState({ FirstName: 'Maheesha', employeeId: 200202, LastName: 'Rosa', empDepartment: 'IT Department', leaveFrom: '2022/10/21', leaveTo: '2022/10/23', dayCount: 'count' })
 */
-    const leaveCategory = [{ AutoID: 1, Name: 'Casual Leave' }, { AutoID: 2, Name: 'Annual Leave' }, { AutoID: 3, Name: 'Comp Leave' }]
-    const empDepartment = [{ DepID: 1, Name: 'HR Department' }, { DepID: 2, Name: 'Finance Department' }, { DepID: 3, Name: 'IT Department' }]
+    //const leaveCategory = [{ AutoID: 1, Name: 'Casual Leave' }, { AutoID: 2, Name: 'Annual Leave' }, { AutoID: 3, Name: 'Comp Leave' }]
+    //const empDepartment = [{ DepID: 1, Name: 'HR Department' }, { DepID: 2, Name: 'Finance Department' }, { DepID: 3, Name: 'IT Department' }]
+
+  const clearForm = () => {
+    setEmpLeaveInfo({
+        FirstName: "",
+        LastName: "",
+        EmployeeID: "",
+        Position: "",
+        LeaveFrom:"",
+        LeaveTo: "",
+        LeaveCategory: "",
+        LeaveType: "",
+        DayCount: ""
+
+    });
+  }
 
     return (
 
@@ -89,15 +104,21 @@ const LeaveRequestForm = () => {
                         </Item>
 
                         <Item 
-                            dataField="EmpDepartment" 
+                            dataField="Position" 
                             editorType="dxSelectBox" 
                             editorOptions={{
-                            items: empDepartment,
+                            items: [
+                                { Name: "Auto Mechanic"},
+                                { Name: "Technicians"},
+                                { Name: "Mechanic"},
+                                { Name: "HR-Manager"},
+                                
+                            ],
                             searchEnabled: true,
                             displayExpr: "Name",
-                            valueExpr: "DepID",
+                            valueExpr: "Name",
                         }}>
-                            <Label text="Employee Department"></Label>
+                            <Label text="Position"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
 
@@ -116,10 +137,14 @@ const LeaveRequestForm = () => {
                             dataField="LeaveCategory"
                             editorType="dxSelectBox"
                             editorOptions={{
-                                items: leaveCategory,
+                                items: [
+                                    { Name: "Casual Leave"},
+                                    { Name: "Anual Leave"},
+                                    { Name: "Comp Leave"},
+                                ],
                                 searchEnabled: true,
                                 displayExpr: "Name",
-                                valueExpr: "AutoID",
+                                valueExpr: "Name",
                             }}
                         >
                             <Label text="Leave Category"></Label>
@@ -130,10 +155,13 @@ const LeaveRequestForm = () => {
                             dataField="LeaveType"
                             editorType="dxSelectBox"
                             editorOptions={{
-                                items: [{ AutoID: 1, Name: 'Full Day' }, { AutoID: 2, Name: 'Half Day' }],
+                                items: [
+                                    { Name: 'Full Day' }, 
+                                    { Name: 'Half Day' },
+                                ],
                                 searchEnabled: true,
                                 displayExpr: "Name",
-                                valueExpr: "AutoID",
+                                valueExpr: "Name",
                             }}
                         >
                             <Label text="Leave Type"></Label>
@@ -168,6 +196,7 @@ const LeaveRequestForm = () => {
                     <Button 
                         stylingMode="contained" 
                         type="default"
+                        onClick={clearForm}
                         >
                             Clear
                         </Button>
