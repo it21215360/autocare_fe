@@ -43,14 +43,14 @@ const VehicleReg = () => {
                   editorType="dxSelectBox"
                   editorOptions={{
                     items: [
-                      { AutoID: 0, Name: "Van" },
-                      { AutoID: 1, Name: "Lorry" },
-                      { AutoID: 2, Name: "Dimo" },
+                      {  Name: "Van" },
+                      {  Name: "Lorry" },
+                      {  Name: "Dimo" },
                    
                     ],
                     searchEnabled: true,
                     displayExpr: "Name",
-                    valueExpr: "AutoID",
+                    valueExpr: "Name",
                   }}
                 >
                   <Label text="Select vehicle type :"></Label>

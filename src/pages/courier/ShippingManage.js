@@ -1,14 +1,32 @@
 import React, { Component, Fragment, useEffect, useState } from "react";
 import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
-import 'devextreme/dist/css/dx.light.css';
-import Modal from "react-bootstrap/Modal";
-import { Button } from 'devextreme-react/button';
+import { Workbook } from 'exceljs';
+import { saveAs } from 'file-saver';
+// Our demo infrastructure requires us to use 'file-saver-es'.
+// We recommend that you use the official 'file-saver' package in your applications.
+import { exportDataGrid } from 'devextreme/excel_exporter';
 
+import 'devextreme/data/odata/store';
+import DataGrid, {
+  Column,
+  Pager,
+  Paging,
+  FilterRow,
+  Lookup, 
+  Export,
+  SearchPanel, 
+  Selection,
+  GroupPanel,
+  Grouping,
+  Editing,
+  ValidationRule
+} from 'devextreme-react/data-grid';
+import { Button } from 'devextreme-react/button';
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
 import { Navbar } from "react-bootstrap";
 import 'devextreme/dist/css/dx.light.css';
-import DataGrid, { Column, SearchPanel, Editing,ValidationRule } from 'devextreme-react/data-grid';
+
 
 const ShippingManage = (props) => {
     const [selectedID, setSelectedID] = useState(0);
@@ -34,9 +52,10 @@ const ShippingManage = (props) => {
       };
     
       const onSelectionChanged = (e) => {
-        setSelectedID(e.selectedRowsData[0].AutoID);
+        setSelectedID(e.selectedRowsData[0].DeliveryID);
       };
 
+      
      
     
     return (
@@ -47,13 +66,26 @@ const ShippingManage = (props) => {
                     dataSource={requestList}
                     rowAlternationEnabled={true}
                     keyExpr="DeliveryID"
-                    showBorders={true}>
+                    showBorders={true}
+                    focusedRowEnabled={true}
+                    defaultFocusedRowIndex={0}
+                    columnAutoWidth={true}
+                    columnHidingEnabled={true}>
+                      
+                      <Paging defaultPageSize={10} />
+        <Pager showPageSizeSelector={true} showInfo={true} />
+        <FilterRow visible={true} />
+        <Selection mode="multiple" />
+        <GroupPanel visible={true} />
+        <Grouping autoExpandAll={true} />
+
+
                 
                     <SearchPanel visible={true} highlightCaseSensitive={true} />
 
                     <Editing
                        
-                        mode="popup"
+                        mode = "popup"
                         allowUpdating={true}
                         allowDeleting={true}
                         allowAdding={true} />
@@ -71,7 +103,10 @@ const ShippingManage = (props) => {
                     
 
         
+                    <Export enabled={true} allowExportSelectedData={true} />
                 </DataGrid>
+
+                
                 <br></br>
                 <div>
                 <Navbar bg="light" variant="light" className="crud_panel_buttons">
@@ -85,7 +120,7 @@ const ShippingManage = (props) => {
             </Button>
                     
                    
-                    <Button><b>Export Excel Sheet</b></Button>
+                   
                     </Navbar>
                 </div>
                 
@@ -94,5 +129,42 @@ const ShippingManage = (props) => {
 
     )
 };
+
+const onExporting =(e) =>{
+  const workbook = new Workbook();
+  const worksheet = workbook.addWorksheet('Main sheet');
+
+  exportDataGrid({
+    component: e.component,
+    worksheet,
+    autoFilterEnabled: true,
+  }).then(() => {
+    workbook.xlsx.writeBuffer().then((buffer) => {
+      saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
+    });
+  });
+  e.cancel = true;
+}
+
+const dataSource = {
+  store: {
+    type: 'odata',
+    key: 'DeliveryID',
+    url: 'https://js.devexpress.com/Demos/DevAV/odata/Tasks'
+  },
+  expand: '',
+  select: [
+    'DeliveryID',
+    'OrderID',
+    'Name',
+    'Phone',
+    'City',
+    'Province',
+    'OrderedDate',
+    'Status'
+    
+  ]
+};
+
 
 export default ShippingManage;

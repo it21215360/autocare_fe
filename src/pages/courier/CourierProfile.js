@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './CourierProfile.scss';
-import Form from 'devextreme-react/form';
+import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
+import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
+
 
 export default function CourierProfile() {
   const [notes, setNotes] = useState(
@@ -40,13 +42,19 @@ export default function CourierProfile() {
               courier.Picture
 
               
-  }`}
+  }`
+
+}
+
+ 
           />
 
         
         </div>
-        <span>{notes}</span>
+      
+
       </div>
+      
       <h2 className={'content-block'}>My Details</h2>
       <div id="block1" className={'content-block dx-card responsive-paddings'}>
         <Form
@@ -57,6 +65,7 @@ export default function CourierProfile() {
           colCountByScreen={colCountByScreen}
         />
       </div>
+     
       <h2 className={'content-block'}>My Vehicle</h2>
 
       <div className={'content-block dx-card responsive-paddings'}>
@@ -66,6 +75,7 @@ export default function CourierProfile() {
           onFieldDataChanged={e => e.dataField === 'Notes' && setNotes(e.value)}
           labelLocation={'top'}
           colCountByScreen={colCountByScreen}
+          
         />
       </div>
     </React.Fragment>

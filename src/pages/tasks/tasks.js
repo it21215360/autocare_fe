@@ -43,11 +43,13 @@ export default function Task() {
           caption={'Priority'}
           hidingPriority={5}
         >
+          
           <Lookup
             dataSource={priorities}
             valueExpr={'value'}
             displayExpr={'name'}
           />
+
         </Column>
         <Column
           dataField={'ResponsibleEmployee.Employee_Full_Name'}
@@ -55,18 +57,21 @@ export default function Task() {
           allowSorting={false}
           hidingPriority={7}
         />
+
         <Column
           dataField={'Task_Start_Date'}
           caption={'Start Date'}
           dataType={'date'}
           hidingPriority={3}
         />
+
         <Column
           dataField={'Task_Due_Date'}
           caption={'Due Date'}
           dataType={'date'}
           hidingPriority={4}
         />
+
         <Column
           dataField={'Task_Priority'}
           caption={'Priority'}

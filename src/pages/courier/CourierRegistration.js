@@ -13,9 +13,19 @@ import { API_BASE_URL } from "../../appconfig/config";
 
 
 const  CourierRegistration = () => {
+    const [RegInfo, setRegInfo] = useState({});
+    const [pageProperties, setPageProperties] = useState({
+      CourierID: 0,
+      DataLoading: false,
+      isDocReadOnly: false,
+      UpdateMode: false,
+    });
+  
+    const [showList, setShowList] = useState(false);
+  
 
 
-   const [RegInfo, setRegInfo] = useState({});
+   //const [RegInfo, setRegInfo] = useState({});
 
    const onSaveBtnClick = (e) => {
        try {
@@ -36,7 +46,44 @@ const  CourierRegistration = () => {
        }
      };
 
-
+     const OnLoadData = () => {
+        try {
+          if (pageProperties.CourierReqID != 0 && pageProperties.UpdateMode)
+            axios
+              .get(`${API_BASE_URL}/api/courier/get-courier`, {
+                params: {
+                  CourierID: pageProperties.CourierID,
+                },
+              })
+              .then((res) => {
+                console.log(res.data[0]);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+        } catch (error) {
+          console.error(error);
+        }
+      };
+    
+      const onListClose = () => {
+        setShowList(false);
+      };
+    
+      const onListClickEvent = (viewListSelectedID) => {
+        debugger;
+        if (showList && viewListSelectedID != 0) {
+          setShowList(!showList);
+          setPageProperties({
+            CourierReqID: viewListSelectedID,
+            DataLoading: true,
+            isDocReadOnly: true,
+            UpdateMode: true,
+          });
+    
+          OnLoadData();
+        }
+      };
     return (
     <> 
      <div className={'content-block'}>
