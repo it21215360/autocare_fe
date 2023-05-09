@@ -197,6 +197,12 @@ const  GoodReceiveForm = () => {
                             <Label text="Good Receive ID"></Label>
                             <RequiredRule message="Field required" />
                         </Item>
+                        <Item dataField="StorageID" editorType="dxTextBox" editorOptions={{
+                            readOnly: false,
+                        }}>
+                            <Label text="Stock ID"></Label>
+                            <RequiredRule message="Field required" />
+                        </Item>
                         <Item dataField="ReceivedDate" editorType="dxDateBox">
                             <Label text="Good Received Date"></Label>
                             <RequiredRule message="Field required" />

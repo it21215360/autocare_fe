@@ -1,6 +1,14 @@
 import React, { useEffect } from "react";
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import DataGrid, {
+  Column,
+  SearchPanel,
+  Paging,
+  Editing, 
+  HeaderFilter,
+  FilterPanel,
+  Export,
+  ValidationRule,
   RequiredRule,
   Form as GridForm,
 } from "devextreme-react/data-grid";
@@ -159,7 +167,17 @@ const Carwash = () => {
     setCusAppointmentInfo({});
    
   };
-
+  const [scheduledDateData, setScheduledDateData] = React.useState([]);
+   
+  const handleViewDateList = () => {
+    axios.get(`${API_BASE_URL}/api/date-carwash-station`)
+      .then(response => {
+        const serviceData = response.data;
+        setScheduledDateData(serviceData);
+      })
+      .catch(error => console.log(error));
+  };
+  
   return (
     <>
       {showList ? (
@@ -360,6 +378,23 @@ const Carwash = () => {
               Clear
             </Button>
           </Navbar>
+          
+        
+          <h5><b>Check the availability of the date</b></h5>
+                <DataGrid id='sample'
+                    dataSource={scheduledDateData}
+                    rowAlternationEnabled={true}
+                    showBorders={true}
+                    >
+                    <SearchPanel visible={true} highlightCaseSensitive={true} />
+                    <Column dataField="date" caption="Scheduled Dates" ><ValidationRule type="required" /></Column>
+                    
+                </DataGrid>
+                <br></br>
+                <div>
+                    <Button onClick={handleViewDateList}><b>View Service List</b></Button>
+                    <Button><b>Clear</b></Button>
+                </div>
         </div>
       )}
     </>

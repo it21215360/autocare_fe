@@ -33,6 +33,7 @@ const ReturnStockList = (props) => {
   const onSelectionChanged = (e) => {
     setSelectedID(e.selectedRowsData[0].StockReturnID);
   };
+  
 
   return (
     <Fragment>
@@ -55,6 +56,7 @@ const ReturnStockList = (props) => {
         <Column dataField="ProductCategory" caption="Product Category" />
         <Column dataField="ProductSubCategory" caption="Product Sub-Category" />
         <Column dataField="Product" caption="Product" />
+        <Column dataField="ReturnedQuantity" caption="Returned Quantity" />
         <Column dataField="ReturningReason" caption="Returning Reason" />
         <Column dataField="ReturnDate" caption="Return Date" />
 

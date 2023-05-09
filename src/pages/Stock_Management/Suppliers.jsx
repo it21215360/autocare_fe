@@ -4,12 +4,13 @@ import DataGrid, { Column, SearchPanel, Editing, ValidationRule, HeaderFilter,Fi
 import { Button } from 'devextreme-react';
 import { jsPDF } from 'jspdf';
 import { exportDataGrid } from 'devextreme/pdf_exporter';
-
+import axios from "axios";
+import { API_BASE_URL } from "../../appconfig/config";
 
 
 export default function Supplier() {
     const exportFormats = ['pdf'];
-    const supplierDataSource = [{}]
+    const [supplierDataSource, setSupplierDataSource] = React.useState([]);
    
     const onExporting = React.useCallback((e) => {
         const doc = new jsPDF();
@@ -23,6 +24,52 @@ export default function Supplier() {
         });
       });
 
+      const onRowInserting = (e) => {
+        axios.post('/api/supplier', e.data)
+          .then(response => {
+            const newSupplier = response.data;
+            setSupplierDataSource([...supplierDataSource, newSupplier]);
+          })
+          .catch(error => console.log(error));
+      };
+    
+     const onRowUpdating = (e) => {
+  const updatedSupplier = { ...e.oldData, ...e.newData };
+  axios.put(`/api/supplier/${updatedSupplier.supID}`, updatedSupplier)
+    .then(response => {
+      const index = supplierDataSource.findIndex(data => data.supID === updatedSupplier.supID);
+      const newSupplierDataSource = [...supplierDataSource];
+      newSupplierDataSource[index] = updatedSupplier;
+      setSupplierDataSource(newSupplierDataSource);
+    })
+    .catch(error => console.log(error));
+};
+
+      
+const onRowRemoving = (e) => {
+  const supplierId = e.key.supID;
+  axios.delete(`/api/supplier/${supplierId}`)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+
+
+
+const handleViewSuppliersList = () => {
+  axios.get(`${API_BASE_URL}/api/supplier`)
+    .then(response => {
+      const supplierData = response.data;
+      setSupplierDataSource(supplierData);
+    })
+    .catch(error => console.log(error));
+};
+
+
     return (
         <React.Fragment>
             <div className={'content-block'}>
@@ -31,7 +78,10 @@ export default function Supplier() {
                     dataSource={supplierDataSource}
                     rowAlternationEnabled={true}
                     showBorders={true}
-                    onExporting={onExporting}>
+                    onExporting={onExporting}
+                    onRowInserting={onRowInserting}
+                    onRowUpdating={onRowUpdating}
+                    onRowRemoving={onRowRemoving}>
                     <SearchPanel visible={true} highlightCaseSensitive={true} />
 
                     <Editing
@@ -56,14 +106,14 @@ export default function Supplier() {
                     <Column dataField='Address' caption='Address' dataType='string' ><ValidationRule type="required" /></Column>
                     <Column dataField='Email' caption='Email' dataType='string' ><ValidationRule type="required" /></Column>
                     <Column dataField='Telephone' caption='Telephone' dataType='char' ><ValidationRule type="required" /></Column>
-                    <Column dataField='ProductCatogory' caption='Product Catogory' dataType='string' ><ValidationRule type="required" /></Column>
-                    <Column dataField='ProductSubCatogory' caption='Product Sub-Catogory' dataType='string' ><ValidationRule type="required" /></Column>
+                    <Column dataField='ProductCategory' caption='Product Catogory' dataType='string' ><ValidationRule type="required" /></Column>
+                    <Column dataField='ProductSubCategory' caption='Product Sub-Catogory' dataType='string' ><ValidationRule type="required" /></Column>
                     <Column dataField='Product' caption='Product' dataType='string' ><ValidationRule type="required" /></Column>
                     
                 </DataGrid>
                 <br></br>
                 <div>
-                    <Button><b>View Suppliers List</b></Button>
+                    <Button onClick={handleViewSuppliersList}><b>View Suppliers List</b></Button>
                     <Button><b>Clear</b></Button>
                 </div>
             </div>
