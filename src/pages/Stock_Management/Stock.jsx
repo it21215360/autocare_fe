@@ -18,14 +18,14 @@ import DataGrid, {
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
-import Orders from "./Order";
+import Storage from "./Storage";
 
-const PurchaseOrderForm = () => {
+const Stock = () => {
   //const [POrderDetails, setPOrderDetails] = useState({});
-  const [POther] = [{}];
-  const [pOrderDetails, setPOrderDetails] = useState({});
+  const [stockOther] = [{}];
+  const [stockDetails, setStockDetails] = useState({});
   const [pageProperties, setPageProperties] = useState({
-    OrderID: 0,
+    StorageID: 0,
     DataLoading: false,
     isDocReadOnly: false,
     UpdateMode: false,
@@ -43,7 +43,7 @@ const PurchaseOrderForm = () => {
 
   const onSaveBtnClick = (e) => {
     try {
-      pageProperties.UpdateMode ? updateStockOrder() : addStockOrder();
+      pageProperties.UpdateMode ? updateStock() : addStock();
     } catch (error) {
       console.error(error);
     }
@@ -51,7 +51,7 @@ const PurchaseOrderForm = () => {
 
   const resetPageProperties = () => {
     setPageProperties({
-      OrderID: 0,
+      StorageID: 0,
       DataLoading: false,
       isDocReadOnly: false,
       UpdateMode: false,
@@ -80,18 +80,18 @@ const PurchaseOrderForm = () => {
     );
   };
 
-  const updateStockOrder = () => {
+  const updateStock = () => {
     try {
-      if (pageProperties.OrderID > 0)
+      if (pageProperties.StorageID > 0)
         axios
-          .put(`${API_BASE_URL}/api/stockOrder/update-stockOrder`, {
-            OrderID: pageProperties.OrderID,
-            PurchaseOrderInfo: JSON.stringify(pOrderDetails),
+          .put(`${API_BASE_URL}/api/stock/update-stock`, {
+            StorageID: pageProperties.StorageID,
+            StockDetails: JSON.stringify(stockDetails),
           })
           .then((response) => {
             console.log(response);
             if (response.data.affectedRows === 1) {
-              showSuccessAlert(`Purchase Order Details Updated!`);
+              showSuccessAlert(`Stock Details Updated!`);
             }
           })
           .catch((error) => {
@@ -103,16 +103,16 @@ const PurchaseOrderForm = () => {
     }
   };
 
-  const addStockOrder = () => {
+  const addStock = () => {
     try {
       axios
-        .post(`${API_BASE_URL}/api/stockOrder/add-stockOrder`, {
-          PurchaseOrderInfo: JSON.stringify(pOrderDetails),
+        .post(`${API_BASE_URL}/api/stock/add-stock`, {
+          StockDetails: JSON.stringify(stockDetails),
         })
         .then((response) => {
           console.log(response);
           if (response.data.affectedRows > 0) {
-            showSuccessAlert(`Stock Order Details Added!`);
+            showSuccessAlert(`Stock Details Added!`);
             onClearBtnClick();
           }
         })
@@ -125,17 +125,17 @@ const PurchaseOrderForm = () => {
     }
   };
 
-  const OnLoadData = (orderId) => {
+  const OnLoadData = (stockId) => {
     try {
       axios
-        .get(`${API_BASE_URL}/api/stockOrder/get-stockOrder`, {
+        .get(`${API_BASE_URL}/api/stock/get-stock`, {
           params: {
-            PurchaseID: orderId, //pageProperties.StockReturnID,
+            InventoryID: stockId, //pageProperties.StockReturnID,
           },
         })
         .then((res) => {
           console.log(res.data);
-          setPOrderDetails(res.data[0][0]);
+          setStockDetails(res.data[0][0]);
         })
         .catch((error) => {
           console.log(error);
@@ -154,7 +154,7 @@ const PurchaseOrderForm = () => {
     if (showList && viewListSelectedID != 0) {
       setShowList(!showList);
       setPageProperties({
-        OrderID: viewListSelectedID,
+        StorageID: viewListSelectedID,
         DataLoading: true,
         isDocReadOnly: true,
         UpdateMode: true,
@@ -166,65 +166,31 @@ const PurchaseOrderForm = () => {
 
   const onClearBtnClick = () => {
     resetPageProperties();
-    setPOrderDetails({});
+    setStockDetails({});
   };
 
   return (
     <>
       {showList ? (
         <div className={"content-block"}>
-          <Orders
+          <Storage
             Show={showList}
             OnHide={onListClickEvent}
             HideTheList={onListClose}
-          ></Orders>
+          ></Storage>
         </div>
       ) : (
         <div className={"content-block"}>
-          <h2>Purchase Order</h2>
+          <h2>Stock</h2>
           <Card style={{ width: "100%" }}>
             <Card.Body>
-             
               <Card.Text>
-                We can place the Stock Order Here!
+               You can add stock from here!
               </Card.Text>
-              <Form formData={pOrderDetails}>
+              <Form formData={stockDetails}>
                 <GroupItem colCount={3}>
-                  <Item
-                    dataField=" OrderID"
-                    editorType="dxTextBox"
-                    editorOptions={{
-                      readOnly: true,
-                    }}
-                  >
-                    <Label text="Order #"></Label>
-                    <RequiredRule message="Field required" />
-                  </Item>
 
-                  <Item dataField="PurchaseOrderNumber" editorType="dxTextBox">
-                    <Label text="Purchase Order Number"></Label>
-                    <RequiredRule message="Field required" />
-                  </Item>
-                  <Item dataField="OrderDate" editorType="dxDateBox">
-                    <Label text="Order Date"></Label>
-                    <RequiredRule message="Field required" />
-                  </Item>
-                  <Item dataField="EstdDeliveryDate" editorType="dxDateBox">
-                    <Label text="Est. Delivery Date"></Label>
-                    <RequiredRule message="Field required" />
-                  </Item>
-                  <Item
-                    dataField="Supplier"
-                    editorType="dxTextBox"
-                    editorOptions={{
-                      readOnly: false,
-                    }}
-                  >
-                    <Label text="Supplier Email"></Label>
-                    <RequiredRule message="Field required" />
-                  </Item>
-
-                  <Item
+                <Item
                   dataField="ProductCategory"
                   editorType="dxSelectBox"
                   editorOptions={{
@@ -242,9 +208,9 @@ const PurchaseOrderForm = () => {
                     valueExpr: "Name",
                   }}
                 >
-                    <Label text="Product Category"></Label>
-                    <RequiredRule message="Field required" />
-                  </Item>
+                  <Label text="Product Category"></Label>
+                  <RequiredRule message="Field required" />
+                </Item>
                   <Item
                   dataField="ProductSubCategory"
                   editorType="dxSelectBox"
@@ -277,21 +243,13 @@ const PurchaseOrderForm = () => {
                     valueExpr: "Name",
                   }}
                 >
-                <Label text="Product Sub-Category"></Label>
-                <RequiredRule message="Field required" />
-                </Item>
-
-                <Item
-                  dataField="Product"
-                  editorType="dxTextBox"
-                  editorOptions={{
-                    readOnly: false,
-                  }}
-                >
-                   <Label text="Product"></Label>
+                  <Label text="Product Sub-Category"></Label>
                   <RequiredRule message="Field required" />
                 </Item>
-
+                  <Item dataField="ProductName" editorType="dxTextBox">
+                    <Label text="Product Name"></Label>
+                    <RequiredRule message="Field required" />
+                  </Item>
                   <Item
                     dataField="Quantity"
                     editorType="dxTextBox"
@@ -299,20 +257,10 @@ const PurchaseOrderForm = () => {
                       readOnly: false,
                     }}
                   >
-                    <Label text="Order Quantity"></Label>
+                    <Label text="Quantity"></Label>
                     <RequiredRule message="Field required" />
-                  </Item>
-                  <Item
-                    dataField="Rate"
-                    editorType="dxTextBox"
-                    editorOptions={{
-                      readOnly: false,
-                    }}
-                  >
-                    <Label text="Rate"></Label>
-                    <RequiredRule message="Field required" />
-                  </Item>
-
+                  </Item>        
+        
                   <Item
                     dataField="UnitPrice"
                     editorType="dxTextBox"
@@ -325,15 +273,21 @@ const PurchaseOrderForm = () => {
                   </Item>
 
                   <Item
-                    dataField="TotalAmount"
+                    dataField="ReorderLevel"
                     editorType="dxTextBox"
                     editorOptions={{
-                      readOnly: true,
+                      readOnly: false,
                     }}
                   >
-                    <Label text="Total Amount"></Label>
+                    <Label text="Reorder Level"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
+
+                  <Item dataField="StoredDate" editorType="dxDateBox">
+                  <Label text="Date"></Label>
+                  <RequiredRule message="Field required" />
+                </Item>
+
                 </GroupItem>
               </Form>
               <br />
@@ -354,7 +308,7 @@ const PurchaseOrderForm = () => {
               type="default"
               onClick={() => setShowList(true)}
             >
-              View List
+              View Stock List
             </Button>
             <Button
               className="crud_panel_buttons"
@@ -377,4 +331,4 @@ const PurchaseOrderForm = () => {
   );
 };
 
-export default PurchaseOrderForm;
+export default Stock;

@@ -1,5 +1,13 @@
 import React from "react";
-import DataGrid, { Column,Paging, SearchPanel, Editing} from 'devextreme-react/data-grid';
+import DataGrid, {
+  Column,
+  SearchPanel,
+  Paging,
+  Editing, 
+  HeaderFilter,
+  FilterPanel,
+  Export
+} from 'devextreme-react/data-grid';
 import { Button } from 'devextreme-react/button';
 import './Confirm.scss';
 
@@ -9,6 +17,8 @@ import Modal from "react-bootstrap/Modal";
 import { Navbar } from "react-bootstrap";
 import { API_BASE_URL } from "../../appconfig/config";
 import axios from "axios";
+import { jsPDF } from 'jspdf';
+import { exportDataGrid } from 'devextreme/pdf_exporter';
 
 
 const Confirm = (props) => {
@@ -19,6 +29,8 @@ const [selectedID, setSelectedID] = useState(0);
 const [getAppointmentDetails, setgetAppointmentDetails] = useState([]);
 const [isLoadingData, setIsdataLoading] = useState(true);
 const fetchURL = `${API_BASE_URL}/api/customer/confirm-appointment`;
+
+const exportFormats = ['pdf'];
 
 useEffect(() => {
   if (isLoadingData)
@@ -40,6 +52,17 @@ const onCloseClick = (e) => {
 const onSelectionChanged = (e) => {
     setSelectedID(e.selectedRowsData[0].StockReturnID);
   };
+  const onExporting = React.useCallback((e) => {
+    const doc = new jsPDF();
+
+    exportDataGrid({
+      jsPDFDocument: doc,
+      component: e.component,
+      indent: 5,
+    }).then(() => {
+      doc.save('Service scheduling.pdf');
+    });
+  });
 
     return(
               
@@ -50,7 +73,7 @@ const onSelectionChanged = (e) => {
                 <h4>Service StationManagement</h4> 
               </div>
               
-              <h2>Confirm Scheduled Appointment</h2>
+              <h2>Confirm Car wash Appointment</h2>
             <DataGrid
               id="grid-list"
               className="dataform"
@@ -61,12 +84,26 @@ const onSelectionChanged = (e) => {
               allowSearch={true}
               selection={{ mode: "single" }}
               hoverStateEnabled={true}
+              rowAlternationEnabled={true}
+              onExporting={onExporting}
               onSelectionChanged={onSelectionChanged}
             >
               <SearchPanel visible={true} />
               <Paging defaultPageSize={10} />
             
-              
+              <Editing
+                mode="popup"
+                allowUpdating={false}
+                allowDeleting={false}
+                allowAdding={false} />
+              <Export enabled={true} formats={exportFormats} allowExportSelectedData={true} />
+
+              <HeaderFilter
+                  visible={false}
+                  />
+              <FilterPanel
+                  visible={true}
+                  />
             <Column  dataField="ID" visible={false} />
             <Column dataField='fname' caption='First Name' dataType='string'></Column>
             <Column dataField='lname' caption='Last Name' dataType='string'></Column>
