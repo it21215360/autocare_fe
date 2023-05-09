@@ -6,7 +6,7 @@ import { Navbar, ListGroup } from "react-bootstrap";
 import { LoadPanel } from "devextreme-react/load-panel";
 import notify from "devextreme/ui/notify";
 import { useState } from "react";
-import { SelectBox } from "devextreme-react";
+import { PieChart, SelectBox } from "devextreme-react";
 import { Button } from 'devextreme-react/button';
 import { DateBox } from 'devextreme-react/calendar';
 
@@ -16,20 +16,33 @@ import { Toast } from 'devextreme-react/toast';
 import axios from 'axios';
 import { API_BASE_URL  } from '../../appconfig/config.js';
 
+import { useAuth } from "../../contexts/auth";
+
+//PieChart
+
+
 
 const LeaveRequestForm = () => {
-    const [empLeaveInfo, setEmpLeaveInfo] = useState({});
+
+    const { user } = useAuth();
+
+    const [empLeaveInfo, setEmpLeaveInfo] = useState({
+        EmployeeID: user.ID,
+        FirstName: user.FirstName,
+        LastName: user.LastName,
+        Email: user.Email
+    });
   
-const showSuccessAlert = (successMsg) => {
-    notify(
-       {
-        message: successMsg.toString(),
-        width: 450,
-       },
-       "success",
-       3000
-    );
-};
+    const showSuccessAlert = (successMsg) => {
+        notify(
+        {
+            message: successMsg.toString(),
+            width: 450,
+        },
+        "success",
+        3000
+        );
+    };
 
 const showErrorAlert = (errorMsg) => {
     notify(

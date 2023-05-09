@@ -32,7 +32,6 @@ export const navigation = [
         text: "Employee Attendance Viewer",
         path: "payroll_hr/dailyAttendanceViewer",
       },
-      { text: "Employee Login", path: "payroll_hr/employeeLogin" },
       { text: "Employee Master", path: "payroll_hr/employee-master" },
     ],
   },
@@ -96,14 +95,18 @@ export const navigation = [
     text: "Delivery",
     icon: "globe",
     items: [
-      { text: "Courier Registration", path: "./courier/CourierRegistration" },
-      { text: "Vehicle Register", path: "courier/VehicleReg" },
-      { text: "Delivery Request Form", path: "courier/deliveryRequest" },
-      { text: "Shipping Manage", path: "courier/ShippingManage" },
-      { text: "Courier Profile", path: "courier/CourierProfile" },
-      { text: "Delivery Confirm", path: "courier/DeliveryConfirm" },
-      { text: "Export to Excel", path: "courier/ExportToExcel" },
-    ],
+      
+      { text: 'Courier Registration', path: './courier/CourierRegistration' },
+      { text: 'Vehicle Register', path: 'courier/VehicleReg' },
+      { text: 'Delivery Request Form', path: 'courier/deliveryRequest' },
+      { text: 'Shipping Manage', path: 'courier/ShippingManage' },
+      { text: 'Courier Profile', path: 'courier/CourierProfile' },
+      { text: 'Delivery Confirm', path: 'courier/DeliveryConfirm' },
+      { text: 'Export to Excel', path: 'courier/exportToExcel' },
+      { text: 'Delivery Alocation', path: 'courier/deliveryAlocation' },
+
+      
+    ]
   },
 
   //it21238994@my.sliit.lk - Amanda
