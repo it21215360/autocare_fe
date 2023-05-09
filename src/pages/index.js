@@ -12,7 +12,7 @@ export { default as AttendanceViewer } from "./payroll_hr/dailyAttendanceViewer"
 export { default as EmployeeMaster } from "./payroll_hr/employeeMaster";
 
 //it21324406@my.sliit.lk - Shanoli
-export { default as InventoryLogin } from "./stock_management/InventoryLogin";
+export { default as Stock } from "./stock_management/Stock";
 export { default as Storage } from "./stock_management/Storage";
 export { default as Suppliers } from "./stock_management/Suppliers";
 export { default as Order } from "./stock_management/Order";
@@ -44,6 +44,8 @@ export { default as deliveryRequest } from "./courier/deliveryRequest";
 export { default as ShippingManage } from "./courier/ShippingManage";
 export { default as CourierProfile } from "./courier/CourierProfile";
 export { default as DeliveryConfirm } from "./courier/DeliveryConfirm";
+export { default as exportToExcel } from "./courier/exportToExcel";
+export { default as deliveryAlocation } from "./courier/deliveryAlocation";
 
 //it21326936@my.sliit.lk - Amandi
 export { default as OrderForm } from "./ordering/Order_details";

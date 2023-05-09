@@ -1,27 +1,38 @@
 import React, { useState } from 'react';
+import './CourierProfile.scss';
+import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
+import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
 
-import Form from 'devextreme-react/form';
 
 export default function CourierProfile() {
   const [notes, setNotes] = useState(
-    'Sandra is a CPA and has been our controller since 2008. She loves to interact with staff so if you`ve not met her, be certain to say hi.\r\n\r\nSandra has 2 daughters both of whom are accomplished gymnasts.'
+    'Mahen Johnson'
   );
   const courier = {
     ID: 7,
-    FirstName: 'Sandra',
-    LastName: 'Johnson',
-    Prefix: 'Mrs.',
-    Position: 'Controller',
+    FullName: 'Mahen Johnson',
     Picture: 'images/employees/06.png',
-    BirthDate: new Date('1974/11/5'),
+    NIC: '19980076876',
     HireDate: new Date('2005/05/11'),
-    Notes: notes,
-    Address: '4600 N Virginia Rd.'
+    Email:'Mahen@gmail.com',
+    Phone:'0770086655',
+    
+
+
+  };
+
+  const vehicle = {
+    VehicleID: 778,
+    VehicleType: 'Van',
+    Model: 'Toyota',
+    Brand: 'Mistubishi',
+    VehicleNo:'789-768',
+
   };
 
   return (
     <React.Fragment>
-      <h2 className={'content-block'}>Profile</h2>
+      <h2 className={'content-block'}>My Profile</h2>
 
       <div className={'content-block dx-card responsive-paddings'}>
         <div className={'form-avatar1'}>
@@ -29,13 +40,23 @@ export default function CourierProfile() {
             alt={''}
             src={`https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/${
               courier.Picture
-  }`}
-          />
-        </div>
-        <span>{notes}</span>
-      </div>
 
-      <div className={'content-block dx-card responsive-paddings'}>
+              
+  }`
+
+}
+
+ 
+          />
+
+        
+        </div>
+      
+
+      </div>
+      
+      <h2 className={'content-block'}>My Details</h2>
+      <div id="block1" className={'content-block dx-card responsive-paddings'}>
         <Form
           id={'form'}
           defaultFormData={courier}
@@ -44,7 +65,22 @@ export default function CourierProfile() {
           colCountByScreen={colCountByScreen}
         />
       </div>
+     
+      <h2 className={'content-block'}>My Vehicle</h2>
+
+      <div className={'content-block dx-card responsive-paddings'}>
+        <Form
+          id={'form'}
+          defaultFormData={vehicle}
+          onFieldDataChanged={e => e.dataField === 'Notes' && setNotes(e.value)}
+          labelLocation={'top'}
+          colCountByScreen={colCountByScreen}
+          
+        />
+      </div>
     </React.Fragment>
+
+    
   );
 }
 

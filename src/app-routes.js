@@ -6,6 +6,7 @@ import {
   LeaveRequestForm,
   Attendance,
   Salary,
+  deliveryAlocation,
   LeaveApproval,
   AttendanceViewer,
   DeliveryConfirm,
@@ -14,7 +15,7 @@ import {
   deliveryRequest,
   ShippingManage,
   CourierProfile,
-  InventoryLogin,
+  Stock,
   Storage,
   Order,
   Suppliers,
@@ -23,6 +24,7 @@ import {
   GoodReceiveForm,
   Scheduling,
   PackageDetails,
+  exportToExcel,
   Update,
   Cancel,
   EmployeeMaster,
@@ -65,7 +67,7 @@ const routes = [
   { path: "payroll_hr/employee-master", element: EmployeeMaster },
 
   //it21324406@my.sliit.lk - Shanoli
-  { path: "stock_management/inventory-login", element: InventoryLogin },
+  { path: "stock_management/stock", element: Stock },
   { path: "stock_management/storage", element: Storage },
   { path: "stock_management/suppliers", element: Suppliers },
   { path: "stock_management/order", element: Order },
@@ -99,6 +101,8 @@ const routes = [
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
   { path: "courier/DeliveryConfirm", element: DeliveryConfirm },
+  { path: "courier/exportToExcel", element: exportToExcel },
+  { path: "courier/deliveryAlocation", element: deliveryAlocation },
 
   //it21238994@my.sliit.lk - Amanda
   { path: "customer_care/myTicket", element: MyTicket },
