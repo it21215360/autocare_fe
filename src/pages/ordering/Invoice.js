@@ -1,166 +1,131 @@
-//import { IconName } from "react-icons/ci";
 import React, { Component, Fragment, useEffect, useState } from "react";
+import axios from 'axios';
+import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import DataGrid, {
   Column,
-  SearchPanel,
-  Editing,
-  ValidationRule,
-  Export,
-  Paging,HeaderFilter,FilterPanel,
+  RequiredRule,
+  Form as GridForm,
 } from "devextreme-react/data-grid";
-//import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
 import { Navbar, ListGroup } from "react-bootstrap";
+import { SelectBox } from "devextreme-react";
 import { Button } from "devextreme-react/button";
-import { jsPDF } from 'jspdf';
-import { exportDataGrid } from 'devextreme/pdf_exporter';
 import { API_BASE_URL } from "../../appconfig/config";
-import axios from "axios";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/auth";
+
 
 const Invoice = (props) => {
+    const { user } = useAuth();
+    const [cartDet, setcartDet] = useState([]);
+    const [isLoadingData, setIsdataLoading] = useState(true);
+    const fetchURL = `${API_BASE_URL}/api/order/get-cart-info?CustomerID=${user.ID}`;
+      
+  const [orderDet, setorderDet] = useState({
+    OrderID: '',
+    FName: '',
+    LName: '',
+    Email: '',
+    Address: '',
+    PayMethod: '',
+  });
 
-  const exportFormats = ['pdf'];
-  const [selectedID, setSelectedID] = useState(0);
-  const [paydet, setPaydet] = useState([]);
-  const [isLoadingData, setIsdataLoading] = useState(true);
-  const fetchURL = `${API_BASE_URL}/api/Order/list-Orders`;
- 
+
   useEffect(() => {
-    if (isLoadingData)
+    if (isLoadingData && user.ID)
       axios.get(fetchURL).then((response) => {
-        console.log(response);
-        setPaydet(response.data);
+        console.log(response.data);
+        if (response.data) {
+          setcartDet(response.data);
+        }
+
         setIsdataLoading(false);
       });
   }, []);
 
-  const onSelectClick = (e) => {
-    props.OnHide(selectedID);
-  };
 
-  const onCloseClick = (e) => {
-    props.HideTheList();
-  };
 
-  const onSelectionChanged = (e) => {
-    setSelectedID(e.selectedRowsData[0].OrderID);
-  };
-
-  /*const paydet = [
-    {
-      AutoID: 1,
-      ProdID: 2,
-      ProductCatID: 5,
-      ProductSubCatID: 3,
-      ProductName: "ghjj",
-      UnitPrice: "23",
-      Quantity: 60,
-      Brand: "ghj",
-      CreatedDte: "2022/1/2",
-      UpdatedDte: "2022/12/3",
-      Rating: "4",
-    },
-    {
-      AutoID: 2,
-      ProdID: 4,
-      ProductCatID: 2,
-      ProductSubCatID: 3,
-      ProductName: "rtyui",
-      UnitPrice: "3460",
-      Quantity: 40,
-      Brand: "tyu",
-      CreatedDte: "2022/12/1",
-      UpdatedDte: "2023/3/4",
-      Rating: "5",
-    },
-  ];*/
-
-  const onExporting = React.useCallback((e) => {
-    const invoice = new jsPDF();
-
-    exportDataGrid({
-      jsPDFDocument: invoice,
-      component: e.component,
-      indent: 5,
-    }).then(() => {
-      invoice.save('OrderInvoice.pdf');
-    });
-  });
+  useEffect(() => {
+    // Call backend route to get the last entered product data
+    axios.get('/invoicedata/last')
+      .then(response => {
+        // Set the product state to the received data
+        setorderDet(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
 
   return (
-    <React.Fragment>
-      <div className={"content-block"}>
-        <h5>
-          <b>Invoice</b>
-        </h5>
-        <DataGrid
-          id="sample"
-          dataSource={paydet}
-          rowAlternationEnabled={true}
-          showBorders={true}
-          onExporting={onExporting} 
-        >
-          <SearchPanel visible={true} highlightCaseSensitive={false} />
-          <Paging defaultPageSize={10} />
-          <Export enabled={true} formats={exportFormats} allowExportSelectedData={true} />
+    <>
+    
+    <form>
+      
+          <label>
+              Order ID:
+              <input type="text" value={orderDet.OrderID} disabled />
+          </label><br></br>
+          <label>
+              First Name:
+              <input type="text" value={orderDet.FName} disabled />
+          </label><br></br>
+          <label>
+              Last Name:
+              <input type="text" value={orderDet.LName} disabled />
+          </label><br></br>
+          <label>
+              Email:
+              <input type="text" value={orderDet.Email} disabled />
+          </label><br></br>
+          <label>
+              Address:
+              <input type="text" value={orderDet.Address} disabled />
+          </label><br></br>
+          <label>
+              Payment Method:
+              <input type="text" value={orderDet.PayMethod} disabled />
+          </label><br></br>
+      </form>
+      
+      
+      <React.Fragment>
 
-          <Editing
-            mode="popup"
-            allowUpdating={true}
-            allowDeleting={true}
-            allowAdding={true}
-          />
+              <div className={'content-block'}>
+                  <h5><b>Ordered Items</b></h5>
+                  <DataGrid id='sample'
+                      dataSource={cartDet}
+                      rowAlternationEnabled={true}
+                      showBorders={true}>
 
-          <Column dataField="ProdID" caption="Product ID" dataType="int">
-            <ValidationRule type="hidden" />
-          </Column>
-          <Column
-            dataField="ProductCatID"
-            caption="Product Category ID"
-            dataType="int"
-          >
-            <ValidationRule type="required" />
-          </Column>
-          <Column
-            dataField="ProductSubCatID"
-            caption="Product Sub Category ID"
-            dataType="int"
-          >
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="ProductName" caption="Product" dataType="string">
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="UnitPrice" caption="Price" dataType="float">
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="Quantity" caption="Quantity" dataType="int">
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="Brand" caption="Brand" dataType="float">
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="CreatedDte" caption="Created Date" dataType="date">
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="UpdatedDte" caption="Updated Date" dataType="date">
-            <ValidationRule type="required" />
-          </Column>
-          <Column dataField="Rating" caption="Rating" dataType="string">
-            <ValidationRule type="required" />
-          </Column>
-        </DataGrid>
-        <br></br>
-        <div>
-          <Button>
-            <b>Confirm</b>
-          </Button>
-          <Button>
-            <b>Edit</b>
-          </Button>
-        </div>
-      </div>
-    </React.Fragment>
+                      <Column dataField='ProductID' 
+                      caption='Product ID' 
+                      dataType='string'>
+                        
+                        </Column>
+                      <Column dataField='Price' 
+                      caption='Price' 
+                      dataType='float'>
+                        
+                        </Column>
+                      <Column dataField='Quantity' 
+                      caption='Quantity' 
+                      dataType='int'>
+                       
+                        </Column>
+                      <Column dataField='Total' 
+                      caption='Total' 
+                      dataType='float'>
+                        
+                        </Column>
+
+                  </DataGrid>
+                  <br></br>
+              </div>
+              <br></br>
+      <div><b>Subtotal: ${cartDet.reduce((total, item) => total + item.Total, 0)}</b></div>
+               
+          </React.Fragment></>
+
   );
 }
-
 export default Invoice;

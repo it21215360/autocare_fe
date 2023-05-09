@@ -133,7 +133,7 @@ export const navigation = [
       { text: "Products", path: "Ordering/Product" },
       { text: "Return Product", path: "Ordering/Return_products" },
       { text: "Orders", path: "Ordering/Orders_Admin" },
-      { text: "Invoice View", path: "Ordering/Invoice" },
+      //{ text: "Invoice View", path: "Ordering/Invoice" },
       { text: "new", path: "Ordering/new" },
     ],
   },
