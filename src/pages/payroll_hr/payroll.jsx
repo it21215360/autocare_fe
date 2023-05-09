@@ -238,7 +238,7 @@ function Salary() {
           2
         ),
         ETF: ((empObject.BasicSalary * 3) / 100).toFixed(2),
-        EPF: ((empObject.BasicSalary * 10) / 100).toFixed(2),
+        EPF: ((empObject.BasicSalary * 8) / 100).toFixed(2),
         NoPayLeaves:
           empObject.CasualCount +
             empObject.AnnualCount -
