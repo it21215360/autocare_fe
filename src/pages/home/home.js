@@ -14,14 +14,10 @@ export default function Home() {
         <div className={"dx-card responsive-paddings"}>
           <h5>Welcome to AutoCare Pvt Ltd</h5>
           <h6>
-            {user.userType === "Customer"
-              ? `Customer Portal`
-              : `Employee Portal`}
+            {user.userType === "Customer" ? `Customer Portal` : null}
+            {user.userType === "Employee" ? `Employee Portal` : null}
+            {user.userType === "SystemUser" ? `System Manager Portal` : null}
           </h6>
-          {/* <img
-            src="../../../public/image/Common/background-1.jpg"
-            alt="background"
-          ></img> */}
         </div>
       </div>
     </React.Fragment>

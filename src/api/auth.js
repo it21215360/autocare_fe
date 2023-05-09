@@ -28,6 +28,20 @@ export async function signIn(userInfo) {
       },
       message: "Authenticated",
     };
+  } else if (userInfo.SysManID > 0) {
+    //employee
+    resultObject = {
+      isOk: true,
+      data: {
+        ID: userInfo.SysManID,
+        FirstName: userInfo.SysManFName,
+        LastName: userInfo.SysManLName,
+        Email: userInfo.SysManEmail,
+        MobileNo: userInfo.SysManMobile,
+        userType: "SystemUser",
+      },
+      message: "Authenticated",
+    };
   }
 
   return resultObject;
