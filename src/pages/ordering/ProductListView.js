@@ -119,11 +119,6 @@ class ProductListView extends React.Component {
     );
   }
 
-
-
-
-
-
   /*
   onSaveBtnClick = (e) => {
     try {
@@ -174,7 +169,7 @@ class ProductListView extends React.Component {
       ProductID: selectedProduct.ID,
       Quantity: 1,
       Price: selectedProduct.Price,
-      Total: 1 * selectedProduct.Price,
+      Total: selectedProduct.Quantity * selectedProduct.Price,
       Add: selectedProduct.AddedToTheCart,
     };
 

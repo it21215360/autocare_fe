@@ -1,10 +1,16 @@
 .productBox {
   padding: 20px;
   margin-top: 20px;
+  margin-left: 20px;
   border-color: black;
   border: solid;
+  height: auto;
   width: fit-content;
-  display: flex;
+  display: inline-flex;
+}
+
+.productBox :hover {
+  background-color:floralwhite;
 }
 
 .large-text {

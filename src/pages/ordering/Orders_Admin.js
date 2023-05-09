@@ -25,7 +25,7 @@ const Ordersdet = (props) => {
         setIsdataLoading(false);
       });
   }, []);
-
+/*
   const onSelectClick = (e) => {
     props.OnHide(selectedID);
   };
@@ -36,10 +36,25 @@ const Ordersdet = (props) => {
 
   const onSelectionChanged = (e) => {
     setSelectedID(e.selectedRowsData[0].OrderID);
-  };
+  };*/
 
-  //const order = [{ AutoID: 1, ProdID: 2, ProductCatID: 5, ProductSubCatID: 3, ProductName:'ghjj', UnitPrice:'23', Quantity: 60, Brand:'ghj', CreatedDte:'2022/1/2', UpdatedDte:'2022/12/3', Rating:'4'},
-  //{ AutoID: 2, ProdID: 4, ProductCatID: 2, ProductSubCatID: 3, ProductName:'rtyui', UnitPrice:'3460', Quantity: 40, Brand:'tyu', CreatedDte:'2022/12/1', UpdatedDte:'2023/3/4', Rating:'5'}]
+  
+  const onRowUpdating = (e) => { 
+    const updatedOrder = { ...e.oldData, ...e.newData }; 
+
+    axios.put(`/api/order/${updatedOrder.OrderID}`, updatedOrder) 
+
+    .then(response => { 
+      const index = order.findIndex(data => data.OrderID === updatedOrder.OrderID); 
+      const newOrder = [...order]; 
+      newOrder[index] = updatedOrder; 
+      setOrder(newOrder); 
+}) 
+
+.catch(error => console.log(error)); 
+
+}; 
+  
 
   return (
     <React.Fragment>
@@ -57,21 +72,22 @@ const Ordersdet = (props) => {
           allowSearch={true}
           selection={{ mode: "single" }}
           hoverStateEnabled={true}
-          onSelectionChanged={onSelectionChanged}
+          //onSelectionChanged={onSelectionChanged}
+          onRowUpdating={onRowUpdating} 
         >
           <Editing
             mode="popup"
             allowUpdating={true}
-            allowDeleting={true}
+            //allowDeleting={true}
             allowAdding={false}
           />
 
           <Column dataField="OrderID" 
           caption="Order ID">
           </Column>
-          <Column dataField="CartID" 
+          {/*<Column dataField="CartID" 
           caption="Cart ID">
-          </Column>
+  </Column>*/}
           <Column dataField="FName" caption="First Name"></Column>
           <Column dataField="Address" caption="Address"></Column>
           <Column dataField="City" caption="City"></Column>
@@ -81,14 +97,14 @@ const Ordersdet = (props) => {
         </DataGrid>
         <br></br>
 
-        <Navbar bg="light" variant="light">
+        {/*<Navbar bg="light" variant="light">
           <Button
             stylingMode="contained"
-            type="success" /*onClick={onSaveBtnClick}*/
+            type="success" /*onClick={onSaveBtnClick}
           >
             Confirm
           </Button>
-        </Navbar>
+        </Navbar>*/}
       </div>
     </React.Fragment>
   );

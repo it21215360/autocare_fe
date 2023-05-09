@@ -48,6 +48,7 @@ import {
   FreaquentQuestionPage,
   ProductMaster,
   Carwash,
+  Invoice
 } from "./pages";
 
 import { withNavigationWatcher } from "./contexts/navigation";
@@ -117,7 +118,7 @@ const routes = [
   { path: "Ordering/Product", element: ProductPage },
   { path: "Ordering/Orders_Admin", element: Ordersdet },
   { path: "Ordering/Return_products", element: ReturnProduct },
-  { path: "Ordering/Invoice", element: invoice },
+  { path: "Ordering/Invoice", element: Invoice },
 ];
 
 export default routes.map((route) => {
