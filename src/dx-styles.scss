@@ -36,8 +36,12 @@
   }
 }
 
+.dx-toolbar {
+  background-color: #3c3c3c !important;
+}
+
 .side-nav-outer-toolbar .dx-drawer {
-  height: calc(100% - 56px)
+  height: calc(100% - 56px);
 }
 
 .screen-x-small .content-block {
@@ -61,10 +65,13 @@
   border-left: 0;
 }
 
-.with-footer>.dx-scrollable-wrapper>.dx-scrollable-container>.dx-scrollable-content {
+.with-footer
+  > .dx-scrollable-wrapper
+  > .dx-scrollable-container
+  > .dx-scrollable-content {
   height: 100%;
 
-  &>.dx-scrollview-content {
+  & > .dx-scrollview-content {
     display: flex;
     flex-direction: column;
     min-height: 100%;

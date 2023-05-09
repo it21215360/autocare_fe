@@ -29,14 +29,6 @@ const EmployeeMaster = () => {
   });
 
   const [showList, setShowList] = useState(false);
-  // const currencyFormat = {
-  //   style: "currency",
-  //   currency: "LKR",
-  //   useGrouping: true,
-  //   minimumSignificantDigits: 3,
-  // };
-
-  const currencyFormat = `LKR #,###.##`;
 
   const onSaveBtnClick = (e) => {
     try {
@@ -178,6 +170,21 @@ const EmployeeMaster = () => {
     setEmpLeaveInfo({});
   };
 
+  const onBasicSalaryChanged = (e) => {
+    debugger;
+    console.log(e);
+    if (e.value) {
+      let _annualSalary = parseFloat(e.value) * 12;
+      let _hourlyRate = _annualSalary / 2080;
+      let _otRate = _hourlyRate * 1.5;
+      setEmpPayrollInfo({
+        ...empPayrollInfo,
+        HourlyRate: _hourlyRate,
+        OTRate: _otRate,
+      });
+    }
+  };
+
   return (
     <>
       {showList ? (
@@ -272,10 +279,7 @@ const EmployeeMaster = () => {
                     dataField="EmpStatus"
                     editorType="dxSelectBox"
                     editorOptions={{
-                      items: [
-                        {  Name: "Active" },
-                        { Name: "Inactive" },
-                      ],
+                      items: [{ Name: "Active" }, { Name: "Inactive" }],
                       searchEnabled: true,
                       displayExpr: "Name",
                       valueExpr: "Name",
@@ -334,9 +338,22 @@ const EmployeeMaster = () => {
                     editorOptions={{
                       readOnly: false,
                       format: "LKR #,###.##",
+                      onValueChanged: onBasicSalaryChanged,
                     }}
                   >
                     <Label text="Basic Salary"></Label>
+                    <RequiredRule message="Field required" />
+                  </Item>
+                  <Item
+                    dataField="HourlyRate"
+                    editorType="dxNumberBox"
+                    editorOptions={{
+                      readOnly: false,
+                      format: "LKR #,###.##",
+                      readOnly: true,
+                    }}
+                  >
+                    <Label text="Hourly Rate"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
                   <Item
@@ -345,6 +362,7 @@ const EmployeeMaster = () => {
                     editorOptions={{
                       readOnly: false,
                       format: "LKR #,###.##",
+                      readOnly: true,
                     }}
                   >
                     <Label text="OT Rate"></Label>

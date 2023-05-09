@@ -6,6 +6,7 @@ import {
   LeaveRequestForm,
   Attendance,
   Salary,
+  deliveryAlocation,
   LeaveApproval,
   AttendanceViewer,
   DeliveryConfirm,
@@ -23,9 +24,9 @@ import {
   GoodReceiveForm,
   Scheduling,
   PackageDetails,
+  exportToExcel,
   Update,
   Cancel,
-  EmpLogin,
   EmployeeMaster,
   RaiseTicket,
   OrderForm,
@@ -46,6 +47,7 @@ import {
   ServiceList,
   FreaquentQuestionPage,
   ProductMaster,
+  Carwash,
 } from "./pages";
 
 import { withNavigationWatcher } from "./contexts/navigation";
@@ -62,7 +64,6 @@ const routes = [
   { path: "payroll_hr/emp-payroll", element: Salary },
   { path: "payroll_hr/leaveApproval", element: LeaveApproval },
   { path: "payroll_hr/dailyAttendanceViewer", element: AttendanceViewer },
-  { path: "payroll_hr/employeeLogin", element: EmpLogin },
   { path: "payroll_hr/employee-master", element: EmployeeMaster },
 
   //it21324406@my.sliit.lk - Shanoli
@@ -88,7 +89,7 @@ const routes = [
   { path: "/scheduling/Memo", element: Memo },
   { path: "/scheduling/Service", element: ServiceAppoinment },
   { path: "/scheduling/ServiceList", element: ServiceList },
-
+  { path: "/scheduling/Carwash", element: Carwash },
   //it21198090@my.sliit.lk - Shania
   { path: "masters/ProductCategory", element: ProductCategory },
   { path: "masters/ProductMaster", element: ProductMaster },
@@ -100,6 +101,8 @@ const routes = [
   { path: "courier/ShippingManage", element: ShippingManage },
   { path: "courier/CourierProfile", element: CourierProfile },
   { path: "courier/DeliveryConfirm", element: DeliveryConfirm },
+  { path: "courier/exportToExcel", element: exportToExcel },
+  { path: "courier/deliveryAlocation", element: deliveryAlocation },
 
   //it21238994@my.sliit.lk - Amanda
   { path: "customer_care/myTicket", element: MyTicket },

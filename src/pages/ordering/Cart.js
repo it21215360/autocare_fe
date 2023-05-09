@@ -25,30 +25,7 @@ const Cart = () => {
     UpdateMode: true,
   });
 
-  //const [showList, setShowList] = useState(false);
-
-  const showSuccessAlert = (successMsg) => {
-    notify(
-      {
-        message: successMsg.toString(),
-        width: 450,
-      },
-      "success",
-      3000
-    );
-  };
-
-  const showErrorAlert = (errorMsg) => {
-    notify(
-      {
-        message: errorMsg.toString(),
-        width: 450,
-      },
-      "error",
-      3000
-    );
-  };
-
+  
   useEffect(() => {
     if (isLoadingData && user.ID)
       axios.get(fetchURL).then((response) => {
@@ -61,7 +38,7 @@ const Cart = () => {
       });
   }, []);
 
-  const onRowUpdating = (e) => {
+  /*const onRowUpdating = (e) => {
 
     try {
       if (pageProperties.CartID > 0)
@@ -82,7 +59,7 @@ const Cart = () => {
     } catch (error) {
       console.error(error);
       showErrorAlert(error);
-    }
+    }*/
 
     /*
       // Validate and process the updated data
@@ -110,80 +87,20 @@ const Cart = () => {
     */
     
     //console.log(e);
-  };
+  //};
 
   //const [cartItems, setCartItems] = useState([]);
 
   const handleQuantityUpdate = (ProductID, newQuantity) => {
     const newCartItems = cartItem.map((item) => {
       if (item.id === ProductID) {
-        return { ...item, quantity: newQuantity };
+        return { ...item, Quantity: newQuantity };
       } else {
         return item;
       }
     });
     setCartItem(newCartItems);
-  };
-
-/*
-  const onSaveBtnClick = (e) => {
-    try {
-      pageProperties.UpdateMode ? updateCart() : addRemoveFromCart();
-    } catch (error) {
-      console.error(error);
-    }
-  };*/
-/*
-  const updateCart = () => {
-    try {
-      if (pageProperties.CartID > 0)
-        axios
-          .put(`${API_BASE_URL}/api/order/update-cart`, {
-            CartID: pageProperties.CartID,
-            productInfo: JSON.stringify(cartInfo),
-          })
-          .then((response) => {
-            console.log(response);
-            if (response.data.affectedRows === 1) {
-              showSuccessAlert(`Quantity Updated`);
-            }
-          })
-          .catch((error) => {
-            showErrorAlert(error);
-          });
-    } catch (error) {
-      console.error(error);
-      showErrorAlert(error);
-    }
-  };*/
-/*
-  const OnLoadData = (cartId) => {
-    try {
-      axios
-        .get(`${API_BASE_URL}/api/order/get-cart-info`, {
-          params: {
-            CartId: cartId,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-
-          setCartInfo(res.data[0][0]);
-          
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const onListClose = () => {
-    setShowList(false);
-  };
-*/
-
+  }
 
   return user.userType == "Customer" ? (
     <React.Fragment>
@@ -196,8 +113,8 @@ const Cart = () => {
           dataSource={cartItem}
           rowAlternationEnabled={true}
           showBorders={true}
-          onRowUpdating={onRowUpdating}
-          onRowUpdated={handleQuantityUpdate}
+          //onRowUpdating={onRowUpdating}
+          //onRowUpdated={handleQuantityUpdate}
         >
           <SearchPanel visible={true} highlightCaseSensitive={true} />
           <Editing mode="row" allowUpdating={true} allowDeleting={true} />

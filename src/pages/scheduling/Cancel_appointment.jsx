@@ -1,25 +1,87 @@
 import React from 'react';
 import 'devextreme/dist/css/dx.light.css';
-import DataGrid, { Column, SearchPanel, Editing} from 'devextreme-react/data-grid';
+import DataGrid, { Column, SearchPanel, Editing, ValidationRule, HeaderFilter,FilterPanel,Export } from 'devextreme-react/data-grid';
 import { Button } from 'devextreme-react';
+import { jsPDF } from 'jspdf';
+import { exportDataGrid } from 'devextreme/pdf_exporter';
+import axios from "axios";
+import { API_BASE_URL } from "../../appconfig/config";
 
-export default function Cancel() {
-    const myCancellation = [{ fname: 'Nimali', lname: 'Silva', phone: '01123456789', email: 'nimali123@gmail.com', vnumber: 'ABC123', vtype: 'Jeep', date: '10/05/2023', time: '4.00', venue: 'Dehiwala' },
-    { fname: 'Sumali', lname: 'Silva', phone: '01177778892', email: 'sumali09@gmail.com', vnumber: 'CAW1234', vtype: 'Car', date: '30/05/2023', time: '5.00', venue: 'Kollupitiya' },
-    { fname: 'Kusum', lname: 'kumari', phone: '0119988773', email: 'kusum02@gmail.com', vnumber: 'DDS7687', vtype: 'Van', date: '10/12/2023', time: '7.00', venue: 'Wallawatte' },
-    { fname: 'Amal', lname: 'Perera', phone: '0778822345', email: 'amalm122@gmail.com', vnumber: 'YRT3456', vtype: 'Jeep', date: '31/05/2023', time: '4.00', venue: 'Kollopitiya' },
-    { fname: 'Aruni', lname: 'Gomas', phone: '0112343234', email: 'arunigomas1234@gmail.com', vnumber: 'EDC9988', vtype: 'Jeep', date: '10/11/2023', time: '3.00', venue: 'Dehiwala' },
 
-    ]
+ function Cancel() {
+    const exportFormats = ['pdf'];
+    const [serviceSatationData, setserviceSatationData] = React.useState([]);
+   
+    const onExporting = React.useCallback((e) => {
+        const doc = new jsPDF();
+    
+        exportDataGrid({
+          jsPDFDocument: doc,
+          component: e.component,
+          indent: 5,
+        }).then(() => {
+          doc.save('Service_satation.pdf');
+        });
+      });
+
+      const onRowInserting = (e) => {
+        axios.post('/api/cancel-sercive-station', e.data)
+          .then(response => {
+            const newService = response.data;
+            setserviceSatationData([...serviceSatationData, newService]);
+          })
+          .catch(error => console.log(error));
+      };
+    
+     const onRowUpdating = (e) => {
+  const updatedService = { ...e.oldData, ...e.newData };
+  axios.put(`/api/cancel-sercive-station/${updatedService.ID}`, updatedService)
+    .then(response => {
+      const index = serviceSatationData.findIndex(data => data.ID === updatedService.ID);
+      const newserviceSatationData = [...serviceSatationData];
+      newserviceSatationData[index] = updatedService;
+      setserviceSatationData(newserviceSatationData);
+    })
+    .catch(error => console.log(error));
+};
+
+      
+const onRowRemoving = (e) => {
+  const serviceId = e.key.ID;
+  axios.delete(`/api/cancel-sercive-station/${serviceId}`)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+
+
+
+const handleViewSerciveList = () => {
+  axios.get(`${API_BASE_URL}/api/cancel-sercive-station`)
+    .then(response => {
+      const serviceData = response.data;
+      setserviceSatationData(serviceData);
+    })
+    .catch(error => console.log(error));
+};
+
 
     return (
         <React.Fragment>
             <div className={'content-block'}>
-                <h3>Cancel Appointment</h3>
+                <h5><b>Services</b></h5>
                 <DataGrid id='sample'
-                    dataSource={myCancellation}
+                    dataSource={serviceSatationData}
                     rowAlternationEnabled={true}
-                    showBorders={true}>
+                    showBorders={true}
+                    onExporting={onExporting}
+                    onRowInserting={onRowInserting}
+                    onRowUpdating={onRowUpdating}
+                    onRowRemoving={onRowRemoving}>
                     <SearchPanel visible={true} highlightCaseSensitive={true} />
 
                     <Editing
@@ -27,26 +89,36 @@ export default function Cancel() {
                         allowUpdating={true}
                         allowDeleting={true}
                         allowAdding={true} />
+                       <Export enabled={true} formats={exportFormats} allowExportSelectedData={true} />
 
-                    <Column dataField='fname' caption='First Name' dataType='string'></Column>
-                    <Column dataField='lname' caption='Last Name' dataType='string'></Column>
-                    <Column dataField='phone' caption='Phone Number' dataType='int'></Column>
-                    <Column dataField='email' caption='Email Address' dataType='email'></Column>
-                    <Column dataField='vnumber' caption='Vehicle Number' dataType='int'></Column>
-                    <Column dataField='vtype' caption='Vehicle Type' dataType='String'></Column>
-                    <Column dataField='date' caption='Scehduled Date' dataType='date'></Column>
-                    <Column dataField='time' caption='Time' dataType='time'></Column>
-                    <Column dataField='venue' caption='Venue' dataType='String'></Column>
-
+                    <HeaderFilter
+                        visible={true}
+                         />
+                    <FilterPanel
+                        visible={true}
+                         />
+             
+       {/*<FilterRow
+          visible={true}
+    />*/}
+        <Column dataField="ID" visible={false} />
+        <Column dataField="fname" caption="First Name"><ValidationRule type="required" /></Column>
+        <Column dataField="lname" caption="Last Name" ><ValidationRule type="required" /></Column>
+        <Column dataField="phone" caption="Phone Number" ><ValidationRule type="required" /></Column>
+        <Column dataField="email" caption="Email Address" ><ValidationRule type="required" /></Column>
+        <Column dataField="vnum" caption="Vehicle no" ><ValidationRule type="required" /></Column>
+        <Column dataField="vtype" caption="Type" ><ValidationRule type="required" /></Column>
+        <Column dataField="date" caption="Last Date" ><ValidationRule type="required" /></Column>
+                    
                 </DataGrid>
                 <br></br>
-                {/** 
                 <div>
-                    <Button><b>View Order List</b></Button>
+                    <Button onClick={handleViewSerciveList}><b>View Service List</b></Button>
                     <Button><b>Clear</b></Button>
-                </div>*/}
+                </div>
             </div>
         </React.Fragment>
 
     )
 }
+export default Cancel;

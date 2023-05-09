@@ -5,17 +5,25 @@ import DataGrid, {
   Column,
   SearchPanel,
   Paging,
+  Editing, 
+  HeaderFilter,
+  FilterPanel,
+  Export
 } from "devextreme-react/data-grid";
 import { Navbar } from "react-bootstrap";
 import { API_BASE_URL } from "../../appconfig/config";
 import axios from "axios";
 import './Scheduling.scss';
+import { jsPDF } from 'jspdf';
+import { exportDataGrid } from 'devextreme/pdf_exporter';
 
 const ServiceList = (props) => {
   const [selectedID, setSelectedID] = useState(0);
   const [serviceList, setServiceList] = useState([]);
   const [isLoadingData, setIsdataLoading] = useState(true);
   const fetchURL = `${API_BASE_URL}/api/customer/list-service-appointment`;
+
+  const exportFormats = ['pdf'];
 
   useEffect(() => {
     if (isLoadingData)
@@ -38,7 +46,18 @@ const ServiceList = (props) => {
     setSelectedID(e.selectedRowsData[0].ID);
   };
 
-  
+  const onExporting = React.useCallback((e) => {
+        const doc = new jsPDF();
+    
+        exportDataGrid({
+          jsPDFDocument: doc,
+          component: e.component,
+          indent: 5,
+        }).then(() => {
+          doc.save('Service scheduling.pdf');
+        });
+      });
+
   return (
     <Fragment>
       <h4>List of Appointment</h4>
@@ -51,8 +70,22 @@ const ServiceList = (props) => {
         allowSearch={true}
         selection={{ mode: "single" }}
         hoverStateEnabled={true}
+        rowAlternationEnabled={true}
+        onExporting={onExporting}
         onSelectionChanged={onSelectionChanged}
-      >
+      ><Editing
+      mode="popup"
+      allowUpdating={false}
+      allowDeleting={false}
+      allowAdding={false} />
+     <Export enabled={true} formats={exportFormats} allowExportSelectedData={true} />
+
+  <HeaderFilter
+      visible={false}
+       />
+  <FilterPanel
+      visible={true}
+       />
         <SearchPanel visible={true} />
         <Paging defaultPageSize={10} />
         <Column dataField="ID" visible={false} />
