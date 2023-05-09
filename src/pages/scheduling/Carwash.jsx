@@ -379,7 +379,7 @@ const Carwash = () => {
             </Button>
           </Navbar>
           
-        
+        <br></br>
           <h5><b>Check the availability of the date</b></h5>
                 <DataGrid id='sample'
                     dataSource={scheduledDateData}
@@ -393,7 +393,7 @@ const Carwash = () => {
                 <br></br>
                 <div>
                     <Button onClick={handleViewDateList}><b>View Service List</b></Button>
-                    <Button><b>Clear</b></Button>
+                    
                 </div>
         </div>
       )}
