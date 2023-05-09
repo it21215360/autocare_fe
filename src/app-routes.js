@@ -90,6 +90,7 @@ const routes = [
   { path: "/scheduling/Service", element: ServiceAppoinment },
   { path: "/scheduling/ServiceList", element: ServiceList },
   { path: "/scheduling/Carwash", element: Carwash },
+  
   //it21198090@my.sliit.lk - Shania
   { path: "masters/ProductCategory", element: ProductCategory },
   { path: "masters/ProductMaster", element: ProductMaster },
