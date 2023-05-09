@@ -15,7 +15,7 @@ import {
   deliveryRequest,
   ShippingManage,
   CourierProfile,
-  InventoryLogin,
+  Stock,
   Storage,
   Order,
   Suppliers,
@@ -67,7 +67,7 @@ const routes = [
   { path: "payroll_hr/employee-master", element: EmployeeMaster },
 
   //it21324406@my.sliit.lk - Shanoli
-  { path: "stock_management/inventory-login", element: InventoryLogin },
+  { path: "stock_management/stock", element: Stock },
   { path: "stock_management/storage", element: Storage },
   { path: "stock_management/suppliers", element: Suppliers },
   { path: "stock_management/order", element: Order },
@@ -84,17 +84,12 @@ const routes = [
   { path: "/scheduling/Update_appointment", element: Update },
   { path: "/scheduling/Cancel_appointment", element: Cancel },
   { path: "/scheduling/Confirm_appointment", element: Confirm },
-<<<<<<< HEAD
- // { path: "/scheduling/Login", element: ServiceLogin },
-
-=======
   { path: "/scheduling/Login", element: ServiceLogin },
   { path: "/scheduling/AppointmentList", element: AppointList },
   { path: "/scheduling/Memo", element: Memo },
   { path: "/scheduling/Service", element: ServiceAppoinment },
   { path: "/scheduling/ServiceList", element: ServiceList },
   { path: "/scheduling/Carwash", element: Carwash },
->>>>>>> 4901f3a8754559d1f48be31ae5ca24289c287416
   //it21198090@my.sliit.lk - Shania
   { path: "masters/ProductCategory", element: ProductCategory },
   { path: "masters/ProductMaster", element: ProductMaster },

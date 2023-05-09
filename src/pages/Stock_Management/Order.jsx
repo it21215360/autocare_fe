@@ -72,11 +72,7 @@ const  Orders = (props) => {
                     <SearchPanel visible={true} />
                     <Paging defaultPageSize={10} />
                     <Export enabled={true} formats={exportFormats} allowExportSelectedData={true} />
-                    <Editing
-                        mode="popup"
-                        allowUpdating={true}
-                        allowDeleting={true}
-                        allowAdding={true} />
+                   
  
                     <HeaderFilter
                         visible={true}

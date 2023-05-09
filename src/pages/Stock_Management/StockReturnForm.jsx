@@ -12,7 +12,7 @@ import axios from "axios";
 import "./stockReturn.scss";
 import { API_BASE_URL } from "../../appconfig/config";
 import ReturnStockList from "./ReturnStockList";
-import sendEmail from "./StockReturnForm"; 
+
 
 
 const StockReturnForm = () => {
@@ -144,7 +144,6 @@ const StockReturnForm = () => {
   const onSaveBtnClick = async (e) => {
     try {
       pageProperties.UpdateMode ? updateReturnStock() : addReturnStock();
-      sendEmail('shohanisilva1996@gmail.com', 'Stock return form submitted.');
     } catch (error) {
       console.error(error);
     }
@@ -199,6 +198,17 @@ const StockReturnForm = () => {
                   }}
                 >
                   <Label text="Return ID"></Label>
+                  <RequiredRule message="Field required" />
+                </Item>
+
+                <Item
+                  dataField="StorageID"
+                  editorType="dxTextBox"
+                  editorOptions={{
+                    readOnly: false,
+                  }}
+                >
+                  <Label text="Stock ID"></Label>
                   <RequiredRule message="Field required" />
                 </Item>
 
@@ -272,7 +282,7 @@ const StockReturnForm = () => {
                 </Item>
 
                 <Item
-                  dataField="Quantity"
+                  dataField="ReturnedQuantity"
                   editorType="dxTextBox"
                   editorOptions={{
                     readOnly: false,
