@@ -4,6 +4,14 @@ import Form, { EmptyItem,
   Item, 
   Label } from "devextreme-react/form";
 import DataGrid, {
+  Column,
+  SearchPanel,
+  Paging,
+  Editing, 
+  HeaderFilter,
+  FilterPanel,
+  Export,
+  ValidationRule,
   RequiredRule,
   Form as GridForm,
 } from "devextreme-react/data-grid";
@@ -11,7 +19,7 @@ import { Navbar,
   ListGroup } from "react-bootstrap";
 import { LoadPanel } from "devextreme-react/load-panel";
 import notify from "devextreme/ui/notify";
-import { useState } from "react";
+import { useState ,Fragment} from "react";
 import { SelectBox } from "devextreme-react";
 import { Button } from "devextreme-react/button";
 import { DateBox } from "devextreme-react/calendar";
@@ -20,224 +28,183 @@ import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
 import AppointmentList from "./AppointmentList";
 import "./Service.scss"
+import { jsPDF } from 'jspdf';
+import { exportDataGrid } from 'devextreme/pdf_exporter';
 
 const Memo = (props) => {
   const myCancellation = [{ fname: 'Nimali', lname: 'Silva', phone: '01123456789', email: 'nimali123@gmail.com', vnumber: 'ABC123', vtype: 'Jeep', date: '10/05/2023', time: '4.00', venue: 'Dehiwala' },
-    ]
-{/*edited*/}
+]
+
 const [selectedID, setSelectedID] = useState(0);
-const [getDeleteAppointmentInfo, setgetDeleteAppointmentInfo] = useState([]);
+const [getAppointmentDetails, setgetAppointmentDetails] = useState([]);
 const [isLoadingData, setIsdataLoading] = useState(true);
-const fetchURL = `${API_BASE_URL}/api/customer/delete-appointment`;
+const fetchURL = `${API_BASE_URL}/api/customer/confirm-appointment`;
+
+const exportFormats = ['pdf'];
 
 
 useEffect(() => {
-  if (isLoadingData)
-    axios.get(fetchURL).then((response) => {
-      console.log(response);
-      setgetDeleteAppointmentInfo(response.data);
-      setIsdataLoading(false);
-    });
+if (isLoadingData)
+axios.get(fetchURL).then((response) => {
+  console.log(response);
+  setgetAppointmentDetails(response.data);
+  setIsdataLoading(false);
+});
 }, []);
 
-const [cusAppointmentInfo, setCusAppointmentInfo] = useState({});
-  
-  const [pageProperties, setPageProperties] = useState({
-    ID: 0,
-    DataLoading: false,
-    isDocReadOnly: false,
-    UpdateMode: false,
+const onSelectClick = (e) => {
+props.OnHide(selectedID);
+};
+
+const onCloseClick = (e) => {
+props.HideTheList();
+};
+
+const onSelectionChanged = (e) => {
+setSelectedID(e.selectedRowsData[0].StockReturnID);
+};
+const onExporting = React.useCallback((e) => {
+  const doc = new jsPDF();
+
+  exportDataGrid({
+    jsPDFDocument: doc,
+    component: e.component,
+    indent: 5,
+  }).then(() => {
+    doc.save('Service scheduling.pdf');
   });
+});
 
-  const [showList, setShowList] = useState(false);
+const [serviceSatationData, setserviceSatationData] = React.useState([]);
+const [carWashData, setCarWashData] = React.useState([]);
 
-  const onSaveBtnClick = (e) => {
-    try {
-      pageProperties.UpdateMode ? updateService() : addService();
-    } catch (error) {
-      console.error(error);
-    }
-  };
+const handleViewCarwashList = () => {
+  axios.get(`${API_BASE_URL}/api/memo-carwash-detail`)
+    .then(response => {
+      const serviceData = response.data;
+      setCarWashData(serviceData);
+    })
+    .catch(error => console.log(error));
+};
 
-  const resetPageProperties = () => {
-    setPageProperties({
-      ID: 0,
-      DataLoading: false,
-      isDocReadOnly: false,
-      UpdateMode: false,
-    });
-  };
+const handleViewServiceList = () => {
+  axios.get(`${API_BASE_URL}/api/memo-sercive-details`)
+    .then(response => {
+      const serviceData = response.data;
+      setserviceSatationData(serviceData);
+    })
+    .catch(error => console.log(error));
+};
 
-  const showErrorAlert = (errorMsg) => {
-    notify(
-      {
-        message: errorMsg.toString(),
-        width: 450,
-      },
-      "error",
-      3000
-    );
-  };
-
-  const showSuccessAlert = (successMsg) => {
-    notify(
-      {
-        message: successMsg.toString(),
-        width: 450,
-      },
-      "success",
-      3000
-    );
-  };
-
-  const updateService = () => {
-    try {
-      if (pageProperties.ID > 0)
-        axios
-          .put(`${API_BASE_URL}/api/customer/update-carwash-appointment`, {
-            ID: pageProperties.ID,
-            AppointmentInfo: JSON.stringify(cusAppointmentInfo),
+return(
           
-          })
-          .then((response) => {
-            console.log(response);
-            if (response.data.affectedRows === 1) {
-              showSuccessAlert(`Service information updated`);
-            }
-          })
-          .catch((error) => {
-            showErrorAlert(error);
-          });
-    } catch (error) {
-      console.error(error);
-      showErrorAlert(error);
-    }
-  };
+    <React.Fragment>
+        <h2><b>Download your Booking Memo</b></h2>
+      <Fragment>
+      <div className={'content-block'}>
+                <h5><b>Car wash Appointment viewer</b></h5>
+                <p>Select youe appointment details and Download the booking memo....</p>
+                <br></br>
+                <DataGrid id='sample'
+                    dataSource={carWashData}
+                    showBorders={true}
+                    wordWrapEnabled={true}
+                    allowSearch={true}
+                    selection={{ mode: "single" }}
+                    hoverStateEnabled={true}
+                    rowAlternationEnabled={true}
+                    onExporting={onExporting}
+                    >
+                    <SearchPanel visible={true} highlightCaseSensitive={true} />
 
-  const addService = () => {
-    try {
-      axios
-        .post(`${API_BASE_URL}/api/customer/add-carwash-appointment`, {
-            AppointmentInfo: JSON.stringify(cusAppointmentInfo),
-         
-        })
-        .then((response) => {
-          console.log(response);
-          if (response.data.affectedRows > 0) {
-            showSuccessAlert(`Appoinment created.`);
-            onClearBtnClick();
-          }
-        })
-        .catch((error) => {
-          showErrorAlert(error);
-        });
-    } catch (error) {
-      console.error(error);
-      showErrorAlert(error);
-    }
-  };
+                    <Editing
+                        mode="popup"
+                        />
+                       <Export enabled={true} formats={exportFormats} allowExportSelectedData={true} />
 
-  const OnLoadData = (CarwashID) => {
-    try {
-      axios
-        .get(`${API_BASE_URL}/api/customer/get-carwash-appointment`, {
-          params: {
-            carwashID: CarwashID,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-
-          setCusAppointmentInfo(res.data[0][0]);
-       
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const onListClose = () => {
-    setShowList(false);
-  };
-
-  const onListClickEvent = (viewListSelectedID) => {
-    if (showList && viewListSelectedID != 0) {
-      setShowList(!showList);
-      setPageProperties({
-        ID: viewListSelectedID,
-        DataLoading: true,
-        isDocReadOnly: true,
-        UpdateMode: true,
-      });
-
-      OnLoadData(viewListSelectedID);
-    }
-  };
-
-  const onClearBtnClick = () => {
-    resetPageProperties();
-    setCusAppointmentInfo({});
-   
-  };
-
-{/*end*/}
-    return(
-              
-        <React.Fragment>
-           
-       
-            <h3>Appointment Memo</h3>
-
-            <Form formData={getDeleteAppointmentInfo}>
-              <GroupItem colCount='2'>                    
-                <Item 
-                    dataField="email" 
-                    editorType="dxTextBox" 
-                    editorOptions={{
-                    readOnly: false,
-                  }}>
-                    <Label text="Customer Email"></Label>
-                    <RequiredRule message="Field required" />
-                </Item>
-              </GroupItem>
-            </Form>
-
-
-            <Navbar bg="light" variant="light" className="crud_panel_buttons">
-            <Button
-              className="crud_panel_buttons1"
-              stylingMode="contained"
-              type="success"
-              onClick={onSaveBtnClick}
-            >
-              {pageProperties.UpdateMode ? "Save Changes" : "Add"}
-            </Button>
-            <Button
-              className="crud_panel_buttons2"
-              stylingMode="contained"
-              type="default"
-              onClick={() => setShowList(true)}
-            >
-              View List
-            </Button>
-            
-            <Button
-              className="crud_panel_buttons3"
-              stylingMode="contained"
-              type="default"
-              onClick={onClearBtnClick}
-            >
-              Clear
-            </Button>
-          </Navbar>
+                    <HeaderFilter
+                        visible={true}
+                         />
+                    <FilterPanel
+                        visible={true}
+                         />
+             
+       {/*<FilterRow
+          visible={true}
+    />*/}
+        <Column  dataField="ID" visible={false} />
+        <Column dataField='fname' caption='First Name' dataType='string'></Column>
+        <Column dataField='lname' caption='Last Name' dataType='string'></Column>
+        <Column dataField='phone'  visible={false} caption='Phone Number' dataType='int'></Column>
+        <Column dataField='email'  visible={false} caption='Email Address' dataType='email'></Column>
+        <Column dataField='vnum' caption='Vehicle Number' dataType='int'></Column>
+        <Column dataField='vtype' caption='Vehicle Type' dataType='String'></Column>
+        <Column dataField='date' caption='Date'></Column>        
+                </DataGrid>
+                <br></br>
+                <div>
+                    <Button onClick={handleViewCarwashList}><b>View Service List</b></Button>
+                    
+                </div>
+            </div>
+        <br></br>
         
-        </React.Fragment>
+      </Fragment>
+
+      <h5></h5>
           
-     
-    )
-    }
-    
+
+      <div className={'content-block'}>
+                <h5><b>Services Appointment viewer</b></h5>
+                <p>Select youe appointment details and Download the booking memo....</p>
+                <br></br>
+                <DataGrid id='sample'
+                    dataSource={serviceSatationData}
+                    showBorders={true}
+                    wordWrapEnabled={true}
+                    allowSearch={true}
+                    selection={{ mode: "single" }}
+                    hoverStateEnabled={true}
+                    rowAlternationEnabled={true}
+                    onExporting={onExporting}
+                    >
+                    <SearchPanel visible={true} highlightCaseSensitive={true} />
+
+                    <Editing
+                        mode="popup"
+                         />
+                       <Export enabled={true} formats={exportFormats} allowExportSelectedData={true} />
+
+                    <HeaderFilter
+                        visible={true}
+                         />
+                    <FilterPanel
+                        visible={true}
+                         />
+             
+       {/*<FilterRow
+          visible={true}
+    />*/}
+        <Column dataField="ID" visible={false} />
+        <Column dataField="fname" caption="First Name"><ValidationRule type="required" /></Column>
+        <Column dataField="lname" caption="Last Name" ><ValidationRule type="required" /></Column>
+        <Column dataField="phone" visible={false} caption="Phone Number" ><ValidationRule type="required" /></Column>
+        <Column dataField="email" visible={false} caption="Email Address" ><ValidationRule type="required" /></Column>
+        <Column dataField="vnum" caption="Vehicle no" ><ValidationRule type="required" /></Column>
+        <Column dataField="vtype" caption="Type" ><ValidationRule type="required" /></Column>
+        <Column dataField="date" caption="Last Date" ><ValidationRule type="required" /></Column>
+                    
+                </DataGrid>
+                <br></br>
+                <div>
+                    <Button onClick={handleViewServiceList}><b>View Service List</b></Button>
+                  
+                </div>
+            </div>
+      
+    </React.Fragment>
+      
+
+)
+}
     export default Memo
