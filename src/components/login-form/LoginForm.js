@@ -11,7 +11,7 @@ import Form, {
 import LoadIndicator from "devextreme-react/load-indicator";
 import notify from "devextreme/ui/notify";
 import { useAuth } from "../../contexts/auth";
-import { LANDING_PAGE_URL, API_BASE_URL } from "../../appconfig/config";
+import { API_BASE_URL } from "../../appconfig/config";
 import axios from "axios";
 import "./LoginForm.scss";
 

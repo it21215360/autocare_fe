@@ -10,6 +10,7 @@ export const productDataSource = [
     Price: 5500.0,
     Status: "1",
     Image: "image/Products/etrna-03.png",
+    Quantity:2,
   },
   {
     ID: "2",
@@ -22,6 +23,7 @@ export const productDataSource = [
     Price: 17500,
     Status: "0",
     Image: "image/Products/download-1.jpg",
+    Quantity:1,
   },
   {
     ID: "3",
@@ -45,6 +47,7 @@ export const productDataSource = [
     Price: 5500,
     Status: "1",
     Image: "image/Products/Red-Horns.png",
+    Quantity:1,
   },
   {
     ID: "5",
@@ -57,6 +60,7 @@ export const productDataSource = [
     Price: 7000,
     Status: "0",
     Image: "image/Products/Amaron-50B20-RL-PRO.jpg",
+    Quantity:1,
   },
   {
     ID: "7",
@@ -69,6 +73,7 @@ export const productDataSource = [
     Price: 5550,
     Status: "1",
     Image: "image/Products/SL-DVD-Toyota-6.95-Display.jpg",
+    Quantity:1,
   },
 
   {
@@ -78,10 +83,11 @@ export const productDataSource = [
     Description:
       "Specifies the alignment between the lines inside a flexible container when the items do not use all available space",
     Brand: "Reform",
-    OnHandQty: 3,
+    OnHandQty: 6,
     Price: 5000,
     Status: "0",
     Image: "image/Products/Blaupunkt-Blue-Magic-TL170-6-(D51061110543).jpg",
+    Quantity:1,
   },
 
   {
@@ -91,9 +97,10 @@ export const productDataSource = [
     Description:
       "Specifies the alignment between the lines inside a flexible container when the items do not use all available space",
     Brand: "Detroit",
-    OnHandQty: 2,
+    OnHandQty: 6,
     Price: 6000.5,
     Status: "0",
     Image: "image/Products/SL-Universal-DVD-(6.8-display).jpg",
+    Quantity:1,
   },
 ];

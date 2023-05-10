@@ -190,7 +190,7 @@ const ServiceAppoinment = () => {
         </div>
       ) : (
         <div className={"content-block"}>
-          <h2>Vehicle Service Scheduling</h2>
+          <h2><b>Vehicle Service Scheduling</b></h2>
          
               <Form formData={cusServiceInfo}>
                 <GroupItem colCount={4}>
@@ -201,7 +201,7 @@ const ServiceAppoinment = () => {
                       readOnly: true,
                     }}
                   >
-                    <Label text="Employee #"></Label>
+                    <Label text="Customer #"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
                   
@@ -306,6 +306,7 @@ const ServiceAppoinment = () => {
               Clear
             </Button>
           </Navbar>
+          <br></br>
           <h5><b>Check the availability of the date</b></h5>
                 <DataGrid id='sample'
                     dataSource={scheduledDateData}
@@ -319,7 +320,6 @@ const ServiceAppoinment = () => {
                 <br></br>
                 <div>
                     <Button onClick={handleViewDateList}><b>View Service List</b></Button>
-                    <Button><b>Clear</b></Button>
                 </div>
         </div>
       )}
