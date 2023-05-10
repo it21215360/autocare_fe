@@ -93,7 +93,7 @@ const Ordersdet = (props) => {
           <Column dataField="City" caption="City"></Column>
           <Column dataField="PayMethod" caption="Payment Method"></Column>
           <Column dataField="PayStatus" caption="Pay Status"></Column>
-          <Column dataField="OrderDate" caption="Order Date"></Column>
+          {/*<Column dataField="OrderDate" caption="Order Date"></Column>*/}
         </DataGrid>
         <br></br>
 
