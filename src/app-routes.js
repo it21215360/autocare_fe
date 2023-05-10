@@ -47,6 +47,7 @@ import {
   ServiceList,
   FreaquentQuestionPage,
   ProductMaster,
+  PackageCategory,
   Carwash,
 } from "./pages";
 
@@ -93,7 +94,8 @@ const routes = [
   
   //it21198090@my.sliit.lk - Shania
   { path: "masters/ProductCategory", element: ProductCategory },
-  { path: "masters/ProductMaster", element: ProductMaster },
+  { path: "masters/masterProducts", element: ProductMaster },
+  { path: "masters/SpackageMaster", element: PackageCategory},
 
   //it21307362@my.sliit.lk - Fernando ST
   { path: "courier/CourierRegistration", element: CourierRegistration },

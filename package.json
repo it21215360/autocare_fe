@@ -25,6 +25,7 @@
     "react-scripts": "5.0.1",
     "react-table": "^7.8.0",
     "react-timeit": "^1.2.12",
+    "react-uploader": "^3.27.0",
     "sass": "^1.34.1",
     "web-vitals": "^2.1.4"
   },

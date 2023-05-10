@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
+import FileUploader from 'devextreme-react/file-uploader';
 import DataGrid, {
   RequiredRule,
   Form as GridForm,
@@ -28,12 +29,6 @@ const ProductMaster = () => {
   });
 
   const [showList, setShowList] = useState(false);
-  // const currencyFormat = {
-  //   style: "currency",
-  //   currency: "LKR",
-  //   useGrouping: true,
-  //   minimumSignificantDigits: 3,
-  // };
 
   const currencyFormat = `LKR #,###.##`;
 
@@ -294,7 +289,19 @@ const ProductMaster = () => {
                     <Label text="Updated Date"></Label>
                     <RequiredRule message="Field required" />
                   </Item>
+                  <Item
+                    dataField="Description"
+                    editorType="dxTextBox"
+                    editorOptions={{
+                      readOnly: false,
+                    }}
+                  >
+                    <Label text="Description"></Label>
+                  </Item>       
                 </GroupItem>
+                <br />
+                <p>&nbsp; &nbsp;Product Reference*</p>
+                <FileUploader selectButtonText="Select photo" labelText="" accept="image/*" uploadMode="useForm" dataField="ProdID" /> 
               </Form>
             </Card.Body>
           </Card>
@@ -321,7 +328,7 @@ const ProductMaster = () => {
                     dataField="Code"
                     editorType="dxTextBox"
                     editorOptions={{
-                      readOnly: true,
+                      readOnly: false,
                     }}
                   >
                     <Label text="Code"></Label>
@@ -389,7 +396,7 @@ const ProductMaster = () => {
                     dataField="ProdCategoryID"
                     editorType="dxTextBox"
                     editorOptions={{
-                      readOnly: true,
+                      readOnly: false,
                     }}
                   >
                     <Label text="Product Category_ID"></Label>

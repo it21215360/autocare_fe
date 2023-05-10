@@ -43,7 +43,7 @@ const ProductMasterList = (props) => {
       <DataGrid
         id="grid-list"
         dataSource={productList}
-        keyExpr="AutoID"
+        keyExpr="ProdID"
         showBorders={true}
         wordWrapEnabled={true}
         allowSearch={true}
@@ -53,9 +53,12 @@ const ProductMasterList = (props) => {
       >
         <SearchPanel visible={true} />
         <Paging defaultPageSize={10} />
-        <Column dataField="AutoID" visible={false} />
-        <Column dataField="Code" caption="Product Code"/>
-        <Column dataField="IsActive" caption="IsActive Status" />
+        <Column dataField="ProdID" visible={false} />
+        <Column dataField="ProdCatID" caption="Product Category ID"/>
+        <Column dataField="ProdName" caption="Product Name"/>
+        <Column dataField="Brand" caption="Product Brand"/>
+        <Column dataField="Price" caption="Price"/>
+        <Column dataField="OnHandQty" caption="On Hand Quantity"/>
         <Column dataField="CreatedDate" caption="Date Created" />
         <Column dataField="UpdatedDate" caption="Date Updated" />
       </DataGrid>
