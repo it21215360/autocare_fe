@@ -88,6 +88,7 @@ export const navigation = [
     items: [
       { text: "Product Category Data", path: "masters/ProductCategory" },
       { text: "Product Master", path: "masters/masterProducts" },
+      { text: "Package Master", path: "masters/SpackageMaster" },
     ],
   },
 
