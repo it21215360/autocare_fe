@@ -58,8 +58,18 @@ const Invoice = (props) => {
 
   return (
     <>
-    
-    <form>
+    <div class="form1">
+    <h2>Invoice</h2>
+    <Form formData={orderDet} readOnly={true}>
+  <Item dataField="OrderID" />
+  <Item dataField="Fname" />
+  <Item dataField="Lname" />
+  <Item dataField="Email" />
+  <Item dataField="Address" />
+  <Item dataField="PayMethod" />
+  
+</Form>
+    {/*<form>
       
           <label>
               Order ID:
@@ -85,8 +95,8 @@ const Invoice = (props) => {
               Payment Method:
               <input type="text" value={orderDet.PayMethod} disabled />
           </label><br></br>
-      </form>
-      
+  </form>*/}
+  </div>
       
       <React.Fragment>
 
