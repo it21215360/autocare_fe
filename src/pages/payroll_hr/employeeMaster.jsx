@@ -1,16 +1,10 @@
-import React, { useEffect } from "react";
-import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
-import DataGrid, {
-  RequiredRule,
-  Form as GridForm,
-} from "devextreme-react/data-grid";
-import { Navbar, ListGroup } from "react-bootstrap";
-import { LoadPanel } from "devextreme-react/load-panel";
+import React from "react";
+import Form, { GroupItem, Item, Label } from "devextreme-react/form";
+import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
+import { Navbar } from "react-bootstrap";
 import notify from "devextreme/ui/notify";
 import { useState } from "react";
-import { SelectBox } from "devextreme-react";
 import { Button } from "devextreme-react/button";
-import { DateBox } from "devextreme-react/calendar";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
@@ -348,7 +342,6 @@ const EmployeeMaster = () => {
                     dataField="HourlyRate"
                     editorType="dxNumberBox"
                     editorOptions={{
-                      readOnly: false,
                       format: "LKR #,###.##",
                       readOnly: true,
                     }}
@@ -360,7 +353,6 @@ const EmployeeMaster = () => {
                     dataField="OTRate"
                     editorType="dxNumberBox"
                     editorOptions={{
-                      readOnly: false,
                       format: "LKR #,###.##",
                       readOnly: true,
                     }}

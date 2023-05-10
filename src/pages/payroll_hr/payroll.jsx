@@ -1,23 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import "./payroll.scss";
-import Form, { EmptyItem, GroupItem, Item, Label } from "devextreme-react/form";
-import { Navbar, ListGroup } from "react-bootstrap";
+import Form, { GroupItem, Item, Label } from "devextreme-react/form";
+import { Navbar } from "react-bootstrap";
 import { Button } from "devextreme-react/button";
 import Card from "react-bootstrap/Card";
 import PayrollList from "./payrollList";
-import DataGrid, {
-  Column,
-  SearchPanel,
-  Editing,
-  ValidationRule,
-  RequiredRule,
-} from "devextreme-react/data-grid";
+import DataGrid, { Column } from "devextreme-react/data-grid";
 import axios from "axios";
 import { API_BASE_URL } from "../../appconfig/config";
 
 function Salary() {
-  const [toggleState, setToggleState] = useState(1);
   const [financialYears] = useState([
     { name: "2018" },
     { name: "2019" },
@@ -44,14 +37,6 @@ function Salary() {
   const [showList, setShowList] = useState(false);
   const [payrollHeader, setPayrollHeader] = useState({});
   const [payrollDetail, setPayrollDetail] = useState([]);
-  const [pageProperties, setPageProperties] = useState({});
-  /*const currencyAmountFormat = {
-    style: "currency",
-    currency: "LKR",
-    useGrouping: true,
-    minimumSignificantDigits: 4,
-  };
-  const qtyFormat = { useGrouping: true, minimumSignificantDigits: 4 };*/
 
   const onListClickEvent = () => {};
 

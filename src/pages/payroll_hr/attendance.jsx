@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Form, { GroupItem, Item, Label } from "devextreme-react/form";
 import { RequiredRule, Form as GridForm } from "devextreme-react/data-grid";
 import notify from "devextreme/ui/notify";
@@ -20,6 +20,25 @@ const Attendance = () => {
   const [outTime, setOutTime] = useState(null);
   const [inTimeClicked, setInTimeClicked] = useState(false);
   const [outTimeClicked, setOutTimeClicked] = useState(false);
+
+  useEffect(() => {
+    if (user.ID) {
+      axios
+        .get(`${API_BASE_URL}/api/employee/get-attendance`, {
+          params: {
+            EmployeeID: user.ID,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data) {
+            setInTime(response.data[0].TimeIn);
+            setOutTime(response.data[0].TimeOut);
+          }
+        })
+        .catch((error) => {});
+    }
+  }, []);
 
   const addInTime = () => {
     const now = new Date();
@@ -43,16 +62,21 @@ const Attendance = () => {
 
   const onSaveBtnClick = (e) => {
     try {
-      console.log(employeeAttendance);
-
       axios
         .post(`${API_BASE_URL}/api/employee/mark-attendance`, {
           EmpAttendance: JSON.stringify(employeeAttendance),
         })
         .then((response) => {
           console.log(response);
+          if (response.data) {
+            if (response.data.affectedRows > 0) {
+              showSuccessAlert("Attendance Marked");
+            }
+          }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          showErrorAlert(error);
+        });
     } catch (error) {
       console.error(error);
     }
@@ -66,6 +90,29 @@ const Attendance = () => {
       TimeOut: "",
     });
   };
+
+  const showErrorAlert = (errorMsg) => {
+    notify(
+      {
+        message: errorMsg.toString(),
+        width: 450,
+      },
+      "error",
+      3000
+    );
+  };
+
+  const showSuccessAlert = (successMsg) => {
+    notify(
+      {
+        message: successMsg.toString(),
+        width: 450,
+      },
+      "success",
+      3000
+    );
+  };
+
   return (
     <>
       <div className={"content-block"}>
@@ -85,7 +132,7 @@ const Attendance = () => {
             </Item>
 
             <Item
-              dataField="Date"
+              dataField="RecordDate"
               editorType="dxDateBox"
               editorOptions={{
                 readOnly: true,
@@ -126,9 +173,6 @@ const Attendance = () => {
             onClick={onSaveBtnClick}
           >
             Save
-          </Button>
-          <Button stylingMode="contained" type="default" onClick={clearForm}>
-            Clear
           </Button>
         </Navbar>
       </div>
