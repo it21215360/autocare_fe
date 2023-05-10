@@ -34,7 +34,7 @@ export { default as ServiceList } from "./scheduling/ServiceList";
 export { default as Carwash } from "./scheduling/Carwash";
 //
 export { default as ProductMaster } from "./masters/masterProducts";
-
+export { default as PackageCategory } from "./masters/SpackageMaster";
 //it21198090@my.sliit.lk - Shania
 
 //it21307362@my.sliit.lk - Fernando ST
