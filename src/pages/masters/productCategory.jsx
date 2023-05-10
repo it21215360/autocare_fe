@@ -51,11 +51,6 @@ export default function ProductCategory() {
           <Column dataField="Code" caption="Code" dataType="string" />
           <Column dataField="IsActive" caption="Status" />
         </DataGrid>
-        <br></br>
-        <div>
-          <Button>View List</Button>
-          <Button>Clear</Button>
-        </div>
       </div>
     </React.Fragment>
   );
