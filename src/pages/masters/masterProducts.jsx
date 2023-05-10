@@ -301,7 +301,7 @@ const ProductMaster = () => {
                 </GroupItem>
                 <br />
                 <p>&nbsp; &nbsp;Product Reference*</p>
-                <FileUploader selectButtonText="Select photo" labelText="" accept="image/*" uploadMode="useForm" dataField="ProdID" /> 
+                <FileUploader selectButtonText="Select photo" labelText="" accept="image/*" uploadMode="useForm" dataField="ImageFileName" /> 
               </Form>
             </Card.Body>
           </Card>
