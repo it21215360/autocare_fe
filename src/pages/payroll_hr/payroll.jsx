@@ -411,6 +411,7 @@ function Salary() {
                   dataField="NoPayAmount"
                   caption="Nopay Amount"
                   dataType="double"
+                  format={{ useGrouping: true }}
                 ></Column>
                 <Column
                   dataField="TotalPay"
@@ -431,7 +432,7 @@ function Salary() {
             >
               Process
             </Button>
-            <Button
+            {/* <Button
               className="crud_panel_buttons"
               stylingMode="contained"
               type="success"
@@ -454,7 +455,7 @@ function Salary() {
               onClick={onClearBtnClick}
             >
               Clear
-            </Button>
+            </Button> */}
           </Navbar>
         </div>
       )}
