@@ -168,14 +168,14 @@ function CardPayForm() {
             >
               Clear
             </Button>
-            <Link to="/ordering/Invoice">
+            {/*<Link to="/ordering/Invoice">
             <Button
               className="crud_panel_buttons"
               stylingMode="contained"
               type="default"
             >
               View Invoice  
-            </Button></Link>
+            </Button></Link>*/}
         </Navbar>
       </div>
     </>

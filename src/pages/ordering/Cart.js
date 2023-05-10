@@ -78,7 +78,7 @@ const Cart = () => {
 
   const onRowRemoving = (e) => { 
     const cartId = e.key.CartID; 
-    axios.delete(`/api/supplier/${cartId}`) 
+    axios.delete(`/api/cart/${cartId}`) 
       .then((response) => { 
         console.log(response.data); 
       }) 
@@ -217,6 +217,10 @@ const Cart = () => {
             }}
           ></Column>
         </DataGrid>
+        <br></br>
+        <br></br>
+      <div><b>Subtotal: ${cartItem.reduce((total, item) => total + item.Total, 0)}</b></div>
+               
         <br></br>
         <div>
           <Link to="/ordering/Order_details">

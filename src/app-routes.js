@@ -118,6 +118,7 @@ const routes = [
   { path: "Ordering/Product", element: ProductPage },
   { path: "Ordering/Orders_Admin", element: Ordersdet },
   { path: "Ordering/Return_products", element: ReturnProduct },
+  //{ path: "Ordering/Invoice", element: Inv },
   { path: "Ordering/Invoice", element: Invoice },
 ];
 
