@@ -62,14 +62,21 @@ const LeaveApproval = (props) => {
     }
   }, []);
 
-  const updateLeaveStatus = (employeeID, status, dayCount, empEmail) => {  //new leaveCategory
+  const updateLeaveStatus = (
+    recordID,
+    employeeID,
+    status,
+    dayCount,
+    empEmail
+  ) => {
+    //new leaveCategory
     axios
       .put(`${API_BASE_URL}/api/employee/leave-request-approval`, {
+        RecordID: recordID,
         EmployeeID: employeeID,
         Status: status,
         DayCount: dayCount,
         EmployeeEmail: empEmail,
-        //LeaveCategory: leaveCategory, //new
       })
       .then((response) => {
         console.log(response);
@@ -85,11 +92,11 @@ const LeaveApproval = (props) => {
   const onRowUpdated = (e) => {
     if (e.data) {
       updateLeaveStatus(
+        e.data.AutoID,
         e.data.EmployeeID,
         e.data.Status,
         e.data.DayCount,
-        e.data.Email,
-        //e.data.LeaveCategory  //NEW
+        e.data.Email
       );
     }
   };

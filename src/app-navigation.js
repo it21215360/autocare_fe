@@ -1,21 +1,13 @@
 export const navigation = [
   { text: "Home", path: "/home", icon: "home" },
-  {
-    text: "Customer",
-    icon: "card",
-    items: [
-      { text: "My Profile", path: "/profile" },
-      { text: "Service History", path: "/tasks" },
-      { text: "Order History", path: "customer/order-history" },
-      { text: "Delivery Tracker", path: "customer/delivery-tracker" },
-    ],
-  },
   // {
-  //   text: "Masters",
-  //   icon: "key",
+  //   text: "Customer",
+  //   icon: "card",
   //   items: [
-  //     { text: "Vehicle", path: "/vehicle" },
-  //     { text: "Product Category", path: "master/product-category" },
+  //     { text: "My Profile", path: "/profile" },
+  //     { text: "Service History", path: "/tasks" },
+  //     { text: "Order History", path: "customer/order-history" },
+  //     { text: "Delivery Tracker", path: "customer/delivery-tracker" },
   //   ],
   // },
 
@@ -62,22 +54,16 @@ export const navigation = [
     items: [
       { text: "Service Scheduling", path: "scheduling/Service" },
       { text: "Car Wash Scheduling", path: "scheduling/Carwash" },
-    //  {
-   //     text: "Car Wash Scheduling Appointment",Cancel Appointment
-    //    path: "scheduling/Scheduling_appointment",
-    //  },
-    { text: "Package Details", path: "scheduling/Package" },
-      { text: "Service Manager Login", path: "scheduling/Login" },
+      { text: "Package Details", path: "scheduling/Package" },
       {
-        text: "Car wash Appointment viewer",
+        text: "View Carwash Appointment",
         path: "scheduling/Confirm_appointment",
       },
-      
-      { text: "Service Appointment viewer", path: "scheduling/Cancel_appointment" },
-    //  { text: "Update Appointment", path: "scheduling/Update_appointment" },
+      {
+        text: "View Service Appointment",
+        path: "scheduling/Cancel_appointment",
+      },
       { text: "Booked memo viewer", path: "scheduling/Memo" },
-      
-      
     ],
   },
 
@@ -97,18 +83,15 @@ export const navigation = [
     text: "Delivery",
     icon: "globe",
     items: [
-      
-      { text: 'Courier Registration', path: './courier/CourierRegistration' },
-      { text: 'Vehicle Register', path: 'courier/VehicleReg' },
-      { text: 'Delivery Request Form', path: 'courier/deliveryRequest' },
-      { text: 'Shipping Manage', path: 'courier/ShippingManage' },
-      { text: 'Courier Profile', path: 'courier/CourierProfile' },
-      { text: 'Delivery Confirm', path: 'courier/DeliveryConfirm' },
-      { text: 'Export to Excel', path: 'courier/exportToExcel' },
-      { text: 'Delivery Alocation', path: 'courier/deliveryAlocation' },
-
-      
-    ]
+      { text: "Courier Registration", path: "./courier/CourierRegistration" },
+      { text: "Vehicle Register", path: "courier/VehicleReg" },
+      { text: "Delivery Request Form", path: "courier/deliveryRequest" },
+      { text: "Shipping Manage", path: "courier/ShippingManage" },
+      { text: "Courier Profile", path: "courier/CourierProfile" },
+      { text: "Delivery Confirm", path: "courier/DeliveryConfirm" },
+      { text: "Export to Excel", path: "courier/exportToExcel" },
+      { text: "Delivery Alocation", path: "courier/deliveryAlocation" },
+    ],
   },
 
   //it21238994@my.sliit.lk - Amanda
