@@ -62,8 +62,8 @@ const Invoice = (props) => {
     <h2>Invoice</h2>
     <Form formData={orderDet} readOnly={true}>
   <Item dataField="OrderID" />
-  <Item dataField="Fname" />
-  <Item dataField="Lname" />
+  {/*<Item dataField="Fname" />
+  <Item dataField="Lname" />*/}
   <Item dataField="Email" />
   <Item dataField="Address" />
   <Item dataField="PayMethod" />
