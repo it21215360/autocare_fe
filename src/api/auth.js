@@ -1,86 +1,98 @@
-import defaultUser from '../utils/default-user';
+export async function signIn(userInfo) {
+  let resultObject = {};
 
-export async function signIn(email, password) {
+  if (userInfo.CusID > 0) {
+    //customer
+    resultObject = {
+      isOk: true,
+      data: {
+        ID: userInfo.CusID,
+        FirstName: userInfo.CusFirstName,
+        LastName: userInfo.CusLastName,
+        Email: userInfo.CusEmail,
+        userType: "Customer",
+      },
+      message: "Authenticated",
+    };
+  } else if (userInfo.EmpID > 0) {
+    //employee
+    resultObject = {
+      isOk: true,
+      data: {
+        ID: userInfo.EmpID,
+        FirstName: userInfo.EmpFirstName,
+        LastName: userInfo.EmpLastName,
+        Email: userInfo.EmpEmail,
+        EPFNo: userInfo.EPFNo,
+        userType: "Employee",
+      },
+      message: "Authenticated",
+    };
+  } else if (userInfo.SysManID > 0) {
+    //employee
+    resultObject = {
+      isOk: true,
+      data: {
+        ID: userInfo.SysManID,
+        FirstName: userInfo.SysManFName,
+        LastName: userInfo.SysManLName,
+        Email: userInfo.SysManEmail,
+        MobileNo: userInfo.SysManMobile,
+        userType: "SystemUser",
+      },
+      message: "Authenticated",
+    };
+  }
+
+  return resultObject;
+}
+
+export async function createAccount(username, password) {
   try {
     // Send request
-    console.log(email, password);
+    console.log(username, password);
 
     return {
       isOk: true,
-      data: defaultUser
     };
-  }
-  catch {
+  } catch {
     return {
       isOk: false,
-      message: "Authentication failed"
+      message: "Failed to create account",
     };
   }
 }
 
-export async function getUser() {
+export async function changePassword(username, recoveryCode) {
   try {
     // Send request
+    console.log(username, recoveryCode);
 
     return {
       isOk: true,
-      data: defaultUser
+      isOk: true,
     };
-  }
-  catch {
+  } catch {
     return {
-      isOk: false
+      isOk: false,
+      message: "Failed to change password",
     };
   }
 }
 
-export async function createAccount(email, password) {
+export async function resetPassword(username) {
   try {
     // Send request
-    console.log(email, password);
+    console.log(username);
 
     return {
-      isOk: true
+      isOk: true,
+      isOk: true,
     };
-  }
-  catch {
+  } catch {
     return {
       isOk: false,
-      message: "Failed to create account"
-    };
-  }
-}
-
-export async function changePassword(email, recoveryCode) {
-  try {
-    // Send request
-    console.log(email, recoveryCode);
-
-    return {
-      isOk: true
-    };
-  }
-  catch {
-    return {
-      isOk: false,
-      message: "Failed to change password"
-    }
-  }
-}
-
-export async function resetPassword(email) {
-  try {
-    // Send request
-    console.log(email);
-
-    return {
-      isOk: true
-    };
-  }
-  catch {
-    return {
-      isOk: false,
-      message: "Failed to reset password"
+      message: "Failed to reset password",
     };
   }
 }

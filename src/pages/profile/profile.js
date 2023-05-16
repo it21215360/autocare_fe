@@ -29,7 +29,7 @@ export default function Profile() {
             alt={''}
             src={`https://js.devexpress.com/Demos/WidgetsGallery/JSDemos/${
               employee.Picture
-            }`}
+  }`}
           />
         </div>
         <span>{notes}</span>
